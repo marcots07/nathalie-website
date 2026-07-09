@@ -40,6 +40,29 @@
       "Schedule — daily tasks with progress",
       "Identify plant — guided camera",
       "LumaAI — conversational care assistant"
+    ],
+    "flowGroups": [
+      {
+        "title": "Onboarding & first run",
+        "flows": [
+          "Welcome — the value proposition",
+          "Onboarding — identify plants instantly",
+          "Onboarding — reminders and guest access",
+          "First run — scan your first plant"
+        ]
+      },
+      {
+        "title": "The app in use",
+        "flows": [
+          "Home — next care at a glance",
+          "My Plants — garden watering status",
+          "Plant detail — care information",
+          "Watering — status and immediate action",
+          "Schedule — daily tasks with progress",
+          "Identify plant — guided camera",
+          "LumaAI — conversational care assistant"
+        ]
+      }
     ]
   },
   "results": {

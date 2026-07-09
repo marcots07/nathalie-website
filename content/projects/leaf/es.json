@@ -40,6 +40,29 @@
       "Agenda — tareas del día con progreso",
       "Identificar planta — cámara con guía",
       "LumaAI — asistente de cuidado conversacional"
+    ],
+    "flowGroups": [
+      {
+        "title": "Onboarding y primer uso",
+        "flows": [
+          "Bienvenida — propuesta de valor",
+          "Onboarding — identificar plantas al instante",
+          "Onboarding — recordatorios y acceso como invitado",
+          "Primer uso — escanear tu primera planta"
+        ]
+      },
+      {
+        "title": "La app en uso",
+        "flows": [
+          "Inicio — próximo cuidado de un vistazo",
+          "Mis plantas — estado de riego del jardín",
+          "Ficha de planta — información de cuidado",
+          "Riego — estado y acción inmediata",
+          "Agenda — tareas del día con progreso",
+          "Identificar planta — cámara con guía",
+          "LumaAI — asistente de cuidado conversacional"
+        ]
+      }
     ]
   },
   "results": {

@@ -229,27 +229,29 @@ export default function CaseStudy({ project, dict, locale }: Props) {
                 {dict.caseStudy.flowsLabel}
               </p>
             </div>
-            <div className="-mx-6 md:-mx-10 overflow-x-auto pb-4">
-              <div className="flex gap-6 px-6 md:px-10 snap-x snap-mandatory">
-                {t.process.flows.map((flow, i) => (
-                  <motion.div
-                    key={flow}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.6, delay: i * 0.08 }}
-                    className="flex-shrink-0 w-72 snap-start"
-                  >
-                    <DeviceScreen
-                      src={project.media?.screens?.[i]?.src}
-                      alt={flow}
+            {t.process.flowGroups && t.process.flowGroups.length > 0 ? (
+              <div className="space-y-12">
+                {t.process.flowGroups.map((group, g) => (
+                  <div key={group.title}>
+                    <h3 className="font-display text-xl md:text-2xl text-ink mb-5 flex items-center gap-3">
+                      <span className="w-6 h-px bg-sage-500" />
+                      {group.title}
+                    </h3>
+                    <FlowRow
+                      flows={group.flows}
+                      screens={project.media?.screenGroups?.[g]?.screens}
                       aspectRatio={project.media?.screensAspectRatio}
                     />
-                    <p className="mt-3 text-sm text-ink-muted text-center">{flow}</p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </div>
+            ) : (
+              <FlowRow
+                flows={t.process.flows}
+                screens={project.media?.screens}
+                aspectRatio={project.media?.screensAspectRatio}
+              />
+            )}
           </>
         )}
       </section>
@@ -346,6 +348,40 @@ export default function CaseStudy({ project, dict, locale }: Props) {
         </TransitionLink>
       </section>
     </article>
+  );
+}
+
+function FlowRow({
+  flows,
+  screens,
+  aspectRatio,
+}: {
+  flows: string[];
+  screens?: { src: string }[];
+  aspectRatio?: string;
+}) {
+  return (
+    <div className="-mx-6 md:-mx-10 overflow-x-auto pb-4">
+      <div className="flex gap-6 px-6 md:px-10 snap-x snap-mandatory">
+        {flows.map((flow, i) => (
+          <motion.div
+            key={flow}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, delay: i * 0.08 }}
+            className="flex-shrink-0 w-72 snap-start"
+          >
+            <DeviceScreen
+              src={screens?.[i]?.src}
+              alt={flow}
+              aspectRatio={aspectRatio}
+            />
+            <p className="mt-3 text-sm text-ink-muted text-center">{flow}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
   );
 }
 

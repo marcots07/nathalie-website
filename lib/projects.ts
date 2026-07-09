@@ -47,6 +47,9 @@ export type ProjectMedia = {
       per-locale `process.flows` captions. Missing entries (or files
       that fail to load) fall back to the device placeholder. */
   screens?: { src: string }[];
+  /** Grouped variant: one row per flow group, matched by index to the
+      per-locale `process.flowGroups`. Takes precedence over `screens`. */
+  screenGroups?: { key: string; screens: { src: string }[] }[];
   /** CSS aspect-ratio for every gallery screen (they share a device). */
   screensAspectRatio?: string;
 };
@@ -91,6 +94,9 @@ export type ProjectResearch = ProjectTextBlock & {
 
 export type ProjectProcess = ProjectTextBlock & {
   flows: string[];
+  /** Grouped captions for the gallery; matched by index to
+      media.screenGroups. When present, rendering prefers groups. */
+  flowGroups?: { title: string; flows: string[] }[];
 };
 
 export type ProjectResults = ProjectTextBlock & {

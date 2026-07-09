@@ -18,13 +18,28 @@
       "after": "/projects/leaf/home-hifi.png",
       "aspectRatio": "393 / 852"
     },
-    "screens": [
-      { "src": "/projects/leaf/home-hifi.png" },
-      { "src": "/projects/leaf/screen-plants.png" },
-      { "src": "/projects/leaf/screen-detail.png" },
-      { "src": "/projects/leaf/screen-schedule.png" },
-      { "src": "/projects/leaf/screen-identify.png" },
-      { "src": "/projects/leaf/screen-lumaai.png" }
+    "screenGroups": [
+      {
+        "key": "onboarding",
+        "screens": [
+          { "src": "/projects/leaf/screen-onboarding-welcome.png" },
+          { "src": "/projects/leaf/screen-onboarding-identify.png" },
+          { "src": "/projects/leaf/screen-onboarding-reminders.png" },
+          { "src": "/projects/leaf/screen-first-plant.png" }
+        ]
+      },
+      {
+        "key": "core",
+        "screens": [
+          { "src": "/projects/leaf/home-hifi.png" },
+          { "src": "/projects/leaf/screen-plants.png" },
+          { "src": "/projects/leaf/screen-detail.png" },
+          { "src": "/projects/leaf/screen-water.png" },
+          { "src": "/projects/leaf/screen-schedule.png" },
+          { "src": "/projects/leaf/screen-identify.png" },
+          { "src": "/projects/leaf/screen-lumaai.png" }
+        ]
+      }
     ],
     "screensAspectRatio": "393 / 852"
   }

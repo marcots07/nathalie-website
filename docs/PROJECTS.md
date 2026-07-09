@@ -88,13 +88,30 @@ drift between languages.
       "after": "/projects/leaf/home-hifi.png",
       "aspectRatio": "393 / 852"                  // CSS aspect-ratio value
     },
-    "screens": [              // flows gallery, matched by INDEX to the
-      { "src": "/projects/leaf/home-hifi.png" },  // per-locale process.flows
-      { "src": "/projects/leaf/screen-plants.png" }
+    "screens": [              // flat flows gallery, matched by INDEX to
+      { "src": "/projects/leaf/home-hifi.png" }   // per-locale process.flows
+    ],
+    "screenGroups": [         // grouped variant — takes precedence over
+      {                       // "screens"; one row per group, matched to
+        "key": "onboarding",  // process.flowGroups in the locale files
+        "screens": [{ "src": "/projects/leaf/screen-onboarding-welcome.png" }]
+      }
     ],
     "screensAspectRatio": "393 / 852"
   }
 }
+```
+
+When using `screenGroups`, add matching captions per locale:
+
+```jsonc
+// es.json / en.json → process
+"flowGroups": [
+  {
+    "title": "Onboarding y primer uso",
+    "flows": ["Bienvenida — propuesta de valor", "..."]
+  }
+]
 ```
 
 Image files live under `public/projects/<slug>/`. If a referenced image

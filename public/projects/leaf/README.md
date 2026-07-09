@@ -12,18 +12,29 @@ image never breaks the page.
 | `home-lofi.png` | Home screen, low-fidelity wireframe |
 | `home-hifi.png` | Home screen, high-fidelity design   |
 
-## Flows gallery (design process, horizontal scroll)
+## Flows gallery — group 1: Onboarding & first run
+
+| File                             | Screen                                     |
+| -------------------------------- | ------------------------------------------ |
+| `screen-onboarding-welcome.png`  | Welcome — "Care for your plants…"          |
+| `screen-onboarding-identify.png` | Onboarding — "Identify plants instantly"   |
+| `screen-onboarding-reminders.png`| Onboarding — smart reminders + guest access|
+| `screen-first-plant.png`         | First run — "Let's identify your first plant" |
+
+## Flows gallery — group 2: The app in use
 
 | File                  | Screen                                   |
 | --------------------- | ---------------------------------------- |
 | `home-hifi.png`       | Home — reused from the slider            |
 | `screen-plants.png`   | My Plants — garden watering status       |
 | `screen-detail.png`   | Plant detail (Monstera) — care info      |
+| `screen-water.png`    | Watering — "Needs Water" status + action |
 | `screen-schedule.png` | Plant Schedule — daily tasks             |
 | `screen-identify.png` | Identify Plant — guided camera           |
 | `screen-lumaai.png`   | LumaAI — conversational care assistant   |
 
-Gallery order and captions live in `content/projects/leaf/{es,en}.json`
-(`process.flows`, matched by index to `media.screens` in `project.json`).
-To add another screen: drop the file here, append an entry to
-`media.screens`, and add its caption to both locale files.
+Group structure and image paths live in `media.screenGroups` in
+`project.json`; captions live in `process.flowGroups` in the per-locale
+`{es,en}.json`, matched group-by-group and index-by-index. To add a
+screen: drop the file here, append it to the right group in
+`project.json`, and add its caption to both locale files.
