@@ -1,17 +1,23 @@
 import type { Locale } from "./i18n";
 
-import leaf from "@/content/projects/leaf.json";
-import cata from "@/content/projects/cata.json";
+// Meta (slug, order, status, feature flags, metrics)
+import leafMeta from "@/content/projects/leaf/project.json";
+import cataMeta from "@/content/projects/cata/project.json";
+
+// Per-locale content files
+import leafEs from "@/content/projects/leaf/es.json";
+import leafEn from "@/content/projects/leaf/en.json";
+import cataEs from "@/content/projects/cata/es.json";
+import cataEn from "@/content/projects/cata/en.json";
 
 /**
  * Adding a new project:
- * 1. Create a JSON file under `content/projects/<slug>.json` matching the
- *    Project shape below.
- * 2. Import it here and add it to the `registry` array.
- * 3. Rebuild — routes at /es/proyectos/<slug> and /en/projects/<slug>
- *    are generated automatically by `PROJECT_SLUGS`.
+ * 1. Create a folder `content/projects/<slug>/`.
+ * 2. Add three files: `project.json` (meta), `es.json`, `en.json`.
+ * 3. Register the trio in the `sources` array below.
+ * 4. Rebuild — routes are generated automatically for both locales.
  *
- * See `docs/PROJECTS.md` for the schema and each feature flag's effect.
+ * See `docs/PROJECTS.md` for the schema of each file.
  */
 
 export type ProjectStatus = "complete" | "in_progress";
@@ -26,6 +32,14 @@ export type ProjectFeatures = {
 export type ProjectMetrics = {
   susScore: number | null;
   susOutOf: number | null;
+};
+
+export type ProjectMeta = {
+  slug: string;
+  order: number;
+  status: ProjectStatus;
+  features: ProjectFeatures;
+  metrics: ProjectMetrics;
 };
 
 export type ProjectCard = {
@@ -76,18 +90,35 @@ export type ProjectTranslation = {
   reflection: ProjectTextBlock;
 };
 
-export type Project = {
-  slug: string;
-  order: number;
-  status: ProjectStatus;
-  features: ProjectFeatures;
-  metrics: ProjectMetrics;
+export type Project = ProjectMeta & {
   translations: Record<Locale, ProjectTranslation>;
 };
 
-const registry: Project[] = ([leaf, cata] as unknown as Project[]).slice().sort(
-  (a, b) => a.order - b.order
-);
+type ProjectSource = {
+  meta: ProjectMeta;
+  translations: Record<Locale, ProjectTranslation>;
+};
+
+const sources: ProjectSource[] = [
+  {
+    meta: leafMeta as ProjectMeta,
+    translations: {
+      es: leafEs as ProjectTranslation,
+      en: leafEn as ProjectTranslation,
+    },
+  },
+  {
+    meta: cataMeta as ProjectMeta,
+    translations: {
+      es: cataEs as ProjectTranslation,
+      en: cataEn as ProjectTranslation,
+    },
+  },
+];
+
+const registry: Project[] = sources
+  .map(({ meta, translations }) => ({ ...meta, translations }))
+  .sort((a, b) => a.order - b.order);
 
 export function getProjects(): Project[] {
   return registry;

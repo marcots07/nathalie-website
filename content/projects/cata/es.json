@@ -1,0 +1,50 @@
+{
+  "card": {
+    "title": "Cata",
+    "tagline": "Diario de vinos y asistente de maridaje",
+    "summary": "Web app responsiva diseñada de principio a fin y construida con Figma + Claude Code vía MCP.",
+    "tags": ["Producto", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+  },
+  "hero": {
+    "title": "Cata",
+    "tagline": "Un diario personal de vinos con asistente de maridaje.",
+    "tags": ["Producto", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+  },
+  "overview": {
+    "role": "Diseño y construcción end-to-end",
+    "tools": "Figma · Claude Code (MCP)",
+    "duration": "Proyecto personal en curso",
+    "type": "Producto web responsivo"
+  },
+  "problem": {
+    "heading": "El diario de vinos como espacio íntimo, no como base de datos.",
+    "body": "Las apps de vino existentes tratan cada botella como una entrada en un catálogo — calificación, notas, foto. Cata parte de otra pregunta: ¿qué historia cuenta esta botella dentro de tu vida? Un diario personal que además te ayuda a decidir qué comer con lo que tienes."
+  },
+  "research": {
+    "heading": "Definiendo el alcance.",
+    "body": "Como proyecto personal, la investigación fue más ligera y directa: sesiones con amigos aficionados al vino para entender qué registran hoy (spoiler: nada consistente) y qué momentos quieren recordar. La conclusión fue clara: la barrera no es la falta de apps, es la fricción para abrirlas."
+  },
+  "process": {
+    "heading": "Diseño y desarrollo, en la misma sesión.",
+    "body": "Diseñé el sistema completo en Figma — paleta, tipografía, biblioteca de componentes — y usé Claude Code vía MCP para llevarlo a producción directamente desde los mockups. La alta fidelidad aún está en construcción; abajo puedes ver los flujos de baja fidelidad que ya cubren el registro y la consulta.",
+    "flows": [
+      "Registro rápido de una botella (foto + 3 campos)",
+      "Vista de detalle con notas y contexto",
+      "Asistente de maridaje conversacional",
+      "Colección personal con filtros suaves"
+    ]
+  },
+  "results": {
+    "heading": "En construcción, con foco.",
+    "body": "Cata está en desarrollo activo. En vez de perseguir features, estoy priorizando que la experiencia de registrar una botella se sienta como escribir una postal — rápida, personal, sin fricción. La versión actual cubre el flujo completo de registro y consulta; el asistente de maridaje entra en la siguiente iteración.",
+    "learnings": [
+      "El input inicial debe ser fotográfico primero — la mayoría de usuarios no quiere escribir antes de tener contexto visual.",
+      "El asistente de maridaje funciona mejor como sugerencia contextual dentro de la ficha del vino, no como pantalla separada.",
+      "El sistema de diseño diseñado desde el inicio permitió que Claude Code generara UI consistente sin retrabajo."
+    ]
+  },
+  "reflection": {
+    "heading": "Qué me llevo.",
+    "body": "Cata me enseñó que diseñar y construir en el mismo flujo cambia cómo tomas decisiones — pruebas ideas antes de casarte con ellas. El sistema de diseño no es un entregable final; es la infraestructura que permite iterar rápido sin perder coherencia."
+  }
+}

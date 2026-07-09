@@ -1,0 +1,50 @@
+{
+  "card": {
+    "title": "Cata",
+    "tagline": "Wine journal and pairing assistant",
+    "summary": "Responsive web app designed end-to-end and built with Figma + Claude Code via MCP.",
+    "tags": ["Product", "Figma", "Design system", "Claude Code + MCP"]
+  },
+  "hero": {
+    "title": "Cata",
+    "tagline": "A personal wine journal with a pairing assistant.",
+    "tags": ["Product", "Figma", "Design system", "Claude Code + MCP"]
+  },
+  "overview": {
+    "role": "End-to-end design and build",
+    "tools": "Figma · Claude Code (MCP)",
+    "duration": "Ongoing personal project",
+    "type": "Responsive web product"
+  },
+  "problem": {
+    "heading": "A wine journal as an intimate space, not a database.",
+    "body": "Existing wine apps treat every bottle as a catalog entry — rating, notes, photo. Cata starts from a different question: what story does this bottle tell inside your life? A personal journal that also helps you decide what to eat with what you've got."
+  },
+  "research": {
+    "heading": "Scoping it.",
+    "body": "As a personal project, research was lighter and direct: sessions with wine-loving friends to understand what they log today (spoiler: nothing consistent) and which moments they actually want to remember. The takeaway: the barrier isn't a lack of apps, it's the friction of opening them."
+  },
+  "process": {
+    "heading": "Design and build, in the same session.",
+    "body": "I designed the full system in Figma — palette, typography, component library — and used Claude Code via MCP to move it into production directly from the mockups. High-fidelity is still in progress; below you can see the low-fidelity flows that already cover capture and detail views.",
+    "flows": [
+      "Quick bottle capture (photo + 3 fields)",
+      "Detail view with notes and context",
+      "Conversational pairing assistant",
+      "Personal collection with gentle filters"
+    ]
+  },
+  "results": {
+    "heading": "In build, with focus.",
+    "body": "Cata is under active development. Instead of chasing features, I'm prioritizing that logging a bottle feels like writing a postcard — quick, personal, frictionless. The current version covers the full capture and detail flow; the pairing assistant lands in the next iteration.",
+    "learnings": [
+      "Initial input should be photo-first — most users don't want to type before they have visual context.",
+      "The pairing assistant works better as a contextual suggestion inside the bottle detail, not as a separate screen.",
+      "Designing the system upfront let Claude Code generate consistent UI without rework."
+    ]
+  },
+  "reflection": {
+    "heading": "What I take away.",
+    "body": "Cata taught me that designing and building in the same flow changes how you make decisions — you test ideas before you commit to them. The design system isn't the final deliverable; it's the infrastructure that lets you iterate fast without losing coherence."
+  }
+}

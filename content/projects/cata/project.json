@@ -1,0 +1,15 @@
+{
+  "slug": "cata",
+  "order": 2,
+  "status": "in_progress",
+  "features": {
+    "showBeforeAfterSlider": false,
+    "showResearchGrid": true,
+    "showFlowsGallery": true,
+    "showSusGauge": false
+  },
+  "metrics": {
+    "susScore": null,
+    "susOutOf": null
+  }
+}

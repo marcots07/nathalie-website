@@ -1,42 +1,68 @@
 # Project JSON schema
 
-Every case study is a JSON file under `content/projects/<slug>.json`. The
-homepage grid and the case study pages are generated from these files —
-no code change is required to add or edit a project.
+Every case study is a folder under `content/projects/<slug>/` containing
+three files: shared meta and one file per language. The homepage grid and
+the case study pages are generated from these files — no code change is
+required to add or edit a project.
 
 ## Where things live
 
 ```
 content/
   projects/
-    leaf.json     ← full project
-    cata.json     ← in-progress project
+    leaf/
+      project.json      ← meta (slug, order, status, feature flags, metrics)
+      es.json           ← Spanish content
+      en.json           ← English content
+    cata/
+      project.json
+      es.json
+      en.json
 lib/
-  projects.ts     ← loader + types
+  projects.ts           ← loader + types
 messages/
-  es.json         ← shared UI copy (section labels, button text)
-  en.json         ← same, for English
+  es.json               ← shared UI copy (section labels, button text)
+  en.json               ← same, for English
 ```
+
+Content per language lives in its own file so you can write or edit
+Spanish without opening the English file, and vice versa. Feature flags
+that control section visibility live in `project.json` only, so they never
+drift between languages.
 
 ## Adding a new project
 
-1. Duplicate `content/projects/leaf.json` to `content/projects/<new-slug>.json`.
-2. Change `slug`, `order`, and the copy in `translations.es` and `translations.en`.
-3. Register the new file in `lib/projects.ts`:
+1. Create the folder `content/projects/<new-slug>/`.
+2. Copy `leaf/project.json` into it and change `slug`, `order`, and any
+   feature flags or metrics you need.
+3. Copy `leaf/es.json` and `leaf/en.json` in, and rewrite the copy for the
+   new project. Leave keys with the same shape — the case study page uses
+   whatever it finds.
+4. Register the new project in `lib/projects.ts` — three imports plus one
+   entry in the `sources` array:
 
     ```ts
-    import newProject from "@/content/projects/<new-slug>.json";
-    // ...
-    const registry: Project[] = [leaf, cata, newProject]
-      .slice()
-      .sort((a, b) => a.order - b.order);
+    import newMeta from "@/content/projects/<new-slug>/project.json";
+    import newEs   from "@/content/projects/<new-slug>/es.json";
+    import newEn   from "@/content/projects/<new-slug>/en.json";
+
+    const sources: ProjectSource[] = [
+      // ...leaf, cata...
+      {
+        meta: newMeta as ProjectMeta,
+        translations: {
+          es: newEs as ProjectTranslation,
+          en: newEn as ProjectTranslation,
+        },
+      },
+    ];
     ```
 
-4. Rebuild — Next.js generates the routes automatically for both locales:
+5. Rebuild — Next.js generates the routes automatically for both locales:
     - Spanish: `/es/proyectos/<new-slug>`
     - English: `/en/projects/<new-slug>`
 
-## Schema
+## `project.json` — shared meta
 
 ```jsonc
 {
@@ -54,16 +80,13 @@ messages/
   "metrics": {
     "susScore": 76,           // integer or null
     "susOutOf": 100           // integer or null
-  },
-
-  "translations": {
-    "es": { /* see below */ },
-    "en": { /* see below */ }
   }
 }
 ```
 
-### `translations.<locale>`
+## `es.json` and `en.json` — per-language content
+
+Both files share the same shape; only the copy differs.
 
 ```jsonc
 {
@@ -112,7 +135,7 @@ messages/
 2. Next to the eyebrow on the case study hero.
 3. Next to the tagline in the "Next project" footer link.
 
-It does **not** automatically flip any feature flags — pair it with the flags that match the current state (Cata for example sets `showBeforeAfterSlider: false` and `showSusGauge: false` while keeping the low-fidelity flows visible).
+It does **not** automatically flip any feature flags — pair it with the flags that match the current state. Cata for example sets `showBeforeAfterSlider: false` and `showSusGauge: false` while keeping the low-fidelity flows visible.
 
 ## Shared UI copy
 
@@ -123,4 +146,4 @@ The homepage grid uses `messages.projects.eyebrow`, `.heading`, `.intro`, `.view
 
 ## Style is fixed
 
-Cards, hero, gauges, sliders and grids reuse the same components in `components/`. Editing a JSON file changes content and section visibility; it does not change layout or palette. If you need a new visual pattern, add a new component and expose it via a new feature flag rather than customizing per-project styling.
+Cards, hero, gauges, sliders, and grids reuse the same components in `components/`. Editing a JSON file changes content and section visibility; it does not change layout or palette. If you need a new visual pattern, add a new component and expose it via a new feature flag rather than customizing per-project styling.

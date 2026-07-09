@@ -1,0 +1,15 @@
+{
+  "slug": "leaf",
+  "order": 1,
+  "status": "complete",
+  "features": {
+    "showBeforeAfterSlider": true,
+    "showResearchGrid": true,
+    "showFlowsGallery": true,
+    "showSusGauge": true
+  },
+  "metrics": {
+    "susScore": 76,
+    "susOutOf": 100
+  }
+}

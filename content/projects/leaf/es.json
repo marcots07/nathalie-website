@@ -1,0 +1,56 @@
+{
+  "card": {
+    "title": "Leaf",
+    "tagline": "App de cuidado de plantas",
+    "summary": "Proyecto de portafolio del Google UX Design Certificate. Proceso UX completo con estudio de usabilidad real (SUS 76).",
+    "tags": ["UX Research", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+  },
+  "hero": {
+    "title": "Leaf",
+    "tagline": "Cuidar tus plantas sin adivinar cuándo regarlas.",
+    "tags": ["UX Research", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+  },
+  "overview": {
+    "role": "Diseño UX de principio a fin",
+    "tools": "Figma · Claude Code (MCP)",
+    "duration": "Proyecto de portafolio",
+    "type": "Google UX Design Certificate"
+  },
+  "problem": {
+    "heading": "Un lenguaje visual y funcional para el cuidado diario.",
+    "body": "Leaf nació como el proyecto final de mi Google UX Design Certificate: una app que ayuda a personas con plantas de interior a organizar recordatorios de riego, luz y cuidado. El reto no era técnico — era encontrar el tono correcto: útil sin ser controlador, calmado sin ser aburrido."
+  },
+  "research": {
+    "heading": "Empecé por escuchar.",
+    "body": "Diseñé personas, hice una auditoría competitiva, definí la propuesta de valor y formulé preguntas 'How Might We…' y enunciados de objetivo. La investigación reveló que la mayoría de apps del segmento pecaban de dos cosas: pedir demasiada información inicial, o convertir el cuidado en una lista de tareas ansiosa. Leaf tenía que hacer lo contrario.",
+    "bullets": [
+      "Personas basadas en entrevistas de usuarios reales.",
+      "Auditoría competitiva de 5 apps del segmento.",
+      "Value proposition y 'How Might We…' priorizadas.",
+      "Enunciados de objetivo para acotar el MVP."
+    ]
+  },
+  "process": {
+    "heading": "De wireframes al sistema de diseño.",
+    "body": "Diseñé wireframes de baja fidelidad primero, iterando con feedback antes de tocar color o tipografía. El sistema de diseño (paleta, tipografía, componentes) se construyó como una biblioteca reutilizable — cada ReminderCard, botón y overlay tipo bottom sheet vive como componente en Figma. La app se prototipó en alta fidelidad y se llevó a desarrollo con Claude Code vía MCP.",
+    "flows": [
+      "Onboarding y autenticación",
+      "Configuración inicial y exploración",
+      "ReminderCard y programación de recordatorios",
+      "Overlays tipo bottom sheet"
+    ]
+  },
+  "results": {
+    "heading": "Estudio de usabilidad real.",
+    "body": "Corrí un estudio con 5 participantes usando el System Usability Scale (SUS). El puntaje final fue 76 — sobre el promedio de la industria (68) y en el rango 'good'. Más importante que el número: los aprendizajes concretos.",
+    "learnings": [
+      "Los usuarios querían ver de un vistazo qué planta necesitaba atención hoy — rediseñé la home para priorizar 'próximo cuidado' sobre inventario completo.",
+      "El onboarding pedía demasiado de golpe — lo dividí en pasos progresivos con la opción de posponer detalles.",
+      "El copy en los recordatorios funcionaba mejor conciso y en tono cálido, no como notificación de sistema."
+    ]
+  },
+  "reflection": {
+    "heading": "Qué me llevo.",
+    "body": "Aprendí que un buen sistema de diseño no es sobre tener muchos componentes, sino sobre tener los correctos y consistentes. Y que la investigación de usuarios no termina cuando empieza el diseño — vuelve a ti en cada iteración. Si empezara de nuevo, invertiría más tiempo en el estudio de usabilidad y menos en refinar mockups antes de probarlos."
+  }
+}
