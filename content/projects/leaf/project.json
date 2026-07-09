@@ -13,6 +13,11 @@
     "susOutOf": 100
   },
   "media": {
+    "card": {
+      "frame": "phone",
+      "screen": "/projects/leaf/home-hifi.png",
+      "tint": "sage"
+    },
     "hero": {
       "layout": "phone-triptych",
       "screens": [

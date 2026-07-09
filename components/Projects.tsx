@@ -8,6 +8,7 @@ import SectionHeading from "./SectionHeading";
 import Placeholder from "./Placeholder";
 import StatusPill from "./StatusPill";
 import TransitionLink from "./TransitionLink";
+import ProjectCardPreview from "./ProjectCardPreview";
 
 export default function Projects({
   dict,
@@ -65,12 +66,19 @@ function ProjectCard({
         style={{ viewTransitionName: `project-${project.slug}` }}
       >
         <div className="relative overflow-hidden rounded-3xl">
-          <Placeholder
-            aspect="aspect-[5/4]"
-            rounded="rounded-3xl"
-            className="transition-transform duration-[900ms] ease-liminal group-hover:scale-[1.03]"
-            ariaLabel={`${t.card.title} hero image`}
-          />
+          {project.media?.card ? (
+            <ProjectCardPreview
+              card={project.media.card}
+              alt={`${t.card.title} — ${t.card.tagline}`}
+            />
+          ) : (
+            <Placeholder
+              aspect="aspect-[5/4]"
+              rounded="rounded-3xl"
+              className="transition-transform duration-[900ms] ease-liminal group-hover:scale-[1.03]"
+              ariaLabel={`${t.card.title} hero image`}
+            />
+          )}
           {project.status === "in_progress" && (
             <div className="absolute top-4 left-4">
               <StatusPill label={dict.projects.inProgress} tone="cream" />

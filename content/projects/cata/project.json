@@ -13,6 +13,11 @@
     "susOutOf": null
   },
   "media": {
+    "card": {
+      "frame": "browser",
+      "screen": "/projects/cata/home-hifi.png",
+      "tint": "terracotta"
+    },
     "hero": {
       "layout": "single-browser",
       "screens": ["/projects/cata/screen-tonight.png"]
