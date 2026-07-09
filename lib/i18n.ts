@@ -33,13 +33,6 @@ export const PROJECTS_SEGMENT: Record<Locale, string> = {
   en: "projects",
 };
 
-export const PROJECT_SLUGS = ["leaf", "cata"] as const;
-export type ProjectSlug = (typeof PROJECT_SLUGS)[number];
-
-export function isProjectSlug(value: string): value is ProjectSlug {
-  return (PROJECT_SLUGS as readonly string[]).includes(value);
-}
-
-export function projectHref(locale: Locale, slug: ProjectSlug): string {
+export function projectHref(locale: Locale, slug: string): string {
   return `/${locale}/${PROJECTS_SEGMENT[locale]}/${slug}`;
 }

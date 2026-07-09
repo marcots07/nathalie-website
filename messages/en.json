@@ -96,20 +96,7 @@
     "heading": "Design with purpose.",
     "intro": "Two projects that show how I combine research, design systems, and AI-assisted development to build products with intent.",
     "viewCase": "View case study",
-    "items": {
-      "leaf": {
-        "title": "Leaf",
-        "tagline": "Plant care app",
-        "summary": "Portfolio project for the Google UX Design Certificate. Full UX process with a real usability study (SUS 76).",
-        "tags": ["UX Research", "Figma", "Design system", "Claude Code + MCP"]
-      },
-      "cata": {
-        "title": "Cata",
-        "tagline": "Wine journal and pairing assistant",
-        "summary": "Responsive web app designed end-to-end and built with Figma + Claude Code via MCP.",
-        "tags": ["Product", "Figma", "Design system", "Claude Code + MCP"]
-      }
-    }
+    "inProgress": "In progress"
   },
   "skills": {
     "eyebrow": "Skills & certifications",
@@ -209,103 +196,8 @@
       "hint": "Drag to compare wireframes and high-fidelity mockups."
     },
     "flowsLabel": "Flows and screens",
-    "leaf": {
-      "hero": {
-        "title": "Leaf",
-        "tagline": "Care for your plants without guessing when to water them.",
-        "tags": ["UX Research", "Figma", "Design system", "Claude Code + MCP"]
-      },
-      "overview": {
-        "role": "End-to-end UX design",
-        "tools": "Figma · Claude Code (MCP)",
-        "duration": "Portfolio project",
-        "type": "Google UX Design Certificate"
-      },
-      "problem": {
-        "heading": "A visual and functional language for daily care.",
-        "body": "Leaf was born as the capstone for my Google UX Design Certificate: an app that helps indoor-plant owners organize watering, light, and general-care reminders. The challenge wasn't technical — it was finding the right tone: useful without being controlling, calm without being boring."
-      },
-      "research": {
-        "heading": "I started by listening.",
-        "body": "I designed personas, ran a competitive audit, defined the value proposition, and framed 'How Might We…' questions and goal statements. Research surfaced two common failure modes across the category: asking users for too much upfront, or turning plant care into an anxious to-do list. Leaf had to do the opposite.",
-        "bullets": [
-          "Personas grounded in real user interviews.",
-          "Competitive audit across 5 apps in the category.",
-          "Prioritized value proposition and 'How Might We…' questions.",
-          "Goal statements to scope the MVP."
-        ]
-      },
-      "process": {
-        "heading": "From wireframes to a design system.",
-        "body": "I designed low-fidelity wireframes first, iterating on feedback before touching color or typography. The design system (palette, typography, components) grew as a reusable library — every ReminderCard, button, and bottom-sheet overlay lives as a component in Figma. The app was prototyped in high fidelity and moved to production with Claude Code via MCP.",
-        "flows": [
-          "Onboarding and authentication",
-          "Initial setup and exploration",
-          "ReminderCard and schedule programming",
-          "Bottom-sheet overlays"
-        ]
-      },
-      "results": {
-        "heading": "Real usability study.",
-        "body": "I ran a study with 5 participants using the System Usability Scale (SUS). The final score was 76 — above the industry average (68), in the 'good' range. What mattered more than the number was what the study surfaced.",
-        "susScore": 76,
-        "susOutOf": 100,
-        "learnings": [
-          "Users wanted to see at a glance which plant needed attention today — I redesigned the home to prioritize 'next care' over full inventory.",
-          "Onboarding asked for too much upfront — I broke it into progressive steps with an option to defer detail.",
-          "Reminder copy worked better concise and warm-toned, not like a system notification."
-        ]
-      },
-      "reflection": {
-        "heading": "What I take away.",
-        "body": "A good design system isn't about having many components — it's about having the right ones and using them consistently. And user research doesn't stop when design starts; it comes back to you on every iteration. If I started over, I'd invest more time in the usability study and less in polishing mockups before testing them."
-      }
-    },
-    "cata": {
-      "hero": {
-        "title": "Cata",
-        "tagline": "A personal wine journal with a pairing assistant.",
-        "tags": ["Product", "Figma", "Design system", "Claude Code + MCP"]
-      },
-      "overview": {
-        "role": "End-to-end design and build",
-        "tools": "Figma · Claude Code (MCP)",
-        "duration": "Ongoing personal project",
-        "type": "Responsive web product"
-      },
-      "problem": {
-        "heading": "A wine journal as an intimate space, not a database.",
-        "body": "Existing wine apps treat every bottle as a catalog entry — rating, notes, photo. Cata starts from a different question: what story does this bottle tell inside your life? A personal journal that also helps you decide what to eat with what you've got."
-      },
-      "research": {
-        "heading": "Scoping it.",
-        "body": "As a personal project, research was lighter and direct: sessions with wine-loving friends to understand what they log today (spoiler: nothing consistent) and which moments they actually want to remember. The takeaway: the barrier isn't a lack of apps, it's the friction of opening them."
-      },
-      "process": {
-        "heading": "Design and build, in the same session.",
-        "body": "I designed the full system in Figma — palette, typography, component library — and used Claude Code via MCP to move it into production directly from the mockups. The workflow shortened the design→code cycle dramatically: every UI iteration could be tested in the browser the same day.",
-        "flows": [
-          "Quick bottle capture (photo + 3 fields)",
-          "Detail view with notes and context",
-          "Conversational pairing assistant",
-          "Personal collection with gentle filters"
-        ]
-      },
-      "results": {
-        "heading": "In build, with focus.",
-        "body": "Cata is under active development. Instead of chasing features, I'm prioritizing that logging a bottle feels like writing a postcard — quick, personal, frictionless. The current version covers the full capture and detail flow; the pairing assistant lands in the next iteration.",
-        "susScore": null,
-        "susOutOf": null,
-        "learnings": [
-          "Initial input should be photo-first — most users don't want to type before they have visual context.",
-          "The pairing assistant works better as a contextual suggestion inside the bottle detail, not as a separate screen.",
-          "Designing the system upfront let Claude Code generate consistent UI without rework."
-        ]
-      },
-      "reflection": {
-        "heading": "What I take away.",
-        "body": "Cata taught me that designing and building in the same flow changes how you make decisions — you test ideas before you commit to them. The design system isn't the final deliverable; it's the infrastructure that lets you iterate fast without losing coherence."
-      }
+    "status": {
+      "inProgress": "In progress"
     }
   },
   "placeholder": {

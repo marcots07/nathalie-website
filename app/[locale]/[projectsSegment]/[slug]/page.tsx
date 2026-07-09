@@ -2,11 +2,10 @@ import { notFound } from "next/navigation";
 import {
   getDictionary,
   isLocale,
-  isProjectSlug,
-  PROJECT_SLUGS,
   PROJECTS_SEGMENT,
   LOCALES,
 } from "@/lib/i18n";
+import { getProject, getProjects } from "@/lib/projects";
 import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
 import Footer from "@/components/Footer";
@@ -14,11 +13,12 @@ import CaseStudy from "@/components/CaseStudy";
 import LocalePersist from "@/components/LocalePersist";
 
 export function generateStaticParams() {
+  const projects = getProjects();
   return LOCALES.flatMap((locale) =>
-    PROJECT_SLUGS.map((slug) => ({
+    projects.map((p) => ({
       locale,
       projectsSegment: PROJECTS_SEGMENT[locale],
-      slug,
+      slug: p.slug,
     }))
   );
 }
@@ -31,12 +31,12 @@ export async function generateMetadata({
   const { locale, projectsSegment, slug } = await params;
   if (!isLocale(locale)) return {};
   if (projectsSegment !== PROJECTS_SEGMENT[locale]) return {};
-  if (!isProjectSlug(slug)) return {};
-  const dict = getDictionary(locale);
-  const data = dict.caseStudy[slug];
+  const project = getProject(slug);
+  if (!project) return {};
+  const t = project.translations[locale];
   return {
-    title: `${data.hero.title} — Nathalie González Pérez`,
-    description: data.hero.tagline,
+    title: `${t.hero.title} — Nathalie González Pérez`,
+    description: t.hero.tagline,
   };
 }
 
@@ -47,9 +47,9 @@ export default async function ProjectPage({
 }) {
   const { locale, projectsSegment, slug } = await params;
   if (!isLocale(locale)) notFound();
-  // Enforce the locale-matched segment so /es/projects/... and /en/proyectos/... 404.
   if (projectsSegment !== PROJECTS_SEGMENT[locale]) notFound();
-  if (!isProjectSlug(slug)) notFound();
+  const project = getProject(slug);
+  if (!project) notFound();
   const dict = getDictionary(locale);
 
   return (
@@ -57,7 +57,7 @@ export default async function ProjectPage({
       <LocalePersist locale={locale} />
       <ScrollProgress />
       <Navigation locale={locale} dict={dict} variant="sub" />
-      <CaseStudy slug={slug} dict={dict} locale={locale} />
+      <CaseStudy project={project} dict={dict} locale={locale} />
       <Footer dict={dict} />
     </main>
   );

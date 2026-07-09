@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Dictionary, Locale } from "@/lib/i18n";
-import { PROJECT_SLUGS, projectHref, type ProjectSlug } from "@/lib/i18n";
+import { projectHref } from "@/lib/i18n";
+import { getProjects, type Project } from "@/lib/projects";
 import SectionHeading from "./SectionHeading";
 import Placeholder from "./Placeholder";
+import StatusPill from "./StatusPill";
 
 export default function Projects({
   dict,
@@ -14,6 +16,7 @@ export default function Projects({
   dict: Dictionary;
   locale: Locale;
 }) {
+  const projects = getProjects();
   return (
     <section id="projects" className="relative py-24 md:py-36">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
@@ -22,8 +25,14 @@ export default function Projects({
         </SectionHeading>
 
         <div className="mt-16 md:mt-20 grid md:grid-cols-2 gap-8 md:gap-12">
-          {PROJECT_SLUGS.map((slug, i) => (
-            <ProjectCard key={slug} slug={slug} index={i} dict={dict} locale={locale} />
+          {projects.map((project, i) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              index={i}
+              dict={dict}
+              locale={locale}
+            />
           ))}
         </div>
       </div>
@@ -32,17 +41,17 @@ export default function Projects({
 }
 
 function ProjectCard({
-  slug,
+  project,
   index,
   dict,
   locale,
 }: {
-  slug: ProjectSlug;
+  project: Project;
   index: number;
   dict: Dictionary;
   locale: Locale;
 }) {
-  const project = dict.projects.items[slug];
+  const t = project.translations[locale];
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -51,17 +60,22 @@ function ProjectCard({
       transition={{ duration: 0.8, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
     >
       <Link
-        href={projectHref(locale, slug)}
+        href={projectHref(locale, project.slug)}
         className="group block"
-        style={{ viewTransitionName: `project-${slug}` }}
+        style={{ viewTransitionName: `project-${project.slug}` }}
       >
         <div className="relative overflow-hidden rounded-3xl">
           <Placeholder
             aspect="aspect-[5/4]"
             rounded="rounded-3xl"
             className="transition-transform duration-[900ms] ease-liminal group-hover:scale-[1.03]"
-            ariaLabel={`${project.title} hero image`}
+            ariaLabel={`${t.card.title} hero image`}
           />
+          {project.status === "in_progress" && (
+            <div className="absolute top-4 left-4">
+              <StatusPill label={dict.projects.inProgress} tone="cream" />
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
           <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-2 group-hover:translate-y-0">
             <div className="bg-cream-50/90 backdrop-blur px-4 py-2 rounded-full text-sm text-ink flex items-center gap-2">
@@ -82,13 +96,13 @@ function ProjectCard({
         <div className="mt-6 flex flex-col gap-2">
           <div className="flex items-baseline gap-3 flex-wrap">
             <h3 className="font-display text-3xl md:text-4xl text-ink group-hover:text-sage-700 transition-colors">
-              {project.title}
+              {t.card.title}
             </h3>
-            <span className="text-ink-muted text-sm">{project.tagline}</span>
+            <span className="text-ink-muted text-sm">{t.card.tagline}</span>
           </div>
-          <p className="text-ink-soft leading-relaxed">{project.summary}</p>
+          <p className="text-ink-soft leading-relaxed">{t.card.summary}</p>
           <div className="flex flex-wrap gap-2 mt-3">
-            {project.tags.map((tag) => (
+            {t.card.tags.map((tag) => (
               <span
                 key={tag}
                 className="text-xs uppercase tracking-[0.14em] text-sage-700 border border-sage-200 rounded-full px-3 py-1"

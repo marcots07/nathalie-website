@@ -2,46 +2,66 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import type { Dictionary, Locale, ProjectSlug } from "@/lib/i18n";
+import type { Dictionary, Locale } from "@/lib/i18n";
 import { projectHref } from "@/lib/i18n";
+import { getNextProject, type Project } from "@/lib/projects";
 import Placeholder from "./Placeholder";
 import SusGauge from "./SusGauge";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import ResearchGrid from "./ResearchGrid";
+import StatusPill from "./StatusPill";
 
 type Props = {
-  slug: ProjectSlug;
+  project: Project;
   dict: Dictionary;
   locale: Locale;
 };
 
-export default function CaseStudy({ slug, dict, locale }: Props) {
-  const data = dict.caseStudy[slug];
-  const otherSlug: ProjectSlug = slug === "leaf" ? "cata" : "leaf";
-  const otherData = dict.caseStudy[otherSlug];
+export default function CaseStudy({ project, dict, locale }: Props) {
+  const t = project.translations[locale];
+  const next = getNextProject(project);
+  const nextT = next.translations[locale];
   const artifacts = dict.caseStudy.researchArtifacts;
   const slider = dict.caseStudy.slider;
+  const showSlider = project.features.showBeforeAfterSlider;
+  const showFlows = project.features.showFlowsGallery;
+  const showResearchGrid = project.features.showResearchGrid;
+  const showSus =
+    project.features.showSusGauge &&
+    project.metrics.susScore !== null &&
+    project.metrics.susScore !== undefined;
 
   return (
     <article className="pt-28 md:pt-32 pb-16">
       {/* Hero */}
       <header className="relative">
         <div className="max-w-5xl mx-auto px-6 md:px-10">
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-xs uppercase tracking-[0.28em] text-sage-700"
-          >
-            {dict.projects.eyebrow}
-          </motion.p>
+          <div className="flex items-center gap-3 flex-wrap">
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-xs uppercase tracking-[0.28em] text-sage-700"
+            >
+              {dict.projects.eyebrow}
+            </motion.p>
+            {project.status === "in_progress" && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <StatusPill label={dict.caseStudy.status.inProgress} />
+              </motion.div>
+            )}
+          </div>
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="mt-4 font-display text-6xl md:text-7xl lg:text-8xl text-ink italic leading-none"
           >
-            {data.hero.title}
+            {t.hero.title}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -49,7 +69,7 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
             transition={{ duration: 0.8, delay: 0.25 }}
             className="mt-6 text-xl md:text-2xl text-ink-soft max-w-2xl leading-snug"
           >
-            {data.hero.tagline}
+            {t.hero.tagline}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -57,7 +77,7 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-8 flex flex-wrap gap-2"
           >
-            {data.hero.tags.map((tag) => (
+            {t.hero.tags.map((tag) => (
               <span
                 key={tag}
                 className="text-xs uppercase tracking-[0.14em] text-sage-700 border border-sage-200 rounded-full px-3 py-1"
@@ -73,13 +93,13 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-6xl mx-auto px-6 md:px-10 mt-14"
-          style={{ viewTransitionName: `project-${slug}` }}
+          style={{ viewTransitionName: `project-${project.slug}` }}
         >
           <Placeholder
             aspect="aspect-[16/9]"
             rounded="rounded-3xl"
             variant="browser"
-            ariaLabel={`${data.hero.title} hero image`}
+            ariaLabel={`${t.hero.title} hero image`}
           />
         </motion.div>
       </header>
@@ -91,16 +111,16 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
           {dict.caseStudy.overview}
         </p>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 border-t border-sage-100 pt-8">
-          <OverviewItem label={dict.caseStudy.role} value={data.overview.role} />
-          <OverviewItem label={dict.caseStudy.tools} value={data.overview.tools} />
-          <OverviewItem label={dict.caseStudy.duration} value={data.overview.duration} />
-          <OverviewItem label={dict.caseStudy.type} value={data.overview.type} />
+          <OverviewItem label={dict.caseStudy.role} value={t.overview.role} />
+          <OverviewItem label={dict.caseStudy.tools} value={t.overview.tools} />
+          <OverviewItem label={dict.caseStudy.duration} value={t.overview.duration} />
+          <OverviewItem label={dict.caseStudy.type} value={t.overview.type} />
         </div>
       </section>
 
       {/* Problem */}
-      <TextSection eyebrow={dict.caseStudy.problem} heading={data.problem.heading}>
-        {data.problem.body}
+      <TextSection eyebrow={dict.caseStudy.problem} heading={t.problem.heading}>
+        {t.problem.body}
       </TextSection>
 
       {/* Research */}
@@ -110,7 +130,7 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
           {dict.caseStudy.research}
         </p>
         <div className="grid md:grid-cols-12 gap-10">
-          <div className="md:col-span-7">
+          <div className={showResearchGrid ? "md:col-span-7" : "md:col-span-12"}>
             <motion.h2
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -118,7 +138,7 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
               transition={{ duration: 0.7 }}
               className="font-display text-3xl md:text-4xl text-ink leading-snug"
             >
-              {data.research.heading}
+              {t.research.heading}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -127,11 +147,11 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
               transition={{ duration: 0.7, delay: 0.15 }}
               className="mt-5 text-lg text-ink-soft leading-relaxed"
             >
-              {data.research.body}
+              {t.research.body}
             </motion.p>
-            {"bullets" in data.research && data.research.bullets && (
+            {t.research.bullets && (
               <ul className="mt-6 space-y-3">
-                {data.research.bullets.map((b: string) => (
+                {t.research.bullets.map((b) => (
                   <li key={b} className="text-ink-soft flex gap-3">
                     <span className="text-sage-500 mt-2.5">
                       <span className="block w-1 h-1 rounded-full bg-current" />
@@ -142,16 +162,18 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
               </ul>
             )}
           </div>
-          <div className="md:col-span-5">
-            <ResearchGrid
-              blocks={[
-                { label: artifacts.personas, glyph: "personas" },
-                { label: artifacts.competitive, glyph: "competitive" },
-                { label: artifacts.valueProp, glyph: "valueProp" },
-                { label: artifacts.hmw, glyph: "hmw" },
-              ]}
-            />
-          </div>
+          {showResearchGrid && (
+            <div className="md:col-span-5">
+              <ResearchGrid
+                blocks={[
+                  { label: artifacts.personas, glyph: "personas" },
+                  { label: artifacts.competitive, glyph: "competitive" },
+                  { label: artifacts.valueProp, glyph: "valueProp" },
+                  { label: artifacts.hmw, glyph: "hmw" },
+                ]}
+              />
+            </div>
+          )}
         </div>
       </section>
 
@@ -168,7 +190,7 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
           transition={{ duration: 0.7 }}
           className="font-display text-3xl md:text-4xl text-ink leading-snug max-w-3xl"
         >
-          {data.process.heading}
+          {t.process.heading}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 12 }}
@@ -177,51 +199,55 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="mt-5 text-lg text-ink-soft leading-relaxed max-w-3xl"
         >
-          {data.process.body}
+          {t.process.body}
         </motion.p>
 
-        {/* Before/after slider: wireframe → high-fidelity */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mt-10"
-        >
-          <BeforeAfterSlider
-            beforeLabel={slider.before}
-            afterLabel={slider.after}
-            dragHint={slider.hint}
-          />
-        </motion.div>
+        {showSlider && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mt-10"
+          >
+            <BeforeAfterSlider
+              beforeLabel={slider.before}
+              afterLabel={slider.after}
+              dragHint={slider.hint}
+            />
+          </motion.div>
+        )}
 
-        {/* Horizontal scroll of design flows */}
-        <div className="mt-14">
-          <p className="text-xs uppercase tracking-[0.24em] text-sage-700 mb-4">
-            {dict.caseStudy.flowsLabel}
-          </p>
-        </div>
-        <div className="-mx-6 md:-mx-10 overflow-x-auto pb-4">
-          <div className="flex gap-6 px-6 md:px-10 snap-x snap-mandatory">
-            {data.process.flows.map((flow: string, i: number) => (
-              <motion.div
-                key={flow}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="flex-shrink-0 w-72 snap-start"
-              >
-                <Placeholder
-                  aspect="aspect-[9/16]"
-                  variant="device"
-                  rounded="rounded-3xl"
-                />
-                <p className="mt-3 text-sm text-ink-muted text-center">{flow}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        {showFlows && (
+          <>
+            <div className={showSlider ? "mt-14" : "mt-10"}>
+              <p className="text-xs uppercase tracking-[0.24em] text-sage-700 mb-4">
+                {dict.caseStudy.flowsLabel}
+              </p>
+            </div>
+            <div className="-mx-6 md:-mx-10 overflow-x-auto pb-4">
+              <div className="flex gap-6 px-6 md:px-10 snap-x snap-mandatory">
+                {t.process.flows.map((flow, i) => (
+                  <motion.div
+                    key={flow}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.6, delay: i * 0.08 }}
+                    className="flex-shrink-0 w-72 snap-start"
+                  >
+                    <Placeholder
+                      aspect="aspect-[9/16]"
+                      variant="device"
+                      rounded="rounded-3xl"
+                    />
+                    <p className="mt-3 text-sm text-ink-muted text-center">{flow}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </section>
 
       {/* Results */}
@@ -231,7 +257,7 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
           {dict.caseStudy.results}
         </p>
         <div className="grid md:grid-cols-12 gap-10 items-center">
-          <div className="md:col-span-7">
+          <div className={showSus ? "md:col-span-7" : "md:col-span-12"}>
             <motion.h2
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -239,7 +265,7 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
               transition={{ duration: 0.7 }}
               className="font-display text-3xl md:text-4xl text-ink leading-snug"
             >
-              {data.results.heading}
+              {t.results.heading}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -248,10 +274,10 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
               transition={{ duration: 0.7, delay: 0.15 }}
               className="mt-5 text-lg text-ink-soft leading-relaxed"
             >
-              {data.results.body}
+              {t.results.body}
             </motion.p>
             <ul className="mt-6 space-y-3">
-              {data.results.learnings.map((l: string) => (
+              {t.results.learnings.map((l) => (
                 <li key={l} className="text-ink-soft flex gap-3">
                   <span className="text-sage-500 mt-2.5">
                     <span className="block w-1 h-1 rounded-full bg-current" />
@@ -261,11 +287,11 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
               ))}
             </ul>
           </div>
-          {data.results.susScore !== null && data.results.susScore !== undefined && (
+          {showSus && project.metrics.susScore !== null && (
             <div className="md:col-span-5 flex justify-center">
               <SusGauge
-                value={data.results.susScore}
-                outOf={data.results.susOutOf ?? 100}
+                value={project.metrics.susScore}
+                outOf={project.metrics.susOutOf ?? 100}
               />
             </div>
           )}
@@ -273,26 +299,29 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
       </section>
 
       {/* Reflection */}
-      <TextSection eyebrow={dict.caseStudy.reflection} heading={data.reflection.heading}>
-        {data.reflection.body}
+      <TextSection eyebrow={dict.caseStudy.reflection} heading={t.reflection.heading}>
+        {t.reflection.body}
       </TextSection>
 
       {/* Next project */}
       <section className="max-w-5xl mx-auto px-6 md:px-10 mt-24 md:mt-32">
         <Link
-          href={projectHref(locale, otherSlug)}
+          href={projectHref(locale, next.slug)}
           className="group block border-t border-sage-100 pt-10"
-          style={{ viewTransitionName: `project-${otherSlug}` }}
+          style={{ viewTransitionName: `project-${next.slug}` }}
         >
           <p className="text-xs uppercase tracking-[0.28em] text-sage-700 mb-3">
             {dict.caseStudy.next}
           </p>
           <div className="flex items-baseline justify-between gap-6 flex-wrap">
-            <div>
+            <div className="flex items-baseline gap-3 flex-wrap">
               <h3 className="font-display text-4xl md:text-5xl text-ink italic group-hover:text-sage-700 transition-colors">
-                {otherData.hero.title}
+                {nextT.hero.title}
               </h3>
-              <p className="text-ink-muted mt-2">{otherData.hero.tagline}</p>
+              <p className="text-ink-muted mt-2">{nextT.hero.tagline}</p>
+              {next.status === "in_progress" && (
+                <StatusPill label={dict.caseStudy.status.inProgress} />
+              )}
             </div>
             <svg
               width="28"

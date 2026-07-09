@@ -1,0 +1,129 @@
+{
+  "slug": "leaf",
+  "order": 1,
+  "status": "complete",
+  "features": {
+    "showBeforeAfterSlider": true,
+    "showResearchGrid": true,
+    "showFlowsGallery": true,
+    "showSusGauge": true
+  },
+  "metrics": {
+    "susScore": 76,
+    "susOutOf": 100
+  },
+  "translations": {
+    "es": {
+      "card": {
+        "title": "Leaf",
+        "tagline": "App de cuidado de plantas",
+        "summary": "Proyecto de portafolio del Google UX Design Certificate. Proceso UX completo con estudio de usabilidad real (SUS 76).",
+        "tags": ["UX Research", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+      },
+      "hero": {
+        "title": "Leaf",
+        "tagline": "Cuidar tus plantas sin adivinar cuándo regarlas.",
+        "tags": ["UX Research", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+      },
+      "overview": {
+        "role": "Diseño UX de principio a fin",
+        "tools": "Figma · Claude Code (MCP)",
+        "duration": "Proyecto de portafolio",
+        "type": "Google UX Design Certificate"
+      },
+      "problem": {
+        "heading": "Un lenguaje visual y funcional para el cuidado diario.",
+        "body": "Leaf nació como el proyecto final de mi Google UX Design Certificate: una app que ayuda a personas con plantas de interior a organizar recordatorios de riego, luz y cuidado. El reto no era técnico — era encontrar el tono correcto: útil sin ser controlador, calmado sin ser aburrido."
+      },
+      "research": {
+        "heading": "Empecé por escuchar.",
+        "body": "Diseñé personas, hice una auditoría competitiva, definí la propuesta de valor y formulé preguntas 'How Might We…' y enunciados de objetivo. La investigación reveló que la mayoría de apps del segmento pecaban de dos cosas: pedir demasiada información inicial, o convertir el cuidado en una lista de tareas ansiosa. Leaf tenía que hacer lo contrario.",
+        "bullets": [
+          "Personas basadas en entrevistas de usuarios reales.",
+          "Auditoría competitiva de 5 apps del segmento.",
+          "Value proposition y 'How Might We…' priorizadas.",
+          "Enunciados de objetivo para acotar el MVP."
+        ]
+      },
+      "process": {
+        "heading": "De wireframes al sistema de diseño.",
+        "body": "Diseñé wireframes de baja fidelidad primero, iterando con feedback antes de tocar color o tipografía. El sistema de diseño (paleta, tipografía, componentes) se construyó como una biblioteca reutilizable — cada ReminderCard, botón y overlay tipo bottom sheet vive como componente en Figma. La app se prototipó en alta fidelidad y se llevó a desarrollo con Claude Code vía MCP.",
+        "flows": [
+          "Onboarding y autenticación",
+          "Configuración inicial y exploración",
+          "ReminderCard y programación de recordatorios",
+          "Overlays tipo bottom sheet"
+        ]
+      },
+      "results": {
+        "heading": "Estudio de usabilidad real.",
+        "body": "Corrí un estudio con 5 participantes usando el System Usability Scale (SUS). El puntaje final fue 76 — sobre el promedio de la industria (68) y en el rango 'good'. Más importante que el número: los aprendizajes concretos.",
+        "learnings": [
+          "Los usuarios querían ver de un vistazo qué planta necesitaba atención hoy — rediseñé la home para priorizar 'próximo cuidado' sobre inventario completo.",
+          "El onboarding pedía demasiado de golpe — lo dividí en pasos progresivos con la opción de posponer detalles.",
+          "El copy en los recordatorios funcionaba mejor conciso y en tono cálido, no como notificación de sistema."
+        ]
+      },
+      "reflection": {
+        "heading": "Qué me llevo.",
+        "body": "Aprendí que un buen sistema de diseño no es sobre tener muchos componentes, sino sobre tener los correctos y consistentes. Y que la investigación de usuarios no termina cuando empieza el diseño — vuelve a ti en cada iteración. Si empezara de nuevo, invertiría más tiempo en el estudio de usabilidad y menos en refinar mockups antes de probarlos."
+      }
+    },
+    "en": {
+      "card": {
+        "title": "Leaf",
+        "tagline": "Plant care app",
+        "summary": "Portfolio project for the Google UX Design Certificate. Full UX process with a real usability study (SUS 76).",
+        "tags": ["UX Research", "Figma", "Design system", "Claude Code + MCP"]
+      },
+      "hero": {
+        "title": "Leaf",
+        "tagline": "Care for your plants without guessing when to water them.",
+        "tags": ["UX Research", "Figma", "Design system", "Claude Code + MCP"]
+      },
+      "overview": {
+        "role": "End-to-end UX design",
+        "tools": "Figma · Claude Code (MCP)",
+        "duration": "Portfolio project",
+        "type": "Google UX Design Certificate"
+      },
+      "problem": {
+        "heading": "A visual and functional language for daily care.",
+        "body": "Leaf was born as the capstone for my Google UX Design Certificate: an app that helps indoor-plant owners organize watering, light, and general-care reminders. The challenge wasn't technical — it was finding the right tone: useful without being controlling, calm without being boring."
+      },
+      "research": {
+        "heading": "I started by listening.",
+        "body": "I designed personas, ran a competitive audit, defined the value proposition, and framed 'How Might We…' questions and goal statements. Research surfaced two common failure modes across the category: asking users for too much upfront, or turning plant care into an anxious to-do list. Leaf had to do the opposite.",
+        "bullets": [
+          "Personas grounded in real user interviews.",
+          "Competitive audit across 5 apps in the category.",
+          "Prioritized value proposition and 'How Might We…' questions.",
+          "Goal statements to scope the MVP."
+        ]
+      },
+      "process": {
+        "heading": "From wireframes to a design system.",
+        "body": "I designed low-fidelity wireframes first, iterating on feedback before touching color or typography. The design system (palette, typography, components) grew as a reusable library — every ReminderCard, button, and bottom-sheet overlay lives as a component in Figma. The app was prototyped in high fidelity and moved to production with Claude Code via MCP.",
+        "flows": [
+          "Onboarding and authentication",
+          "Initial setup and exploration",
+          "ReminderCard and schedule programming",
+          "Bottom-sheet overlays"
+        ]
+      },
+      "results": {
+        "heading": "Real usability study.",
+        "body": "I ran a study with 5 participants using the System Usability Scale (SUS). The final score was 76 — above the industry average (68), in the 'good' range. What mattered more than the number was what the study surfaced.",
+        "learnings": [
+          "Users wanted to see at a glance which plant needed attention today — I redesigned the home to prioritize 'next care' over full inventory.",
+          "Onboarding asked for too much upfront — I broke it into progressive steps with an option to defer detail.",
+          "Reminder copy worked better concise and warm-toned, not like a system notification."
+        ]
+      },
+      "reflection": {
+        "heading": "What I take away.",
+        "body": "A good design system isn't about having many components — it's about having the right ones and using them consistently. And user research doesn't stop when design starts; it comes back to you on every iteration. If I started over, I'd invest more time in the usability study and less in polishing mockups before testing them."
+      }
+    }
+  }
+}
