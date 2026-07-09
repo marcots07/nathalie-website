@@ -3,11 +3,9 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Dictionary, Locale } from "@/lib/i18n";
+import { PROJECT_SLUGS, projectHref, type ProjectSlug } from "@/lib/i18n";
 import SectionHeading from "./SectionHeading";
 import Placeholder from "./Placeholder";
-
-const SLUGS = ["leaf", "cata"] as const;
-type Slug = (typeof SLUGS)[number];
 
 export default function Projects({
   dict,
@@ -24,7 +22,7 @@ export default function Projects({
         </SectionHeading>
 
         <div className="mt-16 md:mt-20 grid md:grid-cols-2 gap-8 md:gap-12">
-          {SLUGS.map((slug, i) => (
+          {PROJECT_SLUGS.map((slug, i) => (
             <ProjectCard key={slug} slug={slug} index={i} dict={dict} locale={locale} />
           ))}
         </div>
@@ -39,7 +37,7 @@ function ProjectCard({
   dict,
   locale,
 }: {
-  slug: Slug;
+  slug: ProjectSlug;
   index: number;
   dict: Dictionary;
   locale: Locale;
@@ -53,7 +51,7 @@ function ProjectCard({
       transition={{ duration: 0.8, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
     >
       <Link
-        href={`/${locale}/projects/${slug}`}
+        href={projectHref(locale, slug)}
         className="group block"
         style={{ viewTransitionName: `project-${slug}` }}
       >

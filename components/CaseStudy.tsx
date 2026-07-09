@@ -2,22 +2,25 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import type { Dictionary, Locale } from "@/lib/i18n";
+import type { Dictionary, Locale, ProjectSlug } from "@/lib/i18n";
+import { projectHref } from "@/lib/i18n";
 import Placeholder from "./Placeholder";
 import SusGauge from "./SusGauge";
-
-type CaseSlug = "leaf" | "cata";
+import BeforeAfterSlider from "./BeforeAfterSlider";
+import ResearchGrid from "./ResearchGrid";
 
 type Props = {
-  slug: CaseSlug;
+  slug: ProjectSlug;
   dict: Dictionary;
   locale: Locale;
 };
 
 export default function CaseStudy({ slug, dict, locale }: Props) {
   const data = dict.caseStudy[slug];
-  const otherSlug: CaseSlug = slug === "leaf" ? "cata" : "leaf";
+  const otherSlug: ProjectSlug = slug === "leaf" ? "cata" : "leaf";
   const otherData = dict.caseStudy[otherSlug];
+  const artifacts = dict.caseStudy.researchArtifacts;
+  const slider = dict.caseStudy.slider;
 
   return (
     <article className="pt-28 md:pt-32 pb-16">
@@ -75,6 +78,7 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
           <Placeholder
             aspect="aspect-[16/9]"
             rounded="rounded-3xl"
+            variant="browser"
             ariaLabel={`${data.hero.title} hero image`}
           />
         </motion.div>
@@ -138,9 +142,15 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
               </ul>
             )}
           </div>
-          <div className="md:col-span-5 grid grid-cols-2 gap-4">
-            <Placeholder aspect="aspect-[4/5]" rounded="rounded-2xl" />
-            <Placeholder aspect="aspect-[4/5]" rounded="rounded-2xl" className="mt-8" />
+          <div className="md:col-span-5">
+            <ResearchGrid
+              blocks={[
+                { label: artifacts.personas, glyph: "personas" },
+                { label: artifacts.competitive, glyph: "competitive" },
+                { label: artifacts.valueProp, glyph: "valueProp" },
+                { label: artifacts.hmw, glyph: "hmw" },
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -170,8 +180,28 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
           {data.process.body}
         </motion.p>
 
-        {/* Horizontal scroll of design frames */}
-        <div className="mt-10 -mx-6 md:-mx-10 overflow-x-auto pb-4">
+        {/* Before/after slider: wireframe → high-fidelity */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="mt-10"
+        >
+          <BeforeAfterSlider
+            beforeLabel={slider.before}
+            afterLabel={slider.after}
+            dragHint={slider.hint}
+          />
+        </motion.div>
+
+        {/* Horizontal scroll of design flows */}
+        <div className="mt-14">
+          <p className="text-xs uppercase tracking-[0.24em] text-sage-700 mb-4">
+            {dict.caseStudy.flowsLabel}
+          </p>
+        </div>
+        <div className="-mx-6 md:-mx-10 overflow-x-auto pb-4">
           <div className="flex gap-6 px-6 md:px-10 snap-x snap-mandatory">
             {data.process.flows.map((flow: string, i: number) => (
               <motion.div
@@ -250,7 +280,7 @@ export default function CaseStudy({ slug, dict, locale }: Props) {
       {/* Next project */}
       <section className="max-w-5xl mx-auto px-6 md:px-10 mt-24 md:mt-32">
         <Link
-          href={`/${locale}/projects/${otherSlug}`}
+          href={projectHref(locale, otherSlug)}
           className="group block border-t border-sage-100 pt-10"
           style={{ viewTransitionName: `project-${otherSlug}` }}
         >

@@ -197,6 +197,18 @@
     "results": "Resultados",
     "reflection": "Reflexión",
     "next": "Siguiente proyecto",
+    "researchArtifacts": {
+      "personas": "Personas",
+      "competitive": "Auditoría competitiva",
+      "valueProp": "Propuesta de valor",
+      "hmw": "How Might We…"
+    },
+    "slider": {
+      "before": "Wireframe",
+      "after": "Alta fidelidad",
+      "hint": "Arrastra para comparar wireframes y mockups de alta fidelidad."
+    },
+    "flowsLabel": "Flujos y pantallas",
     "leaf": {
       "hero": {
         "title": "Leaf",

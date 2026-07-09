@@ -23,3 +23,23 @@ export function getDictionary(locale: Locale): Dictionary {
 export function otherLocale(locale: Locale): Locale {
   return locale === "es" ? "en" : "es";
 }
+
+/**
+ * Localized URL segment for the case-study collection.
+ * ES → /es/proyectos/... · EN → /en/projects/...
+ */
+export const PROJECTS_SEGMENT: Record<Locale, string> = {
+  es: "proyectos",
+  en: "projects",
+};
+
+export const PROJECT_SLUGS = ["leaf", "cata"] as const;
+export type ProjectSlug = (typeof PROJECT_SLUGS)[number];
+
+export function isProjectSlug(value: string): value is ProjectSlug {
+  return (PROJECT_SLUGS as readonly string[]).includes(value);
+}
+
+export function projectHref(locale: Locale, slug: ProjectSlug): string {
+  return `/${locale}/${PROJECTS_SEGMENT[locale]}/${slug}`;
+}

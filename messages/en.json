@@ -197,6 +197,18 @@
     "results": "Results",
     "reflection": "Reflection",
     "next": "Next project",
+    "researchArtifacts": {
+      "personas": "Personas",
+      "competitive": "Competitive audit",
+      "valueProp": "Value proposition",
+      "hmw": "How Might We…"
+    },
+    "slider": {
+      "before": "Wireframe",
+      "after": "High fidelity",
+      "hint": "Drag to compare wireframes and high-fidelity mockups."
+    },
+    "flowsLabel": "Flows and screens",
     "leaf": {
       "hero": {
         "title": "Leaf",
