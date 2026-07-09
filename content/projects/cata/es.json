@@ -39,6 +39,11 @@
           "Login — acceso sereno, sin fricción",
           "Inicio — tu cava de un vistazo",
           "Discover — búsqueda y 'Ask Cata'"
+        ],
+        "notes": [
+          "Login sereno y mínimo; el acceso social queda en segundo plano, sin competir con el correo.",
+          "Titular serif editorial y chips de filtro: la cava se siente como una revista, no una base de datos.",
+          "‘Ask Cata’ vive en su propio panel — un punto de entrada conversacional distinto de la búsqueda normal."
         ]
       },
       {
@@ -48,6 +53,12 @@
           "Colecciones — 'Vinos mexicanos'",
           "Pair — foto del plato, maridaje sugerido",
           "¿Qué tomar hoy? — la elección de esta noche"
+        ],
+        "notes": [
+          "Tres modos de alta —buscar, escanear etiqueta, manual— como una elección segmentada, no formularios separados.",
+          "Las colecciones con nombre (‘Vinos mexicanos’) convierten la cava en algo personal y curado.",
+          "La zona punteada comunica al instante ‘suelta o sube una foto’: una affordance sin instrucciones.",
+          "Una sola recomendación protagonista para hoy, con ‘Probar otra’ para no paralizar la decisión."
         ]
       }
     ]

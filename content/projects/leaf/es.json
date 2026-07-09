@@ -49,6 +49,12 @@
           "Onboarding — identificar plantas al instante",
           "Onboarding — recordatorios y acceso como invitado",
           "Primer uso — escanear tu primera planta"
+        ],
+        "notes": [
+          "Una sola foto a sangre y un CTA primario: la primera pantalla vende la calma, no la lista de funciones.",
+          "El onboarding muestra la pantalla real de identificación para fijar expectativas antes de pedir nada.",
+          "‘Continuar como invitado’ baja la fricción de registro — puedes probar la app sin crear cuenta.",
+          "El primer paso es concreto —escanear una planta— en vez de un estado vacío que no dice qué hacer."
         ]
       },
       {
@@ -61,6 +67,15 @@
           "Agenda — tareas del día con progreso",
           "Identificar planta — cámara con guía",
           "LumaAI — asistente de cuidado conversacional"
+        ],
+        "notes": [
+          "La home prioriza ‘próximo cuidado’ sobre el inventario completo — cambio directo del estudio de usabilidad.",
+          "Un banner verde resume ‘3 plantas necesitan agua hoy’: la acción urgente arriba del todo.",
+          "Fila de acciones rápidas (Regar, Agenda, Diagnóstico, Notas) sobre una tabla de cuidado legible.",
+          "Una sola acción grande —‘Regar ahora’— con el contexto de cuándo se regó por última vez.",
+          "La agenda separa pendiente y hecho, con progreso ‘2 de 6’ para dar sensación de avance.",
+          "Los corchetes de encuadre guían la foto: el usuario sabe exactamente dónde apuntar.",
+          "Chips de sugerencia (‘Identificar una planta’, ‘Tips de riego’) rompen la barrera del input vacío."
         ]
       }
     ]

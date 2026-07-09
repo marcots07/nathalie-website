@@ -3,14 +3,14 @@
 import { motion } from "framer-motion";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { projectHref } from "@/lib/i18n";
-import { getNextProject, type Project } from "@/lib/projects";
+import { getNextProject, estimateReadMinutes, type Project } from "@/lib/projects";
 import Placeholder from "./Placeholder";
 import SusGauge from "./SusGauge";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import ResearchGrid from "./ResearchGrid";
 import StatusPill from "./StatusPill";
 import TransitionLink from "./TransitionLink";
-import DeviceScreen from "./DeviceScreen";
+import FlowShowcase from "./FlowShowcase";
 
 type Props = {
   project: Project;
@@ -31,6 +31,7 @@ export default function CaseStudy({ project, dict, locale }: Props) {
     project.features.showSusGauge &&
     project.metrics.susScore !== null &&
     project.metrics.susScore !== undefined;
+  const readMinutes = estimateReadMinutes(t);
 
   return (
     <article className="pt-28 md:pt-32 pb-16">
@@ -55,6 +56,15 @@ export default function CaseStudy({ project, dict, locale }: Props) {
                 <StatusPill label={dict.caseStudy.status.inProgress} />
               </motion.div>
             )}
+            <motion.span
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-xs uppercase tracking-[0.28em] text-ink-muted inline-flex items-center gap-2"
+            >
+              <span className="w-1 h-1 rounded-full bg-ink-muted" />
+              {readMinutes} {dict.caseStudy.readTime}
+            </motion.span>
           </div>
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
@@ -230,15 +240,17 @@ export default function CaseStudy({ project, dict, locale }: Props) {
               </p>
             </div>
             {t.process.flowGroups && t.process.flowGroups.length > 0 ? (
-              <div className="space-y-12">
+              <div className="space-y-16 md:space-y-20">
                 {t.process.flowGroups.map((group, g) => (
                   <div key={group.title}>
-                    <h3 className="font-display text-xl md:text-2xl text-ink mb-5 flex items-center gap-3">
+                    <h3 className="font-display text-xl md:text-2xl text-ink mb-8 flex items-center gap-3">
                       <span className="w-6 h-px bg-sage-500" />
                       {group.title}
                     </h3>
-                    <FlowRow
+                    <FlowShowcase
                       flows={group.flows}
+                      notes={group.notes}
+                      decisionLabel={dict.caseStudy.designDecision}
                       screens={project.media?.screenGroups?.[g]?.screens}
                       aspectRatio={project.media?.screensAspectRatio}
                       frame={project.media?.screensFrame}
@@ -247,8 +259,10 @@ export default function CaseStudy({ project, dict, locale }: Props) {
                 ))}
               </div>
             ) : (
-              <FlowRow
+              <FlowShowcase
                 flows={t.process.flows}
+                notes={t.process.flowNotes}
+                decisionLabel={dict.caseStudy.designDecision}
                 screens={project.media?.screens}
                 aspectRatio={project.media?.screensAspectRatio}
                 frame={project.media?.screensFrame}
@@ -350,54 +364,6 @@ export default function CaseStudy({ project, dict, locale }: Props) {
         </TransitionLink>
       </section>
     </article>
-  );
-}
-
-function FlowRow({
-  flows,
-  screens,
-  aspectRatio,
-  frame,
-}: {
-  flows: string[];
-  screens?: { src: string }[];
-  aspectRatio?: string;
-  frame?: "device" | "browser";
-}) {
-  // Landscape screenshots (browser frames) need wider cards than phones.
-  const isLandscape = (() => {
-    if (frame === "browser") return true;
-    if (!aspectRatio) return false;
-    const [w, h] = aspectRatio.split("/").map((s) => parseFloat(s.trim()));
-    return Number.isFinite(w) && Number.isFinite(h) && w > h;
-  })();
-  const cardWidth = isLandscape
-    ? "w-[20rem] sm:w-[26rem] md:w-[32rem]"
-    : "w-72";
-
-  return (
-    <div className="-mx-6 md:-mx-10 overflow-x-auto pb-4">
-      <div className="flex gap-6 px-6 md:px-10 snap-x snap-mandatory">
-        {flows.map((flow, i) => (
-          <motion.div
-            key={flow}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.6, delay: i * 0.08 }}
-            className={`flex-shrink-0 snap-start ${cardWidth}`}
-          >
-            <DeviceScreen
-              src={screens?.[i]?.src}
-              alt={flow}
-              aspectRatio={aspectRatio}
-              frame={frame}
-            />
-            <p className="mt-3 text-sm text-ink-muted text-center">{flow}</p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
   );
 }
 

@@ -205,6 +205,8 @@
       "hint": "Drag to compare wireframes and high-fidelity mockups."
     },
     "flowsLabel": "Flows and screens",
+    "readTime": "min read",
+    "designDecision": "Design decision",
     "status": {
       "inProgress": "In progress"
     }

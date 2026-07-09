@@ -97,9 +97,14 @@ export type ProjectResearch = ProjectTextBlock & {
 
 export type ProjectProcess = ProjectTextBlock & {
   flows: string[];
+  /** Optional design-decision note per screen, matched by index to
+      `flows` (flat gallery). */
+  flowNotes?: string[];
   /** Grouped captions for the gallery; matched by index to
-      media.screenGroups. When present, rendering prefers groups. */
-  flowGroups?: { title: string; flows: string[] }[];
+      media.screenGroups. When present, rendering prefers groups.
+      `notes` are per-screen design decisions, matched by index to
+      the group's `flows`. */
+  flowGroups?: { title: string; flows: string[]; notes?: string[] }[];
 };
 
 export type ProjectResults = ProjectTextBlock & {
@@ -168,3 +173,39 @@ export function getNextProject(current: Project): Project {
 }
 
 export const PROJECT_SLUGS: readonly string[] = registry.map((p) => p.slug);
+
+/**
+ * Rough reading-time estimate (minutes) for a case study, from the word
+ * count of every text field a reader actually scans. ~200 wpm, floored
+ * at 1 minute.
+ */
+export function estimateReadMinutes(t: ProjectTranslation): number {
+  const parts: string[] = [
+    t.hero.tagline,
+    t.problem.heading,
+    t.problem.body,
+    t.research.heading,
+    t.research.body,
+    ...(t.research.bullets ?? []),
+    t.process.heading,
+    t.process.body,
+    t.results.heading,
+    t.results.body,
+    ...t.results.learnings,
+    t.reflection.heading,
+    t.reflection.body,
+  ];
+  if (t.process.flowGroups && t.process.flowGroups.length > 0) {
+    for (const g of t.process.flowGroups) {
+      parts.push(g.title, ...g.flows, ...(g.notes ?? []));
+    }
+  } else {
+    parts.push(...t.process.flows, ...(t.process.flowNotes ?? []));
+  }
+  const words = parts
+    .join(" ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}

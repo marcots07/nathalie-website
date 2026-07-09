@@ -49,6 +49,12 @@
           "Onboarding — identify plants instantly",
           "Onboarding — reminders and guest access",
           "First run — scan your first plant"
+        ],
+        "notes": [
+          "One full-bleed photo and a single primary CTA: the first screen sells calm, not a feature list.",
+          "Onboarding shows the real identify screen to set expectations before asking for anything.",
+          "‘Continue as Guest’ lowers signup friction — you can try the app before creating an account.",
+          "The first step is concrete —scan a plant— instead of an empty state that doesn't say what to do."
         ]
       },
       {
@@ -61,6 +67,15 @@
           "Schedule — daily tasks with progress",
           "Identify plant — guided camera",
           "LumaAI — conversational care assistant"
+        ],
+        "notes": [
+          "Home prioritizes ‘next care’ over full inventory — a direct change from the usability study.",
+          "A green banner sums up ‘3 plants need water today’: the urgent action sits right at the top.",
+          "A quick-action row (Water, Schedule, Diagnose, Notes) over a legible care table.",
+          "One big action —‘Water Now’— with the context of when it was last watered.",
+          "The schedule splits pending and done, with ‘2 of 6’ progress to give a sense of momentum.",
+          "Framing brackets guide the shot: the user knows exactly where to point.",
+          "Suggestion chips (‘Identify a plant’, ‘Watering tips’) break the blank-input barrier."
         ]
       }
     ]

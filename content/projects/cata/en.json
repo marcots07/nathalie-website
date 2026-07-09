@@ -39,6 +39,11 @@
           "Log in — calm, frictionless entry",
           "Home — your cellar at a glance",
           "Discover — search and 'Ask Cata'"
+        ],
+        "notes": [
+          "Calm, minimal login; social auth sits in the background, never competing with email.",
+          "Editorial serif headline and filter chips: the cellar feels like a magazine, not a database.",
+          "‘Ask Cata’ lives in its own panel — a conversational entry point distinct from ordinary search."
         ]
       },
       {
@@ -48,6 +53,12 @@
           "Collections — 'Mexican wines'",
           "Pair — snap your dish, get a match",
           "What to drink today — tonight's pick"
+        ],
+        "notes": [
+          "Three add modes —search, scan label, manual— as a segmented choice, not separate forms.",
+          "Named collections (‘Mexican wines’) turn the cellar into something personal and curated.",
+          "The dashed zone instantly signals ‘drop or upload a photo’: an affordance with no instructions.",
+          "One hero recommendation for tonight, with ‘Try another’ so the decision never stalls."
         ]
       }
     ]

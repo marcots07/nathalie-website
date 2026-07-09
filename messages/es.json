@@ -205,6 +205,8 @@
       "hint": "Arrastra para comparar wireframes y mockups de alta fidelidad."
     },
     "flowsLabel": "Flujos y pantallas",
+    "readTime": "min de lectura",
+    "designDecision": "Decisión de diseño",
     "status": {
       "inProgress": "En construcción"
     }
