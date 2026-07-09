@@ -32,7 +32,7 @@
   },
   "process": {
     "heading": "De wireframes al sistema de diseño.",
-    "body": "Diseñé wireframes de baja fidelidad primero, iterando con feedback antes de tocar color o tipografía. El sistema de diseño (paleta, tipografía, componentes) se construyó como una biblioteca reutilizable — cada ReminderCard, botón y overlay tipo bottom sheet vive como componente en Figma. La app se prototipó en alta fidelidad y se llevó a desarrollo con Claude Code vía MCP.",
+    "body": "Diseñé wireframes de baja fidelidad primero, iterando con feedback antes de tocar color o tipografía. El sistema de diseño se construyó por capas: primitivos con rampas tonales de 10 pasos — verde bosque (#2D5016) sobre beige cálido, con acentos ámbar, azul y rojo —, una capa semántica que mapea cada primitivo a su rol (fondo, texto, bordes, estados) preparada para modo claro y oscuro, e Inter como única tipografía de la app. Cada ReminderCard, botón y overlay tipo bottom sheet vive como componente en Figma, y la alta fidelidad se llevó a desarrollo con Claude Code vía MCP.",
     "flows": [
       "Inicio — próximo cuidado de un vistazo",
       "Mis plantas — estado de riego del jardín",

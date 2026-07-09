@@ -32,7 +32,7 @@
   },
   "process": {
     "heading": "From wireframes to a design system.",
-    "body": "I designed low-fidelity wireframes first, iterating on feedback before touching color or typography. The design system (palette, typography, components) grew as a reusable library — every ReminderCard, button, and bottom-sheet overlay lives as a component in Figma. The app was prototyped in high fidelity and moved to production with Claude Code via MCP.",
+    "body": "I designed low-fidelity wireframes first, iterating on feedback before touching color or typography. The design system is built in layers: primitives with 10-step tonal ramps — forest green (#2D5016) over warm beige, with amber, blue, and red accents —, a semantic layer mapping each primitive to its role (background, text, borders, statuses) ready for light and dark modes, and Inter as the app's single typeface. Every ReminderCard, button, and bottom-sheet overlay lives as a Figma component, and the high-fidelity build moved to development with Claude Code via MCP.",
     "flows": [
       "Home — next care at a glance",
       "My Plants — garden watering status",
