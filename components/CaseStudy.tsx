@@ -214,6 +214,9 @@ export default function CaseStudy({ project, dict, locale }: Props) {
               beforeLabel={slider.before}
               afterLabel={slider.after}
               dragHint={slider.hint}
+              beforeSrc={project.media?.beforeAfter?.before}
+              afterSrc={project.media?.beforeAfter?.after}
+              aspectRatio={project.media?.beforeAfter?.aspectRatio}
             />
           </motion.div>
         )}

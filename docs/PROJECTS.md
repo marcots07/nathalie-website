@@ -80,9 +80,23 @@ drift between languages.
   "metrics": {
     "susScore": 76,           // integer or null
     "susOutOf": 100           // integer or null
+  },
+
+  "media": {                  // optional — real imagery
+    "beforeAfter": {          // real screenshots for the comparison slider
+      "before": "/projects/leaf/home-lofi.png",   // public/-relative path
+      "after": "/projects/leaf/home-hifi.png",
+      "aspectRatio": "393 / 852"                  // CSS aspect-ratio value
+    }
   }
 }
 ```
+
+Image files live under `public/projects/<slug>/`. If a referenced image
+is missing or fails to load, the slider falls back to its drawn
+placeholder — a missing file never breaks the page. Portrait aspect
+ratios (phone screens) are automatically constrained to a centered
+column.
 
 ## `es.json` and `en.json` — per-language content
 

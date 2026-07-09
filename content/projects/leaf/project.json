@@ -11,5 +11,12 @@
   "metrics": {
     "susScore": 76,
     "susOutOf": 100
+  },
+  "media": {
+    "beforeAfter": {
+      "before": "/projects/leaf/home-lofi.png",
+      "after": "/projects/leaf/home-hifi.png",
+      "aspectRatio": "393 / 852"
+    }
   }
 }

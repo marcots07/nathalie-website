@@ -7,22 +7,40 @@ type Props = {
   beforeLabel: string;
   afterLabel: string;
   dragHint: string;
-  aspect?: string;
+  /** Real screenshot paths (public/-relative). When provided, the slider
+      compares actual images; otherwise it renders the drawn placeholder. */
+  beforeSrc?: string;
+  afterSrc?: string;
+  /** CSS aspect-ratio value, e.g. "393 / 852" for a phone screen. */
+  aspectRatio?: string;
 };
 
 /**
- * Wireframe → high-fidelity slider: two overlaid placeholder frames revealed
- * by a draggable vertical divider. Works with mouse, touch, and keyboard.
+ * Wireframe → high-fidelity slider: two overlaid frames revealed by a
+ * draggable vertical divider. Works with mouse, touch, and keyboard.
+ * Portrait comparisons (phone screens) are automatically constrained to
+ * a centered column so the slider doesn't tower over the page.
  */
 export default function BeforeAfterSlider({
   beforeLabel,
   afterLabel,
   dragHint,
-  aspect = "aspect-[16/10]",
+  beforeSrc,
+  afterSrc,
+  aspectRatio,
 }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [percent, setPercent] = useState(50);
   const [dragging, setDragging] = useState(false);
+  const [imgError, setImgError] = useState(false);
+
+  const hasImages = Boolean(beforeSrc && afterSrc) && !imgError;
+
+  const isPortrait = (() => {
+    if (!aspectRatio) return false;
+    const [w, h] = aspectRatio.split("/").map((s) => parseFloat(s.trim()));
+    return Number.isFinite(w) && Number.isFinite(h) && h > w;
+  })();
 
   const updateFromClientX = useCallback((clientX: number) => {
     const el = containerRef.current;
@@ -60,10 +78,13 @@ export default function BeforeAfterSlider({
   };
 
   return (
-    <div>
+    <div className={hasImages && isPortrait ? "max-w-[420px] mx-auto" : undefined}>
       <div
         ref={containerRef}
-        className={`relative overflow-hidden rounded-3xl border border-sage-100 select-none ${aspect} cursor-ew-resize`}
+        className="relative overflow-hidden rounded-3xl border border-sage-100 select-none cursor-ew-resize bg-cream-100"
+        style={{
+          aspectRatio: hasImages && aspectRatio ? aspectRatio : "16 / 10",
+        }}
         onMouseDown={(e) => startDrag(e.clientX)}
         onTouchStart={(e) => {
           if (e.touches[0]) startDrag(e.touches[0].clientX);
@@ -71,37 +92,59 @@ export default function BeforeAfterSlider({
         role="img"
         aria-label={`${beforeLabel} / ${afterLabel}`}
       >
-        {/* Before layer (bottom) — wireframe look */}
+        {/* Before layer (bottom) */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-cream-100">
-            <svg
-              viewBox="0 0 400 250"
-              preserveAspectRatio="xMidYMid slice"
-              className="w-full h-full"
-              aria-hidden
-            >
-              <rect x="24" y="24" width="120" height="14" rx="3" fill="#c6d9c0" />
-              <rect x="24" y="48" width="200" height="10" rx="3" fill="#e2ecdf" />
-              <rect x="24" y="80" width="352" height="90" rx="6" fill="none" stroke="#a3c199" strokeWidth="1.2" strokeDasharray="4 4" />
-              <rect x="40" y="96" width="60" height="60" rx="4" fill="#c6d9c0" />
-              <rect x="112" y="100" width="140" height="10" rx="3" fill="#e2ecdf" />
-              <rect x="112" y="120" width="100" height="8" rx="3" fill="#e2ecdf" />
-              <rect x="112" y="138" width="80" height="8" rx="3" fill="#e2ecdf" />
-              <rect x="24" y="188" width="60" height="24" rx="12" fill="none" stroke="#a3c199" strokeWidth="1.2" />
-              <rect x="96" y="188" width="60" height="24" rx="12" fill="none" stroke="#a3c199" strokeWidth="1.2" />
-            </svg>
-          </div>
+          {hasImages ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={beforeSrc}
+              alt={beforeLabel}
+              className="absolute inset-0 w-full h-full object-cover"
+              draggable={false}
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="absolute inset-0 bg-cream-100">
+              <svg
+                viewBox="0 0 400 250"
+                preserveAspectRatio="xMidYMid slice"
+                className="w-full h-full"
+                aria-hidden
+              >
+                <rect x="24" y="24" width="120" height="14" rx="3" fill="#c6d9c0" />
+                <rect x="24" y="48" width="200" height="10" rx="3" fill="#e2ecdf" />
+                <rect x="24" y="80" width="352" height="90" rx="6" fill="none" stroke="#a3c199" strokeWidth="1.2" strokeDasharray="4 4" />
+                <rect x="40" y="96" width="60" height="60" rx="4" fill="#c6d9c0" />
+                <rect x="112" y="100" width="140" height="10" rx="3" fill="#e2ecdf" />
+                <rect x="112" y="120" width="100" height="8" rx="3" fill="#e2ecdf" />
+                <rect x="112" y="138" width="80" height="8" rx="3" fill="#e2ecdf" />
+                <rect x="24" y="188" width="60" height="24" rx="12" fill="none" stroke="#a3c199" strokeWidth="1.2" />
+                <rect x="96" y="188" width="60" height="24" rx="12" fill="none" stroke="#a3c199" strokeWidth="1.2" />
+              </svg>
+            </div>
+          )}
           <div className="absolute bottom-3 left-3 text-xs uppercase tracking-[0.24em] text-sage-700 bg-cream-50/80 backdrop-blur px-2 py-1 rounded-full">
             {beforeLabel}
           </div>
         </div>
 
-        {/* After layer (top, clipped) — high-fi look */}
+        {/* After layer (top, clipped) */}
         <div
           className="absolute inset-0"
           style={{ clipPath: `inset(0 0 0 ${percent}%)` }}
         >
-          <Placeholder aspect="w-full h-full" rounded="rounded-none" />
+          {hasImages ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={afterSrc}
+              alt={afterLabel}
+              className="absolute inset-0 w-full h-full object-cover"
+              draggable={false}
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <Placeholder aspect="w-full h-full" rounded="rounded-none" />
+          )}
           <div className="absolute bottom-3 right-3 text-xs uppercase tracking-[0.24em] text-cream-50 bg-sage-700/90 backdrop-blur px-2 py-1 rounded-full">
             {afterLabel}
           </div>

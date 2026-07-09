@@ -34,12 +34,24 @@ export type ProjectMetrics = {
   susOutOf: number | null;
 };
 
+export type ProjectMedia = {
+  /** Real screenshots for the wireframe → high-fi comparison slider.
+      Paths are public/-relative; aspectRatio is a CSS value ("393 / 852").
+      Omit (or leave null) to render the drawn-placeholder fallback. */
+  beforeAfter?: {
+    before: string;
+    after: string;
+    aspectRatio?: string;
+  } | null;
+};
+
 export type ProjectMeta = {
   slug: string;
   order: number;
   status: ProjectStatus;
   features: ProjectFeatures;
   metrics: ProjectMetrics;
+  media?: ProjectMedia;
 };
 
 export type ProjectCard = {
