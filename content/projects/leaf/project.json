@@ -17,6 +17,15 @@
       "before": "/projects/leaf/home-lofi.png",
       "after": "/projects/leaf/home-hifi.png",
       "aspectRatio": "393 / 852"
-    }
+    },
+    "screens": [
+      { "src": "/projects/leaf/home-hifi.png" },
+      { "src": "/projects/leaf/screen-plants.png" },
+      { "src": "/projects/leaf/screen-detail.png" },
+      { "src": "/projects/leaf/screen-schedule.png" },
+      { "src": "/projects/leaf/screen-identify.png" },
+      { "src": "/projects/leaf/screen-lumaai.png" }
+    ],
+    "screensAspectRatio": "393 / 852"
   }
 }

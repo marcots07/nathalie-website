@@ -87,7 +87,12 @@ drift between languages.
       "before": "/projects/leaf/home-lofi.png",   // public/-relative path
       "after": "/projects/leaf/home-hifi.png",
       "aspectRatio": "393 / 852"                  // CSS aspect-ratio value
-    }
+    },
+    "screens": [              // flows gallery, matched by INDEX to the
+      { "src": "/projects/leaf/home-hifi.png" },  // per-locale process.flows
+      { "src": "/projects/leaf/screen-plants.png" }
+    ],
+    "screensAspectRatio": "393 / 852"
   }
 }
 ```

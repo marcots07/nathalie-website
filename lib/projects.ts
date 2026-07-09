@@ -43,6 +43,12 @@ export type ProjectMedia = {
     after: string;
     aspectRatio?: string;
   } | null;
+  /** Real screenshots for the flows gallery, matched by index to the
+      per-locale `process.flows` captions. Missing entries (or files
+      that fail to load) fall back to the device placeholder. */
+  screens?: { src: string }[];
+  /** CSS aspect-ratio for every gallery screen (they share a device). */
+  screensAspectRatio?: string;
 };
 
 export type ProjectMeta = {

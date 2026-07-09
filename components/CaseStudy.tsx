@@ -10,6 +10,7 @@ import BeforeAfterSlider from "./BeforeAfterSlider";
 import ResearchGrid from "./ResearchGrid";
 import StatusPill from "./StatusPill";
 import TransitionLink from "./TransitionLink";
+import DeviceScreen from "./DeviceScreen";
 
 type Props = {
   project: Project;
@@ -239,10 +240,10 @@ export default function CaseStudy({ project, dict, locale }: Props) {
                     transition={{ duration: 0.6, delay: i * 0.08 }}
                     className="flex-shrink-0 w-72 snap-start"
                   >
-                    <Placeholder
-                      aspect="aspect-[9/16]"
-                      variant="device"
-                      rounded="rounded-3xl"
+                    <DeviceScreen
+                      src={project.media?.screens?.[i]?.src}
+                      alt={flow}
+                      aspectRatio={project.media?.screensAspectRatio}
                     />
                     <p className="mt-3 text-sm text-ink-muted text-center">{flow}</p>
                   </motion.div>

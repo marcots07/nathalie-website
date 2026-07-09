@@ -34,10 +34,12 @@
     "heading": "From wireframes to a design system.",
     "body": "I designed low-fidelity wireframes first, iterating on feedback before touching color or typography. The design system (palette, typography, components) grew as a reusable library — every ReminderCard, button, and bottom-sheet overlay lives as a component in Figma. The app was prototyped in high fidelity and moved to production with Claude Code via MCP.",
     "flows": [
-      "Onboarding and authentication",
-      "Initial setup and exploration",
-      "ReminderCard and schedule programming",
-      "Bottom-sheet overlays"
+      "Home — next care at a glance",
+      "My Plants — garden watering status",
+      "Plant detail — care information",
+      "Schedule — daily tasks with progress",
+      "Identify plant — guided camera",
+      "LumaAI — conversational care assistant"
     ]
   },
   "results": {
