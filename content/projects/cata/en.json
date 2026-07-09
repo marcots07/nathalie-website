@@ -31,11 +31,30 @@
       "Home — your cellar at a glance",
       "Discover — search and 'Ask Cata'",
       "Log in — calm, frictionless entry"
+    ],
+    "flowGroups": [
+      {
+        "title": "Getting in & exploring",
+        "flows": [
+          "Log in — calm, frictionless entry",
+          "Home — your cellar at a glance",
+          "Discover — search and 'Ask Cata'"
+        ]
+      },
+      {
+        "title": "The cellar in use",
+        "flows": [
+          "Add wine — search, scan, or manual entry",
+          "Collections — 'Mexican wines'",
+          "Pair — snap your dish, get a match",
+          "What to drink today — tonight's pick"
+        ]
+      }
     ]
   },
   "results": {
     "heading": "In build, with focus.",
-    "body": "Cata is under active development. Instead of chasing features, I'm prioritizing that logging a bottle feels like writing a postcard — quick, personal, frictionless. The current version covers the full capture and detail flow; the pairing assistant lands in the next iteration.",
+    "body": "Cata is under active development. Instead of chasing features, I'm prioritizing that logging a bottle feels like writing a postcard — quick, personal, frictionless. The design already covers the full cycle — getting in, logging, collecting, pairing, and deciding what to open tonight — and the Claude Code build is advancing screen by screen.",
     "learnings": [
       "Initial input should be photo-first — most users don't want to type before they have visual context.",
       "The pairing assistant works better as a contextual suggestion inside the bottle detail, not as a separate screen.",

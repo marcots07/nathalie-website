@@ -31,11 +31,30 @@
       "Inicio — tu cava de un vistazo",
       "Discover — búsqueda y 'Ask Cata'",
       "Login — acceso sereno, sin fricción"
+    ],
+    "flowGroups": [
+      {
+        "title": "Entrar y explorar",
+        "flows": [
+          "Login — acceso sereno, sin fricción",
+          "Inicio — tu cava de un vistazo",
+          "Discover — búsqueda y 'Ask Cata'"
+        ]
+      },
+      {
+        "title": "La cava en uso",
+        "flows": [
+          "Añadir vino — buscar, escanear o entrada manual",
+          "Colecciones — 'Vinos mexicanos'",
+          "Pair — foto del plato, maridaje sugerido",
+          "¿Qué tomar hoy? — la elección de esta noche"
+        ]
+      }
     ]
   },
   "results": {
     "heading": "En construcción, con foco.",
-    "body": "Cata está en desarrollo activo. En vez de perseguir features, estoy priorizando que la experiencia de registrar una botella se sienta como escribir una postal — rápida, personal, sin fricción. La versión actual cubre el flujo completo de registro y consulta; el asistente de maridaje entra en la siguiente iteración.",
+    "body": "Cata está en desarrollo activo. En vez de perseguir features, estoy priorizando que la experiencia de registrar una botella se sienta como escribir una postal — rápida, personal, sin fricción. El diseño ya cubre el ciclo completo — entrar, registrar, coleccionar, maridar y decidir qué abrir hoy — y la construcción con Claude Code avanza pantalla por pantalla.",
     "learnings": [
       "El input inicial debe ser fotográfico primero — la mayoría de usuarios no quiere escribir antes de tener contexto visual.",
       "El asistente de maridaje funciona mejor como sugerencia contextual dentro de la ficha del vino, no como pantalla separada.",

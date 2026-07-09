@@ -18,10 +18,24 @@
       "after": "/projects/cata/home-hifi.png",
       "aspectRatio": "1440 / 1024"
     },
-    "screens": [
-      { "src": "/projects/cata/home-hifi.png" },
-      { "src": "/projects/cata/screen-discover.png" },
-      { "src": "/projects/cata/screen-login.png" }
+    "screenGroups": [
+      {
+        "key": "explore",
+        "screens": [
+          { "src": "/projects/cata/screen-login.png" },
+          { "src": "/projects/cata/home-hifi.png" },
+          { "src": "/projects/cata/screen-discover.png" }
+        ]
+      },
+      {
+        "key": "cellar",
+        "screens": [
+          { "src": "/projects/cata/screen-add-wine.png" },
+          { "src": "/projects/cata/screen-collection.png" },
+          { "src": "/projects/cata/screen-pair.png" },
+          { "src": "/projects/cata/screen-tonight.png" }
+        ]
+      }
     ],
     "screensFrame": "browser",
     "screensAspectRatio": "1440 / 1024"
