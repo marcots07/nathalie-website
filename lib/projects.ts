@@ -35,6 +35,13 @@ export type ProjectMetrics = {
 };
 
 export type ProjectMedia = {
+  /** Landing-page card preview: a framed screenshot on a tinted panel.
+      Omit to fall back to the neutral placeholder block. */
+  card?: {
+    frame: "phone" | "browser";
+    screen: string;
+    tint?: "sage" | "terracotta" | "cream";
+  };
   /** Case-study hero visual. `phone-triptych` shows three iPhone frames,
       `single-phone` one, `single-browser` a browser window (for web apps).
       Omit to fall back to the neutral browser placeholder. */
