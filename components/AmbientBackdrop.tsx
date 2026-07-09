@@ -1,69 +1,84 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 /**
- * Site-wide ambient backdrop. Three very large, very soft blobs that drift
- * on autonomous 30-45 second loops — decoupled from scroll, so the
- * atmosphere feels alive rather than reactive. Heavy blur + low-saturation
- * pastel gradients keep the effect liminal instead of decorative.
+ * Site-wide ambient backdrop. Scroll-driven so the composition breathes
+ * with the reader, but kept minimal: two large soft radial gradients that
+ * counter-drift as you scroll, plus a very quiet tint shift over a long
+ * base wash. Heavy spring on the scroll progress smooths any nudge into
+ * a slow drift so nothing ever feels jumpy.
  *
- * The whole thing lives at z-index 0, fixed, with content above it at
- * z-index 10. Sections are transparent, so the atmosphere reads as a
- * single continuous space rather than section-per-section bands.
- * `prefers-reduced-motion` freezes it to a static composition.
+ * Fixed at z-index 0; page content sits above at z-index 10. Sections
+ * are transparent so the whole scroll reads as one continuous space.
+ * Respects `prefers-reduced-motion`.
  */
 export default function AmbientBackdrop() {
   const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll();
 
-  const orbs = [
-    {
-      // Warm sage, upper region.
-      gradient:
-        "radial-gradient(circle at 40% 40%, rgba(163, 193, 153, 0.55), rgba(163, 193, 153, 0) 65%)",
-      base: { top: "-20vh", left: "-25vw" },
-      size: "120vw",
-      // A slow, wide loop; ~40 s for one round trip.
-      keyframes: reduce
-        ? { x: 0, y: 0 }
-        : {
-            x: ["0vw", "10vw", "-4vw", "0vw"],
-            y: ["0vh", "8vh", "16vh", "0vh"],
-          },
-      duration: 42,
-      delay: 0,
-    },
-    {
-      // Warm cream / terracotta whisper, right side drifting up.
-      gradient:
-        "radial-gradient(circle at 60% 50%, rgba(230, 176, 154, 0.42), rgba(230, 176, 154, 0) 60%)",
-      base: { top: "20vh", right: "-30vw" },
-      size: "110vw",
-      keyframes: reduce
-        ? { x: 0, y: 0 }
-        : {
-            x: ["0vw", "-8vw", "4vw", "0vw"],
-            y: ["0vh", "-6vh", "10vh", "0vh"],
-          },
-      duration: 55,
-      delay: 6,
-    },
-    {
-      // Cool cream anchor bottom-left, keeps composition asymmetrical.
-      gradient:
-        "radial-gradient(circle at 50% 50%, rgba(230, 210, 175, 0.5), rgba(230, 210, 175, 0) 60%)",
-      base: { bottom: "-30vh", left: "10vw" },
-      size: "100vw",
-      keyframes: reduce
-        ? { x: 0, y: 0 }
-        : {
-            x: ["0vw", "-6vw", "8vw", "0vw"],
-            y: ["0vh", "-10vh", "-4vh", "0vh"],
-          },
-      duration: 48,
-      delay: 12,
-    },
-  ];
+  // Heavy spring — motion arrives late and settles slowly, so the drift
+  // reads as atmosphere rather than as a scroll indicator.
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 22,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  // Orb 1 — sage, drifts down-right through the composition.
+  const orb1X = useTransform(smooth, [0, 1], ["-8vw", "18vw"]);
+  const orb1Y = useTransform(smooth, [0, 1], ["-6vh", "38vh"]);
+
+  // Orb 2 — warm cream / terracotta, counter-drifts up-left.
+  const orb2X = useTransform(smooth, [0, 1], ["12vw", "-14vw"]);
+  const orb2Y = useTransform(smooth, [0, 1], ["30vh", "-4vh"]);
+
+  // Tint sweep — sage → warm cream → soft terracotta → sage.
+  const tint = useTransform(
+    smooth,
+    [0, 0.35, 0.7, 1],
+    [
+      "rgba(163, 193, 153, 0.10)",
+      "rgba(230, 210, 175, 0.16)",
+      "rgba(230, 176, 154, 0.14)",
+      "rgba(163, 193, 153, 0.10)",
+    ]
+  );
+
+  if (reduce) {
+    return (
+      <div
+        aria-hidden
+        className="fixed inset-0 pointer-events-none overflow-hidden"
+        style={{ zIndex: 0 }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{ background: "rgba(226, 236, 223, 0.18)" }}
+        />
+        <div
+          className="absolute -top-[10vh] -left-[8vw] w-[90vw] h-[90vw] max-w-[1200px] max-h-[1200px]"
+          style={{
+            background:
+              "radial-gradient(circle at 40% 40%, rgba(163, 193, 153, 0.45), rgba(163, 193, 153, 0) 65%)",
+          }}
+        />
+        <div
+          className="absolute top-[20vh] right-[-14vw] w-[80vw] h-[80vw] max-w-[1100px] max-h-[1100px]"
+          style={{
+            background:
+              "radial-gradient(circle at 60% 50%, rgba(230, 176, 154, 0.32), rgba(230, 176, 154, 0) 60%)",
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -71,48 +86,52 @@ export default function AmbientBackdrop() {
       className="fixed inset-0 pointer-events-none overflow-hidden"
       style={{ zIndex: 0 }}
     >
-      {/* Base wash — a fraction of sage so the atmosphere is never fully
-          absent even at the edges of the composition. */}
+      {/* Base wash. Always present, keeps the atmosphere continuous even
+          when both orbs happen to be near the edges. */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(226, 236, 223, 0.35) 0%, rgba(246, 241, 230, 0.25) 50%, rgba(226, 236, 223, 0.30) 100%)",
+            "linear-gradient(180deg, rgba(226, 236, 223, 0.18) 0%, rgba(246, 241, 230, 0.12) 50%, rgba(226, 236, 223, 0.16) 100%)",
         }}
       />
 
-      {orbs.map((orb, i) => (
-        <motion.div
-          key={i}
-          className="absolute"
-          style={{
-            ...orb.base,
-            width: orb.size,
-            height: orb.size,
-            background: orb.gradient,
-            willChange: reduce ? undefined : "transform",
-            filter: "blur(20px)",
-          }}
-          animate={orb.keyframes}
-          transition={
-            reduce
-              ? undefined
-              : {
-                  duration: orb.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: orb.delay,
-                }
-          }
-        />
-      ))}
+      {/* Tint sweep bound to scroll — very quiet, mostly a warmth shift. */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ backgroundColor: tint, willChange: "background-color" }}
+      />
 
-      {/* A quiet vignette so text always has enough contrast at the edges. */}
+      {/* Orb 1 — sage */}
+      <motion.div
+        className="absolute -top-[10vh] -left-[8vw] w-[90vw] h-[90vw] max-w-[1200px] max-h-[1200px]"
+        style={{
+          x: orb1X,
+          y: orb1Y,
+          background:
+            "radial-gradient(circle at 40% 40%, rgba(163, 193, 153, 0.45), rgba(163, 193, 153, 0) 65%)",
+          willChange: "transform",
+        }}
+      />
+
+      {/* Orb 2 — warm cream / terracotta */}
+      <motion.div
+        className="absolute top-[20vh] right-[-14vw] w-[80vw] h-[80vw] max-w-[1100px] max-h-[1100px]"
+        style={{
+          x: orb2X,
+          y: orb2Y,
+          background:
+            "radial-gradient(circle at 60% 50%, rgba(230, 176, 154, 0.32), rgba(230, 176, 154, 0) 60%)",
+          willChange: "transform",
+        }}
+      />
+
+      {/* Quiet vignette so text always has enough contrast at the edges. */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 40%, rgba(251, 249, 244, 0.35) 100%)",
+            "radial-gradient(ellipse at center, transparent 45%, rgba(251, 249, 244, 0.28) 100%)",
         }}
       />
     </div>
