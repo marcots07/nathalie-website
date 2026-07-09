@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { Dictionary } from "@/lib/i18n";
-import Placeholder from "./Placeholder";
+import Portrait from "./Portrait";
 
 const line = {
   initial: { y: "110%", opacity: 0 },
@@ -113,10 +113,11 @@ export default function Hero({ dict }: { dict: Dictionary }) {
           className="md:col-span-5 order-1 md:order-2 relative"
         >
           <div className="relative max-w-md mx-auto">
-            <Placeholder
+            <Portrait
+              src="/profile/nathalie.jpg"
+              alt={dict.hero.portraitAlt}
               aspect="aspect-[4/5]"
               rounded="rounded-[2rem]"
-              ariaLabel="Portrait of Nathalie"
             />
             <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-terracotta-300/60 blur-2xl -z-10" />
             <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-sage-300/50 blur-2xl -z-10" />
