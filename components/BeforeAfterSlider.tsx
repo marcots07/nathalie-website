@@ -99,7 +99,7 @@ export default function BeforeAfterSlider({
             <img
               src={beforeSrc}
               alt={beforeLabel}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover object-top"
               draggable={false}
               onError={() => setImgError(true)}
             />
@@ -138,7 +138,7 @@ export default function BeforeAfterSlider({
             <img
               src={afterSrc}
               alt={afterLabel}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover object-top"
               draggable={false}
               onError={() => setImgError(true)}
             />

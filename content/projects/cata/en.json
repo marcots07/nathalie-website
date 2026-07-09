@@ -26,12 +26,11 @@
   },
   "process": {
     "heading": "Design and build, in the same session.",
-    "body": "I designed the full system in Figma — palette, typography, component library — and used Claude Code via MCP to move it into production directly from the mockups. High-fidelity is still in progress; below you can see the low-fidelity flows that already cover capture and detail views.",
+    "body": "I defined the full design system in Figma before touching code: Playfair Display for headlines and Inter for UI, a warm bordeaux (#993335) on ivory palette with sage-green accents, a 4-point spacing scale, and WCAG AA-verified contrast on every text-and-surface pair. Every button, chip, score badge, and card lives as a Figma component with variants — and Claude Code via MCP moves it into production straight from the mockups. Below: the home's evolution from wireframe to high fidelity, and the product's first screens.",
     "flows": [
-      "Quick bottle capture (photo + 3 fields)",
-      "Detail view with notes and context",
-      "Conversational pairing assistant",
-      "Personal collection with gentle filters"
+      "Home — your cellar at a glance",
+      "Discover — search and 'Ask Cata'",
+      "Log in — calm, frictionless entry"
     ]
   },
   "results": {

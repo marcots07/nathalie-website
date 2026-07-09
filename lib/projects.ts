@@ -52,6 +52,9 @@ export type ProjectMedia = {
   screenGroups?: { key: string; screens: { src: string }[] }[];
   /** CSS aspect-ratio for every gallery screen (they share a device). */
   screensAspectRatio?: string;
+  /** Frame drawn around gallery screenshots: phone bezel ("device",
+      default) or a browser window with a title bar ("browser"). */
+  screensFrame?: "device" | "browser";
 };
 
 export type ProjectMeta = {

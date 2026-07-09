@@ -97,8 +97,9 @@ drift between languages.
         "screens": [{ "src": "/projects/leaf/screen-onboarding-welcome.png" }]
       }
     ],
-    "screensAspectRatio": "393 / 852"
-  }
+    "screensAspectRatio": "393 / 852",
+    "screensFrame": "device"  // "device" (phone bezel, default) or
+  }                           // "browser" (window chrome, for web apps)
 }
 ```
 

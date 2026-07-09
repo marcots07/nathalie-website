@@ -241,6 +241,7 @@ export default function CaseStudy({ project, dict, locale }: Props) {
                       flows={group.flows}
                       screens={project.media?.screenGroups?.[g]?.screens}
                       aspectRatio={project.media?.screensAspectRatio}
+                      frame={project.media?.screensFrame}
                     />
                   </div>
                 ))}
@@ -250,6 +251,7 @@ export default function CaseStudy({ project, dict, locale }: Props) {
                 flows={t.process.flows}
                 screens={project.media?.screens}
                 aspectRatio={project.media?.screensAspectRatio}
+                frame={project.media?.screensFrame}
               />
             )}
           </>
@@ -355,11 +357,24 @@ function FlowRow({
   flows,
   screens,
   aspectRatio,
+  frame,
 }: {
   flows: string[];
   screens?: { src: string }[];
   aspectRatio?: string;
+  frame?: "device" | "browser";
 }) {
+  // Landscape screenshots (browser frames) need wider cards than phones.
+  const isLandscape = (() => {
+    if (frame === "browser") return true;
+    if (!aspectRatio) return false;
+    const [w, h] = aspectRatio.split("/").map((s) => parseFloat(s.trim()));
+    return Number.isFinite(w) && Number.isFinite(h) && w > h;
+  })();
+  const cardWidth = isLandscape
+    ? "w-[20rem] sm:w-[26rem] md:w-[32rem]"
+    : "w-72";
+
   return (
     <div className="-mx-6 md:-mx-10 overflow-x-auto pb-4">
       <div className="flex gap-6 px-6 md:px-10 snap-x snap-mandatory">
@@ -370,12 +385,13 @@ function FlowRow({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.6, delay: i * 0.08 }}
-            className="flex-shrink-0 w-72 snap-start"
+            className={`flex-shrink-0 snap-start ${cardWidth}`}
           >
             <DeviceScreen
               src={screens?.[i]?.src}
               alt={flow}
               aspectRatio={aspectRatio}
+              frame={frame}
             />
             <p className="mt-3 text-sm text-ink-muted text-center">{flow}</p>
           </motion.div>

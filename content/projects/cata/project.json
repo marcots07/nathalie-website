@@ -3,7 +3,7 @@
   "order": 2,
   "status": "in_progress",
   "features": {
-    "showBeforeAfterSlider": false,
+    "showBeforeAfterSlider": true,
     "showResearchGrid": true,
     "showFlowsGallery": true,
     "showSusGauge": false
@@ -11,5 +11,19 @@
   "metrics": {
     "susScore": null,
     "susOutOf": null
+  },
+  "media": {
+    "beforeAfter": {
+      "before": "/projects/cata/home-lofi.png",
+      "after": "/projects/cata/home-hifi.png",
+      "aspectRatio": "1440 / 1024"
+    },
+    "screens": [
+      { "src": "/projects/cata/home-hifi.png" },
+      { "src": "/projects/cata/screen-discover.png" },
+      { "src": "/projects/cata/screen-login.png" }
+    ],
+    "screensFrame": "browser",
+    "screensAspectRatio": "1440 / 1024"
   }
 }

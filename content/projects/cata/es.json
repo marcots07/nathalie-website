@@ -26,12 +26,11 @@
   },
   "process": {
     "heading": "Diseño y desarrollo, en la misma sesión.",
-    "body": "Diseñé el sistema completo en Figma — paleta, tipografía, biblioteca de componentes — y usé Claude Code vía MCP para llevarlo a producción directamente desde los mockups. La alta fidelidad aún está en construcción; abajo puedes ver los flujos de baja fidelidad que ya cubren el registro y la consulta.",
+    "body": "Definí el sistema de diseño completo en Figma antes de tocar código: Playfair Display para titulares e Inter para UI, una paleta cálida de burdeos (#993335) sobre marfil con acentos verde salvia, escala de espaciado de 4 puntos, y contraste verificado WCAG AA en cada combinación de texto y superficie. Cada botón, chip, badge de puntaje y tarjeta vive como componente con variantes en Figma — y Claude Code vía MCP lo lleva a producción directamente desde los mockups. Abajo: la evolución del home de wireframe a alta fidelidad, y las primeras pantallas del producto.",
     "flows": [
-      "Registro rápido de una botella (foto + 3 campos)",
-      "Vista de detalle con notas y contexto",
-      "Asistente de maridaje conversacional",
-      "Colección personal con filtros suaves"
+      "Inicio — tu cava de un vistazo",
+      "Discover — búsqueda y 'Ask Cata'",
+      "Login — acceso sereno, sin fricción"
     ]
   },
   "results": {
