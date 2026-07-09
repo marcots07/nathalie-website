@@ -114,7 +114,7 @@ export default function Hero({ dict }: { dict: Dictionary }) {
         >
           <div className="relative max-w-md mx-auto">
             <Portrait
-              src="/profile/nathalie.jpg"
+              src="/profile/nathalie.jpeg"
               alt={dict.hero.portraitAlt}
               aspect="aspect-[4/5]"
               rounded="rounded-[2rem]"
