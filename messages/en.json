@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "title": "Nathalie González Pérez",
+    "description": "Registered Behavior Technician transitioning into UX design and AI for social impact."
+  },
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact",
+    "back": "Back to home",
+    "downloadCv": "Download Resume"
+  },
+  "hero": {
+    "eyebrow": "Jersey City, NJ",
+    "titleLine1": "I help children",
+    "titleLine2": "find",
+    "titleLine3": "their voice.",
+    "subtitle": "Certified behavior technician (RBT) transitioning into UX design and AI applied to social impact.",
+    "ctaPrimary": "View projects",
+    "ctaSecondary": "Download Resume"
+  },
+  "about": {
+    "eyebrow": "About",
+    "heading": "One question, three different doors.",
+    "paragraphs": [
+      "I was studying medicine in Cuba, at the University of Medical Sciences in Pinar del Río — near the top of my class, with a clear path ahead. Circumstances at home forced me to leave before finishing: two years done, a plan interrupted.",
+      "I arrived in the United States without fluent English. I waited tables while teaching myself the language. I earned my Registered Behavior Technician (RBT) certification while still working — and found a new door back to the same calling: helping people function and be understood.",
+      "Leaving medicine didn't mean leaving the reason I wanted to be a doctor. I've kept following that same pattern — not waiting for the right degree or the right permission, I've been teaching myself UX design and AI and applying it to real projects. Self-taught English, then RBT certification while waiting tables, and now UX and AI on my own while working as an RBT. The same mission, rebuilt."
+    ],
+    "anchorQuote": "Leaving medicine didn't mean leaving the reason I wanted to be a doctor.",
+    "doors": {
+      "medicine": {
+        "label": "Medicine",
+        "detail": "University of Medical Sciences · Pinar del Río"
+      },
+      "rbt": {
+        "label": "RBT",
+        "detail": "ABA therapy in schools and homes"
+      },
+      "design": {
+        "label": "UX · AI Design",
+        "detail": "Self-taught, applied to real work"
+      }
+    }
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "heading": "Behavior therapy, in the field.",
+    "current": "Current",
+    "roles": [
+      {
+        "company": "Delta-T Group",
+        "role": "Registered Behavior Technician",
+        "location": "North Bergen, NJ",
+        "period": "Nov 2025 – Present",
+        "bullets": [
+          "Intensive 1:1 ABA therapy in a school setting.",
+          "Collecting and logging behavioral data to track client progress.",
+          "Supporting communication, social, behavioral, and academic skill-building.",
+          "Running structured ABA programs using DTT (Discrete Trial Training) and NET (Natural Environment Teaching).",
+          "Collaborating with supervising BCBAs and school staff to keep service consistent."
+        ]
+      },
+      {
+        "company": "Smart Behavior Therapy",
+        "role": "Registered Behavior Technician",
+        "location": "Miami, FL · Part-time",
+        "period": "Aug 2024 – Nov 2025",
+        "bullets": [
+          "Implementing individualized treatment plans in a school setting (K–1st grade).",
+          "One-on-one sessions using DTT and NET to reinforce positive behavior.",
+          "Documenting behavioral data to track progress toward individual goals.",
+          "Collaborating with teachers, school staff, and BCBAs.",
+          "Running structured therapeutic activities to build communication and social skills."
+        ]
+      },
+      {
+        "company": "Bee Positive Behavior Services",
+        "role": "Registered Behavior Technician",
+        "location": "Miami, FL · Part-time",
+        "period": "Aug 2024 – Nov 2025",
+        "bullets": [
+          "Implementing individualized behavior intervention plans in home settings.",
+          "Communicating with families about their child's progress, goals, and needs.",
+          "Tracking behavioral data using ABA principles.",
+          "Collaborating with parents, BCBAs, and other professionals.",
+          "Evidence-based techniques to promote functional communication and daily-living skills."
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "heading": "Design with purpose.",
+    "intro": "Two projects that show how I combine research, design systems, and AI-assisted development to build products with intent.",
+    "viewCase": "View case study",
+    "items": {
+      "leaf": {
+        "title": "Leaf",
+        "tagline": "Plant care app",
+        "summary": "Portfolio project for the Google UX Design Certificate. Full UX process with a real usability study (SUS 76).",
+        "tags": ["UX Research", "Figma", "Design system", "Claude Code + MCP"]
+      },
+      "cata": {
+        "title": "Cata",
+        "tagline": "Wine journal and pairing assistant",
+        "summary": "Responsive web app designed end-to-end and built with Figma + Claude Code via MCP.",
+        "tags": ["Product", "Figma", "Design system", "Claude Code + MCP"]
+      }
+    }
+  },
+  "skills": {
+    "eyebrow": "Skills & certifications",
+    "heading": "Two worlds, one practice.",
+    "clinical": {
+      "title": "Clinical / ABA",
+      "items": [
+        "Behavior Intervention Plans (BIPs)",
+        "Discrete Trial Training (DTT)",
+        "Natural Environment Teaching (NET)",
+        "Functional Communication Training (FCT)",
+        "Behavior Skills Training (BST)",
+        "Preference and reinforcement assessments",
+        "Behavioral data collection and reporting",
+        "Crisis management and de-escalation"
+      ]
+    },
+    "design": {
+      "title": "Design / Technology",
+      "items": [
+        "UX Design (research, wireframing, high-fidelity prototyping)",
+        "Figma",
+        "Usability testing and research synthesis",
+        "AI tools for design (Claude Code + Figma via MCP)"
+      ]
+    },
+    "professional": {
+      "title": "Professional",
+      "items": [
+        "Family communication and parent training",
+        "Multidisciplinary collaboration",
+        "Accurate documentation and reporting",
+        "Adaptability across settings",
+        "Bilingual service (English/Spanish)",
+        "Empathy, patience, and emotional support"
+      ]
+    },
+    "certifications": {
+      "title": "Certifications",
+      "items": [
+        "Registered Behavior Technician (RBT) — BACB",
+        "CPR & First Aid",
+        "Crisis Management",
+        "HIPAA Compliance",
+        "OSHA",
+        "Google UX Design Certificate",
+        "Anthropic Academy — AI Fluency, Claude 101"
+      ]
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "heading": "Let's talk.",
+    "intro": "I'm open to collaborations, opportunities, and conversations — about therapy, design, or the space between them.",
+    "email": "nathaliegp1411@gmail.com",
+    "phone": "786-391-8558",
+    "location": "Jersey City, NJ",
+    "form": {
+      "name": "Name",
+      "emailLabel": "Email",
+      "message": "Message",
+      "submit": "Send message",
+      "submitting": "Sending...",
+      "success": "Thanks — I'll get back to you soon.",
+      "error": "Something went wrong. Try again or email me directly.",
+      "required": "This field is required.",
+      "invalidEmail": "Invalid email address."
+    },
+    "downloadCv": "Download Resume"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Built with Next.js, Tailwind, and Claude Code."
+  },
+  "caseStudy": {
+    "back": "Back",
+    "overview": "Overview",
+    "role": "Role",
+    "tools": "Tools",
+    "duration": "Duration",
+    "type": "Type",
+    "problem": "The problem",
+    "research": "Research",
+    "process": "Design process",
+    "results": "Results",
+    "reflection": "Reflection",
+    "next": "Next project",
+    "leaf": {
+      "hero": {
+        "title": "Leaf",
+        "tagline": "Care for your plants without guessing when to water them.",
+        "tags": ["UX Research", "Figma", "Design system", "Claude Code + MCP"]
+      },
+      "overview": {
+        "role": "End-to-end UX design",
+        "tools": "Figma · Claude Code (MCP)",
+        "duration": "Portfolio project",
+        "type": "Google UX Design Certificate"
+      },
+      "problem": {
+        "heading": "A visual and functional language for daily care.",
+        "body": "Leaf was born as the capstone for my Google UX Design Certificate: an app that helps indoor-plant owners organize watering, light, and general-care reminders. The challenge wasn't technical — it was finding the right tone: useful without being controlling, calm without being boring."
+      },
+      "research": {
+        "heading": "I started by listening.",
+        "body": "I designed personas, ran a competitive audit, defined the value proposition, and framed 'How Might We…' questions and goal statements. Research surfaced two common failure modes across the category: asking users for too much upfront, or turning plant care into an anxious to-do list. Leaf had to do the opposite.",
+        "bullets": [
+          "Personas grounded in real user interviews.",
+          "Competitive audit across 5 apps in the category.",
+          "Prioritized value proposition and 'How Might We…' questions.",
+          "Goal statements to scope the MVP."
+        ]
+      },
+      "process": {
+        "heading": "From wireframes to a design system.",
+        "body": "I designed low-fidelity wireframes first, iterating on feedback before touching color or typography. The design system (palette, typography, components) grew as a reusable library — every ReminderCard, button, and bottom-sheet overlay lives as a component in Figma. The app was prototyped in high fidelity and moved to production with Claude Code via MCP.",
+        "flows": [
+          "Onboarding and authentication",
+          "Initial setup and exploration",
+          "ReminderCard and schedule programming",
+          "Bottom-sheet overlays"
+        ]
+      },
+      "results": {
+        "heading": "Real usability study.",
+        "body": "I ran a study with 5 participants using the System Usability Scale (SUS). The final score was 76 — above the industry average (68), in the 'good' range. What mattered more than the number was what the study surfaced.",
+        "susScore": 76,
+        "susOutOf": 100,
+        "learnings": [
+          "Users wanted to see at a glance which plant needed attention today — I redesigned the home to prioritize 'next care' over full inventory.",
+          "Onboarding asked for too much upfront — I broke it into progressive steps with an option to defer detail.",
+          "Reminder copy worked better concise and warm-toned, not like a system notification."
+        ]
+      },
+      "reflection": {
+        "heading": "What I take away.",
+        "body": "A good design system isn't about having many components — it's about having the right ones and using them consistently. And user research doesn't stop when design starts; it comes back to you on every iteration. If I started over, I'd invest more time in the usability study and less in polishing mockups before testing them."
+      }
+    },
+    "cata": {
+      "hero": {
+        "title": "Cata",
+        "tagline": "A personal wine journal with a pairing assistant.",
+        "tags": ["Product", "Figma", "Design system", "Claude Code + MCP"]
+      },
+      "overview": {
+        "role": "End-to-end design and build",
+        "tools": "Figma · Claude Code (MCP)",
+        "duration": "Ongoing personal project",
+        "type": "Responsive web product"
+      },
+      "problem": {
+        "heading": "A wine journal as an intimate space, not a database.",
+        "body": "Existing wine apps treat every bottle as a catalog entry — rating, notes, photo. Cata starts from a different question: what story does this bottle tell inside your life? A personal journal that also helps you decide what to eat with what you've got."
+      },
+      "research": {
+        "heading": "Scoping it.",
+        "body": "As a personal project, research was lighter and direct: sessions with wine-loving friends to understand what they log today (spoiler: nothing consistent) and which moments they actually want to remember. The takeaway: the barrier isn't a lack of apps, it's the friction of opening them."
+      },
+      "process": {
+        "heading": "Design and build, in the same session.",
+        "body": "I designed the full system in Figma — palette, typography, component library — and used Claude Code via MCP to move it into production directly from the mockups. The workflow shortened the design→code cycle dramatically: every UI iteration could be tested in the browser the same day.",
+        "flows": [
+          "Quick bottle capture (photo + 3 fields)",
+          "Detail view with notes and context",
+          "Conversational pairing assistant",
+          "Personal collection with gentle filters"
+        ]
+      },
+      "results": {
+        "heading": "In build, with focus.",
+        "body": "Cata is under active development. Instead of chasing features, I'm prioritizing that logging a bottle feels like writing a postcard — quick, personal, frictionless. The current version covers the full capture and detail flow; the pairing assistant lands in the next iteration.",
+        "susScore": null,
+        "susOutOf": null,
+        "learnings": [
+          "Initial input should be photo-first — most users don't want to type before they have visual context.",
+          "The pairing assistant works better as a contextual suggestion inside the bottle detail, not as a separate screen.",
+          "Designing the system upfront let Claude Code generate consistent UI without rework."
+        ]
+      },
+      "reflection": {
+        "heading": "What I take away.",
+        "body": "Cata taught me that designing and building in the same flow changes how you make decisions — you test ideas before you commit to them. The design system isn't the final deliverable; it's the infrastructure that lets you iterate fast without losing coherence."
+      }
+    }
+  },
+  "placeholder": {
+    "label": ""
+  }
+}

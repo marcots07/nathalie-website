@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "title": "Nathalie González Pérez",
+    "description": "Registered Behavior Technician en transición hacia diseño UX e IA aplicada a impacto social."
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "skills": "Habilidades",
+    "contact": "Contacto",
+    "back": "Volver al inicio",
+    "downloadCv": "Descargar CV"
+  },
+  "hero": {
+    "eyebrow": "Jersey City, NJ",
+    "titleLine1": "Ayudo a niños",
+    "titleLine2": "a encontrar",
+    "titleLine3": "su voz.",
+    "subtitle": "Terapeuta conductual certificada (RBT) en transición hacia diseño UX e IA aplicada a impacto social.",
+    "ctaPrimary": "Ver proyectos",
+    "ctaSecondary": "Descargar CV"
+  },
+  "about": {
+    "eyebrow": "Sobre mí",
+    "heading": "Una misma pregunta, tres puertas distintas.",
+    "paragraphs": [
+      "Estudiaba medicina en Cuba, en la Universidad de Ciencias Médicas de Pinar del Río, entre las mejores de mi clase, con un futuro claro por delante. La situación del país me obligó a salir antes de terminar la carrera — dos años completados, un plan interrumpido.",
+      "Llegué a Estados Unidos sin hablar inglés con fluidez. Trabajé de mesera mientras lo aprendía por mi cuenta. Me certifiqué como Registered Behavior Technician (RBT) mientras seguía trabajando, y encontré una nueva puerta hacia la misma vocación: ayudar a las personas a funcionar y ser comprendidas.",
+      "Dejar medicina no significó dejar la razón por la que quería ser doctora. Hoy sigo ese mismo patrón — sin esperar el título ni el permiso correcto, aprendo diseño UX e IA por mi cuenta y los aplico a proyectos reales. Inglés autodidacta, luego certificación RBT mientras trabajaba de mesera, y ahora UX/IA por cuenta propia mientras trabajo como RBT. La misma misión, reconstruida."
+    ],
+    "anchorQuote": "Dejar medicina no significó dejar la razón por la que quería ser doctora.",
+    "doors": {
+      "medicine": {
+        "label": "Medicina",
+        "detail": "Universidad de Ciencias Médicas · Pinar del Río"
+      },
+      "rbt": {
+        "label": "RBT",
+        "detail": "Terapia ABA en escuelas y hogares"
+      },
+      "design": {
+        "label": "Diseño UX · IA",
+        "detail": "Autoformación aplicada a proyectos reales"
+      }
+    }
+  },
+  "experience": {
+    "eyebrow": "Experiencia",
+    "heading": "Terapia conductual, en el campo.",
+    "current": "Actualidad",
+    "roles": [
+      {
+        "company": "Delta-T Group",
+        "role": "Registered Behavior Technician",
+        "location": "North Bergen, NJ",
+        "period": "Nov 2025 – Presente",
+        "bullets": [
+          "Terapia ABA intensiva 1:1 en entorno escolar.",
+          "Recolección y registro de datos conductuales para monitorear el progreso de los clientes.",
+          "Apoyo al desarrollo de habilidades de comunicación, sociales, conductuales y académicas.",
+          "Ejecución de programas ABA estructurados usando DTT (Discrete Trial Training) y NET (Natural Environment Teaching).",
+          "Colaboración con el BCBA supervisor y personal escolar para asegurar consistencia en el servicio."
+        ]
+      },
+      {
+        "company": "Smart Behavior Therapy",
+        "role": "Registered Behavior Technician",
+        "location": "Miami, FL · Medio tiempo",
+        "period": "Ago 2024 – Nov 2025",
+        "bullets": [
+          "Implementación de planes de tratamiento individualizados en entorno escolar (kínder y primer grado).",
+          "Sesiones uno a uno usando DTT y NET para reforzar conductas positivas.",
+          "Documentación de datos conductuales para monitorear progreso hacia metas individuales.",
+          "Colaboración con maestros, personal escolar y BCBAs.",
+          "Actividades terapéuticas estructuradas para promover comunicación y habilidades sociales."
+        ]
+      },
+      {
+        "company": "Bee Positive Behavior Services",
+        "role": "Registered Behavior Technician",
+        "location": "Miami, FL · Medio tiempo",
+        "period": "Ago 2024 – Nov 2025",
+        "bullets": [
+          "Implementación de planes de intervención conductual individualizados en entorno de hogar.",
+          "Comunicación con familias sobre el progreso, metas y necesidades de sus hijos.",
+          "Seguimiento de datos conductuales bajo principios ABA.",
+          "Colaboración con padres, BCBAs y otros profesionales.",
+          "Técnicas basadas en evidencia para promover comunicación funcional y habilidades de vida diaria."
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Proyectos",
+    "heading": "Diseño con propósito.",
+    "intro": "Dos proyectos que representan cómo aplico investigación, sistema de diseño y desarrollo asistido por IA para crear productos con intención.",
+    "viewCase": "Ver caso completo",
+    "items": {
+      "leaf": {
+        "title": "Leaf",
+        "tagline": "App de cuidado de plantas",
+        "summary": "Proyecto de portafolio del Google UX Design Certificate. Proceso UX completo con estudio de usabilidad real (SUS 76).",
+        "tags": ["UX Research", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+      },
+      "cata": {
+        "title": "Cata",
+        "tagline": "Diario de vinos y asistente de maridaje",
+        "summary": "Web app responsiva diseñada de principio a fin y construida con Figma + Claude Code vía MCP.",
+        "tags": ["Producto", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+      }
+    }
+  },
+  "skills": {
+    "eyebrow": "Habilidades y certificaciones",
+    "heading": "Dos mundos, una práctica.",
+    "clinical": {
+      "title": "Clínico / ABA",
+      "items": [
+        "Planes de Intervención Conductual (BIPs)",
+        "Discrete Trial Training (DTT)",
+        "Natural Environment Teaching (NET)",
+        "Entrenamiento en Comunicación Funcional (FCT)",
+        "Behavior Skills Training (BST)",
+        "Evaluaciones de preferencia y reforzamiento",
+        "Recolección y documentación de datos conductuales",
+        "Manejo de crisis y de-escalada"
+      ]
+    },
+    "design": {
+      "title": "Diseño / Tecnología",
+      "items": [
+        "Diseño UX (investigación, wireframing, alta fidelidad)",
+        "Figma",
+        "Pruebas de usabilidad y síntesis de investigación",
+        "Herramientas de IA aplicadas al diseño (Claude Code + Figma vía MCP)"
+      ]
+    },
+    "professional": {
+      "title": "Profesionales",
+      "items": [
+        "Comunicación con familias y entrenamiento de padres",
+        "Colaboración multidisciplinaria",
+        "Documentación y reportes precisos",
+        "Adaptabilidad entre entornos",
+        "Servicio bilingüe (inglés/español)",
+        "Empatía, paciencia y apoyo emocional"
+      ]
+    },
+    "certifications": {
+      "title": "Certificaciones",
+      "items": [
+        "Registered Behavior Technician (RBT) — BACB",
+        "CPR & First Aid",
+        "Crisis Management",
+        "HIPAA Compliance",
+        "OSHA",
+        "Google UX Design Certificate",
+        "Anthropic Academy — AI Fluency, Claude 101"
+      ]
+    }
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "heading": "Hablemos.",
+    "intro": "Estoy abierta a colaboraciones, oportunidades y conversaciones — sobre terapia, diseño o el espacio entre ambos.",
+    "email": "nathaliegp1411@gmail.com",
+    "phone": "786-391-8558",
+    "location": "Jersey City, NJ",
+    "form": {
+      "name": "Nombre",
+      "emailLabel": "Correo electrónico",
+      "message": "Mensaje",
+      "submit": "Enviar mensaje",
+      "submitting": "Enviando...",
+      "success": "Gracias — te responderé pronto.",
+      "error": "Algo salió mal. Intenta de nuevo o escríbeme directamente.",
+      "required": "Este campo es requerido.",
+      "invalidEmail": "Correo electrónico inválido."
+    },
+    "downloadCv": "Descargar CV"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "builtWith": "Construido con Next.js, Tailwind y Claude Code."
+  },
+  "caseStudy": {
+    "back": "Volver",
+    "overview": "Resumen",
+    "role": "Rol",
+    "tools": "Herramientas",
+    "duration": "Duración",
+    "type": "Tipo",
+    "problem": "El problema",
+    "research": "Investigación",
+    "process": "Proceso de diseño",
+    "results": "Resultados",
+    "reflection": "Reflexión",
+    "next": "Siguiente proyecto",
+    "leaf": {
+      "hero": {
+        "title": "Leaf",
+        "tagline": "Cuidar tus plantas sin adivinar cuándo regarlas.",
+        "tags": ["UX Research", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+      },
+      "overview": {
+        "role": "Diseño UX de principio a fin",
+        "tools": "Figma · Claude Code (MCP)",
+        "duration": "Proyecto de portafolio",
+        "type": "Google UX Design Certificate"
+      },
+      "problem": {
+        "heading": "Un lenguaje visual y funcional para el cuidado diario.",
+        "body": "Leaf nació como el proyecto final de mi Google UX Design Certificate: una app que ayuda a personas con plantas de interior a organizar recordatorios de riego, luz y cuidado. El reto no era técnico — era encontrar el tono correcto: útil sin ser controlador, calmado sin ser aburrido."
+      },
+      "research": {
+        "heading": "Empecé por escuchar.",
+        "body": "Diseñé personas, hice una auditoría competitiva, definí la propuesta de valor y formulé preguntas 'How Might We…' y enunciados de objetivo. La investigación reveló que la mayoría de apps del segmento pecaban de dos cosas: pedir demasiada información inicial, o convertir el cuidado en una lista de tareas ansiosa. Leaf tenía que hacer lo contrario.",
+        "bullets": [
+          "Personas basadas en entrevistas de usuarios reales.",
+          "Auditoría competitiva de 5 apps del segmento.",
+          "Value proposition y 'How Might We…' priorizadas.",
+          "Enunciados de objetivo para acotar el MVP."
+        ]
+      },
+      "process": {
+        "heading": "De wireframes al sistema de diseño.",
+        "body": "Diseñé wireframes de baja fidelidad primero, iterando con feedback antes de tocar color o tipografía. El sistema de diseño (paleta, tipografía, componentes) se construyó como una biblioteca reutilizable — cada ReminderCard, botón y overlay tipo bottom sheet vive como componente en Figma. La app se prototipó en alta fidelidad y se llevó a desarrollo con Claude Code vía MCP.",
+        "flows": [
+          "Onboarding y autenticación",
+          "Configuración inicial y exploración",
+          "ReminderCard y programación de recordatorios",
+          "Overlays tipo bottom sheet"
+        ]
+      },
+      "results": {
+        "heading": "Estudio de usabilidad real.",
+        "body": "Corrí un estudio con 5 participantes usando el System Usability Scale (SUS). El puntaje final fue 76 — sobre el promedio de la industria (68) y en el rango 'good'. Más importante que el número: los aprendizajes concretos.",
+        "susScore": 76,
+        "susOutOf": 100,
+        "learnings": [
+          "Los usuarios querían ver de un vistazo qué planta necesitaba atención hoy — rediseñé la home para priorizar 'próximo cuidado' sobre inventario completo.",
+          "El onboarding pedía demasiado de golpe — lo dividí en pasos progresivos con la opción de posponer detalles.",
+          "El copy en los recordatorios funcionaba mejor conciso y en tono cálido, no como notificación de sistema."
+        ]
+      },
+      "reflection": {
+        "heading": "Qué me llevo.",
+        "body": "Aprendí que un buen sistema de diseño no es sobre tener muchos componentes, sino sobre tener los correctos y consistentes. Y que la investigación de usuarios no termina cuando empieza el diseño — vuelve a ti en cada iteración. Si empezara de nuevo, invertiría más tiempo en el estudio de usabilidad y menos en refinar mockups antes de probarlos."
+      }
+    },
+    "cata": {
+      "hero": {
+        "title": "Cata",
+        "tagline": "Un diario personal de vinos con asistente de maridaje.",
+        "tags": ["Producto", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+      },
+      "overview": {
+        "role": "Diseño y construcción end-to-end",
+        "tools": "Figma · Claude Code (MCP)",
+        "duration": "Proyecto personal en curso",
+        "type": "Producto web responsivo"
+      },
+      "problem": {
+        "heading": "El diario de vinos como espacio íntimo, no como base de datos.",
+        "body": "Las apps de vino existentes tratan cada botella como una entrada en un catálogo — calificación, notas, foto. Cata parte de otra pregunta: ¿qué historia cuenta esta botella dentro de tu vida? Un diario personal que además te ayuda a decidir qué comer con lo que tienes."
+      },
+      "research": {
+        "heading": "Definiendo el alcance.",
+        "body": "Como proyecto personal, la investigación fue más ligera y directa: sesiones con amigos aficionados al vino para entender qué registran hoy (spoiler: nada consistente) y qué momentos quieren recordar. La conclusión fue clara: la barrera no es la falta de apps, es la fricción para abrirlas."
+      },
+      "process": {
+        "heading": "Diseño y desarrollo, en la misma sesión.",
+        "body": "Diseñé el sistema completo en Figma — paleta, tipografía, biblioteca de componentes — y usé Claude Code vía MCP para llevarlo a producción directamente desde los mockups. Este workflow acortó dramáticamente el ciclo diseño→código: cada iteración de UI se probaba en el navegador el mismo día.",
+        "flows": [
+          "Registro rápido de una botella (foto + 3 campos)",
+          "Vista de detalle con notas y contexto",
+          "Asistente de maridaje conversacional",
+          "Colección personal con filtros suaves"
+        ]
+      },
+      "results": {
+        "heading": "En construcción, con foco.",
+        "body": "Cata está en desarrollo activo. En vez de perseguir features, estoy priorizando que la experiencia de registrar una botella se sienta como escribir una postal — rápida, personal, sin fricción. La versión actual cubre el flujo completo de registro y consulta; el asistente de maridaje entra en la siguiente iteración.",
+        "susScore": null,
+        "susOutOf": null,
+        "learnings": [
+          "El input inicial debe ser fotográfico primero — la mayoría de usuarios no quiere escribir antes de tener contexto visual.",
+          "El asistente de maridaje funciona mejor como sugerencia contextual dentro de la ficha del vino, no como pantalla separada.",
+          "El sistema de diseño diseñado desde el inicio permitió que Claude Code generara UI consistente sin retrabajo."
+        ]
+      },
+      "reflection": {
+        "heading": "Qué me llevo.",
+        "body": "Cata me enseñó que diseñar y construir en el mismo flujo cambia cómo tomas decisiones — pruebas ideas antes de casarte con ellas. El sistema de diseño no es un entregable final; es la infraestructura que permite iterar rápido sin perder coherencia."
+      }
+    }
+  },
+  "placeholder": {
+    "label": ""
+  }
+}
