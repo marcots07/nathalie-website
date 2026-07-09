@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Placeholder from "./Placeholder";
+import PhoneFrame from "./PhoneFrame";
 
 type Props = {
   src?: string;
@@ -13,10 +14,10 @@ type Props = {
 };
 
 /**
- * One screen in the flows gallery: a real screenshot inside a phone bezel
- * or a browser window, matching the placeholder variants. If no src is
- * configured or the image fails to load, falls back to the placeholder so
- * a missing file never breaks the gallery.
+ * One screen in a gallery: a real screenshot inside a phone bezel (with the
+ * dynamic-island notch, via PhoneFrame) or a browser window. If no src is
+ * configured or the image fails to load, falls back to a placeholder so a
+ * missing file never breaks the layout.
  */
 export default function DeviceScreen({
   src,
@@ -26,15 +27,12 @@ export default function DeviceScreen({
 }: Props) {
   const [errored, setErrored] = useState(false);
 
-  if (!src || errored) {
-    return frame === "browser" ? (
-      <Placeholder aspect="aspect-[7/5]" variant="browser" rounded="rounded-2xl" />
-    ) : (
-      <Placeholder aspect="aspect-[9/16]" variant="device" rounded="rounded-3xl" />
-    );
-  }
-
   if (frame === "browser") {
+    if (!src || errored) {
+      return (
+        <Placeholder aspect="aspect-[7/5]" variant="browser" rounded="rounded-2xl" />
+      );
+    }
     return (
       <div className="rounded-2xl overflow-hidden border border-sage-100 bg-cream-100 shadow-sm">
         <div className="flex items-center gap-1.5 px-4 py-2 bg-cream-200/60 border-b border-sage-100">
@@ -56,18 +54,6 @@ export default function DeviceScreen({
     );
   }
 
-  return (
-    <div className="rounded-3xl overflow-hidden bg-ink/90 p-2 shadow-sm">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt}
-        draggable={false}
-        loading="lazy"
-        className="w-full rounded-xl object-cover"
-        style={{ aspectRatio: aspectRatio ?? "9 / 16" }}
-        onError={() => setErrored(true)}
-      />
-    </div>
-  );
+  // Phone bezel — PhoneFrame handles its own image / fallback + the notch.
+  return <PhoneFrame src={src} alt={alt} aspectRatio={aspectRatio} />;
 }

@@ -35,6 +35,13 @@ export type ProjectMetrics = {
 };
 
 export type ProjectMedia = {
+  /** Case-study hero visual. `phone-triptych` shows three iPhone frames,
+      `single-phone` one, `single-browser` a browser window (for web apps).
+      Omit to fall back to the neutral browser placeholder. */
+  hero?: {
+    layout: "phone-triptych" | "single-phone" | "single-browser";
+    screens: string[];
+  };
   /** Real screenshots for the wireframe → high-fi comparison slider.
       Paths are public/-relative; aspectRatio is a CSS value ("393 / 852").
       Omit (or leave null) to render the drawn-placeholder fallback. */

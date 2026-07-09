@@ -13,6 +13,14 @@
     "susOutOf": 100
   },
   "media": {
+    "hero": {
+      "layout": "phone-triptych",
+      "screens": [
+        "/projects/leaf/screen-plants.png",
+        "/projects/leaf/home-hifi.png",
+        "/projects/leaf/screen-detail.png"
+      ]
+    },
     "beforeAfter": {
       "before": "/projects/leaf/home-lofi.png",
       "after": "/projects/leaf/home-hifi.png",

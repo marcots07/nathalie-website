@@ -11,6 +11,7 @@ import ResearchGrid from "./ResearchGrid";
 import StatusPill from "./StatusPill";
 import TransitionLink from "./TransitionLink";
 import FlowShowcase from "./FlowShowcase";
+import ProjectHeroMedia from "./ProjectHeroMedia";
 
 type Props = {
   project: Project;
@@ -106,12 +107,20 @@ export default function CaseStudy({ project, dict, locale }: Props) {
           className="max-w-6xl mx-auto px-6 md:px-10 mt-14"
           style={{ viewTransitionName: `project-${project.slug}` }}
         >
-          <Placeholder
-            aspect="aspect-[16/9]"
-            rounded="rounded-3xl"
-            variant="browser"
-            ariaLabel={`${t.hero.title} hero image`}
-          />
+          {project.media?.hero ? (
+            <ProjectHeroMedia
+              hero={project.media.hero}
+              alt={`${t.hero.title} — ${t.hero.tagline}`}
+              aspectRatio={project.media.screensAspectRatio}
+            />
+          ) : (
+            <Placeholder
+              aspect="aspect-[16/9]"
+              rounded="rounded-3xl"
+              variant="browser"
+              ariaLabel={`${t.hero.title} hero image`}
+            />
+          )}
         </motion.div>
       </header>
 

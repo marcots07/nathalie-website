@@ -13,6 +13,10 @@
     "susOutOf": null
   },
   "media": {
+    "hero": {
+      "layout": "single-browser",
+      "screens": ["/projects/cata/screen-tonight.png"]
+    },
     "beforeAfter": {
       "before": "/projects/cata/home-lofi.png",
       "after": "/projects/cata/home-hifi.png",
