@@ -63,11 +63,11 @@ export default function FlowShowcase({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Step list */}
+      {/* Step list — desktop only; on phones the arrows drive navigation. */}
       <ol
-        className={`order-2 md:order-1 ${
+        className={`hidden md:flex order-2 md:order-1 ${
           isLandscape ? "md:col-span-4" : "md:col-span-6"
-        } flex md:flex-col gap-1 overflow-x-auto md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0`}
+        } md:flex-col gap-1`}
       >
         {flows.map((flow, i) => {
           const isActive = i === active;
@@ -143,11 +143,21 @@ export default function FlowShowcase({
           </div>
 
           {count > 1 && (
-            <div className="mt-4 flex items-center justify-between">
-              <span className="text-xs tabular-nums tracking-[0.24em] text-ink-muted">
+            <div className="mt-4 flex items-center justify-between gap-3">
+              {/* Desktop: plain counter (the step list already names each screen) */}
+              <span className="hidden md:inline text-xs tabular-nums tracking-[0.24em] text-ink-muted">
                 {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
               </span>
-              <div className="flex gap-2">
+              {/* Mobile: current screen name, since the step list is hidden */}
+              <span className="md:hidden min-w-0 flex items-baseline gap-2">
+                <span className="font-display italic text-sage-700 tabular-nums">
+                  {String(active + 1).padStart(2, "0")}
+                </span>
+                <span className="text-sm text-ink truncate">
+                  {flows[active].split("—")[0].trim()}
+                </span>
+              </span>
+              <div className="flex gap-2 flex-shrink-0">
                 <ArrowButton
                   direction="prev"
                   onClick={() => select(active - 1)}
