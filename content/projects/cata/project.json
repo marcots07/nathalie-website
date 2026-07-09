@@ -25,7 +25,8 @@
     "beforeAfter": {
       "before": "/projects/cata/home-lofi.png",
       "after": "/projects/cata/home-hifi.png",
-      "aspectRatio": "1440 / 1024"
+      "aspectRatio": "1440 / 1024",
+      "frame": "browser"
     },
     "screenGroups": [
       {

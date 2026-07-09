@@ -237,6 +237,7 @@ export default function CaseStudy({ project, dict, locale }: Props) {
               beforeSrc={project.media?.beforeAfter?.before}
               afterSrc={project.media?.beforeAfter?.after}
               aspectRatio={project.media?.beforeAfter?.aspectRatio}
+              frame={project.media?.beforeAfter?.frame}
             />
           </motion.div>
         )}

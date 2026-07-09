@@ -13,13 +13,17 @@ type Props = {
   afterSrc?: string;
   /** CSS aspect-ratio value, e.g. "393 / 852" for a phone screen. */
   aspectRatio?: string;
+  /** Optional chrome wrapped around the comparison: a browser window
+      (for web apps) or a phone bezel. Omit for a plain rounded panel. */
+  frame?: "browser" | "phone";
 };
 
 /**
  * Wireframe → high-fidelity slider: two overlaid frames revealed by a
  * draggable vertical divider. Works with mouse, touch, and keyboard.
  * Portrait comparisons (phone screens) are automatically constrained to
- * a centered column so the slider doesn't tower over the page.
+ * a centered column so the slider doesn't tower over the page. Can be
+ * wrapped in browser or phone chrome via `frame`.
  */
 export default function BeforeAfterSlider({
   beforeLabel,
@@ -28,6 +32,7 @@ export default function BeforeAfterSlider({
   beforeSrc,
   afterSrc,
   aspectRatio,
+  frame,
 }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [percent, setPercent] = useState(50);
@@ -77,11 +82,12 @@ export default function BeforeAfterSlider({
     setDragging(true);
   };
 
-  return (
-    <div className={hasImages && isPortrait ? "max-w-[420px] mx-auto" : undefined}>
+  const comparison = (
       <div
         ref={containerRef}
-        className="relative overflow-hidden rounded-3xl border border-sage-100 select-none cursor-ew-resize bg-cream-100"
+        className={`relative overflow-hidden select-none cursor-ew-resize bg-cream-100 ${
+          frame ? "" : "rounded-3xl border border-sage-100"
+        }`}
         style={{
           aspectRatio: hasImages && aspectRatio ? aspectRatio : "16 / 10",
         }}
@@ -190,6 +196,43 @@ export default function BeforeAfterSlider({
           </svg>
         </button>
       </div>
+  );
+
+  let framed = comparison;
+  if (frame === "browser") {
+    framed = (
+      <div className="rounded-2xl overflow-hidden border border-sage-100 bg-cream-100 shadow-sm">
+        <div className="flex items-center gap-1.5 px-4 py-2 bg-cream-200/60 border-b border-sage-100">
+          <span className="w-2.5 h-2.5 rounded-full bg-sage-200" />
+          <span className="w-2.5 h-2.5 rounded-full bg-sage-200" />
+          <span className="w-2.5 h-2.5 rounded-full bg-sage-200" />
+        </div>
+        {comparison}
+      </div>
+    );
+  } else if (frame === "phone") {
+    framed = (
+      <div className="relative rounded-[2rem] bg-ink p-1.5 shadow-xl ring-1 ring-black/10">
+        <div className="relative overflow-hidden rounded-[1.4rem]">
+          {comparison}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-[1.6%] -translate-x-1/2 h-[3.2%] min-h-[10px] w-[26%] rounded-full bg-black/90 z-20"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={
+        (isPortrait || frame === "phone") && hasImages
+          ? "max-w-[420px] mx-auto"
+          : undefined
+      }
+    >
+      {framed}
       <p className="mt-3 text-xs text-ink-muted text-center">{dragHint}</p>
     </div>
   );

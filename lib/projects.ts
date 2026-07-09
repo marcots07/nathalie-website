@@ -56,6 +56,8 @@ export type ProjectMedia = {
     before: string;
     after: string;
     aspectRatio?: string;
+    /** Chrome around the slider: browser window or phone bezel. */
+    frame?: "browser" | "phone";
   } | null;
   /** Real screenshots for the flows gallery, matched by index to the
       per-locale `process.flows` captions. Missing entries (or files
