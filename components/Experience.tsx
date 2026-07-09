@@ -6,7 +6,7 @@ import SectionHeading from "./SectionHeading";
 
 export default function Experience({ dict }: { dict: Dictionary }) {
   return (
-    <section id="experience" className="relative py-24 md:py-36 bg-cream-100/40">
+    <section id="experience" className="relative py-24 md:py-36">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         <SectionHeading
           eyebrow={dict.experience.eyebrow}

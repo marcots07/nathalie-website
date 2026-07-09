@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import type { Dictionary } from "@/lib/i18n";
-import OrganicBackdrop from "./OrganicBackdrop";
 import Placeholder from "./Placeholder";
 
 const line = {
@@ -21,7 +20,6 @@ const line = {
 export default function Hero({ dict }: { dict: Dictionary }) {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16">
-      <OrganicBackdrop />
       <div className="relative max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-12 gap-10 md:gap-14 items-center w-full">
         <div className="md:col-span-7 order-2 md:order-1">
           <motion.p
