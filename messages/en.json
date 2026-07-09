@@ -30,17 +30,24 @@
       "Leaving medicine didn't mean leaving the reason I wanted to be a doctor. I've kept following that same pattern — not waiting for the right degree or the right permission, I've been teaching myself UX design and AI and applying it to real projects. Self-taught English, then RBT certification while waiting tables, and now UX and AI on my own while working as an RBT. The same mission, rebuilt."
     ],
     "anchorQuote": "Leaving medicine didn't mean leaving the reason I wanted to be a doctor.",
+    "threadLabel": "Three doors, one thread",
     "doors": {
       "medicine": {
+        "year": "2019",
         "label": "Medicine",
+        "keyword": "Interrupted",
         "detail": "University of Medical Sciences · Pinar del Río"
       },
       "rbt": {
+        "year": "2024",
         "label": "RBT",
+        "keyword": "Found",
         "detail": "ABA therapy in schools and homes"
       },
       "design": {
+        "year": "2026",
         "label": "UX · AI Design",
+        "keyword": "Building",
         "detail": "Self-taught, applied to real work"
       }
     }

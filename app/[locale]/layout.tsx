@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDictionary, isLocale, LOCALES, type Locale } from "@/lib/i18n";
+import AmbientBackdrop from "@/components/AmbientBackdrop";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -57,5 +58,10 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return <>{children}</>;
+  return (
+    <>
+      <AmbientBackdrop />
+      {children}
+    </>
+  );
 }

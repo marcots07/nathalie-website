@@ -11,10 +11,11 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--bg);
 }
 
 body {
-  background-color: var(--bg);
+  background-color: transparent;
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -71,6 +72,23 @@ body {
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 500ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Shared-element morph for project cards → case study heroes. Named
+     via `view-transition-name: project-<slug>` inline; wildcards apply
+     to any slug we add later. */
+  ::view-transition-old(project-leaf),
+  ::view-transition-new(project-leaf),
+  ::view-transition-old(project-cata),
+  ::view-transition-new(project-cata) {
+    animation-duration: 650ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: 650ms;
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 }

@@ -30,17 +30,24 @@
       "Dejar medicina no significó dejar la razón por la que quería ser doctora. Hoy sigo ese mismo patrón — sin esperar el título ni el permiso correcto, aprendo diseño UX e IA por mi cuenta y los aplico a proyectos reales. Inglés autodidacta, luego certificación RBT mientras trabajaba de mesera, y ahora UX/IA por cuenta propia mientras trabajo como RBT. La misma misión, reconstruida."
     ],
     "anchorQuote": "Dejar medicina no significó dejar la razón por la que quería ser doctora.",
+    "threadLabel": "Tres puertas, un hilo",
     "doors": {
       "medicine": {
+        "year": "2019",
         "label": "Medicina",
+        "keyword": "Interrumpida",
         "detail": "Universidad de Ciencias Médicas · Pinar del Río"
       },
       "rbt": {
+        "year": "2024",
         "label": "RBT",
+        "keyword": "Encontrada",
         "detail": "Terapia ABA en escuelas y hogares"
       },
       "design": {
+        "year": "2026",
         "label": "Diseño UX · IA",
+        "keyword": "En construcción",
         "detail": "Autoformación aplicada a proyectos reales"
       }
     }

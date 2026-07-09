@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { projectHref } from "@/lib/i18n";
@@ -10,6 +9,7 @@ import SusGauge from "./SusGauge";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import ResearchGrid from "./ResearchGrid";
 import StatusPill from "./StatusPill";
+import TransitionLink from "./TransitionLink";
 
 type Props = {
   project: Project;
@@ -305,7 +305,7 @@ export default function CaseStudy({ project, dict, locale }: Props) {
 
       {/* Next project */}
       <section className="max-w-5xl mx-auto px-6 md:px-10 mt-24 md:mt-32">
-        <Link
+        <TransitionLink
           href={projectHref(locale, next.slug)}
           className="group block border-t border-sage-100 pt-10"
           style={{ viewTransitionName: `project-${next.slug}` }}
@@ -339,7 +339,7 @@ export default function CaseStudy({ project, dict, locale }: Props) {
               />
             </svg>
           </div>
-        </Link>
+        </TransitionLink>
       </section>
     </article>
   );

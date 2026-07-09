@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { projectHref } from "@/lib/i18n";
@@ -8,6 +7,7 @@ import { getProjects, type Project } from "@/lib/projects";
 import SectionHeading from "./SectionHeading";
 import Placeholder from "./Placeholder";
 import StatusPill from "./StatusPill";
+import TransitionLink from "./TransitionLink";
 
 export default function Projects({
   dict,
@@ -59,7 +59,7 @@ function ProjectCard({
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.8, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
     >
-      <Link
+      <TransitionLink
         href={projectHref(locale, project.slug)}
         className="group block"
         style={{ viewTransitionName: `project-${project.slug}` }}
@@ -112,7 +112,7 @@ function ProjectCard({
             ))}
           </div>
         </div>
-      </Link>
+      </TransitionLink>
     </motion.div>
   );
 }
