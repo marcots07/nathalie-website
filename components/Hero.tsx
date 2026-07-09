@@ -36,7 +36,9 @@ export default function Hero({ dict }: { dict: Dictionary }) {
               (text, i) => (
                 <span key={i} className="block overflow-hidden">
                   <motion.span
-                    className="inline-block italic"
+                    className={`inline-block ${
+                      i === 1 ? "italic text-sage-700" : ""
+                    }`}
                     variants={line}
                     initial="initial"
                     animate="animate"

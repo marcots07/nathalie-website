@@ -44,6 +44,36 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* Keyboard focus — one consistent, on-palette ring everywhere. */
+:focus-visible {
+  outline: 2px solid #5f8555;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Text selection in the site's sage. */
+::selection {
+  background: rgba(163, 193, 153, 0.4);
+  color: #263826;
+}
+
+/* Skip-to-content link: hidden until focused. */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1.5rem;
+  z-index: 100;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  background: #3a5535;
+  color: #fbf9f4;
+  font-size: 0.875rem;
+  transition: top 0.2s ease;
+}
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
 /* Subtle grain overlay for organic texture. */
 .grain::before {
   content: "";
@@ -65,6 +95,118 @@ body {
 }
 .editorial-link:hover {
   background-size: 100% 2px;
+}
+
+/* ---------------------------------------------------------------------
+   Aurora backdrop — pure CSS, transform-only (translate + rotate; never
+   scale). Three overlapping gradient fields drift on 45–80 s loops and a
+   cream veil fuses them into one soft mesh. Composites off the main
+   thread; costs zero JS.
+   -------------------------------------------------------------------- */
+.aurora-base {
+  background: linear-gradient(
+    180deg,
+    rgba(226, 236, 223, 0.5) 0%,
+    rgba(246, 241, 230, 0.35) 45%,
+    rgba(237, 228, 207, 0.4) 100%
+  );
+}
+
+.aurora-blob {
+  position: absolute;
+  width: 110vmax;
+  height: 110vmax;
+  border-radius: 50%;
+  filter: blur(60px);
+  will-change: transform;
+}
+
+.aurora-a {
+  top: -55vmax;
+  left: -30vmax;
+  background: radial-gradient(
+    circle at 50% 55%,
+    rgba(163, 193, 153, 0.5) 0%,
+    rgba(163, 193, 153, 0.22) 35%,
+    rgba(163, 193, 153, 0) 65%
+  );
+  animation: aurora-a 52s ease-in-out infinite alternate;
+}
+
+.aurora-b {
+  top: -20vmax;
+  right: -45vmax;
+  background: radial-gradient(
+    circle at 45% 50%,
+    rgba(230, 176, 154, 0.4) 0%,
+    rgba(230, 176, 154, 0.16) 38%,
+    rgba(230, 176, 154, 0) 65%
+  );
+  animation: aurora-b 66s ease-in-out infinite alternate;
+}
+
+.aurora-c {
+  bottom: -60vmax;
+  left: 5vmax;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(205, 181, 137, 0.35) 0%,
+    rgba(224, 209, 177, 0.18) 40%,
+    rgba(224, 209, 177, 0) 68%
+  );
+  animation: aurora-c 78s ease-in-out infinite alternate;
+}
+
+.aurora-veil {
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(251, 249, 244, 0.05) 0%,
+    rgba(251, 249, 244, 0.35) 100%
+  );
+}
+
+@keyframes aurora-a {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(14vw, 10vh) rotate(12deg);
+  }
+  100% {
+    transform: translate(4vw, 22vh) rotate(-6deg);
+  }
+}
+
+@keyframes aurora-b {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-16vw, 14vh) rotate(-10deg);
+  }
+  100% {
+    transform: translate(-6vw, 4vh) rotate(8deg);
+  }
+}
+
+@keyframes aurora-c {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(10vw, -12vh) rotate(9deg);
+  }
+  100% {
+    transform: translate(-8vw, -4vh) rotate(-8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-a,
+  .aurora-b,
+  .aurora-c {
+    animation: none;
+  }
 }
 
 /* View Transitions cross-fade for page navigation. */

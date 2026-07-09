@@ -20,7 +20,10 @@ export default async function HomePage({
   const dict = getDictionary(locale);
 
   return (
-    <main>
+    <main id="main">
+      <a href="#main" className="skip-link">
+        {dict.nav.skipToContent}
+      </a>
       <LocalePersist locale={locale} />
       <Navigation locale={locale} dict={dict} />
       <Hero dict={dict} />

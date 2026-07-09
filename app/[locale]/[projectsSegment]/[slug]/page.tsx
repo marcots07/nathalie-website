@@ -53,7 +53,10 @@ export default async function ProjectPage({
   const dict = getDictionary(locale);
 
   return (
-    <main>
+    <main id="main">
+      <a href="#main" className="skip-link">
+        {dict.nav.skipToContent}
+      </a>
       <LocalePersist locale={locale} />
       <ScrollProgress />
       <Navigation locale={locale} dict={dict} variant="sub" />
