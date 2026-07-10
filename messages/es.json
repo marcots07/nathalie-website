@@ -11,7 +11,9 @@
     "skills": "Habilidades",
     "contact": "Contacto",
     "back": "Volver al inicio",
-    "downloadCv": "Descargar CV"
+    "downloadCv": "Descargar CV",
+    "switchLanguage": "Cambiar idioma",
+    "toggleMenu": "Abrir menú"
   },
   "hero": {
     "eyebrow": "Jersey City, NJ",
@@ -29,7 +31,7 @@
     "paragraphs": [
       "Estudiaba medicina en Cuba, en la Universidad de Ciencias Médicas de Pinar del Río, entre las mejores de mi clase, con un futuro claro por delante. La situación del país me obligó a salir antes de terminar la carrera — dos años completados, un plan interrumpido.",
       "Llegué a Estados Unidos sin hablar inglés con fluidez. Trabajé de mesera mientras lo aprendía por mi cuenta. Me certifiqué como Registered Behavior Technician (RBT) mientras seguía trabajando, y encontré una nueva puerta hacia la misma vocación: ayudar a las personas a funcionar y ser comprendidas.",
-      "Dejar medicina no significó dejar la razón por la que quería ser doctora. Hoy sigo ese mismo patrón — sin esperar el título ni el permiso correcto, aprendo diseño UX e IA por mi cuenta y los aplico a proyectos reales. Inglés autodidacta, luego certificación RBT mientras trabajaba de mesera, y ahora UX/IA por cuenta propia mientras trabajo como RBT. La misma misión, reconstruida."
+      "Dejar medicina no significó dejar la razón por la que quería ser doctora. Hoy sigo ese mismo patrón — sin esperar el título ni el permiso de nadie, aprendo diseño UX e IA por mi cuenta y los aplico a proyectos reales. Inglés autodidacta, luego certificación RBT mientras trabajaba de mesera, y ahora UX/IA por cuenta propia mientras trabajo como RBT. La misma misión, reconstruida."
     ],
     "anchorQuote": "Dejar medicina no significó dejar la razón por la que quería ser doctora.",
     "threadLabel": "Tres puertas, un hilo",
@@ -120,13 +122,13 @@
         "Behavior Skills Training (BST)",
         "Evaluaciones de preferencia y reforzamiento",
         "Recolección y documentación de datos conductuales",
-        "Manejo de crisis y de-escalada"
+        "Manejo de crisis y desescalada"
       ]
     },
     "design": {
       "title": "Diseño / Tecnología",
       "items": [
-        "Diseño UX (investigación, wireframing, alta fidelidad)",
+        "Diseño UX (investigación, wireframing, prototipado de alta fidelidad)",
         "Figma",
         "Pruebas de usabilidad y síntesis de investigación",
         "Herramientas de IA aplicadas al diseño (Claude Code + Figma vía MCP)"

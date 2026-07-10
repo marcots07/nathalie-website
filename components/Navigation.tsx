@@ -80,7 +80,7 @@ export default function Navigation({ locale, dict, variant = "home" }: NavProps)
           <button
             onClick={switchLocale}
             className="text-sm font-medium text-ink-soft hover:text-sage-700 transition-colors border border-sage-200 rounded-full px-3 py-1"
-            aria-label="Switch language"
+            aria-label={dict.nav.switchLanguage}
           >
             <span className={locale === "es" ? "text-sage-700 font-semibold" : ""}>ES</span>
             <span className="mx-1 text-sage-300">/</span>
@@ -91,7 +91,7 @@ export default function Navigation({ locale, dict, variant = "home" }: NavProps)
         <button
           className="md:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMobileOpen((v) => !v)}
-          aria-label="Toggle menu"
+          aria-label={dict.nav.toggleMenu}
           aria-expanded={mobileOpen}
         >
           <span

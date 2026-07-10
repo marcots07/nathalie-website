@@ -33,11 +33,17 @@ const config: Config = {
           300: "#e3b09a",
           400: "#d69374",
           500: "#c47758",
+          // 600/700 are AA-safe for small text on the light cream palette
+          // (terracotta-500 only reaches ~3.2:1). Used for form errors, etc.
+          600: "#a85a3c",
+          700: "#8a4529",
         },
         ink: {
           DEFAULT: "#2a2a26",
+          // Darkened from #7a7a72 (~4.1:1) to clear AA (4.5:1) for small
+          // muted text on cream while keeping the muted feel.
           soft: "#4a4a44",
-          muted: "#7a7a72",
+          muted: "#6b6b63",
         },
       },
       fontFamily: {

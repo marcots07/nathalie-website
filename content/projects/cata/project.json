@@ -20,7 +20,7 @@
     },
     "hero": {
       "layout": "single-browser",
-      "screens": ["/projects/cata/screen-tonight.png"]
+      "screens": ["/projects/cata/home-hifi.png"]
     },
     "beforeAfter": {
       "before": "/projects/cata/home-lofi.png",

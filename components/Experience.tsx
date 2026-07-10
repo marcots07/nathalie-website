@@ -67,7 +67,7 @@ function TimelineRole({
             {role.period}
           </span>
           {isCurrent && (
-            <span className="text-xs uppercase tracking-[0.2em] text-terracotta-500 font-medium">
+            <span className="text-xs uppercase tracking-[0.2em] text-terracotta-600 font-medium">
               {currentLabel}
             </span>
           )}

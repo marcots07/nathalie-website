@@ -1,3 +1,5 @@
-# CV placeholder
+# CV
 
-Drop the real CV PDF here as `nathalie-gonzalez-perez-cv.pdf`. The Hero and Contact buttons link to that path directly. This placeholder file is safe to leave in place — the site never links to it.
+The live CV is `nathalie-gonzalez-perez-cv.pdf`. The Hero and Contact "Download Resume / Descargar CV" buttons link to that path directly.
+
+To update it, replace that file in place — keep the same filename so the links keep working.

@@ -11,7 +11,9 @@
     "skills": "Skills",
     "contact": "Contact",
     "back": "Back to home",
-    "downloadCv": "Download Resume"
+    "downloadCv": "Download Resume",
+    "switchLanguage": "Switch language",
+    "toggleMenu": "Toggle menu"
   },
   "hero": {
     "eyebrow": "Jersey City, NJ",
