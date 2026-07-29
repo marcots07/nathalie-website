@@ -1,0 +1,155 @@
+{
+  "eyebrow": "Drawing & painting",
+  "heading": "What I work out by hand.",
+  "intro": "Drawing is the part of my day with no protocol. Every piece starts on paper or canvas and ends when it stops asking me for something. Here's the story behind each one — and what it's made of.",
+  "labels": {
+    "story": "The story",
+    "medium": "Medium",
+    "size": "Dimensions",
+    "year": "Year",
+    "materials": "Materials",
+    "browse": "Pick a piece",
+    "prev": "Previous piece",
+    "next": "Next piece"
+  },
+  "items": {
+    "shoreline": {
+      "title": "Shoreline at Dusk",
+      "medium": "Acrylic on canvas",
+      "size": "20 × 25 cm",
+      "year": "2026",
+      "story": "I painted the sky first and let it decide everything else. The daisies came last, almost as an afterthought, once the water needed something to hold onto at the edge of the frame.",
+      "materials": [
+        "Acrylic paint",
+        "8 × 10 in canvas panel",
+        "Flat and round brushes",
+        "Palette knife for the horizon line"
+      ]
+    },
+    "october": {
+      "title": "October",
+      "medium": "Acrylic on canvas",
+      "size": "20 × 25 cm",
+      "year": "2026",
+      "story": "A studio afternoon that turned into a small ritual: one pumpkin, one moon, and just enough stars to make the dark feel intentional instead of empty.",
+      "materials": [
+        "Acrylic paint",
+        "8 × 10 in canvas panel",
+        "Fan brush for the leaves",
+        "White paint pen for the stars"
+      ]
+    },
+    "lily": {
+      "title": "Lily",
+      "medium": "Colored pencil on paper",
+      "size": "21 × 29 cm",
+      "year": "2025",
+      "story": "I kept building up the petals in thin layers until the pink finally looked like it was lit from inside instead of just colored in.",
+      "materials": [
+        "Colored pencils",
+        "Sketchbook paper, 160 gsm",
+        "Fine liner for the outlines",
+        "Paper blending stump"
+      ]
+    },
+    "tulip": {
+      "title": "Tulip",
+      "medium": "Colored pencil on paper",
+      "size": "21 × 29 cm",
+      "year": "2025",
+      "story": "The simplest subject I've drawn in a while, which is exactly why it took the longest: every petal only has one curve, and it has to be the right one.",
+      "materials": [
+        "Colored pencils",
+        "Sketchbook paper, 160 gsm",
+        "Fine liner for the outlines"
+      ]
+    },
+    "mountain-lake": {
+      "title": "Mountain Lake",
+      "medium": "Colored pencil on paper",
+      "size": "21 × 29 cm",
+      "year": "2024",
+      "story": "Drawn from a photo I keep coming back to. I never get the mountains right on the first pass, so I've learned to draw the light on the water first and work backward from there.",
+      "materials": [
+        "Colored pencils",
+        "Sketchbook paper, 160 gsm",
+        "Graphite pencil for the underdrawing"
+      ]
+    },
+    "cathedral": {
+      "title": "New Orleans Cathedral",
+      "medium": "Ballpoint pen on paper",
+      "size": "21 × 30 cm",
+      "year": "2023",
+      "story": "I was walking through New Orleans and a pen was the only thing I had on me. I didn't want to let the moment pass, so I drew fast, knowing I only had a few minutes before I had to keep walking. That's why the lines are loose — there's no correcting a pen.",
+      "materials": [
+        "Ballpoint pen",
+        "Pocket notebook"
+      ]
+    },
+    "lion-cub": {
+      "title": "Cub on the Rock",
+      "medium": "Graphite on paper",
+      "size": "28 × 21 cm",
+      "year": "2023",
+      "story": "A warm-up sketch before a longer session. I drew this cub in a few minutes just to loosen my hand, and it ended up being the one I liked best that day.",
+      "materials": [
+        "Graphite pencil",
+        "Sketchbook paper",
+        "Kneaded eraser"
+      ]
+    },
+    "seaside-brew": {
+      "title": "Moka View",
+      "medium": "Digital painting (Procreate)",
+      "size": "iPad · 2048 × 2048 px canvas",
+      "year": "2026",
+      "story": "I'm only just starting to paint digitally, and wanted to begin with something small and familiar: the moka pot from every morning, set down in front of the sea. On paper I'd start with the drawing; here I started with color and let the shape show up on top of it.",
+      "materials": [
+        "iPad + Apple Pencil",
+        "Procreate",
+        "Soft oil brush for the sky and sea",
+        "Dry texture brush for the moka pot"
+      ]
+    },
+    "window-view": {
+      "title": "Window",
+      "medium": "Digital painting (Procreate)",
+      "size": "iPad · 2048 × 2048 px canvas",
+      "year": "2026",
+      "story": "More of a practice exercise than a painting: I split the canvas into four and painted the same sky twice, day and dusk, just to get a feel for layers and blend brushes in Procreate.",
+      "materials": [
+        "iPad + Apple Pencil",
+        "Procreate",
+        "Airbrush for the gradient",
+        "Custom cloud brush"
+      ]
+    },
+    "full-moon": {
+      "title": "Full Moon",
+      "medium": "Digital painting (Procreate)",
+      "size": "iPad · 2048 × 2048 px canvas",
+      "year": "2026",
+      "story": "I wanted to see how much I could say with almost no light. Most of the time went into painting the darkness in layers, not the moon itself — it turns out a night sky has more texture in it than it looks like at first glance.",
+      "materials": [
+        "iPad + Apple Pencil",
+        "Procreate",
+        "Grain brush for the sky",
+        "Soft light brush for the moon's glow"
+      ]
+    },
+    "summer-umbrella": {
+      "title": "Summer Umbrella",
+      "medium": "Digital painting (Procreate)",
+      "size": "iPad · 2048 × 2048 px canvas",
+      "year": "2026",
+      "story": "A beach memory drawn in one sitting, no sketch first, just to practice letting my hand move as freely on the screen as it does on paper. The little dog half-buried in the sand was the last thing I added, and it ended up being my favorite part.",
+      "materials": [
+        "iPad + Apple Pencil",
+        "Procreate",
+        "Digital watercolor brush",
+        "Hard brush for the umbrella edges"
+      ]
+    }
+  }
+}

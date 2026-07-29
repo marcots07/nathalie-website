@@ -36,3 +36,14 @@ export const PROJECTS_SEGMENT: Record<Locale, string> = {
 export function projectHref(locale: Locale, slug: string): string {
   return `/${locale}/${PROJECTS_SEGMENT[locale]}/${slug}`;
 }
+
+/**
+ * Photography and Art live at fixed slugs (not translated per-locale like
+ * projects) because they're standalone static routes, not a dynamic
+ * `[segment]/[slug]` pair — see the route folders under `app/[locale]/`.
+ */
+export type GalleryKey = "photography" | "art";
+
+export function galleryHref(locale: Locale, gallery: GalleryKey): string {
+  return `/${locale}/${gallery}`;
+}

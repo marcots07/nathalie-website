@@ -1,0 +1,151 @@
+{
+  "items": [
+    {
+      "id": "ridgeline-silhouette",
+      "src": "/photography/ridgeline-silhouette.jpg",
+      "aspect": "1024 / 682",
+      "feature": true,
+      "wideAspect": "16 / 7"
+    },
+    {
+      "id": "sea-stack-glow",
+      "src": "/photography/sea-stack-glow.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "horizon-glow",
+      "src": "/photography/horizon-glow.jpg",
+      "aspect": "624 / 1024"
+    },
+    {
+      "id": "skyline-blush",
+      "src": "/photography/skyline-blush.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "tulip-field-red",
+      "src": "/photography/tulip-field-red.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "driftwood-dusk",
+      "src": "/photography/driftwood-dusk.jpg",
+      "aspect": "1024 / 682"
+    },
+    {
+      "id": "keyhole-light",
+      "src": "/photography/keyhole-light.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "museum-bench",
+      "src": "/photography/museum-bench.jpg",
+      "aspect": "627 / 1024"
+    },
+    {
+      "id": "museum-stairs",
+      "src": "/photography/museum-stairs.jpg",
+      "aspect": "630 / 1024"
+    },
+    {
+      "id": "winter-harbor",
+      "src": "/photography/winter-harbor.jpg",
+      "aspect": "1024 / 682"
+    },
+    {
+      "id": "street-canyon-glow",
+      "src": "/photography/street-canyon-glow.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "glass-triangles-1",
+      "src": "/photography/glass-triangles-1.jpg",
+      "aspect": "768 / 1024"
+    },
+    {
+      "id": "wild-daisy",
+      "src": "/photography/wild-daisy.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "tulip-field-yellow",
+      "src": "/photography/tulip-field-yellow.jpg",
+      "aspect": "1024 / 682"
+    },
+    {
+      "id": "lake-pines",
+      "src": "/photography/lake-pines.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "windswept-pine",
+      "src": "/photography/windswept-pine.jpg",
+      "aspect": "1024 / 682"
+    },
+    {
+      "id": "snow-squirrel",
+      "src": "/photography/snow-squirrel.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "alpine-lake",
+      "src": "/photography/alpine-lake.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "woven-gold",
+      "src": "/photography/woven-gold.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "forest-light",
+      "src": "/photography/forest-light.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "woven-black",
+      "src": "/photography/woven-black.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "river-dusk",
+      "src": "/photography/river-dusk.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "tulip-rows",
+      "src": "/photography/tulip-rows.jpg",
+      "aspect": "1024 / 682"
+    },
+    {
+      "id": "museum-atrium",
+      "src": "/photography/museum-atrium.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "moonrise-skyline",
+      "src": "/photography/moonrise-skyline.jpg",
+      "aspect": "768 / 1024"
+    },
+    {
+      "id": "terraced-falls",
+      "src": "/photography/terraced-falls.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "stone-bridge-falls",
+      "src": "/photography/stone-bridge-falls.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "ledge-falls",
+      "src": "/photography/ledge-falls.jpg",
+      "aspect": "682 / 1024"
+    },
+    {
+      "id": "veil-falls",
+      "src": "/photography/veil-falls.jpg",
+      "aspect": "682 / 1024"
+    }
+  ]
+}

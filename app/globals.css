@@ -7,10 +7,15 @@
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --bg: #fbf9f4;
   --ink: #2a2a26;
+  /* Surface the paper sheet appears to rest on, seen through the torn edge. */
+  --paper-backing: #cabfa7;
 }
 
 html {
   scroll-behavior: smooth;
+  /* Must stay the cream page tone: the aurora layers are semi-transparent,
+     so anything darker here tints the whole site. The torn edge paints its
+     own backing color instead. */
   background-color: var(--bg);
 }
 
@@ -74,15 +79,90 @@ body {
   top: 1rem;
 }
 
-/* Subtle grain overlay for organic texture. */
+/* Subtle grain overlay for organic texture. Kept light so it adds bite to
+   the paper fiber below rather than compounding into mush. */
 .grain::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.02;
   z-index: 1;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ---------------------------------------------------------------------
+   Paper sheet — tileable fiber texture plus a torn deckle edge. See
+   components/PaperBackdrop.tsx for the layer order and how the tear is
+   built.
+   -------------------------------------------------------------------- */
+.paper-texture {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: url("/textures/paper.png");
+  background-repeat: repeat;
+  /* Multiply tints the aurora underneath instead of flattening it. Kept low:
+     the texture is dark-on-transparent, so higher values drag the whole
+     palette down and push muted text under the AA contrast floor. */
+  mix-blend-mode: multiply;
+  opacity: 0.13;
+}
+
+/* Soft inner vignette so the sheet reads as lifted off the backing. */
+.paper-lift {
+  position: fixed;
+  inset: 0;
+  z-index: 44;
+  pointer-events: none;
+  box-shadow: inset 0 0 60px rgba(90, 78, 54, 0.13);
+}
+
+/* The tear itself: a thick backing-colored border, inset past the viewport
+   so only its displaced inner boundary shows. */
+.paper-edge {
+  position: fixed;
+  inset: -10px;
+  z-index: 45;
+  pointer-events: none;
+  border: 16px solid var(--paper-backing);
+  filter: url(#deckle-edge-sm);
+}
+
+@media (min-width: 768px) {
+  .paper-edge {
+    inset: -14px;
+    border-width: 28px;
+    filter: url(#deckle-edge);
+  }
+}
+
+/* Torn cards in the Photography/Art sections carry the same fiber as the page
+   sheet, so a card reads as a piece torn from the same stock rather than a
+   rectangle with a wavy mask. The element supplies its own base color; this
+   only lays the fiber over it. Pair with a `relative` box. */
+.paper-fiber::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("/textures/paper.png");
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.14;
+}
+
+/* The torn frame is decoration; never let it eat into a printed page. */
+@media print {
+  .paper-texture,
+  .paper-lift,
+  .paper-edge {
+    display: none;
+  }
+  .paper-fiber::after {
+    display: none;
+  }
 }
 
 /* Custom underline for editorial links. */

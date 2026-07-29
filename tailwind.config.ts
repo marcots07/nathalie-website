@@ -40,10 +40,11 @@ const config: Config = {
         },
         ink: {
           DEFAULT: "#2a2a26",
-          // Darkened from #7a7a72 (~4.1:1) to clear AA (4.5:1) for small
-          // muted text on cream while keeping the muted feel.
+          // `muted` is measured against the composited background (the aurora
+          // tints cream down to ~#dbe4d3), not the flat cream token — at
+          // #6b6b63 it only reached 4.1:1. This clears AA at ~5.1:1.
           soft: "#4a4a44",
-          muted: "#6b6b63",
+          muted: "#5c5c54",
         },
       },
       fontFamily: {

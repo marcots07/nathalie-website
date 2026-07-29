@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
-import { LOCALES, PROJECTS_SEGMENT } from "@/lib/i18n";
+import { LOCALES, PROJECTS_SEGMENT, type GalleryKey } from "@/lib/i18n";
 import { PROJECT_SLUGS } from "@/lib/projects";
+
+const GALLERIES: GalleryKey[] = ["photography", "art"];
 
 const BASE_URL = "https://nathaliegonzalez.com";
 
@@ -21,6 +23,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ),
       },
     });
+
+    for (const gallery of GALLERIES) {
+      entries.push({
+        url: `${BASE_URL}/${locale}/${gallery}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.6,
+        alternates: {
+          languages: Object.fromEntries(
+            LOCALES.map((l) => [l, `${BASE_URL}/${l}/${gallery}`])
+          ),
+        },
+      });
+    }
 
     for (const slug of PROJECT_SLUGS) {
       entries.push({

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Nathalie González Pérez",
+    "title": "Nathalie Gonzalez Perez",
     "description": "Registered Behavior Technician en transición hacia diseño UX e IA aplicada a impacto social."
   },
   "nav": {
@@ -8,6 +8,8 @@
     "about": "Sobre mí",
     "experience": "Experiencia",
     "projects": "Proyectos",
+    "photography": "Fotografía",
+    "art": "Arte",
     "skills": "Habilidades",
     "contact": "Contacto",
     "back": "Volver al inicio",
@@ -17,13 +19,13 @@
   },
   "hero": {
     "eyebrow": "Jersey City, NJ",
-    "titleLine1": "Ayudo a niños",
-    "titleLine2": "a encontrar",
-    "titleLine3": "su voz.",
+    "titleLine1": "Impulsada por la",
+    "titleLine2": "curiosidad,",
+    "titleLine3": "guiada por la empatía.",
     "subtitle": "Terapeuta conductual certificada (RBT) en transición hacia diseño UX e IA aplicada a impacto social.",
     "ctaPrimary": "Ver proyectos",
     "ctaSecondary": "Descargar CV",
-    "portraitAlt": "Nathalie González Pérez frente al skyline de Nueva York"
+    "portraitAlt": "Nathalie Gonzalez Perez frente al skyline de Nueva York"
   },
   "about": {
     "eyebrow": "Sobre mí",
@@ -105,9 +107,39 @@
   "projects": {
     "eyebrow": "Proyectos",
     "heading": "Diseño con propósito.",
-    "intro": "Dos proyectos que representan cómo aplico investigación, sistema de diseño y desarrollo asistido por IA para crear productos con intención.",
+    "intro": "Proyectos que representan cómo aplico investigación, sistema de diseño y desarrollo asistido por IA para crear productos con intención.",
     "viewCase": "Ver caso completo",
     "inProgress": "En construcción"
+  },
+  "gateway": {
+    "eyebrow": "Más allá del trabajo",
+    "heading": "Lo que hago cuando nadie pide un entregable.",
+    "intro": "Dos espacios personales, hechos con el mismo cuidado que pongo en todo lo demás.",
+    "photography": {
+      "index": "01",
+      "title": "Fotografía",
+      "tagline": "Paisajes que me obligan a caminar más despacio.",
+      "cta": "Explorar la galería"
+    },
+    "art": {
+      "index": "02",
+      "title": "Dibujo y pintura",
+      "tagline": "La historia y los materiales detrás de cada pieza.",
+      "cta": "Explorar las piezas"
+    }
+  },
+  "galleryConnector": {
+    "toArt": {
+      "eyebrow": "Y cuando no ando con la cámara",
+      "title": "Dibujo y pintura",
+      "tagline": "La historia detrás de cada pieza."
+    },
+    "toPhotography": {
+      "eyebrow": "Y cuando no ando con el pincel",
+      "title": "Fotografía",
+      "tagline": "Paisajes del último año."
+    },
+    "backToWork": "Volver al trabajo"
   },
   "skills": {
     "eyebrow": "Habilidades y certificaciones",

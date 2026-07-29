@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Nathalie González Pérez",
+    "title": "Nathalie Gonzalez Perez",
     "description": "Registered Behavior Technician transitioning into UX design and AI for social impact."
   },
   "nav": {
@@ -8,6 +8,8 @@
     "about": "About",
     "experience": "Experience",
     "projects": "Projects",
+    "photography": "Photography",
+    "art": "Art",
     "skills": "Skills",
     "contact": "Contact",
     "back": "Back to home",
@@ -17,13 +19,13 @@
   },
   "hero": {
     "eyebrow": "Jersey City, NJ",
-    "titleLine1": "I help children",
-    "titleLine2": "find",
-    "titleLine3": "their voice.",
+    "titleLine1": "Driven by",
+    "titleLine2": "curiosity,",
+    "titleLine3": "grounded in empathy.",
     "subtitle": "Certified behavior technician (RBT) transitioning into UX design and AI applied to social impact.",
     "ctaPrimary": "View projects",
     "ctaSecondary": "Download Resume",
-    "portraitAlt": "Nathalie González Pérez in front of the New York skyline"
+    "portraitAlt": "Nathalie Gonzalez Perez in front of the New York skyline"
   },
   "about": {
     "eyebrow": "About",
@@ -105,9 +107,39 @@
   "projects": {
     "eyebrow": "Projects",
     "heading": "Design with purpose.",
-    "intro": "Two projects that show how I combine research, design systems, and AI-assisted development to build products with intent.",
+    "intro": "Projects that show how I combine research, design systems, and AI-assisted development to build products with intent.",
     "viewCase": "View case study",
     "inProgress": "In progress"
+  },
+  "gateway": {
+    "eyebrow": "Beyond the work",
+    "heading": "What I do when no one's asking for a deliverable.",
+    "intro": "Two personal spaces, made with the same care I put into everything else.",
+    "photography": {
+      "index": "01",
+      "title": "Photography",
+      "tagline": "Landscapes that make me slow down.",
+      "cta": "Explore the gallery"
+    },
+    "art": {
+      "index": "02",
+      "title": "Drawing & Painting",
+      "tagline": "The story and materials behind each piece.",
+      "cta": "Explore the pieces"
+    }
+  },
+  "galleryConnector": {
+    "toArt": {
+      "eyebrow": "And when I'm not out with the camera",
+      "title": "Drawing & Painting",
+      "tagline": "The story behind each piece."
+    },
+    "toPhotography": {
+      "eyebrow": "And when I'm not at the easel",
+      "title": "Photography",
+      "tagline": "Landscapes from the past year."
+    },
+    "backToWork": "Back to the work"
   },
   "skills": {
     "eyebrow": "Skills & certifications",

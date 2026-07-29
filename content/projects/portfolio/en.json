@@ -1,0 +1,74 @@
+{
+  "card": {
+    "title": "Portfolio",
+    "tagline": "The site you're on right now",
+    "summary": "Designed and built end to end: bilingual, dressed in a hand-made paper aesthetic, with transitions that stitch every section together like a notebook.",
+    "tags": ["Product", "Next.js", "Framer Motion", "Claude Code + MCP"]
+  },
+  "hero": {
+    "title": "Portfolio",
+    "tagline": "A bilingual site with a paper texture, built to feel hand-made.",
+    "tags": ["Product", "Next.js", "Framer Motion", "Claude Code + MCP"]
+  },
+  "overview": {
+    "role": "End-to-end design and development",
+    "tools": "Next.js · Tailwind · Framer Motion · Claude Code (MCP)",
+    "duration": "Ongoing personal project",
+    "type": "Personal website, bilingual"
+  },
+  "problem": {
+    "heading": "A portfolio that didn't feel like a template.",
+    "body": "I wanted a site that spoke about me in two languages without either one feeling 'translated,' and that looked and felt hand-made — more scrapbook than corporate landing page. The hard part wasn't technical: it was making every section, from the hero to the contact form, breathe the same paper warmth without sacrificing accessibility or performance."
+  },
+  "research": {
+    "heading": "Setting the tone before the code.",
+    "body": "I started with the content: I reviewed every string in Spanish and English so translations were contextual Latin American Spanish, not literal copies of the English. From there came the visual direction — aged paper, torn edges, washi tape as an accent — and the modular structure it would need to grow: projects, photography and art, all fed by JSON instead of hardcoded copy."
+  },
+  "process": {
+    "heading": "From design system to the details no one asks for.",
+    "body": "I built a warm color system (sage, terracotta, cream) checked against WCAG AA contrast, and a shared paper-texture layer used across the whole app: torn edges generated from Catmull-Rom splines over SVG filters, decorative washi tape, and a portrait card with an irregular deckle edge. Projects, photography and art all live in modular JSON — adding a new piece never touches component code. Transitions between sections use Framer Motion and the View Transitions API so a card on the homepage literally morphs into the hero of its destination page. I closed the loop with a working contact form via Resend, a CV download, a custom Open Graph image, a sitemap, and a full accessibility and performance pass.",
+    "flows": [
+      "Home — hero, projects and 'Beyond the work'",
+      "Photography and art — standalone pages, tied back to the home"
+    ],
+    "flowGroups": [
+      {
+        "title": "The home page",
+        "flows": [
+          "Hero — torn-edge portrait with a CV download CTA",
+          "Projects — cards with a shared transition into each case study",
+          "Beyond the work — photography and art as clippings pinned with washi tape"
+        ],
+        "notes": [
+          "The portrait reuses the same torn-edge clip-path as the art cards — visual consistency without duplicating code.",
+          "Each project card carries its own viewTransitionName; clicking it, the card becomes the case study's hero.",
+          "The two 'photos' in this block sit at a slight tilt, connected by a hand-drawn SVG thread, like a corkboard of references."
+        ]
+      },
+      {
+        "title": "Photography and art, as their own pages",
+        "flows": [
+          "Photography — a mosaic of images with a paper mount and a slight tilt",
+          "Art — a piece-by-piece viewer with the story and materials behind each one"
+        ],
+        "notes": [
+          "Every photo gets its own paper margin and a subtle random tilt, so the mosaic never reads as a perfect grid.",
+          "In Art, switching pieces triggers a directional Framer Motion transition — the image, the background tint and the label slide together with no layout jump, no matter the artwork's size."
+        ]
+      }
+    ]
+  },
+  "results": {
+    "heading": "A site that feels finished in the details.",
+    "body": "The result is a complete bilingual portfolio — home, projects, photography, art and a working contact form — where the paper texture, transitions and copy feel like one object, not stacked layers. It passes AA contrast, respects prefers-reduced-motion, is fully keyboard-navigable, and generates its own Open Graph image.",
+    "learnings": [
+      "Designing the texture system (paper, torn edges, washi tape) as reusable components from the start kept every new section from feeling bolted on.",
+      "Splitting content into per-language JSON — even for new sections like photography and art — made it trivial to swap in real pieces later without touching components.",
+      "Shared transitions (View Transitions + Framer Motion) do more to sell the feeling of 'one place' than any single animation on its own."
+    ]
+  },
+  "reflection": {
+    "heading": "What I'm taking with me.",
+    "body": "This site is, in itself, the project that best sums up how I work: define the system before the screens, care about the detail no one asked for (the grain of the paper, the correct translation, the contrast of a secondary label), and build with AI tools like Claude Code without ever skipping a hand review of each decision."
+  }
+}

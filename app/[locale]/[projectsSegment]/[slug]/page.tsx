@@ -35,7 +35,7 @@ export async function generateMetadata({
   if (!project) return {};
   const t = project.translations[locale];
   return {
-    title: `${t.hero.title} — Nathalie González Pérez`,
+    title: `${t.hero.title} — Nathalie Gonzalez Perez`,
     description: t.hero.tagline,
   };
 }

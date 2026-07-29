@@ -1,0 +1,70 @@
+{
+  "items": [
+    {
+      "id": "shoreline",
+      "image": "/art/shoreline.jpg",
+      "aspect": "1400 / 1838",
+      "tone": "terracotta"
+    },
+    {
+      "id": "october",
+      "image": "/art/october.jpg",
+      "aspect": "1400 / 1787",
+      "tone": "terracotta"
+    },
+    {
+      "id": "lily",
+      "image": "/art/lily.jpg",
+      "aspect": "1400 / 2042",
+      "tone": "sage"
+    },
+    {
+      "id": "tulip",
+      "image": "/art/tulip.jpg",
+      "aspect": "1400 / 2146",
+      "tone": "sage"
+    },
+    {
+      "id": "mountain-lake",
+      "image": "/art/mountain-lake.jpg",
+      "aspect": "1400 / 1928",
+      "tone": "sage"
+    },
+    {
+      "id": "cathedral",
+      "image": "/art/cathedral.jpg",
+      "aspect": "1400 / 2055",
+      "tone": "cream"
+    },
+    {
+      "id": "lion-cub",
+      "image": "/art/lion-cub.jpg",
+      "aspect": "1400 / 1087",
+      "tone": "cream"
+    },
+    {
+      "id": "seaside-brew",
+      "image": "/art/seaside-brew.jpg",
+      "aspect": "1400 / 1400",
+      "tone": "sage"
+    },
+    {
+      "id": "window-view",
+      "image": "/art/window-view.jpg",
+      "aspect": "1400 / 1400",
+      "tone": "cream"
+    },
+    {
+      "id": "full-moon",
+      "image": "/art/full-moon.jpg",
+      "aspect": "1400 / 1400",
+      "tone": "cream"
+    },
+    {
+      "id": "summer-umbrella",
+      "image": "/art/summer-umbrella.jpg",
+      "aspect": "1400 / 1400",
+      "tone": "terracotta"
+    }
+  ]
+}

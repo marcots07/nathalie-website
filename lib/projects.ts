@@ -3,12 +3,15 @@ import type { Locale } from "./i18n";
 // Meta (slug, order, status, feature flags, metrics)
 import leafMeta from "@/content/projects/leaf/project.json";
 import cataMeta from "@/content/projects/cata/project.json";
+import portfolioMeta from "@/content/projects/portfolio/project.json";
 
 // Per-locale content files
 import leafEs from "@/content/projects/leaf/es.json";
 import leafEn from "@/content/projects/leaf/en.json";
 import cataEs from "@/content/projects/cata/es.json";
 import cataEn from "@/content/projects/cata/en.json";
+import portfolioEs from "@/content/projects/portfolio/es.json";
+import portfolioEn from "@/content/projects/portfolio/en.json";
 
 /**
  * Adding a new project:
@@ -160,6 +163,13 @@ const sources: ProjectSource[] = [
     translations: {
       es: cataEs as ProjectTranslation,
       en: cataEn as ProjectTranslation,
+    },
+  },
+  {
+    meta: portfolioMeta as ProjectMeta,
+    translations: {
+      es: portfolioEs as ProjectTranslation,
+      en: portfolioEn as ProjectTranslation,
     },
   },
 ];

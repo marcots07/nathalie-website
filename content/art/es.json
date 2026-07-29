@@ -1,0 +1,155 @@
+{
+  "eyebrow": "Dibujo y pintura",
+  "heading": "Lo que entiendo con las manos.",
+  "intro": "Dibujar es la parte de mi día que no tiene protocolo. Cada pieza empieza en papel o lienzo y termina cuando deja de pedirme algo. Aquí está la historia de cada una — y con qué está hecha.",
+  "labels": {
+    "story": "La historia",
+    "medium": "Técnica",
+    "size": "Dimensiones",
+    "year": "Año",
+    "materials": "Materiales",
+    "browse": "Elegir una pieza",
+    "prev": "Pieza anterior",
+    "next": "Pieza siguiente"
+  },
+  "items": {
+    "shoreline": {
+      "title": "Orilla al atardecer",
+      "medium": "Acrílico sobre lienzo",
+      "size": "20 × 25 cm",
+      "year": "2026",
+      "story": "Pinté el cielo primero y dejé que decidiera todo lo demás. Las margaritas llegaron al final, casi de casualidad, cuando el agua necesitaba algo de qué sostenerse en el borde del cuadro.",
+      "materials": [
+        "Pintura acrílica",
+        "Lienzo de 8 × 10 pulgadas",
+        "Pinceles planos y redondos",
+        "Espátula para la línea del horizonte"
+      ]
+    },
+    "october": {
+      "title": "Octubre",
+      "medium": "Acrílico sobre lienzo",
+      "size": "20 × 25 cm",
+      "year": "2026",
+      "story": "Una tarde de estudio que se convirtió en un pequeño ritual: una calabaza, una luna, y apenas las estrellas necesarias para que la oscuridad se sintiera intencional y no vacía.",
+      "materials": [
+        "Pintura acrílica",
+        "Lienzo de 8 × 10 pulgadas",
+        "Pincel de abanico para las hojas",
+        "Marcador blanco para las estrellas"
+      ]
+    },
+    "lily": {
+      "title": "Lirio",
+      "medium": "Lápices de colores sobre papel",
+      "size": "21 × 29 cm",
+      "year": "2025",
+      "story": "Fui construyendo los pétalos en capas delgadas hasta que el rosado por fin pareció iluminado desde adentro, en vez de solo coloreado.",
+      "materials": [
+        "Lápices de colores",
+        "Papel de cuaderno de bocetos, 160 g",
+        "Rotulador fino para los contornos",
+        "Difumino de papel"
+      ]
+    },
+    "tulip": {
+      "title": "Tulipán",
+      "medium": "Lápices de colores sobre papel",
+      "size": "21 × 29 cm",
+      "year": "2025",
+      "story": "El tema más simple que he dibujado en un buen tiempo, y por eso mismo fue el que más tardó: cada pétalo tiene una sola curva, y tiene que ser la correcta.",
+      "materials": [
+        "Lápices de colores",
+        "Papel de cuaderno de bocetos, 160 g",
+        "Rotulador fino para los contornos"
+      ]
+    },
+    "mountain-lake": {
+      "title": "Lago de montaña",
+      "medium": "Lápices de colores sobre papel",
+      "size": "21 × 29 cm",
+      "year": "2024",
+      "story": "Lo dibujé a partir de una foto a la que siempre vuelvo. Nunca me salen bien las montañas al primer intento, así que aprendí a dibujar primero la luz sobre el agua y construir todo lo demás hacia atrás.",
+      "materials": [
+        "Lápices de colores",
+        "Papel de cuaderno de bocetos, 160 g",
+        "Lápiz de grafito para el boceto inicial"
+      ]
+    },
+    "cathedral": {
+      "title": "Catedral de Nueva Orleans",
+      "medium": "Bolígrafo sobre papel",
+      "size": "21 × 30 cm",
+      "year": "2023",
+      "story": "Iba caminando por Nueva Orleans y lo único que tenía a mano era un bolígrafo. No quise dejar pasar el momento, así que dibujé rápido, sabiendo que solo tenía unos minutos antes de seguir caminando. Por eso las líneas quedaron sueltas — no hay forma de corregir un bolígrafo.",
+      "materials": [
+        "Bolígrafo",
+        "Cuaderno de bolsillo"
+      ]
+    },
+    "lion-cub": {
+      "title": "Cachorro en la roca",
+      "medium": "Grafito sobre papel",
+      "size": "28 × 21 cm",
+      "year": "2023",
+      "story": "Un boceto de calentamiento antes de una sesión más larga. Dibujé a este cachorro en unos minutos, solo para soltar la mano, y terminó siendo el que más me gustó ese día.",
+      "materials": [
+        "Lápiz de grafito",
+        "Papel de cuaderno de bocetos",
+        "Goma moldeable"
+      ]
+    },
+    "seaside-brew": {
+      "title": "Vista con moka",
+      "medium": "Pintura digital (Procreate)",
+      "size": "iPad · lienzo 2048 × 2048 px",
+      "year": "2026",
+      "story": "Estoy apenas aprendiendo a pintar en digital, y quería empezar por algo pequeño y familiar: la cafetera de todas las mañanas, puesta frente al mar. En papel hubiera empezado por el dibujo; acá empecé por el color y dejé que la forma apareciera encima.",
+      "materials": [
+        "iPad + Apple Pencil",
+        "Procreate",
+        "Pincel de óleo suave para el cielo y el mar",
+        "Pincel de textura seca para la cafetera"
+      ]
+    },
+    "window-view": {
+      "title": "Ventana",
+      "medium": "Pintura digital (Procreate)",
+      "size": "iPad · lienzo 2048 × 2048 px",
+      "year": "2026",
+      "story": "Un ejercicio de práctica más que un cuadro: dividí el lienzo en cuatro y pinté el mismo cielo dos veces, de día y al atardecer, solo para entender cómo se comportan las capas y los pinceles de mezcla en Procreate.",
+      "materials": [
+        "iPad + Apple Pencil",
+        "Procreate",
+        "Pincel de aerógrafo para el degradado",
+        "Pincel de nubes personalizado"
+      ]
+    },
+    "full-moon": {
+      "title": "Luna llena",
+      "medium": "Pintura digital (Procreate)",
+      "size": "iPad · lienzo 2048 × 2048 px",
+      "year": "2026",
+      "story": "Quería ver qué tanto podía decir con casi nada de luz. La mayor parte del tiempo la pasé pintando la oscuridad en capas, no la luna — resulta que el cielo nocturno tiene más textura de la que parece a simple vista.",
+      "materials": [
+        "iPad + Apple Pencil",
+        "Procreate",
+        "Pincel de grano para el cielo",
+        "Pincel de luz suave para el resplandor de la luna"
+      ]
+    },
+    "summer-umbrella": {
+      "title": "Sombrilla de verano",
+      "medium": "Pintura digital (Procreate)",
+      "size": "iPad · lienzo 2048 × 2048 px",
+      "year": "2026",
+      "story": "Una memoria de playa dibujada de un tirón, sin boceto previo, para practicar a soltar la mano en la pantalla igual que lo haría en papel. El perrito medio enterrado en la arena fue lo último que agregué, y terminó siendo mi parte favorita.",
+      "materials": [
+        "iPad + Apple Pencil",
+        "Procreate",
+        "Pincel de acuarela digital",
+        "Pincel duro para los bordes de la sombrilla"
+      ]
+    }
+  }
+}

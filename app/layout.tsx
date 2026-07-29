@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Nathalie González Pérez",
+  title: "Nathalie Gonzalez Perez",
   description:
     "Registered Behavior Technician transitioning into UX design and applied AI — the same mission, rebuilt.",
 };

@@ -87,7 +87,7 @@ export async function GET(req: Request) {
               }}
             >
               <span>Nathalie</span>
-              <span>González Pérez</span>
+              <span>Gonzalez Perez</span>
             </div>
             <div
               style={{

@@ -112,12 +112,16 @@ export default function Hero({ dict }: { dict: Dictionary }) {
           transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="md:col-span-5 order-1 md:order-2 relative"
         >
-          <div className="relative max-w-md mx-auto">
+          {/* Mounted on a torn sheet, laid at a slight angle: the portrait is
+              the first thing a visitor sees, so it sets the paper language the
+              Photography and Art cards carry through the rest of the page. */}
+          <div className="relative max-w-md mx-auto rotate-[-1.5deg]">
             <Portrait
               src="/profile/nathalie.jpeg"
               alt={dict.hero.portraitAlt}
               aspect="aspect-[4/5]"
-              rounded="rounded-[2rem]"
+              position="50% 28%"
+              torn={2}
             />
             <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-terracotta-300/60 blur-2xl -z-10" />
             <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-sage-300/50 blur-2xl -z-10" />

@@ -197,7 +197,7 @@ export default function Contact({
                 <motion.p
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="text-terracotta-600 text-sm"
+                  className="text-terracotta-700 text-sm"
                 >
                   {dict.contact.form.error}
                 </motion.p>
@@ -250,7 +250,7 @@ function Field({
           onChange={(e) => onChange(e.target.value)}
         />
       )}
-      {error && <p className="text-terracotta-600 text-xs mt-1">{error}</p>}
+      {error && <p className="text-terracotta-700 text-xs mt-1">{error}</p>}
     </label>
   );
 }

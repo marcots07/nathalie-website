@@ -1,0 +1,45 @@
+{
+  "slug": "portfolio",
+  "order": 3,
+  "status": "complete",
+  "features": {
+    "showBeforeAfterSlider": false,
+    "showResearchGrid": false,
+    "showFlowsGallery": true,
+    "showSusGauge": false
+  },
+  "metrics": {
+    "susScore": null,
+    "susOutOf": null
+  },
+  "media": {
+    "card": {
+      "frame": "browser",
+      "screen": "/projects/portfolio/home-hifi.png",
+      "tint": "cream"
+    },
+    "hero": {
+      "layout": "single-browser",
+      "screens": ["/projects/portfolio/home-hifi.png"]
+    },
+    "screenGroups": [
+      {
+        "key": "landing",
+        "screens": [
+          { "src": "/projects/portfolio/home-hifi.png" },
+          { "src": "/projects/portfolio/screen-projects.png" },
+          { "src": "/projects/portfolio/screen-creative.png" }
+        ]
+      },
+      {
+        "key": "galleries",
+        "screens": [
+          { "src": "/projects/portfolio/screen-photography.png" },
+          { "src": "/projects/portfolio/screen-art.png" }
+        ]
+      }
+    ],
+    "screensFrame": "browser",
+    "screensAspectRatio": "1440 / 1024"
+  }
+}

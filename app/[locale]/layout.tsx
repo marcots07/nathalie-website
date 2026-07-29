@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDictionary, isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
+import PaperBackdrop from "@/components/PaperBackdrop";
+import TornEdgeDefs from "@/components/TornEdgeDefs";
 import MotionProvider from "@/components/MotionProvider";
 
 export function generateStaticParams() {
@@ -63,6 +65,8 @@ export default async function LocaleLayout({
   return (
     <MotionProvider>
       <AmbientBackdrop />
+      <PaperBackdrop />
+      <TornEdgeDefs />
       <div className="relative z-10">{children}</div>
     </MotionProvider>
   );

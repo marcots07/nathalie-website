@@ -1,0 +1,153 @@
+{
+  "eyebrow": "Photography",
+  "heading": "Looking slowly.",
+  "intro": "I go out walking with a camera for the same reason I love therapy: it forces me to actually look, without rushing to a conclusion. These are from the last year.",
+  "counterLabel": "photographs",
+  "items": {
+    "ridgeline-silhouette": {
+      "title": "Silhouettes at Dusk",
+      "place": "Pacific Coast, Washington",
+      "year": "2025"
+    },
+    "sea-stack-glow": {
+      "title": "Glow Between the Rocks",
+      "place": "Pacific Coast, Washington",
+      "year": "2025"
+    },
+    "horizon-glow": {
+      "title": "Last Light",
+      "place": "Pacific Coast, Washington",
+      "year": "2025"
+    },
+    "skyline-blush": {
+      "title": "Sky on Fire",
+      "place": "City View",
+      "year": "2025"
+    },
+    "tulip-field-red": {
+      "title": "Field of Red Tulips",
+      "place": "Skagit Valley, Washington",
+      "year": "2025"
+    },
+    "driftwood-dusk": {
+      "title": "Driftwood at Dusk",
+      "place": "Pacific Coast, Washington",
+      "year": "2025"
+    },
+    "keyhole-light": {
+      "title": "Light Through the Gap",
+      "place": "Pacific Coast, Washington",
+      "year": "2025"
+    },
+    "museum-bench": {
+      "title": "Facing the Glass",
+      "place": "Art Museum",
+      "year": "2025"
+    },
+    "museum-stairs": {
+      "title": "Reflection on the Stairs",
+      "place": "Art Museum",
+      "year": "2025"
+    },
+    "winter-harbor": {
+      "title": "Winter Harbor",
+      "place": "Boston, Massachusetts",
+      "year": "2025"
+    },
+    "street-canyon-glow": {
+      "title": "Sun Between the Buildings",
+      "place": "Manhattan, New York",
+      "year": "2025"
+    },
+    "glass-triangles-1": {
+      "title": "Stained Glass",
+      "place": "Art Museum",
+      "year": "2025"
+    },
+    "wild-daisy": {
+      "title": "Wild Daisy",
+      "place": "Jersey City, NJ",
+      "year": "2025"
+    },
+    "tulip-field-yellow": {
+      "title": "Field of Yellow Tulips",
+      "place": "Skagit Valley, Washington",
+      "year": "2025"
+    },
+    "lake-pines": {
+      "title": "Framed by Pine",
+      "place": "The Cascades, Washington",
+      "year": "2025"
+    },
+    "windswept-pine": {
+      "title": "Wind-Bent Tree",
+      "place": "Pacific Coast, Washington",
+      "year": "2025"
+    },
+    "snow-squirrel": {
+      "title": "Squirrel in the Snow",
+      "place": "Central Park, New York",
+      "year": "2025"
+    },
+    "alpine-lake": {
+      "title": "Alpine Lake",
+      "place": "The Cascades, Washington",
+      "year": "2025"
+    },
+    "woven-gold": {
+      "title": "Woven Gold",
+      "place": "Art Museum",
+      "year": "2025"
+    },
+    "forest-light": {
+      "title": "Light Through the Moss",
+      "place": "Pacific Northwest Forest, Washington",
+      "year": "2025"
+    },
+    "woven-black": {
+      "title": "Woven in Shadow",
+      "place": "Art Museum",
+      "year": "2025"
+    },
+    "river-dusk": {
+      "title": "River at Dusk",
+      "place": "Hudson Valley, NY",
+      "year": "2025"
+    },
+    "tulip-rows": {
+      "title": "Rows of Tulips",
+      "place": "Skagit Valley, Washington",
+      "year": "2025"
+    },
+    "museum-atrium": {
+      "title": "Curves in Concrete",
+      "place": "Art Museum",
+      "year": "2025"
+    },
+    "moonrise-skyline": {
+      "title": "Moonrise Over Manhattan",
+      "place": "New York",
+      "year": "2025"
+    },
+    "terraced-falls": {
+      "title": "Terraced Falls",
+      "place": "Oregon",
+      "year": "2025"
+    },
+    "stone-bridge-falls": {
+      "title": "Stone Bridge",
+      "place": "Mount Rainier, Washington",
+      "year": "2025"
+    },
+    "ledge-falls": {
+      "title": "Ledge Falls",
+      "place": "Oregon",
+      "year": "2025"
+    },
+    "veil-falls": {
+      "title": "Veil of Water",
+      "place": "Silver Falls, Oregon",
+      "year": "2025"
+    }
+  }
+}

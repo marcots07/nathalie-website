@@ -1,4 +1,4 @@
-# Nathalie González Pérez — Personal Website
+# Nathalie Gonzalez Perez — Personal Website
 
 Single-page personal website with case study subpages, built with Next.js (App Router), TypeScript, Tailwind CSS, and Framer Motion. Bilingual (Spanish/English).
 

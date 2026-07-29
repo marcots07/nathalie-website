@@ -1,0 +1,74 @@
+{
+  "card": {
+    "title": "Portafolio",
+    "tagline": "El sitio que estás viendo ahora mismo",
+    "summary": "Diseñado y construido de principio a fin: bilingüe, con una estética de papel hecho a mano y transiciones que conectan cada sección como un cuaderno.",
+    "tags": ["Producto", "Next.js", "Framer Motion", "Claude Code + MCP"]
+  },
+  "hero": {
+    "title": "Portafolio",
+    "tagline": "Un sitio bilingüe con textura de papel, construido para sentirse hecho a mano.",
+    "tags": ["Producto", "Next.js", "Framer Motion", "Claude Code + MCP"]
+  },
+  "overview": {
+    "role": "Diseño y desarrollo end-to-end",
+    "tools": "Next.js · Tailwind · Framer Motion · Claude Code (MCP)",
+    "duration": "Proyecto personal en curso",
+    "type": "Sitio web personal, bilingüe"
+  },
+  "problem": {
+    "heading": "Un portafolio que no se sintiera como una plantilla.",
+    "body": "Quería un sitio que hablara de mí en dos idiomas sin que ninguno se sintiera 'traducido', y que se viera y se sintiera como algo hecho con las manos — más cuaderno de recortes que landing page corporativa. El reto no era técnico: era que cada sección, del hero al contacto, respirara la misma calidez de papel, sin sacrificar accesibilidad ni rendimiento."
+  },
+  "research": {
+    "heading": "Definiendo el tono antes que el código.",
+    "body": "Empecé por el contenido: revisé cada texto en español e inglés para que fueran traducciones contextuales en español latinoamericano, no calcos literales del inglés. De ahí salió la dirección visual — papel envejecido, bordes rasgados, cinta washi como acento — y la estructura modular que necesitaría para crecer: proyectos, fotografía y arte, todos alimentados por JSON en vez de código hardcodeado."
+  },
+  "process": {
+    "heading": "Del sistema de diseño a los detalles que no se notan.",
+    "body": "Construí un sistema de colores cálido (verde salvia, terracota, crema) verificado en contraste WCAG AA, y una capa de textura de papel compartida por toda la app: bordes rasgados generados con splines Catmull-Rom sobre filtros SVG, cinta washi decorativa y una tarjeta de retrato con esquinas irregulares. El contenido de proyectos, fotografía y arte vive en JSON modular — agregar una pieza nueva no toca código. Las transiciones entre secciones usan Framer Motion y la View Transitions API para que una tarjeta en la portada se convierta, literalmente, en el héroe de la página de destino. Cerré con un formulario de contacto funcional vía Resend, descarga de CV, imagen Open Graph a medida, sitemap y un pase completo de accesibilidad y rendimiento.",
+    "flows": [
+      "Inicio — hero, proyectos y 'Más allá del trabajo'",
+      "Fotografía y arte — páginas propias, conectadas al inicio"
+    ],
+    "flowGroups": [
+      {
+        "title": "La página de inicio",
+        "flows": [
+          "Hero — retrato con borde rasgado y CTA de descarga de CV",
+          "Proyectos — tarjetas con transición compartida hacia cada caso de estudio",
+          "Más allá del trabajo — fotografía y arte como recortes prendidos con cinta washi"
+        ],
+        "notes": [
+          "El retrato usa el mismo clip-path de borde rasgado que las tarjetas de arte — coherencia visual sin repetir código.",
+          "Cada tarjeta de proyecto tiene un viewTransitionName propio; al hacer clic, se convierte en el héroe del caso de estudio.",
+          "Las dos 'fotos' de este bloque están rotadas ligeramente y conectadas por un hilo de SVG dibujado a mano, como en un corcho de referencias."
+        ]
+      },
+      {
+        "title": "Fotografía y arte, como páginas propias",
+        "flows": [
+          "Fotografía — mosaico de imágenes con marco de papel y ligera inclinación",
+          "Arte — visor pieza por pieza con la historia y los materiales detrás de cada una"
+        ],
+        "notes": [
+          "Cada foto tiene su propio margen de papel y una inclinación aleatoria sutil, para que el mosaico no se sienta como una grilla perfecta.",
+          "En Arte, cambiar de pieza dispara una transición direccional con Framer Motion — la imagen, el color de fondo y la ficha técnica se deslizan juntos sin saltos de layout, sin importar el tamaño de la obra."
+        ]
+      }
+    ]
+  },
+  "results": {
+    "heading": "Un sitio que se siente terminado en los detalles.",
+    "body": "El resultado es un portafolio bilingüe completo — inicio, proyectos, fotografía, arte y contacto funcional — donde la textura de papel, las transiciones y el copy se sienten parte del mismo objeto, no capas superpuestas. Pasa contraste AA, respeta prefers-reduced-motion, es navegable por teclado y genera su propia imagen Open Graph.",
+    "learnings": [
+      "Diseñar el sistema de textura (papel, rasgado, cinta washi) como componentes reutilizables desde el inicio evitó que cada sección nueva se sintiera 'pegada' al resto.",
+      "Separar el contenido en JSON por idioma —incluso para secciones nuevas como fotografía y arte— hizo trivial agregar piezas reales más adelante, sin tocar componentes.",
+      "Las transiciones compartidas (View Transitions + Framer Motion) son las que más venden la sensación de 'un solo lugar', más que cualquier animación individual."
+    ]
+  },
+  "reflection": {
+    "heading": "Qué me llevo.",
+    "body": "Este sitio es, en sí mismo, el proyecto que mejor resume cómo trabajo: defino el sistema antes que las pantallas, cuido el detalle que nadie pide (el grano del papel, la traducción correcta, el contraste de un texto secundario) y construyo con herramientas de IA como Claude Code sin dejar de revisar cada decisión a mano."
+  }
+}

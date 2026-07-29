@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import CreativeGateway from "@/components/CreativeGateway";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -30,6 +31,7 @@ export default async function HomePage({
       <About dict={dict} />
       <Experience dict={dict} />
       <Projects dict={dict} locale={locale} />
+      <CreativeGateway dict={dict} locale={locale} />
       <Skills dict={dict} />
       <Contact dict={dict} locale={locale} />
       <Footer dict={dict} />

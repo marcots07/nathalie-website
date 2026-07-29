@@ -1,0 +1,153 @@
+{
+  "eyebrow": "Fotografía",
+  "heading": "Mirar despacio.",
+  "intro": "Salgo a caminar con la cámara por la misma razón por la que me gusta la terapia: obliga a mirar de verdad, sin apurar la conclusión. Estas son del último año.",
+  "counterLabel": "fotografías",
+  "items": {
+    "ridgeline-silhouette": {
+      "title": "Siluetas al atardecer",
+      "place": "Costa del Pacífico, Washington",
+      "year": "2025"
+    },
+    "sea-stack-glow": {
+      "title": "Resplandor entre rocas",
+      "place": "Costa del Pacífico, Washington",
+      "year": "2025"
+    },
+    "horizon-glow": {
+      "title": "Último resplandor",
+      "place": "Costa del Pacífico, Washington",
+      "year": "2025"
+    },
+    "skyline-blush": {
+      "title": "Cielo encendido",
+      "place": "Vista de ciudad",
+      "year": "2025"
+    },
+    "tulip-field-red": {
+      "title": "Campo de tulipanes rojos",
+      "place": "Skagit Valley, Washington",
+      "year": "2025"
+    },
+    "driftwood-dusk": {
+      "title": "Madera a la deriva",
+      "place": "Costa del Pacífico, Washington",
+      "year": "2025"
+    },
+    "keyhole-light": {
+      "title": "Luz por la grieta",
+      "place": "Costa del Pacífico, Washington",
+      "year": "2025"
+    },
+    "museum-bench": {
+      "title": "Frente al vidrio",
+      "place": "Museo de arte",
+      "year": "2025"
+    },
+    "museum-stairs": {
+      "title": "Reflejo en la escalera",
+      "place": "Museo de arte",
+      "year": "2025"
+    },
+    "winter-harbor": {
+      "title": "Puerto de invierno",
+      "place": "Boston, Massachusetts",
+      "year": "2025"
+    },
+    "street-canyon-glow": {
+      "title": "Sol entre edificios",
+      "place": "Manhattan, Nueva York",
+      "year": "2025"
+    },
+    "glass-triangles-1": {
+      "title": "Vitral de colores",
+      "place": "Museo de arte",
+      "year": "2025"
+    },
+    "wild-daisy": {
+      "title": "Margarita silvestre",
+      "place": "Jersey City, NJ",
+      "year": "2025"
+    },
+    "tulip-field-yellow": {
+      "title": "Campo de tulipanes amarillos",
+      "place": "Skagit Valley, Washington",
+      "year": "2025"
+    },
+    "lake-pines": {
+      "title": "Marco de pino",
+      "place": "Cascadas, Washington",
+      "year": "2025"
+    },
+    "windswept-pine": {
+      "title": "Árbol al viento",
+      "place": "Costa del Pacífico, Washington",
+      "year": "2025"
+    },
+    "snow-squirrel": {
+      "title": "Ardilla en la nieve",
+      "place": "Central Park, Nueva York",
+      "year": "2025"
+    },
+    "alpine-lake": {
+      "title": "Lago alpino",
+      "place": "Cascadas, Washington",
+      "year": "2025"
+    },
+    "woven-gold": {
+      "title": "Tejido dorado",
+      "place": "Museo de arte",
+      "year": "2025"
+    },
+    "forest-light": {
+      "title": "Luz entre el musgo",
+      "place": "Bosque del Pacífico, Washington",
+      "year": "2025"
+    },
+    "woven-black": {
+      "title": "Tejido en la sombra",
+      "place": "Museo de arte",
+      "year": "2025"
+    },
+    "river-dusk": {
+      "title": "Río al atardecer",
+      "place": "Hudson Valley, NY",
+      "year": "2025"
+    },
+    "tulip-rows": {
+      "title": "Filas de tulipanes",
+      "place": "Skagit Valley, Washington",
+      "year": "2025"
+    },
+    "museum-atrium": {
+      "title": "Curvas de concreto",
+      "place": "Museo de arte",
+      "year": "2025"
+    },
+    "moonrise-skyline": {
+      "title": "Luna sobre Manhattan",
+      "place": "Nueva York",
+      "year": "2025"
+    },
+    "terraced-falls": {
+      "title": "Cascada escalonada",
+      "place": "Oregon",
+      "year": "2025"
+    },
+    "stone-bridge-falls": {
+      "title": "Puente de piedra",
+      "place": "Mount Rainier, Washington",
+      "year": "2025"
+    },
+    "ledge-falls": {
+      "title": "Cascada de repisa",
+      "place": "Oregon",
+      "year": "2025"
+    },
+    "veil-falls": {
+      "title": "Velo de agua",
+      "place": "Silver Falls, Oregon",
+      "year": "2025"
+    }
+  }
+}
