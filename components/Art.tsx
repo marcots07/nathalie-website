@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Locale } from "@/lib/i18n";
 import { getArt, type ArtPiece, type ArtLabels, type ArtTone } from "@/lib/galleries";
@@ -77,6 +77,24 @@ export default function Art({
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
   const reduce = useReducedMotion();
+  const railRef = useRef<HTMLUListElement>(null);
+  const thumbRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+  // Keep the active thumbnail centred in the rail. Scrolls the rail itself
+  // rather than using scrollIntoView, which would also drag the page.
+  useEffect(() => {
+    const rail = railRef.current;
+    const thumb = thumbRefs.current[active];
+    if (!rail || !thumb) return;
+    const railBox = rail.getBoundingClientRect();
+    const thumbBox = thumb.getBoundingClientRect();
+    const offset =
+      thumbBox.left - railBox.left - (railBox.width - thumbBox.width) / 2;
+    rail.scrollTo({
+      left: rail.scrollLeft + offset,
+      behavior: reduce ? "auto" : "smooth",
+    });
+  }, [active, reduce]);
 
   if (pieces.length === 0) return null;
 
@@ -152,61 +170,6 @@ export default function Art({
                 </AnimatePresence>
               </div>
             </div>
-
-            {/* Thumbnails */}
-            <div className="mt-6">
-              <p className="text-[10px] uppercase tracking-[0.28em] text-sage-700 mb-3">
-                {labels.browse}
-              </p>
-              <div className="flex items-center gap-3">
-                <ul className="flex gap-3 flex-1 min-w-0">
-                  {pieces.map((p, i) => (
-                    <li key={p.id} className="relative min-w-0">
-                      <button
-                        type="button"
-                        onClick={() => select(i)}
-                        aria-current={i === active ? "true" : undefined}
-                        aria-label={p.title}
-                        className={`block w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 border-transparent transition-opacity duration-500 ${
-                          i === active ? "opacity-100" : "opacity-55 hover:opacity-90"
-                        }`}
-                      >
-                        <img
-                          src={p.image}
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          className="w-full h-full object-cover"
-                        />
-                      </button>
-                      {/* Slides between thumbnails instead of snapping, so the
-                          active frame reads as one spotlight moving along the
-                          wall rather than a border toggling on and off. */}
-                      {i === active && (
-                        <motion.span
-                          layoutId="art-thumb-active"
-                          aria-hidden
-                          className="absolute inset-0 rounded-xl border-2 border-sage-600 pointer-events-none"
-                          transition={{ type: "spring", stiffness: 420, damping: 34 }}
-                        />
-                      )}
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex gap-2 flex-shrink-0">
-                  <StepButton
-                    direction="prev"
-                    label={labels.prev}
-                    onClick={() => select(active - 1)}
-                  />
-                  <StepButton
-                    direction="next"
-                    label={labels.next}
-                    onClick={() => select(active + 1)}
-                  />
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* The wall label */}
@@ -257,9 +220,90 @@ export default function Art({
             </AnimatePresence>
           </div>
         </div>
+
+        {/* Browse rail — spans the whole wall instead of sharing the mat's
+            column, so each thumbnail keeps its full size as the collection
+            grows and the step buttons get room of their own. */}
+        <div className="mt-16 md:mt-20 border-t border-sage-200 pt-7">
+          <div className="flex items-center justify-between gap-6">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-sage-700">
+              {labels.browse}
+            </p>
+            <div className="flex items-center gap-5">
+              <p className="text-xs tracking-[0.2em] text-ink-muted tabular-nums">
+                {pad(active + 1)}
+                <span className="text-sage-400 mx-1.5">/</span>
+                {pad(count)}
+              </p>
+              <div className="flex gap-3">
+                <StepButton
+                  direction="prev"
+                  label={labels.prev}
+                  onClick={() => select(active - 1)}
+                />
+                <StepButton
+                  direction="next"
+                  label={labels.next}
+                  onClick={() => select(active + 1)}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Bleeds past the page gutter on narrow screens so a scrolled rail
+              reads as continuing off the edge rather than being clipped. */}
+          <ul
+            ref={railRef}
+            className="hide-scrollbar mt-6 flex gap-3 md:gap-4 overflow-x-auto -mx-6 px-6 py-2 md:mx-0 md:px-0"
+          >
+            {pieces.map((p, i) => (
+              <li
+                key={p.id}
+                ref={(el) => {
+                  thumbRefs.current[i] = el;
+                }}
+                className="relative flex-none"
+              >
+                <button
+                  type="button"
+                  onClick={() => select(i)}
+                  aria-current={i === active ? "true" : undefined}
+                  aria-label={p.title}
+                  className={`block w-16 h-16 md:w-[76px] md:h-[76px] rounded-xl overflow-hidden shadow-[0_6px_14px_-8px_rgba(30,25,15,0.5)] transition-opacity duration-500 ${
+                    i === active ? "opacity-100" : "opacity-55 hover:opacity-90"
+                  }`}
+                >
+                  <img
+                    src={p.image}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+                {/* Slides between thumbnails instead of snapping, so the
+                    active frame reads as one spotlight moving along the
+                    wall rather than a border toggling on and off. */}
+                {i === active && (
+                  <motion.span
+                    layoutId="art-thumb-active"
+                    aria-hidden
+                    className="absolute -inset-1 rounded-2xl border-2 border-sage-600 pointer-events-none"
+                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
+}
+
+/** Two-digit counter, so 1 / 11 doesn't jitter the width as it counts up. */
+function pad(n: number) {
+  return String(n).padStart(2, "0");
 }
 
 function Spec({ label, value }: { label: string; value: string }) {
@@ -287,11 +331,13 @@ function StepButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="w-9 h-9 rounded-full border border-sage-200 hover:border-sage-600 hover:bg-cream-100/80 text-sage-700 flex items-center justify-center transition-all duration-300"
+      className={`w-11 h-11 rounded-full border border-sage-300 bg-cream-50/60 hover:border-sage-600 hover:bg-cream-100 text-sage-700 flex items-center justify-center transition-all duration-300 ${
+        direction === "prev" ? "hover:-translate-x-0.5" : "hover:translate-x-0.5"
+      }`}
     >
       <svg
-        width="14"
-        height="14"
+        width="16"
+        height="16"
         viewBox="0 0 16 16"
         fill="none"
         className={direction === "prev" ? "rotate-180" : ""}

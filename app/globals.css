@@ -165,6 +165,16 @@ body {
   }
 }
 
+/* Horizontal rails (the art browse strip) are stepped with their own buttons
+   and swipe on touch; a native scrollbar would draw a grey slab across the
+   paper. The rail stays keyboard-reachable through its buttons. */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Custom underline for editorial links. */
 .editorial-link {
   background-image: linear-gradient(currentColor, currentColor);
