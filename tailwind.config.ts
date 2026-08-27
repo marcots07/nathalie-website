@@ -33,11 +33,14 @@ const config: Config = {
           300: "#e3b09a",
           400: "#d69374",
           500: "#c47758",
+          // 600 meets WCAG AA (~4.75:1) as text on the cream background.
+          600: "#a8552f",
         },
         ink: {
           DEFAULT: "#2a2a26",
           soft: "#4a4a44",
-          muted: "#7a7a72",
+          // muted darkened from #7a7a72 to clear AA (~5:1) on cream.
+          muted: "#6b6b63",
         },
       },
       fontFamily: {

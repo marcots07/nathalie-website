@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getDictionary, isLocale, LOCALES, type Locale } from "@/lib/i18n";
+import { getDictionary, isLocale, LOCALES } from "@/lib/i18n";
+import { SITE_URL } from "@/lib/site";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
+import MotionProvider from "@/components/MotionProvider";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -18,11 +20,14 @@ export async function generateMetadata({
   return {
     title: dict.meta.title,
     description: dict.meta.description,
-    metadataBase: new URL("https://nathaliegonzalez.com"),
+    metadataBase: new URL(SITE_URL),
     openGraph: {
       title: dict.meta.title,
       description: dict.meta.description,
+      url: `/${locale}`,
+      siteName: "Nathalie González Pérez",
       locale: locale === "es" ? "es_ES" : "en_US",
+      alternateLocale: locale === "es" ? "en_US" : "es_ES",
       type: "website",
       images: [
         {
@@ -59,9 +64,9 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   return (
-    <>
+    <MotionProvider>
       <AmbientBackdrop />
       <div className="relative z-10">{children}</div>
-    </>
+    </MotionProvider>
   );
 }
