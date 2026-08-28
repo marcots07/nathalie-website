@@ -1,7 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
-import type { Dictionary } from "@/lib/i18n";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect } from "react";
+import type { Dictionary, Locale } from "@/lib/i18n";
 import Portrait from "./Portrait";
 
 const line = {
@@ -17,7 +20,32 @@ const line = {
   }),
 };
 
-export default function Hero({ dict }: { dict: Dictionary }) {
+export default function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
+  const swingControls = useAnimation();
+
+  useEffect(() => {
+    swingControls.start({
+      rotate: [-1.5, 1.5],
+      transition: { repeat: Infinity, repeatType: "mirror", duration: 2.5, ease: "easeInOut" },
+    });
+  }, [swingControls]);
+
+  const handleNudge = async () => {
+    swingControls.stop();
+    await swingControls.start({
+      rotate: 2.5,
+      transition: { duration: 0.18, ease: [0.22, 1, 0.36, 1] },
+    });
+    await swingControls.start({
+      rotate: -1.5,
+      transition: { type: "spring", stiffness: 55, damping: 10 },
+    });
+    swingControls.start({
+      rotate: [-1.5, 1.5],
+      transition: { repeat: Infinity, repeatType: "mirror", duration: 2.5, ease: "easeInOut" },
+    });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16">
       <div className="relative max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-12 gap-10 md:gap-14 items-center w-full">
@@ -66,8 +94,8 @@ export default function Hero({ dict }: { dict: Dictionary }) {
             transition={{ duration: 0.8, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
             className="mt-10 flex flex-wrap gap-4"
           >
-            <a
-              href="#projects"
+            <Link
+              href={`/${locale}/projects`}
               className="inline-flex items-center gap-2 bg-sage-700 hover:bg-sage-800 text-cream-50 px-6 py-3 rounded-full transition-all duration-500 hover:gap-3"
             >
               {dict.hero.ctaPrimary}
@@ -80,7 +108,7 @@ export default function Hero({ dict }: { dict: Dictionary }) {
                   strokeLinejoin="round"
                 />
               </svg>
-            </a>
+            </Link>
             <a
               href="/cv/nathalie-gonzalez-perez-cv.pdf"
               download
@@ -112,19 +140,42 @@ export default function Hero({ dict }: { dict: Dictionary }) {
           transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="md:col-span-5 order-1 md:order-2 relative"
         >
-          {/* Mounted on a torn sheet, laid at a slight angle: the portrait is
-              the first thing a visitor sees, so it sets the paper language the
-              Photography and Art cards carry through the rest of the page. */}
-          <div className="relative max-w-md mx-auto rotate-[-1.5deg]">
-            <Portrait
-              src="/profile/nathalie.jpeg"
-              alt={dict.hero.portraitAlt}
-              aspect="aspect-[4/5]"
-              position="50% 28%"
-              torn={2}
-            />
-            <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-terracotta-300/60 blur-2xl -z-10" />
-            <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-sage-300/50 blur-2xl -z-10" />
+          {/* Held up by a single strip of washi tape across the top edge, laid
+              at a slight angle: the portrait is the first thing a visitor sees,
+              so it sets the paper language — torn stock, warm tape — that the
+              Photography and Art cards carry through the rest of the page. The
+              loosely-taped sheet sways gently from where it's fixed. */}
+          <div className="relative max-w-md mx-auto pt-6">
+            <motion.div
+              className="relative"
+              initial={{ rotate: -1.5 }}
+              animate={swingControls}
+              style={{ transformOrigin: "50% 0%" }}
+              onHoverStart={handleNudge}
+            >
+              <Portrait
+                src="/profile/nathalie.jpeg"
+                alt={dict.hero.portraitAlt}
+                aspect="aspect-[4/5]"
+                position="50% 28%"
+                torn={2}
+              />
+
+              {/* A single strip of real washi tape straddling the top edge,
+                  centred and just barely askew. Drawn after the portrait so it
+                  sits on top of it. */}
+              <Image
+                aria-hidden
+                src="/tape.png"
+                alt=""
+                width={734}
+                height={245}
+                className="absolute -top-3 left-1/2 z-20 w-28 h-auto -translate-x-1/2 -rotate-[3deg] select-none pointer-events-none drop-shadow-[0_2px_4px_rgba(42,42,38,0.15)]"
+              />
+
+              <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-terracotta-300/60 blur-2xl -z-10" />
+              <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-sage-300/50 blur-2xl -z-10" />
+            </motion.div>
           </div>
         </motion.div>
       </div>

@@ -47,7 +47,7 @@ export default async function ArtPage({
       </a>
       <LocalePersist locale={locale} />
       <ScrollProgress />
-      <Navigation locale={locale} dict={dict} variant="sub" />
+      <Navigation locale={locale} dict={dict} />
 
       <div className="pt-28 md:pt-32">
         <Art locale={locale} heroViewTransitionName="gateway-art" />

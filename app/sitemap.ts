@@ -3,6 +3,7 @@ import { LOCALES, PROJECTS_SEGMENT, type GalleryKey } from "@/lib/i18n";
 import { PROJECT_SLUGS } from "@/lib/projects";
 
 const GALLERIES: GalleryKey[] = ["photography", "art"];
+const SECTIONS = ["experience", "projects", "skills", "contact"] as const;
 
 const BASE_URL = "https://nathaliegonzalez.com";
 
@@ -23,6 +24,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ),
       },
     });
+
+    for (const section of SECTIONS) {
+      entries.push({
+        url: `${BASE_URL}/${locale}/${section}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.7,
+        alternates: {
+          languages: Object.fromEntries(
+            LOCALES.map((l) => [l, `${BASE_URL}/${l}/${section}`])
+          ),
+        },
+      });
+    }
 
     for (const gallery of GALLERIES) {
       entries.push({

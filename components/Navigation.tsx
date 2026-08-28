@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Dictionary, Locale } from "@/lib/i18n";
-import { otherLocale, galleryHref } from "@/lib/i18n";
+import { otherLocale, PROJECTS_SEGMENT } from "@/lib/i18n";
 import TransitionLink from "./TransitionLink";
 
 type NavProps = {
@@ -14,17 +14,16 @@ type NavProps = {
   variant?: "home" | "sub";
 };
 
-// Most items scroll to an in-page section; photography and art moved out to
-// their own standalone pages, so those two navigate instead.
 const NAV_ITEMS = [
-  { key: "about", kind: "anchor" },
-  { key: "experience", kind: "anchor" },
-  { key: "projects", kind: "anchor" },
-  { key: "photography", kind: "page" },
-  { key: "art", kind: "page" },
-  { key: "skills", kind: "anchor" },
-  { key: "contact", kind: "anchor" },
+  { key: "experience" },
+  { key: "projects" },
+  { key: "photography" },
+  { key: "art" },
+  { key: "skills" },
+  { key: "contact" },
 ] as const;
+
+type NavKey = (typeof NAV_ITEMS)[number]["key"];
 
 export default function Navigation({ locale, dict, variant = "home" }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
@@ -46,9 +45,39 @@ export default function Navigation({ locale, dict, variant = "home" }: NavProps)
     } catch {
       // ignore
     }
-    const nextPath = pathname.replace(/^\/(es|en)/, `/${next}`);
+    // Swap locale prefix, then swap the localized projects segment so
+    // /es/proyectos/slug → /en/projects/slug (not a 404).
+    let nextPath = pathname.replace(/^\/(es|en)/, `/${next}`);
+    nextPath = nextPath.replace(
+      `/${PROJECTS_SEGMENT[locale]}/`,
+      `/${PROJECTS_SEGMENT[next]}/`,
+    );
     router.push(nextPath);
   };
+
+  const navHref = (key: NavKey) => `/${locale}/${key}`;
+
+  // Highlight the nav item whose route matches the current path.
+  // "projects" also highlights when inside a case-study URL (/{locale}/{segment}/{slug}).
+  const isActive = (key: NavKey) => {
+    const href = navHref(key);
+    if (pathname.startsWith(href)) return true;
+    if (key === "projects") {
+      const segHref = `/${locale}/${PROJECTS_SEGMENT[locale]}`;
+      return pathname.startsWith(segHref);
+    }
+    return false;
+  };
+
+  const linkClass = (key: NavKey) =>
+    `text-sm transition-colors editorial-link ${
+      isActive(key) ? "text-sage-700 font-medium" : "text-ink-soft hover:text-sage-700"
+    }`;
+
+  const mobileLinkClass = (key: NavKey) =>
+    `text-base transition-colors ${
+      isActive(key) ? "text-sage-700 font-medium" : "text-ink hover:text-sage-700"
+    }`;
 
   return (
     <motion.header
@@ -65,32 +94,24 @@ export default function Navigation({ locale, dict, variant = "home" }: NavProps)
       <div className="max-w-6xl mx-auto px-6 md:px-10 pt-4 md:pt-6 h-20 md:h-28 flex items-center justify-between">
         <Link
           href={`/${locale}`}
-          className="font-display text-xl md:text-2xl tracking-tightest text-ink hover:text-sage-700 transition-colors"
+          className={`font-display text-xl md:text-2xl tracking-tightest transition-colors editorial-link ${
+            pathname === `/${locale}` ? "text-sage-700" : "text-ink hover:text-sage-700"
+          }`}
         >
           Nathalie<span className="text-sage-500">.</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-5 lg:gap-8">
           {variant === "home"
-            ? NAV_ITEMS.map((item) =>
-                item.kind === "anchor" ? (
-                  <a
-                    key={item.key}
-                    href={`#${item.key}`}
-                    className="text-sm text-ink-soft hover:text-sage-700 transition-colors editorial-link"
-                  >
-                    {dict.nav[item.key]}
-                  </a>
-                ) : (
-                  <TransitionLink
-                    key={item.key}
-                    href={galleryHref(locale, item.key)}
-                    className="text-sm text-ink-soft hover:text-sage-700 transition-colors editorial-link"
-                  >
-                    {dict.nav[item.key]}
-                  </TransitionLink>
-                )
-              )
+            ? NAV_ITEMS.map((item) => (
+                <TransitionLink
+                  key={item.key}
+                  href={navHref(item.key)}
+                  className={linkClass(item.key)}
+                >
+                  {dict.nav[item.key]}
+                </TransitionLink>
+              ))
             : (
                 <Link
                   href={`/${locale}`}
@@ -145,27 +166,16 @@ export default function Navigation({ locale, dict, variant = "home" }: NavProps)
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {variant === "home" ? (
-                NAV_ITEMS.map((item) =>
-                  item.kind === "anchor" ? (
-                    <a
-                      key={item.key}
-                      href={`#${item.key}`}
-                      onClick={() => setMobileOpen(false)}
-                      className="text-base text-ink hover:text-sage-700 transition-colors"
-                    >
-                      {dict.nav[item.key]}
-                    </a>
-                  ) : (
-                    <TransitionLink
-                      key={item.key}
-                      href={galleryHref(locale, item.key)}
-                      onClick={() => setMobileOpen(false)}
-                      className="text-base text-ink hover:text-sage-700 transition-colors"
-                    >
-                      {dict.nav[item.key]}
-                    </TransitionLink>
-                  )
-                )
+                NAV_ITEMS.map((item) => (
+                  <TransitionLink
+                    key={item.key}
+                    href={navHref(item.key)}
+                    onClick={() => setMobileOpen(false)}
+                    className={mobileLinkClass(item.key)}
+                  >
+                    {dict.nav[item.key]}
+                  </TransitionLink>
+                ))
               ) : (
                 <Link
                   href={`/${locale}`}

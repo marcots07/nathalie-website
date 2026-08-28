@@ -1,10 +1,6 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import {
-  getDictionary,
-  isLocale,
-  PROJECTS_SEGMENT,
-  LOCALES,
-} from "@/lib/i18n";
+import { getDictionary, isLocale, LOCALES } from "@/lib/i18n";
 import { getProject, getProjects } from "@/lib/projects";
 import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -14,26 +10,18 @@ import LocalePersist from "@/components/LocalePersist";
 
 export function generateStaticParams() {
   const projects = getProjects();
-  // English case studies are served by the static app/[locale]/projects/[slug]
-  // route. Only generate Spanish params here so there's no path collision.
-  return LOCALES.filter((locale) => PROJECTS_SEGMENT[locale] !== "projects").flatMap(
-    (locale) =>
-      projects.map((p) => ({
-        locale,
-        projectsSegment: PROJECTS_SEGMENT[locale],
-        slug: p.slug,
-      }))
+  return LOCALES.flatMap((locale) =>
+    projects.map((p) => ({ locale, slug: p.slug }))
   );
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string; projectsSegment: string; slug: string }>;
-}) {
-  const { locale, projectsSegment, slug } = await params;
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
   if (!isLocale(locale)) return {};
-  if (projectsSegment !== PROJECTS_SEGMENT[locale]) return {};
   const project = getProject(slug);
   if (!project) return {};
   const t = project.translations[locale];
@@ -46,11 +34,10 @@ export async function generateMetadata({
 export default async function ProjectPage({
   params,
 }: {
-  params: Promise<{ locale: string; projectsSegment: string; slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { locale, projectsSegment, slug } = await params;
+  const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  if (projectsSegment !== PROJECTS_SEGMENT[locale]) notFound();
   const project = getProject(slug);
   if (!project) notFound();
   const dict = getDictionary(locale);
