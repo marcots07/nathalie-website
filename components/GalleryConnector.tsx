@@ -57,12 +57,12 @@ export default function GalleryConnector({
                   </div>
 
           <div className="flex-1 min-w-0">
-            <p className="text-xs uppercase tracking-[0.28em] text-sage-700 mb-2">
+            <p className="text-xs font-label uppercase tracking-[0.28em] text-sage-700 mb-2">
               {eyebrow}
             </p>
             <div className="flex items-baseline justify-between gap-6 flex-wrap">
               <div>
-                <h3 className="font-display text-3xl md:text-5xl text-ink italic group-hover:text-sage-700 transition-colors">
+                <h3 className="font-display text-2xl md:text-4xl text-ink italic group-hover:text-sage-700 transition-colors">
                   {title}
                 </h3>
                 <p className="text-ink-muted mt-1">{tagline}</p>

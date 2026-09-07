@@ -46,7 +46,11 @@ export default async function PhotographyPage({
       <ScrollProgress />
       <Navigation locale={locale} dict={dict} />
 
-      <div className="pt-28 md:pt-32">
+      {/* No top padding here: <Photography>'s own `py-24 md:py-36` already
+          clears the fixed nav, the same way it does on the Experience/
+          Skills/Contact pages. Adding padding here too stacked the two and
+          left a ~128px dead band above the heading. */}
+      <div>
         <Photography locale={locale} heroViewTransitionName="gateway-photography" />
 
         {artCover && (

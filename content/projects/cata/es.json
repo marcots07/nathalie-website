@@ -3,15 +3,15 @@
     "title": "Cata",
     "tagline": "Diario de vinos y asistente de maridaje",
     "summary": "Web app responsiva diseñada de principio a fin y construida con Figma + Claude Code vía MCP.",
-    "tags": ["Producto", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+    "tags": ["Producto", "Figma", "Sistema de diseño", "Pruebas de usabilidad", "Claude Code + MCP"]
   },
   "hero": {
     "title": "Cata",
     "tagline": "Un diario personal de vinos con asistente de maridaje.",
-    "tags": ["Producto", "Figma", "Sistema de diseño", "Claude Code + MCP"]
+    "tags": ["Producto", "Figma", "Sistema de diseño", "Pruebas de usabilidad", "Claude Code + MCP"]
   },
   "overview": {
-    "role": "Diseño y construcción end-to-end",
+    "role": "Diseño, pruebas y construcción end-to-end",
     "tools": "Figma · Claude Code (MCP)",
     "duration": "Proyecto personal en curso",
     "type": "Producto web responsivo"
@@ -22,11 +22,35 @@
   },
   "research": {
     "heading": "Definiendo el alcance.",
-    "body": "Como proyecto personal, la investigación fue más ligera y directa: sesiones con amigos aficionados al vino para entender qué registran hoy (spoiler: nada consistente) y qué momentos quieren recordar. La conclusión fue clara: la barrera no es la falta de apps, es la fricción para abrirlas."
+    "body": "Como proyecto personal, la investigación fue más ligera y directa: sesiones con amigos aficionados al vino para entender qué registran hoy (spoiler: nada consistente) y qué momentos quieren recordar. La conclusión fue clara: la barrera no es la falta de apps, es la fricción para abrirlas.",
+    "persona": {
+      "name": "Daniela Ríos, 29",
+      "role": "Coordinadora de marketing en CDMX — come afuera seguido y apenas está descubriendo el vino; no es experta ni quiere serlo.",
+      "goals": "Recordar los vinos que le gustaron · aprender poco a poco · sentirse segura al pedir o comprar.",
+      "frustrations": "Olvida los nombres de las botellas en días · las apps se sienten hechas para expertos · no sabe qué combina con qué.",
+      "statement": "Daniela es una aficionada principiante al vino que necesita una forma simple de recordar los vinos que le gustan y decidir qué tomar o maridar, porque se siente perdida frente a una carta de vinos o un anaquel y termina eligiendo a ciegas o repitiendo la misma botella."
+    },
+    "insight": "A mitad del proyecto entendí que el problema no era solo qué pedir en un restaurante — también eran las seis o siete botellas que ya tenías en casa sin recordar cuál era la buena (yo mismo traje siete de un viaje a Napa Valley y no podía decirte cuál valía la pena volver a abrir). Cata se volvió tanto una cava personal como una herramienta de descubrimiento.",
+    "figure": {
+      "label": "Mapa del sitio",
+      "caption": "La arquitectura de información que salió de esas sesiones: ocho secciones, desde autenticación hasta ajustes, con cada pantalla marcada como existente, renombrada o recién propuesta."
+    }
   },
   "process": {
     "heading": "Diseño y desarrollo, en la misma sesión.",
-    "body": "Definí el sistema de diseño completo en Figma antes de tocar código: Playfair Display para titulares e Inter para UI, una paleta cálida de burdeos (#993335) sobre marfil con acentos verde salvia, escala de espaciado de 4 puntos, y contraste verificado WCAG AA en cada combinación de texto y superficie. Cada botón, chip, badge de puntaje y tarjeta vive como componente con variantes en Figma — y Claude Code vía MCP lo lleva a producción directamente desde los mockups. Abajo: la evolución del home de wireframe a alta fidelidad, y las primeras pantallas del producto.",
+    "body": "Cada pantalla empezó en papel antes de tocar Figma. Definí el sistema de diseño completo antes de tocar código — Playfair Display para titulares e Inter para UI, una paleta cálida de burdeos (#993335) sobre marfil con acentos verde salvia, escala de espaciado de 4 puntos. Una auditoría WCAG AA encontró una falla — texto blanco sobre el acento verde salvia (2.99:1) — corregida con texto oscuro (4.95:1) y convertida en su propio token. Cada botón, chip, badge de puntaje y tarjeta vive como componente con variantes en Figma, y Claude Code vía MCP lo lleva a producción directamente desde los mockups.",
+    "figure": {
+      "label": "Sistema de diseño",
+      "caption": "La hoja de referencia completa: paleta de marca, estados del botón primario, colores de superficie y texto, la escala de acento salvia, y cada combinación de texto y superficie verificada contra WCAG AA."
+    },
+    "evolutionLabels": ["Boceto en papel", "Wireframe", "Alta fidelidad"],
+    "sketchToScreensLabel": "Del papel a la pantalla",
+    "sketchToScreensStageLabels": ["Wireframe", "Alta fidelidad"],
+    "sketchToScreensCaptions": [
+      "Inicio — el diseño mobile, bocetado antes de construirse.",
+      "Discover — el panel 'Ask Cata' ya estaba ahí en papel.",
+      "My Cellar — las colecciones con nombre eran parte del primer boceto."
+    ],
     "flows": [
       "Inicio — tu cava de un vistazo",
       "Discover — búsqueda y 'Ask Cata'",
@@ -63,17 +87,52 @@
       }
     ]
   },
+  "testing": {
+    "heading": "Poniendo a prueba lo construido.",
+    "body": "La investigación señaló la fricción como la barrera real, así que probé el flujo con más probabilidad de tenerla: agregar un vino. Tres participantes con distintos niveles de experiencia tecnológica y conocimiento de vinos, cada uno con una sola tarea — agregar un vino que hayan disfrutado y organizarlo a su manera. Sin pistas, solo protocolo think-aloud y un prototipo de alta fidelidad. Los tres encontraron Add Wine y eligieron Scan Label sin ayuda; la fricción apareció después.",
+    "stats": [
+      { "label": "Tarea completada", "value": "100%" },
+      { "label": "Participantes", "value": "3" },
+      { "label": "Facilidad promedio", "value": "4.3/5" },
+      { "label": "Confianza promedio", "value": "4.7/5" }
+    ],
+    "findings": [
+      {
+        "title": "“Save Wine” genera una falsa sensación de haber terminado",
+        "quote": "Pensé que ya lo había guardado.",
+        "severity": "Media",
+        "recommendation": "Cambiar el primer CTA de “Save Wine” a algo como “Continuar”. Dos de tres participantes creyeron que el proceso había terminado antes de que apareciera la pantalla de dónde guardar."
+      },
+      {
+        "title": "Collections vs. All Wines no coincide con cómo piensa la gente",
+        "quote": "¿No debería estar igual en todos mis vinos si lo pongo en una colección?",
+        "severity": "Media",
+        "recommendation": "Guardar cada vino en All Wines automáticamente; que Collections funcione como una capa extra opcional, no como una bifurcación que el usuario tenga que razonar."
+      }
+    ],
+    "insight": "La gente entendió cómo agregar un vino — la fricción no estaba en encontrarlo ni en escanear la etiqueta, sino en un paso final de guardar y organizar que no coincidía con su modelo mental. La solución no es rediseñar el flujo; es dar claridad en la recta final."
+  },
   "results": {
-    "heading": "En construcción, con foco.",
-    "body": "Cata está en desarrollo activo. En vez de perseguir funciones, estoy priorizando que la experiencia de registrar una botella se sienta como escribir una postal — rápida, personal, sin fricción. El diseño ya cubre el ciclo completo — entrar, registrar, coleccionar, maridar y decidir qué abrir hoy — y la construcción con Claude Code avanza pantalla por pantalla.",
+    "heading": "Lo que cambió con las pruebas.",
+    "body": "Las pruebas reemplazaron dos suposiciones por dos arreglos concretos: el botón de guardar necesitaba dejar de sugerir que el proceso había terminado, y la división entre Collections y All Wines necesitaba dejar de ser una decisión que el usuario tuviera que tomar. Ambos cambios van en la siguiente construcción.",
     "learnings": [
-      "El input inicial debe ser fotográfico primero — la mayoría de usuarios no quiere escribir antes de tener contexto visual.",
-      "El asistente de maridaje funciona mejor como sugerencia contextual dentro de la ficha del vino, no como pantalla separada.",
-      "El sistema de diseño diseñado desde el inicio permitió que Claude Code generara UI consistente sin retrabajo."
+      "Un CTA de primer paso que dice “Save” implica que ya terminaste — hay que renombrarlo para que la gente sepa que falta un paso más.",
+      "Cada vino debería guardarse en All Wines automáticamente; Collections debería ser un extra opcional, no una bifurcación que la gente tenga que razonar.",
+      "Los campos opcionales como calificación y nota de cata necesitan la etiqueta explícita “(opcional)” — dos de tres participantes dudaron ahí, sin saber si eran obligatorios."
     ]
   },
   "reflection": {
     "heading": "Qué me llevo.",
-    "body": "Cata me enseñó que diseñar y construir en el mismo flujo cambia cómo tomas decisiones — pruebas ideas antes de casarte con ellas. El sistema de diseño no es un entregable final; es la infraestructura que permite iterar rápido sin perder coherencia."
+    "body": "Cata me enseñó que diseñar y construir en el mismo flujo cambia cómo tomas decisiones — pruebas ideas antes de casarte con ellas. El sistema de diseño no es un entregable final; es la infraestructura que permite iterar rápido sin perder coherencia.",
+    "moments": [
+      {
+        "title": "Atrapar un bug de escala antes de publicarlo",
+        "body": "Una auditoría del sistema de diseño reveló que el badge de puntaje mobile mostraba valores como “94” — leyéndose como puntaje sobre 100 — cuando el resto de la app usa una escala de 1 a 10. Corregí el componente mismo, no solo la instancia, así que cada pantalla que lo usa heredó la corrección."
+      },
+      {
+        "title": "Convertir un archivo perdido en una mejor decisión",
+        "body": "Mientras convertía las tarjetas de una pantalla en componentes reutilizables, la imagen original de una tarjeta se destruyó y no se pudo recuperar. En vez de parcharla, rediseñé la pantalla para que combinara con el estilo más limpio, basado en íconos, que ya había definido para una pantalla hermana — arreglando la imagen perdida y haciendo que ambas pantallas fueran más consistentes que antes."
+      }
+    ]
   }
 }

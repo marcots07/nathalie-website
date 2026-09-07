@@ -14,7 +14,7 @@ export default function StatusPill({ label, tone = "sage" }: Props) {
       : "bg-cream-50/90 backdrop-blur text-sage-700 border-sage-200";
   return (
     <span
-      className={`inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.24em] border rounded-full px-3 py-1 ${cls}`}
+      className={`inline-flex items-center gap-2 text-[10px] font-label uppercase tracking-[0.24em] border rounded-full px-3 py-1 ${cls}`}
     >
       <span className="relative flex w-1.5 h-1.5">
         <span className="absolute inset-0 rounded-full bg-terracotta-500 animate-ping opacity-40" />

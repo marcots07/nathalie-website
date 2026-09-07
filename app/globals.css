@@ -3,12 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --font-serif: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --bg: #fbf9f4;
+  /* One typeface for the whole site now — Courier Prime, a typewriter
+     face — carried under all three historical tokens so every existing
+     `.font-display` / body / `.font-label` usage converges on it without
+     restructuring every caller. The three tokens stay distinct (rather
+     than collapsing to one) so headings, body copy, and paper-tag labels
+     can still diverge again later in weight, size, or even typeface,
+     without another sitewide sweep. */
+  --font-serif: "Courier Prime", "Courier New", monospace;
+  --font-sans: "Courier Prime", "Courier New", monospace;
+  --font-mono: "Courier Prime", "Courier New", monospace;
+  /* Warmed from #fbf9f4 toward an aged-paper tone (per user-supplied
+     .old-paper-bg reference: #F3EFE0), then a step further per request
+     for more visible age — the center of the page reads closer to old
+     parchment than bright white. */
+  --bg: #ece2cb;
   --ink: #2a2a26;
-  /* Surface the paper sheet appears to rest on, seen through the torn edge. */
-  --paper-backing: #cabfa7;
+  /* Surface the paper sheet appears to rest on, seen through the torn
+     edge — darkened alongside --bg so the backing still reads as a
+     surface *behind* the sheet instead of washing out next to it. */
+  --paper-backing: #9c8a6c;
 }
 
 html {
@@ -17,6 +31,91 @@ html {
      so anything darker here tints the whole site. The torn edge paints its
      own backing color instead. */
   background-color: var(--bg);
+  /* Paper fiber + crumple wash live here as layered *backgrounds* (not
+     separate `position: fixed` elements with `mix-blend-mode`, which they
+     used to be) — `background-attachment: fixed` gets the same
+     "doesn't scroll with content" result without creating an independent
+     compositor layer that has to re-blend against scrolling content on
+     every frame. That combination (fixed + blend-mode) is a known
+     Chromium ghosting bug: scroll fast enough and it leaves a translucent
+     freeze-frame of whatever was underneath (here, the nav bar) stuck
+     partway down the page until something forces a repaint. Baking the
+     blend into one element's own background sidesteps the bug entirely.
+     Layer order (first = painted on top): crumple wash, then the tiled
+     fiber texture, both multiplying/soft-lighting down onto --bg. */
+  background-image: linear-gradient(
+      128deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.9) 19%,
+      transparent 23%,
+      transparent 44%,
+      rgba(69, 52, 32, 0.65) 49%,
+      transparent 55%
+    ),
+    linear-gradient(
+      35deg,
+      transparent 0%,
+      rgba(69, 52, 32, 0.5) 12%,
+      transparent 18%,
+      transparent 55%,
+      rgba(255, 255, 255, 0.75) 61%,
+      transparent 67%
+    ),
+    linear-gradient(
+      200deg,
+      transparent 5%,
+      rgba(255, 255, 255, 0.65) 27%,
+      transparent 33%,
+      transparent 66%,
+      rgba(69, 52, 32, 0.45) 72%,
+      transparent 79%
+    ),
+    linear-gradient(
+      302deg,
+      transparent 10%,
+      rgba(69, 52, 32, 0.4) 36%,
+      transparent 42%,
+      transparent 74%,
+      rgba(255, 255, 255, 0.55) 81%,
+      transparent 88%
+    ),
+    linear-gradient(
+      62deg,
+      transparent 0%,
+      rgba(69, 52, 32, 0.35) 8%,
+      transparent 14%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.55) 65%,
+      transparent 71%
+    ),
+    linear-gradient(
+      168deg,
+      transparent 15%,
+      rgba(255, 255, 255, 0.5) 40%,
+      transparent 45%,
+      transparent 82%,
+      rgba(69, 52, 32, 0.4) 88%,
+      transparent 95%
+    ),
+    linear-gradient(
+      255deg,
+      transparent 20%,
+      rgba(69, 52, 32, 0.3) 47%,
+      transparent 53%,
+      transparent 90%,
+      rgba(255, 255, 255, 0.45) 95%,
+      transparent 100%
+    ),
+    linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)),
+    url("/textures/paper.png");
+  background-blend-mode: soft-light, soft-light, soft-light, soft-light,
+    soft-light, soft-light, soft-light, lighten, multiply;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
+    no-repeat, no-repeat, no-repeat, repeat;
+  background-attachment: fixed, fixed, fixed, fixed, fixed, fixed, fixed,
+    fixed, fixed;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
+    100% 100%, 100% 100%, 100% 100%, auto;
 }
 
 body {
@@ -42,11 +141,23 @@ body {
   }
 }
 
-/* Editorial serif headline utility. */
+/* Headline utility. Regular weight, no negative tracking — no bold
+   anywhere on the page; emphasis is carried by color (the existing
+   sage/terracotta/ink tones), never by weight. The -0.02em tuned for the
+   old serif's loose curves also reads as collided/cramped on a monospace
+   face, where every glyph already sits in a fixed-width cell. */
 .font-display {
   font-family: var(--font-serif);
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
+}
+
+/* Typewriter label utility — every torn-paper tag and small uppercase
+   eyebrow/stat/tag label sitewide. Courier Prime (not the more distressed
+   Special Elite) so it still ships a real bold + italic, since several
+   callers pair it with font-medium/font-semibold. */
+.font-label {
+  font-family: var(--font-mono);
 }
 
 /* Keyboard focus — one consistent, on-palette ring everywhere. */
@@ -80,43 +191,44 @@ body {
 }
 
 /* Subtle grain overlay for organic texture. Kept light so it adds bite to
-   the paper fiber below rather than compounding into mush. */
+   the paper fiber below rather than compounding into mush — nudged up
+   slightly (0.02 → 0.035) as part of the "old paper" pass, alongside the
+   .paper-lift vignette. */
 .grain::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.02;
+  opacity: 0.035;
   z-index: 1;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 /* ---------------------------------------------------------------------
-   Paper sheet — tileable fiber texture plus a torn deckle edge. See
-   components/PaperBackdrop.tsx for the layer order and how the tear is
-   built.
+   Paper sheet — the fiber texture and crumple wash live on `html`'s own
+   background now (see above); this section is just the torn deckle edge
+   and the inner-lift vignette. See components/PaperBackdrop.tsx for the
+   layer order and how the tear is built.
    -------------------------------------------------------------------- */
-.paper-texture {
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background-image: url("/textures/paper.png");
-  background-repeat: repeat;
-  /* Multiply tints the aurora underneath instead of flattening it. Kept low:
-     the texture is dark-on-transparent, so higher values drag the whole
-     palette down and push muted text under the AA contrast floor. */
-  mix-blend-mode: multiply;
-  opacity: 0.13;
-}
 
-/* Soft inner vignette so the sheet reads as lifted off the backing. */
+/* Soft inner vignette so the sheet reads as lifted off the backing —
+   plus a radial "old paper" burn: a warm brown-tan wash that stays
+   fully transparent through the center (where the reading content
+   lives) and only darkens toward the edges, like a worn/foxed
+   parchment corner. Box-shadow and gradient stack for depth without
+   either one alone having to carry the whole effect. */
 .paper-lift {
   position: fixed;
   inset: 0;
   z-index: 44;
   pointer-events: none;
-  box-shadow: inset 0 0 60px rgba(90, 78, 54, 0.13);
+  background-image: radial-gradient(
+    circle,
+    transparent 38%,
+    rgba(180, 158, 128, 0.22) 72%,
+    rgba(133, 111, 82, 0.4) 100%
+  );
+  box-shadow: inset 0 0 70px rgba(100, 82, 58, 0.24);
 }
 
 /* The tear itself: a thick backing-colored border, inset past the viewport
@@ -193,12 +305,17 @@ body {
    cream veil fuses them into one soft mesh. Composites off the main
    thread; costs zero JS.
    -------------------------------------------------------------------- */
+/* Warm bone/aged-paper wash — no green stop. The sage tint that used to
+   open this gradient (and aurora-a below) read as "green and white mixed"
+   against the cream backing; every stop here now stays inside the
+   cream/tan family so the base wash looks like worn paper, not a green
+   aurora. */
 .aurora-base {
   background: linear-gradient(
     180deg,
-    rgba(226, 236, 223, 0.5) 0%,
-    rgba(246, 241, 230, 0.35) 45%,
-    rgba(237, 228, 207, 0.4) 100%
+    rgba(237, 228, 207, 0.25) 0%,
+    rgba(246, 241, 230, 0.2) 45%,
+    rgba(224, 209, 177, 0.18) 100%
   );
 }
 
@@ -214,11 +331,13 @@ body {
 .aurora-a {
   top: -55vmax;
   left: -30vmax;
+  /* Was sage green (163,193,153) — recolored to a dusty bone/taupe so this
+     field reads as aged paper, not a green wash mixing into the cream. */
   background: radial-gradient(
     circle at 50% 55%,
-    rgba(163, 193, 153, 0.5) 0%,
-    rgba(163, 193, 153, 0.22) 35%,
-    rgba(163, 193, 153, 0) 65%
+    rgba(201, 186, 152, 0.22) 0%,
+    rgba(201, 186, 152, 0.1) 35%,
+    rgba(201, 186, 152, 0) 65%
   );
   animation: aurora-a 52s ease-in-out infinite alternate;
 }
@@ -228,8 +347,8 @@ body {
   right: -45vmax;
   background: radial-gradient(
     circle at 45% 50%,
-    rgba(230, 176, 154, 0.4) 0%,
-    rgba(230, 176, 154, 0.16) 38%,
+    rgba(230, 176, 154, 0.18) 0%,
+    rgba(230, 176, 154, 0.07) 38%,
     rgba(230, 176, 154, 0) 65%
   );
   animation: aurora-b 66s ease-in-out infinite alternate;
@@ -240,18 +359,21 @@ body {
   left: 5vmax;
   background: radial-gradient(
     circle at 50% 40%,
-    rgba(205, 181, 137, 0.35) 0%,
-    rgba(224, 209, 177, 0.18) 40%,
+    rgba(205, 181, 137, 0.16) 0%,
+    rgba(224, 209, 177, 0.08) 40%,
     rgba(224, 209, 177, 0) 68%
   );
   animation: aurora-c 78s ease-in-out infinite alternate;
 }
 
 .aurora-veil {
+  /* Boosted from the original 0.05/0.35 — with the fields above already
+     toned down, this cream wash now carries more of the job of keeping
+     the page light, closer to white paper than tan paper. */
   background: radial-gradient(
     ellipse at 50% 40%,
-    rgba(251, 249, 244, 0.05) 0%,
-    rgba(251, 249, 244, 0.35) 100%
+    rgba(251, 249, 244, 0.2) 0%,
+    rgba(251, 249, 244, 0.55) 100%
   );
 }
 

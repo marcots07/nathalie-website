@@ -5,6 +5,8 @@ import AmbientBackdrop from "@/components/AmbientBackdrop";
 import PaperBackdrop from "@/components/PaperBackdrop";
 import TornEdgeDefs from "@/components/TornEdgeDefs";
 import MotionProvider from "@/components/MotionProvider";
+import { DecorEditProvider } from "@/components/DecorEditContext";
+import DecorEditToggle from "@/components/DecorEditToggle";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -64,10 +66,13 @@ export default async function LocaleLayout({
   if (!isLocale(locale)) notFound();
   return (
     <MotionProvider>
-      <AmbientBackdrop />
-      <PaperBackdrop />
-      <TornEdgeDefs />
-      <div className="relative z-10">{children}</div>
+      <DecorEditProvider>
+        <AmbientBackdrop />
+        <PaperBackdrop />
+        <TornEdgeDefs />
+        <div className="relative z-10">{children}</div>
+        <DecorEditToggle />
+      </DecorEditProvider>
     </MotionProvider>
   );
 }

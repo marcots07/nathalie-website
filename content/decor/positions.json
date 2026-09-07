@@ -1,0 +1,139 @@
+{
+  "hero-daisy": {
+    "section": "hero",
+    "src": "/decor/decor-daisy-single-tape.png",
+    "top": 28.37736226220937,
+    "left": -10.342678493923614,
+    "width": 168,
+    "rotate": -7
+  },
+  "about-butterflies": {
+    "section": "about",
+    "src": "/decor/decor-butterflies.png",
+    "top": -67.95695364238411,
+    "left": 40.51608615451389,
+    "width": 176,
+    "rotate": -4
+  },
+  "projects-notebooks": {
+    "section": "projects",
+    "src": "/decor/decor-notebooks.png",
+    "top": 100.62318335655982,
+    "left": 83.00042046440973,
+    "width": 150,
+    "rotate": 5
+  },
+  "projects-coffee": {
+    "section": "projects",
+    "src": "/decor/decor-coffee-cup.png",
+    "top": 95.00741588692017,
+    "left": 84.71507432725694,
+    "width": 140,
+    "rotate": -5
+  },
+  "experience-tulip": {
+    "section": "experience",
+    "src": "/decor/decor-tulip-red-tape.png",
+    "top": 22.755718206770357,
+    "left": 5.120537651909714,
+    "width": 150,
+    "rotate": -6
+  },
+  "experience-butterfly": {
+    "section": "experience",
+    "src": "/decor/decor-butterfly-ink-tape.png",
+    "top": 61.36472152333028,
+    "left": 55.821709526909714,
+    "width": 170,
+    "rotate": 5
+  },
+  "experience-daisy": {
+    "section": "experience",
+    "src": "/decor/decor-daisy-brown.png",
+    "top": 91.0255603842635,
+    "left": 16.925455729166664,
+    "width": 140,
+    "rotate": -4
+  },
+  "art-paintbrushes": {
+    "section": "art",
+    "src": "/decor/decor-paintbrushes.png",
+    "top": 3.8595010288838485,
+    "left": 68.2873806423611,
+    "width": 106.09455245733261,
+    "rotate": 4
+  },
+  "art-tulip": {
+    "section": "art",
+    "src": "/decor/decor-tulip-purple-tape.png",
+    "top": -6.49129495650753,
+    "left": -5.885552300347218,
+    "width": 126.779999576509,
+    "rotate": -5
+  },
+  "photography-camera": {
+    "section": "photography",
+    "src": "/decor/decor-camera.png",
+    "top": 3.727158286026937,
+    "left": 15.899671766493048,
+    "width": 78.04486392438412,
+    "rotate": -5
+  },
+  "photography-bird": {
+    "section": "photography",
+    "src": "/decor/decor-bird.png",
+    "top": -0.4537881257476552,
+    "left": 39.59373643663194,
+    "width": 132.74797075241804,
+    "rotate": 4
+  },
+  "contact-lilies": {
+    "section": "contact",
+    "src": "/decor/decor-lilies-cutout.png",
+    "top": 37.436542913105406,
+    "left": 21.717108832465286,
+    "width": 201.43739692121744,
+    "rotate": -5
+  },
+  "contact-sunflower-orange": {
+    "section": "contact",
+    "src": "/decor/decor-sunflower-orange.png",
+    "top": -12.678285256410245,
+    "left": 14.218343098958325,
+    "width": 126.2750626951456,
+    "rotate": -6
+  },
+  "skills-clinical": {
+    "section": "skills",
+    "src": "/decor/decor-paper-kraft.png",
+    "top": -11.15576171875,
+    "left": -8.362144650436761,
+    "width": 474.3165406510234,
+    "rotate": -2
+  },
+  "skills-design": {
+    "section": "skills",
+    "src": "/decor/decor-paper-kraft-tape.png",
+    "top": -19.362205505371094,
+    "left": -6.916897030327262,
+    "width": 695.7262224256992,
+    "rotate": 2
+  },
+  "skills-professional": {
+    "section": "skills",
+    "src": "/decor/decor-paper-poppy.png",
+    "top": -14.30408952619646,
+    "left": -13.69213578832431,
+    "width": 618.0286283455789,
+    "rotate": -1.5
+  },
+  "skills-certifications": {
+    "section": "skills",
+    "src": "/decor/decor-paper-kraft.png",
+    "top": -11.86849868881119,
+    "left": -4.885027066929134,
+    "width": 476.43886215239763,
+    "rotate": 1.5,
+    "flip": true
+  }
+}

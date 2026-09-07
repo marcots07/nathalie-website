@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Locale } from "@/lib/i18n";
 import { getArt, type ArtPiece, type ArtLabels, type ArtTone } from "@/lib/galleries";
+import DecorFlower from "./DecorFlower";
 import SectionHeading from "./SectionHeading";
 import { tornClipPath } from "./TornEdgeDefs";
 
@@ -114,66 +115,182 @@ export default function Art({
 
   return (
     <section id="art" className="relative py-24 md:py-36">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-6xl mx-auto px-6 md:px-10">
+        {/* Position lives in content/decor/positions.json — draggable via
+            the "Mover flores" toggle. */}
+        <div className="hidden lg:contents">
+          <DecorFlower id="art-paintbrushes" />
+        </div>
         <SectionHeading eyebrow={eyebrow} heading={heading}>
           {intro}
         </SectionHeading>
 
-        <div className="mt-16 md:mt-20 grid md:grid-cols-12 gap-10 md:gap-14 items-start">
+        {/* `order-*` (not separate mobile/desktop markup) reflows the same
+            three blocks — image, thumbnails, label — into two different
+            arrangements: image → thumbnails → label stacked below `lg`
+            (phone and tablet), vs. the original image+label side by side
+            with thumbnails spanning below at `lg` and up. Keeping one
+            thumbnail rail instance matters — it carries the ref-based
+            auto-scroll-to-center effect above, which would only track
+            whichever copy rendered last if this were duplicated per
+            breakpoint. */}
+        <div className="mt-16 lg:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* The work, matted */}
-          <div className="md:col-span-6">
-            {/* clip-path tears the mat's edge like a deckle-edge frame;
-                drop-shadow follows that silhouette instead of a plain box.
-                paper-fiber lays the page's own fiber over the tinted mat so it
-                reads as the same stock as the torn cards elsewhere. */}
+          <div className="order-1 lg:col-span-6">
+            {/* The torn mat (clip-path + overflow-hidden) is its own inner
+                layer, separate from this outer `relative` wrapper — the
+                overlay arrows below anchor to the wrapper instead of
+                living inside the clipped element. Chrome clips an
+                absolutely positioned, elevated-z-index child to a parent's
+                clip-path correctly; Safari doesn't reliably, so on iPad the
+                arrow sat visibly straddling the mat's torn edge instead of
+                staying inside it. Living outside the clipped element
+                entirely sidesteps that inconsistency rather than just
+                nudging the inset and hoping to dodge it. */}
             <div
-              className="paper-fiber relative overflow-hidden p-6 sm:p-10 md:p-12 drop-shadow-[0_20px_36px_rgba(60,50,35,0.4)]"
-              style={{
-                clipPath: tornClipPath(1),
-                ...(heroViewTransitionName
+              className="relative"
+              style={
+                heroViewTransitionName
                   ? { viewTransitionName: heroViewTransitionName }
-                  : undefined),
-              }}
+                  : undefined
+              }
             >
-              {/* The mat's tint crossfades only when the piece's tone
-                  actually changes, so same-tone neighbours don't flicker. */}
-              <AnimatePresence initial={false}>
-                <motion.div
-                  key={piece.tone}
-                  className={`absolute inset-0 bg-gradient-to-br ${MATS[piece.tone]}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.6, ease: artEase }}
-                />
-              </AnimatePresence>
-              {/* Fixed height, not the piece's own aspect ratio — portrait and
-                  landscape pieces share one frame so switching between them
-                  doesn't resize the mat and bounce the page underneath it.
-                  object-contain still shows each piece uncropped inside it. */}
-              <div className="relative w-full h-[38vh] sm:h-[46vh] md:h-[52vh] max-h-[560px] min-h-[280px]">
-                <AnimatePresence mode="popLayout" initial={false} custom={direction}>
-                  <motion.img
-                    key={piece.id}
-                    src={piece.image}
-                    alt={`${piece.title} — ${piece.medium}`}
-                    loading="lazy"
-                    decoding="async"
-                    custom={direction}
-                    variants={reduce ? imageVariantsReduced : imageVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{ duration: 0.55, ease: artEase }}
-                    className="absolute inset-0 w-full h-full object-contain shadow-[0_16px_34px_-12px_rgba(30,25,15,0.45)]"
+              {/* clip-path tears the mat's edge like a deckle-edge frame;
+                  drop-shadow follows that silhouette instead of a plain box.
+                  paper-fiber lays the page's own fiber over the tinted mat so it
+                  reads as the same stock as the torn cards elsewhere. */}
+              <div
+                className="paper-fiber relative overflow-hidden p-6 sm:p-10 lg:p-12 drop-shadow-[0_20px_36px_rgba(60,50,35,0.4)]"
+                style={{ clipPath: tornClipPath(1) }}
+              >
+                {/* The mat's tint crossfades only when the piece's tone
+                    actually changes, so same-tone neighbours don't flicker. */}
+                <AnimatePresence initial={false}>
+                  <motion.div
+                    key={piece.tone}
+                    className={`absolute inset-0 bg-gradient-to-br ${MATS[piece.tone]}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, ease: artEase }}
                   />
                 </AnimatePresence>
+                {/* Fixed height, not the piece's own aspect ratio — portrait and
+                    landscape pieces share one frame so switching between them
+                    doesn't resize the mat and bounce the page underneath it.
+                    object-contain still shows each piece uncropped inside it. */}
+                <div className="relative w-full h-[38vh] sm:h-[46vh] lg:h-[52vh] max-h-[560px] min-h-[280px]">
+                  <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+                    <motion.img
+                      key={piece.id}
+                      src={piece.image}
+                      alt={`${piece.title} — ${piece.medium}`}
+                      loading="lazy"
+                      decoding="async"
+                      custom={direction}
+                      variants={reduce ? imageVariantsReduced : imageVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ duration: 0.55, ease: artEase }}
+                      className="absolute inset-0 w-full h-full object-contain shadow-[0_16px_34px_-12px_rgba(30,25,15,0.45)]"
+                    />
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Slider-style overlay arrows, pinned to the mat's own edge
+                  (not the image's) so they never sit over the painting
+                  itself, whatever its aspect ratio — same at every
+                  breakpoint now. Living outside the clipped mat (see the
+                  comment above) rather than a tighter inset is what keeps
+                  this safe from Safari's clip-path/overflow-hidden
+                  inconsistency, not the breakpoint. */}
+              <div>
+                <StepButton
+                  direction="prev"
+                  label={labels.prev}
+                  onClick={() => select(active - 1)}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-50"
+                />
+                <StepButton
+                  direction="next"
+                  label={labels.next}
+                  onClick={() => select(active + 1)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-50"
+                />
               </div>
             </div>
           </div>
 
+          {/* Thumbnail rail — right under the image on phone/tablet
+              (`order-2`), spanning full width below the image+label row on
+              `lg` and up (`order-3`, `lg:col-span-12`). */}
+          <div className="order-2 lg:order-3 lg:col-span-12 lg:border-t lg:border-sage-200 lg:pt-7">
+            {/* Browse label + counter — `lg` and up only. Below `lg` both
+                are dropped entirely. The step buttons used to live here
+                too; they now overlay the image at every breakpoint (see
+                above), so this row is just the label and count. */}
+            <div className="hidden lg:flex items-center justify-between gap-6 mb-6">
+              <p className="text-[10px] font-label uppercase tracking-[0.28em] text-sage-700">
+                {labels.browse}
+              </p>
+              <p className="text-xs tracking-[0.2em] text-ink-muted tabular-nums">
+                {pad(active + 1)}
+                <span className="text-sage-400 mx-1.5">/</span>
+                {pad(count)}
+              </p>
+            </div>
+
+            {/* Bleeds past the page gutter on narrow screens so a scrolled rail
+                reads as continuing off the edge rather than being clipped. */}
+            <ul
+              ref={railRef}
+              className="hide-scrollbar flex gap-3 lg:gap-4 overflow-x-auto -mx-6 px-6 py-2 lg:mx-0 lg:px-0"
+            >
+              {pieces.map((p, i) => (
+                <li
+                  key={p.id}
+                  ref={(el) => {
+                    thumbRefs.current[i] = el;
+                  }}
+                  className="relative flex-none"
+                >
+                  <button
+                    type="button"
+                    onClick={() => select(i)}
+                    aria-current={i === active ? "true" : undefined}
+                    aria-label={p.title}
+                    className={`block w-16 h-16 lg:w-[76px] lg:h-[76px] rounded-xl overflow-hidden shadow-[0_6px_14px_-8px_rgba(30,25,15,0.5)] transition-opacity duration-500 ${
+                      i === active ? "opacity-100" : "opacity-55 hover:opacity-90"
+                    }`}
+                  >
+                    <img
+                      src={p.image}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                  {/* Slides between thumbnails instead of snapping, so the
+                      active frame reads as one spotlight moving along the
+                      wall rather than a border toggling on and off. */}
+                  {i === active && (
+                    <motion.span
+                      layoutId="art-thumb-active"
+                      aria-hidden
+                      className="absolute -inset-1 rounded-2xl border-2 border-sage-600 pointer-events-none"
+                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* The wall label */}
-          <div className="md:col-span-6 md:pt-4 overflow-hidden">
+          <div className="order-3 lg:order-2 lg:col-span-6 lg:pt-4 overflow-hidden">
             <AnimatePresence mode="popLayout" initial={false} custom={direction}>
               <motion.div
                 key={piece.id}
@@ -184,7 +301,7 @@ export default function Art({
                 exit="exit"
                 transition={{ duration: 0.45, ease: artEase }}
               >
-                <h3 className="font-display text-3xl md:text-4xl text-ink leading-tight">
+                <h3 className="font-display text-3xl lg:text-4xl text-ink leading-tight">
                   {piece.title}
                 </h3>
                 <p className="mt-2 text-ink-soft italic">{piece.medium}</p>
@@ -195,14 +312,14 @@ export default function Art({
                 </dl>
 
                 <div className="mt-7">
-                  <p className="text-[10px] uppercase tracking-[0.28em] text-sage-700 mb-3">
+                  <p className="text-[10px] font-label uppercase tracking-[0.28em] text-sage-700 mb-3">
                     {labels.story}
                   </p>
                   <p className="text-ink-soft leading-relaxed">{piece.story}</p>
                 </div>
 
                 <div className="mt-7">
-                  <p className="text-[10px] uppercase tracking-[0.28em] text-sage-700 mb-3">
+                  <p className="text-[10px] font-label uppercase tracking-[0.28em] text-sage-700 mb-3">
                     {labels.materials}
                   </p>
                   <ul className="flex flex-wrap gap-2">
@@ -220,82 +337,6 @@ export default function Art({
             </AnimatePresence>
           </div>
         </div>
-
-        {/* Browse rail — spans the whole wall instead of sharing the mat's
-            column, so each thumbnail keeps its full size as the collection
-            grows and the step buttons get room of their own. */}
-        <div className="mt-16 md:mt-20 border-t border-sage-200 pt-7">
-          <div className="flex items-center justify-between gap-6">
-            <p className="text-[10px] uppercase tracking-[0.28em] text-sage-700">
-              {labels.browse}
-            </p>
-            <div className="flex items-center gap-5">
-              <p className="text-xs tracking-[0.2em] text-ink-muted tabular-nums">
-                {pad(active + 1)}
-                <span className="text-sage-400 mx-1.5">/</span>
-                {pad(count)}
-              </p>
-              <div className="flex gap-3">
-                <StepButton
-                  direction="prev"
-                  label={labels.prev}
-                  onClick={() => select(active - 1)}
-                />
-                <StepButton
-                  direction="next"
-                  label={labels.next}
-                  onClick={() => select(active + 1)}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Bleeds past the page gutter on narrow screens so a scrolled rail
-              reads as continuing off the edge rather than being clipped. */}
-          <ul
-            ref={railRef}
-            className="hide-scrollbar mt-6 flex gap-3 md:gap-4 overflow-x-auto -mx-6 px-6 py-2 md:mx-0 md:px-0"
-          >
-            {pieces.map((p, i) => (
-              <li
-                key={p.id}
-                ref={(el) => {
-                  thumbRefs.current[i] = el;
-                }}
-                className="relative flex-none"
-              >
-                <button
-                  type="button"
-                  onClick={() => select(i)}
-                  aria-current={i === active ? "true" : undefined}
-                  aria-label={p.title}
-                  className={`block w-16 h-16 md:w-[76px] md:h-[76px] rounded-xl overflow-hidden shadow-[0_6px_14px_-8px_rgba(30,25,15,0.5)] transition-opacity duration-500 ${
-                    i === active ? "opacity-100" : "opacity-55 hover:opacity-90"
-                  }`}
-                >
-                  <img
-                    src={p.image}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-                {/* Slides between thumbnails instead of snapping, so the
-                    active frame reads as one spotlight moving along the
-                    wall rather than a border toggling on and off. */}
-                {i === active && (
-                  <motion.span
-                    layoutId="art-thumb-active"
-                    aria-hidden
-                    className="absolute -inset-1 rounded-2xl border-2 border-sage-600 pointer-events-none"
-                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
-                  />
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );
@@ -309,7 +350,7 @@ function pad(n: number) {
 function Spec({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-[10px] uppercase tracking-[0.24em] text-ink-muted">
+      <dt className="text-[10px] font-label uppercase tracking-[0.24em] text-ink-muted">
         {label}
       </dt>
       <dd className="mt-1 text-ink tabular-nums">{value}</dd>
@@ -321,19 +362,24 @@ function StepButton({
   direction,
   label,
   onClick,
+  className = "",
+  style,
 }: {
   direction: "prev" | "next";
   label: string;
   onClick: () => void;
+  className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={label}
-      className={`w-11 h-11 rounded-full border border-sage-300 bg-cream-50/60 hover:border-sage-600 hover:bg-cream-100 text-sage-700 flex items-center justify-center transition-all duration-300 ${
+      style={style}
+      className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 bg-ink/70 hover:bg-ink/85 text-cream-50 backdrop-blur-sm ring-1 ring-cream-50/50 shadow-[0_4px_14px_rgba(0,0,0,0.5)] ${
         direction === "prev" ? "hover:-translate-x-0.5" : "hover:translate-x-0.5"
-      }`}
+      } ${className}`}
     >
       <svg
         width="16"

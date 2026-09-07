@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDictionary, isLocale, LOCALES } from "@/lib/i18n";
 import Navigation from "@/components/Navigation";
+import ProjectSwitcher from "@/components/ProjectSwitcher";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import LocalePersist from "@/components/LocalePersist";
@@ -42,6 +43,7 @@ export default async function ProjectsPage({
       <LocalePersist locale={locale} />
       <ScrollProgress />
       <Navigation locale={locale} dict={dict} />
+      <ProjectSwitcher locale={locale} dict={dict} />
       <Projects dict={dict} locale={locale} />
       <Footer dict={dict} />
     </main>

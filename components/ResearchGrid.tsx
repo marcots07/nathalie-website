@@ -32,7 +32,7 @@ export default function ResearchGrid({ blocks }: Props) {
             <Glyph name={b.glyph} />
           </div>
           <div className="px-3 py-2 border-t border-sage-100 bg-cream-50/60">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-sage-700">
+            <p className="text-[10px] font-label uppercase tracking-[0.24em] text-sage-700">
               {b.label}
             </p>
           </div>

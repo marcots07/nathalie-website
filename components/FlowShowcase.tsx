@@ -94,7 +94,7 @@ export default function FlowShowcase({
                 </span>
                 <span className="min-w-0">
                   <span
-                    className={`block text-sm font-medium transition-colors duration-500 whitespace-nowrap md:whitespace-normal ${
+                    className={`block text-sm transition-colors duration-500 whitespace-nowrap md:whitespace-normal ${
                       isActive ? "text-ink" : "text-ink-soft"
                     }`}
                   >
@@ -176,7 +176,7 @@ export default function FlowShowcase({
         {/* Design-decision note for the active screen */}
         {notes && notes[active] && (
           <div className="mt-6 border-l-2 border-sage-500 pl-5 min-h-[4.5rem]">
-            <p className="text-[10px] uppercase tracking-[0.28em] text-sage-700 mb-2">
+            <p className="text-[10px] font-label uppercase tracking-[0.28em] text-sage-700 mb-2">
               {decisionLabel}
             </p>
             <AnimatePresence mode="wait" initial={false}>

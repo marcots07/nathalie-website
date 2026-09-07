@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { projectHref } from "@/lib/i18n";
 import { getProjects, type Project } from "@/lib/projects";
+import DecorFlower from "./DecorFlower";
 import SectionHeading from "./SectionHeading";
 import Placeholder from "./Placeholder";
 import StatusPill from "./StatusPill";
@@ -19,11 +20,24 @@ export default function Projects({
 }) {
   const projects = getProjects();
   return (
-    <section id="projects" className="relative py-24 md:py-36">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
+    // Top padding is deliberately much smaller than the bottom: this
+    // section always renders under <ProjectSwitcher>, whose own `pt-20
+    // md:pt-28` already clears the fixed nav. A full `py-36` up here
+    // stacked on top of that and left a ~176px dead band between the
+    // filter tags and the heading.
+    <section id="projects" className="relative pt-10 md:pt-14 pb-24 md:pb-36">
+      <div className="relative max-w-6xl mx-auto px-6 md:px-10">
         <SectionHeading eyebrow={dict.projects.eyebrow} heading={dict.projects.heading}>
           {dict.projects.intro}
         </SectionHeading>
+
+        {/* Position lives in content/decor/positions.json — draggable via
+            the "Mover flores" toggle. Hidden below md, where the grid is
+            one column. */}
+        <div className="hidden lg:contents">
+          <DecorFlower id="projects-notebooks" />
+          <DecorFlower id="projects-coffee" />
+        </div>
 
         <div className="mt-16 md:mt-20 grid md:grid-cols-2 gap-8 md:gap-12">
           {projects.map((project, i) => (
@@ -113,7 +127,7 @@ function ProjectCard({
             {t.card.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs uppercase tracking-[0.14em] text-sage-700 border border-sage-200 rounded-full px-3 py-1"
+                className="text-xs font-label uppercase tracking-[0.14em] text-sage-700 border border-sage-200 rounded-full px-3 py-1"
               >
                 {tag}
               </span>

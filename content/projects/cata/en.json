@@ -3,15 +3,15 @@
     "title": "Cata",
     "tagline": "Wine journal and pairing assistant",
     "summary": "Responsive web app designed end-to-end and built with Figma + Claude Code via MCP.",
-    "tags": ["Product", "Figma", "Design system", "Claude Code + MCP"]
+    "tags": ["Product", "Figma", "Design system", "Usability testing", "Claude Code + MCP"]
   },
   "hero": {
     "title": "Cata",
     "tagline": "A personal wine journal with a pairing assistant.",
-    "tags": ["Product", "Figma", "Design system", "Claude Code + MCP"]
+    "tags": ["Product", "Figma", "Design system", "Usability testing", "Claude Code + MCP"]
   },
   "overview": {
-    "role": "End-to-end design and build",
+    "role": "End-to-end design, testing, and build",
     "tools": "Figma · Claude Code (MCP)",
     "duration": "Ongoing personal project",
     "type": "Responsive web product"
@@ -22,11 +22,35 @@
   },
   "research": {
     "heading": "Scoping it.",
-    "body": "As a personal project, research was lighter and direct: sessions with wine-loving friends to understand what they log today (spoiler: nothing consistent) and which moments they actually want to remember. The takeaway: the barrier isn't a lack of apps, it's the friction of opening them."
+    "body": "As a personal project, research was lighter and direct: sessions with wine-loving friends to understand what they log today (spoiler: nothing consistent) and which moments they actually want to remember. The takeaway: the barrier isn't a lack of apps, it's the friction of opening them.",
+    "persona": {
+      "name": "Daniela Ríos, 29",
+      "role": "Marketing coordinator, Mexico City — eats out often and is just discovering wine, not an expert and doesn't want to be one.",
+      "goals": "Remember the wines she liked · learn gradually · feel confident ordering or buying.",
+      "frustrations": "Forgets bottle names within days · apps feel built for experts · doesn't know what pairs with what.",
+      "statement": "Daniela is a beginner wine enthusiast who needs a simple way to remember wines she likes and decide what to drink or pair, because she feels lost in front of a wine list or shelf and ends up choosing blindly or repeating the same bottle."
+    },
+    "insight": "Partway through, I realized the problem wasn't just what to order at a restaurant — it was the six or seven bottles already at home with no memory of which one was good (I'd brought back seven from Napa Valley myself and couldn't say which was worth opening again). Cata became as much a home cellar as a discovery tool.",
+    "figure": {
+      "label": "Sitemap",
+      "caption": "The information architecture that came out of those sessions: eight sections, from authentication through settings, with each screen marked as existing, renamed, or newly proposed."
+    }
   },
   "process": {
     "heading": "Design and build, in the same session.",
-    "body": "I defined the full design system in Figma before touching code: Playfair Display for headlines and Inter for UI, a warm bordeaux (#993335) on ivory palette with sage-green accents, a 4-point spacing scale, and WCAG AA-verified contrast on every text-and-surface pair. Every button, chip, score badge, and card lives as a Figma component with variants — and Claude Code via MCP moves it into production straight from the mockups. Below: the home's evolution from wireframe to high fidelity, and the product's first screens.",
+    "body": "Every screen started on paper before it touched Figma. I defined the full design system before touching code — Playfair Display for headlines and Inter for UI, a warm bordeaux (#993335) on ivory with sage-green accents, a 4-point spacing scale. A WCAG AA audit caught one failure — white text on the sage accent (2.99:1) — fixed with dark text instead (4.95:1) and locked in as its own token. Every button, chip, score badge, and card lives as a Figma component with variants, and Claude Code via MCP moves it into production straight from the mockups.",
+    "figure": {
+      "label": "Design system",
+      "caption": "The full reference sheet: brand palette, primary-button states, surface and text colors, the sage accent scale, and every text/surface pair checked against WCAG AA."
+    },
+    "evolutionLabels": ["Paper sketch", "Wireframe", "High fidelity"],
+    "sketchToScreensLabel": "From paper to screen",
+    "sketchToScreensStageLabels": ["Wireframe", "High fidelity"],
+    "sketchToScreensCaptions": [
+      "Home — the mobile layout, sketched before it was built.",
+      "Discover — the 'Ask Cata' panel was already there on paper.",
+      "My Cellar — named collections were part of the very first draft."
+    ],
     "flows": [
       "Home — your cellar at a glance",
       "Discover — search and 'Ask Cata'",
@@ -63,17 +87,52 @@
       }
     ]
   },
+  "testing": {
+    "heading": "Testing what I built.",
+    "body": "Research pointed at friction as the real barrier, so I tested the flow most likely to have it: adding a wine. Three participants with different levels of tech and wine experience, each given one task — add a wine you enjoyed and organize it your way. No hints, just a think-aloud protocol and a high-fidelity prototype. All three found Add Wine and chose Scan Label without help; the friction showed up later.",
+    "stats": [
+      { "label": "Task completion", "value": "100%" },
+      { "label": "Participants", "value": "3" },
+      { "label": "Average ease", "value": "4.3/5" },
+      { "label": "Average confidence", "value": "4.7/5" }
+    ],
+    "findings": [
+      {
+        "title": "“Save Wine” creates a false sense of completion",
+        "quote": "I thought I already saved it.",
+        "severity": "Medium",
+        "recommendation": "Rename the first CTA from “Save Wine” to something like “Continue.” Two of three participants believed the process was finished before the save-location screen even appeared."
+      },
+      {
+        "title": "Collections vs. All Wines doesn't match how people think",
+        "quote": "Wouldn't it still be in all my wines if I put it in a collection?",
+        "severity": "Medium",
+        "recommendation": "Save every wine to All Wines automatically; let Collections work as an optional extra layer instead of a fork participants have to reason through."
+      }
+    ],
+    "insight": "People understood how to add a wine — the friction wasn't in finding it or scanning a label, it was in a final save-and-organize step that didn't match their mental model. The fix isn't a redesign of the flow; it's clarity at the finish line."
+  },
   "results": {
-    "heading": "In build, with focus.",
-    "body": "Cata is under active development. Instead of chasing features, I'm prioritizing that logging a bottle feels like writing a postcard — quick, personal, frictionless. The design already covers the full cycle — getting in, logging, collecting, pairing, and deciding what to open tonight — and the Claude Code build is advancing screen by screen.",
+    "heading": "What testing changed.",
+    "body": "Testing replaced two guesses with two concrete fixes: the save button needed to stop implying the process was done, and the split between Collections and All Wines needed to disappear as a decision users have to make. Both are going into the next build.",
     "learnings": [
-      "Initial input should be photo-first — most users don't want to type before they have visual context.",
-      "The pairing assistant works better as a contextual suggestion inside the bottle detail, not as a separate screen.",
-      "Designing the system upfront let Claude Code generate consistent UI without rework."
+      "A first-step CTA that says “Save” implies completion — rename it so people know another step remains.",
+      "Every wine should save to All Wines automatically; Collections should be an optional add, not a fork people have to reason through.",
+      "Optional fields like rating and tasting notes need an explicit “(optional)” label — two of three participants paused there, unsure if they were required."
     ]
   },
   "reflection": {
     "heading": "What I take away.",
-    "body": "Cata taught me that designing and building in the same flow changes how you make decisions — you test ideas before you commit to them. The design system isn't the final deliverable; it's the infrastructure that lets you iterate fast without losing coherence."
+    "body": "Cata taught me that designing and building in the same flow changes how you make decisions — you test ideas before you commit to them. The design system isn't the final deliverable; it's the infrastructure that lets you iterate fast without losing coherence.",
+    "moments": [
+      {
+        "title": "Catching a scale bug before it shipped",
+        "body": "A design-system audit surfaced the mobile score badge displaying values like “94” — reading as a score out of 100 — when the rest of the app uses a 1–10 scale. I fixed the component itself, not the one instance, so every screen using it inherited the correction."
+      },
+      {
+        "title": "Turning a lost asset into a better decision",
+        "body": "While converting a screen's cards into reusable components, one card's source image was destroyed and unrecoverable. Instead of patching it, I rebuilt the screen to match the cleaner, icon-based style I'd already settled on for a sibling screen — fixing the missing image and making the two screens more consistent than before."
+      }
+    ]
   }
 }

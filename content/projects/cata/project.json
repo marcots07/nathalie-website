@@ -1,12 +1,13 @@
 {
   "slug": "cata",
   "order": 2,
-  "status": "in_progress",
+  "status": "complete",
   "features": {
-    "showBeforeAfterSlider": true,
-    "showResearchGrid": true,
+    "showBeforeAfterSlider": false,
+    "showResearchGrid": false,
     "showFlowsGallery": true,
-    "showSusGauge": false
+    "showSusGauge": false,
+    "showTesting": true
   },
   "metrics": {
     "susScore": null,
@@ -15,39 +16,64 @@
   "media": {
     "card": {
       "frame": "browser",
-      "screen": "/projects/cata/home-hifi.png",
+      "screen": "/projects/cata/home-desktop.png",
       "tint": "terracotta"
     },
     "hero": {
       "layout": "single-browser",
-      "screens": ["/projects/cata/home-hifi.png"]
+      "screens": ["/projects/cata/home-desktop.png"],
+      "mobileScreen": "/projects/cata/home-mobile.png"
     },
-    "beforeAfter": {
-      "before": "/projects/cata/home-lofi.png",
-      "after": "/projects/cata/home-hifi.png",
-      "aspectRatio": "1440 / 1024",
-      "frame": "browser"
+    "evolution": {
+      "stages": [
+        { "src": "/projects/cata/sketch-home.jpg", "aspectRatio": "3468 / 2541", "paper": true },
+        { "src": "/projects/cata/home-lofi.png", "aspectRatio": "1440 / 1024" },
+        { "src": "/projects/cata/home-desktop.png", "aspectRatio": "1440 / 1024" }
+      ]
+    },
+    "sketchToScreens": {
+      "sketch": "/projects/cata/sketch-mobile-flows.jpg",
+      "sketchAspectRatio": "3750 / 2782",
+      "midScreens": [
+        { "src": "/projects/cata/home-mobile-lofi.png", "aspectRatio": "390 / 844" },
+        { "src": "/projects/cata/discover-mobile-lofi.png", "aspectRatio": "390 / 844" },
+        { "src": "/projects/cata/my-cellar-mobile-lofi.png", "aspectRatio": "390 / 844" }
+      ],
+      "screens": [
+        { "src": "/projects/cata/home-mobile.png", "aspectRatio": "393 / 852" },
+        { "src": "/projects/cata/discover-mobile.png", "aspectRatio": "393 / 852" },
+        { "src": "/projects/cata/my-cellar-mobile.png", "aspectRatio": "393 / 852" }
+      ]
     },
     "screenGroups": [
       {
         "key": "explore",
         "screens": [
           { "src": "/projects/cata/screen-login.png" },
-          { "src": "/projects/cata/home-hifi.png" },
+          { "src": "/projects/cata/home-desktop.png" },
           { "src": "/projects/cata/screen-discover.png" }
         ]
       },
       {
         "key": "cellar",
         "screens": [
-          { "src": "/projects/cata/screen-add-wine.png" },
-          { "src": "/projects/cata/screen-collection.png" },
+          { "src": "/projects/cata/add-wine-desktop.png" },
+          { "src": "/projects/cata/my-cellar-desktop.png" },
           { "src": "/projects/cata/screen-pair.png" },
           { "src": "/projects/cata/screen-tonight.png" }
         ]
       }
     ],
     "screensFrame": "browser",
-    "screensAspectRatio": "1440 / 1024"
+    "screensAspectRatio": "1440 / 1024",
+    "researchFigure": {
+      "src": "/projects/cata/sitemap.png",
+      "aspectRatio": "1920 / 632"
+    },
+    "processFigure": {
+      "src": "/projects/cata/design-system.png",
+      "aspectRatio": "2298 / 6218",
+      "scrollable": true
+    }
   }
 }

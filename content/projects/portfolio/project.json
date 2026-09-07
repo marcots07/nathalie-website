@@ -15,18 +15,18 @@
   "media": {
     "card": {
       "frame": "browser",
-      "screen": "/projects/portfolio/home-hifi.png",
+      "screen": "/projects/portfolio/home-hifi.jpg",
       "tint": "cream"
     },
     "hero": {
       "layout": "single-browser",
-      "screens": ["/projects/portfolio/home-hifi.png"]
+      "screens": ["/projects/portfolio/home-hifi.jpg"]
     },
     "screenGroups": [
       {
         "key": "landing",
         "screens": [
-          { "src": "/projects/portfolio/home-hifi.png" },
+          { "src": "/projects/portfolio/home-hifi.jpg" },
           { "src": "/projects/portfolio/screen-projects.png" },
           { "src": "/projects/portfolio/screen-creative.png" }
         ]

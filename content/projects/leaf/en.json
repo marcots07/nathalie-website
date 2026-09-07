@@ -22,17 +22,51 @@
   },
   "research": {
     "heading": "I started by listening.",
-    "body": "I designed personas, ran a competitive audit, defined the value proposition, and framed 'How Might We…' questions and goal statements. Research surfaced two common failure modes across the category: asking users for too much upfront, or turning plant care into an anxious to-do list. Leaf had to do the opposite.",
+    "body": "I designed three personas, ran a competitive audit, defined the value proposition, and framed 'How Might We…' questions and goal statements for each. Research surfaced two common failure modes across the category: asking users for too much upfront, or turning plant care into an anxious to-do list. Leaf had to do the opposite.",
     "bullets": [
-      "Personas grounded in real user interviews.",
-      "Competitive audit across 5 apps in the category.",
-      "Prioritized value proposition and 'How Might We…' questions.",
-      "Goal statements to scope the MVP."
-    ]
+      "Personas grounded in 5 real user interviews, March 2025.",
+      "Competitive audit across 4 apps — Greg, Planta, PictureThis, and Google Lens.",
+      "Value proposition built around four categories: simplicity, personalization, accuracy, efficiency.",
+      "Goal statements and 'How Might We…' questions, one set per persona."
+    ],
+    "personas": [
+      {
+        "name": "Sofia Ramirez, 27",
+        "role": "UX Researcher, Brooklyn, NY — first-time plant owner with five plants and zero prior experience, learning from apps and YouTube.",
+        "goals": "Understand what each plant needs without doing research · get simple, timely reminders before it's too late · build confidence as a new plant owner.",
+        "frustrations": "Apps use terms she doesn't understand · photo ID fails on first tries, breaking trust immediately · basic features are locked behind a subscription.",
+        "statement": "Sofia is a first-time plant owner who needs an app that meets her where she is — not where an expert would be — because every time an app assumes she already knows what 'well-draining soil' means, it confirms her fear that plant care is too complicated for someone like her."
+      },
+      {
+        "name": "Carlos Mendez, 38",
+        "role": "Accountant, Los Angeles, CA — twelve plants and an inconsistent routine, travels often for work.",
+        "goals": "Never over- or under-water a plant again · trust that his data is always safe and synced · log care in one tap without digging through menus.",
+        "frustrations": "Lost a year of plant data after a phone update, with no recovery path · can't easily customize watering per plant · notifications mix care alerts with marketing.",
+        "statement": "Carlos is a busy professional who needs an app that works with his life instead of against it — remembering his plants, his schedule, and his preferences — because right now the app demands more from him than his plants do."
+      },
+      {
+        "name": "Mayelin Perez, 52",
+        "role": "Commerce Specialist, Cuba — 20+ plants and decades of experience, monitors soil humidity daily; internet access is unreliable.",
+        "goals": "Access her full plant library and care history at any time · get environment-specific recommendations without internet · sync automatically once a connection returns.",
+        "frustrations": "The app fails completely without an internet connection · generic recommendations ignore her real climate and plants · no way to enter her actual environment or watering method.",
+        "statement": "Mayelin is an experienced plant owner who needs a plant care app that works reliably without internet access — because where she lives, connectivity is inconsistent, and an app that stops working the moment the signal drops isn't a tool she can trust."
+      }
+    ],
+    "insight": "The real problem wasn't a lack of information — every competitor already floods people with care tips. It was a lack of relevance: no app adapted to who you actually are, where you live, or how much you already know. A first-timer, a forgetful professional, and a 20-year expert with no reliable internet were all being handed the exact same advice.",
+    "figure": {
+      "label": "Storyboard — Mayelin Perez",
+      "caption": "One of three hand-drawn storyboards from the empathize phase. Mayelin's plant is stressed and her app won't load with no connection — until she finds one that works fully offline, no exception."
+    }
   },
   "process": {
     "heading": "From wireframes to a design system.",
-    "body": "I designed low-fidelity wireframes first, iterating on feedback before touching color or typography. The design system is built in layers: primitives with 10-step tonal ramps — forest green (#2D5016) over warm beige, with amber, blue, and red accents —, a semantic layer mapping each primitive to its role (background, text, borders, statuses) ready for light and dark modes, and Inter as the app's single typeface. Every ReminderCard, button, and bottom-sheet overlay lives as a Figma component, and the high-fidelity build moved to development with Claude Code via MCP.",
+    "body": "Every screen started on paper before it touched Figma — fast, disposable sketches to test layout logic before committing to pixels. Low-fidelity digital wireframes came next, iterated on before any color or typography entered the picture. The design system is built in layers: primitives with 10-step tonal ramps — forest green (#2D5016) over warm beige, with amber, blue, and red accents —, a semantic layer mapping each primitive to its role (background, text, borders, statuses) ready for light and dark modes, and Inter as the app's single typeface. Every ReminderCard, button, and bottom-sheet overlay lives as a Figma component, and the high-fidelity build moved to development with Claude Code via MCP.",
+    "figure": {
+      "label": "Value proposition",
+      "caption": "The full working canvas, start to finish: every feature idea, sorted into four categories, each one traced back to the real participant who needed it, then checked against what competitors already offer. It ends in a single line — \"The app that stops giving everyone the same advice.\" Scroll to see the whole thing."
+    },
+    "evolutionLabels": ["Paper sketch", "Wireframe", "High fidelity"],
+    "evolutionsLabels": ["Home", "My Plants", "Plant detail"],
     "flows": [
       "Home — next care at a glance",
       "My Plants — garden watering status",
@@ -80,9 +114,34 @@
       }
     ]
   },
+  "testing": {
+    "heading": "Testing before calling it done.",
+    "body": "Five participants completed the same 5 tasks — independently, unmoderated, on a low-fidelity Figma prototype: identify a plant by camera, review its diagnosis, set a watering reminder, find the notes page, and locate upcoming reminders back on the homepage.",
+    "stats": [
+      { "label": "Tasks completed", "value": "100%" },
+      { "label": "Participants", "value": "5" },
+      { "label": "Tasks with no difficulty", "value": "2 of 5" },
+      { "label": "SUS score", "value": "76" }
+    ],
+    "findings": [
+      {
+        "title": "Bottom navigation icons need labels",
+        "quote": "I'm mostly guessing what these icons mean.",
+        "severity": "Medium",
+        "recommendation": "Add text labels under every bottom-nav icon. Navigation was the only task where all 5 participants ran into some difficulty, usually tapping the wrong tab first."
+      },
+      {
+        "title": "The identify button doesn't stand out enough",
+        "quote": "The camera feature could stand out more.",
+        "severity": "Low",
+        "recommendation": "Strengthen the visual hierarchy of the scan CTA on the homepage so it reads as the obvious first move, not something users have to scan the page to find."
+      }
+    ],
+    "insight": "Every participant finished every task — Leaf wasn't hard to use, it was hard to feel sure about. Icons with no labels and a diagnosis that didn't explain itself made people doubt choices they'd already gotten right."
+  },
   "results": {
-    "heading": "Real usability study.",
-    "body": "I ran a study with 5 participants using the System Usability Scale (SUS). The final score was 76 — above the industry average (68), in the 'good' range. What mattered more than the number was what the study surfaced.",
+    "heading": "A good score, backed by real testing.",
+    "body": "The same study that surfaced the navigation and confidence issues above also included a System Usability Scale survey. The final score was 76 — above the industry average (68), squarely in the 'good' range.",
     "learnings": [
       "Users wanted to see at a glance which plant needed attention today — I redesigned the home to prioritize 'next care' over full inventory.",
       "Onboarding asked for too much upfront — I broke it into progressive steps with an option to defer detail.",
@@ -91,6 +150,16 @@
   },
   "reflection": {
     "heading": "What I take away.",
-    "body": "A good design system isn't about having many components — it's about having the right ones and using them consistently. And user research doesn't stop when design starts; it comes back to you on every iteration. If I started over, I'd invest more time in the usability study and less in polishing mockups before testing them."
+    "body": "A good design system isn't about having many components — it's about having the right ones and using them consistently. And user research doesn't stop when design starts; it comes back to you on every iteration.",
+    "moments": [
+      {
+        "title": "Betting on offline-first before anyone asked for it directly",
+        "body": "Mayelin's interview surfaced something no competitor addresses: an app that stops working the moment the signal drops. Instead of treating offline as a fallback, I flipped the architecture — store everything locally first, sync to the cloud when a connection exists, not the other way around."
+      },
+      {
+        "title": "Designing for trust, not just accuracy",
+        "body": "One competitor gave the same plant two different names in the same session. Another participant's plant got worse after following in-app advice. Trust breaks in one bad moment and doesn't come back — so every identification shows a confidence score, and every recommendation comes with a plain explanation of why."
+      }
+    ]
   }
 }

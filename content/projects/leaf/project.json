@@ -3,10 +3,11 @@
   "order": 1,
   "status": "complete",
   "features": {
-    "showBeforeAfterSlider": true,
-    "showResearchGrid": true,
+    "showBeforeAfterSlider": false,
+    "showResearchGrid": false,
     "showFlowsGallery": true,
-    "showSusGauge": true
+    "showSusGauge": true,
+    "showTesting": true
   },
   "metrics": {
     "susScore": 76,
@@ -26,10 +27,36 @@
         "/projects/leaf/screen-detail.png"
       ]
     },
-    "beforeAfter": {
-      "before": "/projects/leaf/home-lofi.png",
-      "after": "/projects/leaf/home-hifi.png",
-      "aspectRatio": "393 / 852"
+    "researchFigure": {
+      "src": "/projects/leaf/storyboard-mayelin.jpg",
+      "aspectRatio": "4420 / 3245"
+    },
+    "evolutions": [
+      {
+        "stages": [
+          { "src": "/projects/leaf/sketch-home.jpg", "aspectRatio": "1905 / 3550", "paper": true },
+          { "src": "/projects/leaf/home-lofi.png", "aspectRatio": "393 / 852" },
+          { "src": "/projects/leaf/home-hifi.png", "aspectRatio": "393 / 852" }
+        ]
+      },
+      {
+        "stages": [
+          { "src": "/projects/leaf/sketch-plants.jpg", "aspectRatio": "1825 / 3605", "paper": true },
+          { "src": "/projects/leaf/wireframe-plants.png", "aspectRatio": "819 / 1775" },
+          { "src": "/projects/leaf/screen-plants.png", "aspectRatio": "393 / 852" }
+        ]
+      },
+      {
+        "stages": [
+          { "src": "/projects/leaf/sketch-detail.jpg", "aspectRatio": "1895 / 2610", "paper": true },
+          { "src": "/projects/leaf/wireframe-detail.png", "aspectRatio": "819 / 1775" },
+          { "src": "/projects/leaf/screen-detail.png", "aspectRatio": "393 / 852" }
+        ]
+      }
+    ],
+    "processFigure": {
+      "src": "/projects/leaf/value-proposition-full.jpg",
+      "scrollable": true
     },
     "screenGroups": [
       {

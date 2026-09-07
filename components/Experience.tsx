@@ -2,12 +2,20 @@
 
 import { motion } from "framer-motion";
 import type { Dictionary } from "@/lib/i18n";
+import DecorFlower from "./DecorFlower";
 import SectionHeading from "./SectionHeading";
 
 export default function Experience({ dict }: { dict: Dictionary }) {
   return (
     <section id="experience" className="relative py-24 md:py-36">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-6xl mx-auto px-6 md:px-10">
+        {/* Position lives in content/decor/positions.json — draggable via
+            the "Mover flores" toggle. */}
+        <div className="hidden lg:contents">
+          <DecorFlower id="experience-tulip" />
+          <DecorFlower id="experience-butterfly" />
+          <DecorFlower id="experience-daisy" />
+        </div>
         <SectionHeading
           eyebrow={dict.experience.eyebrow}
           heading={dict.experience.heading}
@@ -63,11 +71,11 @@ function TimelineRole({
 
       <div className={`pl-12 md:pl-0 ${isEven ? "md:col-start-1 md:text-right md:pr-8" : "md:col-start-2 md:pl-8"}`}>
         <div className="flex items-center gap-3 mb-2 flex-wrap">
-          <span className="text-xs uppercase tracking-[0.24em] text-ink-muted">
+          <span className="text-xs font-label uppercase tracking-[0.24em] text-ink-muted">
             {role.period}
           </span>
           {isCurrent && (
-            <span className="text-xs uppercase tracking-[0.2em] text-terracotta-700 font-medium">
+            <span className="text-xs font-label uppercase tracking-[0.2em] text-terracotta-700">
               {currentLabel}
             </span>
           )}
@@ -75,7 +83,7 @@ function TimelineRole({
         <h3 className="font-display text-2xl md:text-3xl text-ink leading-tight">
           {role.company}
         </h3>
-        <p className="text-sage-700 font-medium mt-1">{role.role}</p>
+        <p className="text-sage-700 mt-1">{role.role}</p>
         <p className="text-sm text-ink-muted mt-1">{role.location}</p>
       </div>
 

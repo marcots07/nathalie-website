@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { otherLocale, PROJECTS_SEGMENT } from "@/lib/i18n";
+import { tornClipPath, type TornVariant } from "./TornEdgeDefs";
 import TransitionLink from "./TransitionLink";
 
 type NavProps = {
   locale: Locale;
   dict: Dictionary;
-  variant?: "home" | "sub";
 };
 
 const NAV_ITEMS = [
@@ -25,7 +25,21 @@ const NAV_ITEMS = [
 
 type NavKey = (typeof NAV_ITEMS)[number]["key"];
 
-export default function Navigation({ locale, dict, variant = "home" }: NavProps) {
+// One torn variant + resting lean per nav item, same device the Projects
+// switcher uses, so the primary nav reads as the same handful of paper
+// scraps rather than a plain link row — the site's signature, not a
+// one-off. Rotation is a plain degree number (not a Tailwind class)
+// because framer-motion drives it, layered with the hover/entrance state.
+const TAG_STYLE: { torn: TornVariant; rotate: number }[] = [
+  { torn: 1, rotate: -1.4 },
+  { torn: 2, rotate: 1.0 },
+  { torn: 3, rotate: -1.0 },
+  { torn: 1, rotate: 1.5 },
+  { torn: 2, rotate: -1.3 },
+  { torn: 3, rotate: 1.1 },
+];
+
+export default function Navigation({ locale, dict }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const router = useRouter();
@@ -69,14 +83,13 @@ export default function Navigation({ locale, dict, variant = "home" }: NavProps)
     return false;
   };
 
-  const linkClass = (key: NavKey) =>
-    `text-sm transition-colors editorial-link ${
-      isActive(key) ? "text-sage-700 font-medium" : "text-ink-soft hover:text-sage-700"
-    }`;
-
-  const mobileLinkClass = (key: NavKey) =>
-    `text-base transition-colors ${
-      isActive(key) ? "text-sage-700 font-medium" : "text-ink hover:text-sage-700"
+  const tagClass = (key: NavKey, size: "desktop" | "mobile") =>
+    `font-label paper-fiber relative block bg-cream-50 whitespace-nowrap transition-colors duration-300 ${
+      size === "desktop" ? "px-3 py-1.5 text-sm" : "px-4 py-2 text-base"
+    } ${
+      isActive(key)
+        ? "text-ink"
+        : "text-ink-soft hover:text-sage-700"
     }`;
 
   return (
@@ -94,45 +107,62 @@ export default function Navigation({ locale, dict, variant = "home" }: NavProps)
       <div className="max-w-6xl mx-auto px-6 md:px-10 pt-4 md:pt-6 h-20 md:h-28 flex items-center justify-between">
         <Link
           href={`/${locale}`}
-          className={`font-display text-xl md:text-2xl tracking-tightest transition-colors editorial-link ${
+          className={`font-display text-lg md:text-xl tracking-tightest transition-colors editorial-link ${
             pathname === `/${locale}` ? "text-sage-700" : "text-ink hover:text-sage-700"
           }`}
         >
-          Nathalie<span className="text-sage-500">.</span>
+          Nathalie
         </Link>
 
-        <nav className="hidden md:flex items-center gap-5 lg:gap-8">
-          {variant === "home"
-            ? NAV_ITEMS.map((item) => (
+        <nav className="hidden lg:flex items-center gap-2 lg:gap-3">
+          {NAV_ITEMS.map((item, i) => {
+            const style = TAG_STYLE[i % TAG_STYLE.length];
+            return (
+              <motion.div
+                key={item.key}
+                initial={{ opacity: 0, y: -10, rotate: style.rotate * 2.2 }}
+                animate={{ opacity: 1, y: 0, rotate: style.rotate }}
+                whileHover={{ rotate: 0, y: -2 }}
+                whileTap={{ y: 0, scale: 0.96 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 16,
+                  delay: 0.4 + i * 0.06,
+                }}
+              >
                 <TransitionLink
-                  key={item.key}
                   href={navHref(item.key)}
-                  className={linkClass(item.key)}
+                  style={{ clipPath: tornClipPath(style.torn) }}
+                  className={tagClass(item.key, "desktop")}
                 >
                   {dict.nav[item.key]}
+                  {isActive(item.key) && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      aria-hidden
+                      src="/tape.png"
+                      alt=""
+                      className="absolute -top-2 left-1/2 z-10 w-8 h-auto -translate-x-1/2 -rotate-2 select-none pointer-events-none drop-shadow-[0_2px_4px_rgba(42,42,38,0.15)]"
+                    />
+                  )}
                 </TransitionLink>
-              ))
-            : (
-                <Link
-                  href={`/${locale}`}
-                  className="text-sm text-ink-soft hover:text-sage-700 transition-colors editorial-link"
-                >
-                  ← {dict.nav.back}
-                </Link>
-              )}
+              </motion.div>
+            );
+          })}
           <button
             onClick={switchLocale}
-            className="text-sm font-medium text-ink-soft hover:text-sage-700 transition-colors border border-sage-200 rounded-full px-3 py-1"
+            className="text-sm text-ink-soft hover:text-sage-700 transition-colors border border-sage-200 rounded-full px-3 py-1 ml-1"
             aria-label={dict.nav.switchLanguage}
           >
-            <span className={locale === "es" ? "text-sage-700 font-semibold" : ""}>ES</span>
+            <span className={locale === "es" ? "text-sage-700" : ""}>ES</span>
             <span className="mx-1 text-sage-300">/</span>
-            <span className={locale === "en" ? "text-sage-700 font-semibold" : ""}>EN</span>
+            <span className={locale === "en" ? "text-sage-700" : ""}>EN</span>
           </button>
         </nav>
 
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="lg:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={dict.nav.toggleMenu}
           aria-expanded={mobileOpen}
@@ -162,38 +192,55 @@ export default function Navigation({ locale, dict, variant = "home" }: NavProps)
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden bg-cream-50/95 backdrop-blur border-t border-sage-100/60 overflow-hidden"
+            className="lg:hidden bg-cream-50/95 backdrop-blur border-t border-sage-100/60 overflow-hidden"
           >
-            <div className="px-6 py-6 flex flex-col gap-4">
-              {variant === "home" ? (
-                NAV_ITEMS.map((item) => (
-                  <TransitionLink
+            <div className="px-6 py-6 flex flex-col items-start gap-3">
+              {NAV_ITEMS.map((item, i) => {
+                const style = TAG_STYLE[i % TAG_STYLE.length];
+                return (
+                  <motion.div
                     key={item.key}
-                    href={navHref(item.key)}
-                    onClick={() => setMobileOpen(false)}
-                    className={mobileLinkClass(item.key)}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 20,
+                      delay: i * 0.05,
+                    }}
+                    style={{ rotate: style.rotate }}
+                    whileTap={{ scale: 0.96, rotate: 0 }}
                   >
-                    {dict.nav[item.key]}
-                  </TransitionLink>
-                ))
-              ) : (
-                <Link
-                  href={`/${locale}`}
-                  className="text-base text-ink hover:text-sage-700 transition-colors"
-                >
-                  ← {dict.nav.back}
-                </Link>
-              )}
+                    <TransitionLink
+                      href={navHref(item.key)}
+                      onClick={() => setMobileOpen(false)}
+                      style={{ clipPath: tornClipPath(style.torn) }}
+                      className={tagClass(item.key, "mobile")}
+                    >
+                      {dict.nav[item.key]}
+                      {isActive(item.key) && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          aria-hidden
+                          src="/tape.png"
+                          alt=""
+                          className="absolute -top-2.5 left-1/2 z-10 w-9 h-auto -translate-x-1/2 -rotate-2 select-none pointer-events-none drop-shadow-[0_2px_4px_rgba(42,42,38,0.15)]"
+                        />
+                      )}
+                    </TransitionLink>
+                  </motion.div>
+                );
+              })}
               <button
                 onClick={() => {
                   switchLocale();
                   setMobileOpen(false);
                 }}
-                className="text-sm font-medium text-ink-soft self-start border border-sage-200 rounded-full px-3 py-1"
+                className="text-sm text-ink-soft self-start border border-sage-200 rounded-full px-3 py-1"
               >
-                <span className={locale === "es" ? "text-sage-700 font-semibold" : ""}>ES</span>
+                <span className={locale === "es" ? "text-sage-700" : ""}>ES</span>
                 <span className="mx-1 text-sage-300">/</span>
-                <span className={locale === "en" ? "text-sage-700 font-semibold" : ""}>EN</span>
+                <span className={locale === "en" ? "text-sage-700" : ""}>EN</span>
               </button>
             </div>
           </motion.div>

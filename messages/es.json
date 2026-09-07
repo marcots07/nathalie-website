@@ -12,7 +12,6 @@
     "art": "Arte",
     "skills": "Habilidades",
     "contact": "Contacto",
-    "back": "Volver al inicio",
     "downloadCv": "Descargar CV",
     "switchLanguage": "Cambiar idioma",
     "toggleMenu": "Abrir menú"
@@ -33,7 +32,7 @@
     "paragraphs": [
       "Estudiaba medicina en Cuba, en la Universidad de Ciencias Médicas de Pinar del Río, entre las mejores de mi clase, con un futuro claro por delante. La situación del país me obligó a salir antes de terminar la carrera — dos años completados, un plan interrumpido.",
       "Llegué a Estados Unidos sin hablar inglés con fluidez. Trabajé de mesera mientras lo aprendía por mi cuenta. Me certifiqué como Registered Behavior Technician (RBT) mientras seguía trabajando, y encontré una nueva puerta hacia la misma vocación: ayudar a las personas a funcionar y ser comprendidas.",
-      "Dejar medicina no significó dejar la razón por la que quería ser doctora. Hoy sigo ese mismo patrón — sin esperar el título ni el permiso de nadie, aprendo diseño UX e IA por mi cuenta y los aplico a proyectos reales. Inglés autodidacta, luego certificación RBT mientras trabajaba de mesera, y ahora UX/IA por cuenta propia mientras trabajo como RBT. La misma misión, reconstruida."
+      "Dejar medicina no significó dejar la razón por la que quería ser doctora. Hoy sigo ese mismo patrón — sin esperar el título ni el permiso de nadie, me formé por mi cuenta en diseño UX e IA y los aplico a proyectos reales. Inglés autodidacta, luego certificación RBT mientras trabajaba de mesera, y ahora el Google UX Design Certificate mientras trabajo como RBT. La misma misión, reconstruida."
     ],
     "anchorQuote": "Dejar medicina no significó dejar la razón por la que quería ser doctora.",
     "threadLabel": "Tres puertas, un hilo",
@@ -53,8 +52,8 @@
       "design": {
         "year": "2026",
         "label": "Diseño UX · IA",
-        "keyword": "En construcción",
-        "detail": "Autoformación aplicada a proyectos reales"
+        "keyword": "Certificada",
+        "detail": "Google UX Design Certificate"
       }
     }
   },
@@ -109,7 +108,8 @@
     "heading": "Diseño con propósito.",
     "intro": "Proyectos que representan cómo aplico investigación, sistema de diseño y desarrollo asistido por IA para crear productos con intención.",
     "viewCase": "Ver caso completo",
-    "inProgress": "En construcción"
+    "inProgress": "En construcción",
+    "switcherAll": "Todos"
   },
   "gateway": {
     "eyebrow": "Más allá del trabajo",
@@ -169,7 +169,7 @@
     "professional": {
       "title": "Profesionales",
       "items": [
-        "Comunicación con familias y entrenamiento de padres",
+        "Comunicación con familias y\nentrenamiento de padres",
         "Colaboración multidisciplinaria",
         "Documentación y reportes precisos",
         "Adaptabilidad entre entornos",
@@ -180,12 +180,12 @@
     "certifications": {
       "title": "Certificaciones",
       "items": [
+        "Google UX Design Certificate",
         "Registered Behavior Technician (RBT) — BACB",
         "CPR & First Aid",
         "Crisis Management",
         "HIPAA Compliance",
         "OSHA",
-        "Google UX Design Certificate",
         "Anthropic Academy — AI Fluency, Claude 101"
       ]
     }
@@ -223,10 +223,21 @@
     "type": "Tipo",
     "problem": "El problema",
     "research": "Investigación",
+    "persona": {
+      "goals": "Objetivos",
+      "frustrations": "Frustraciones"
+    },
     "process": "Proceso de diseño",
     "results": "Resultados",
+    "testing": "Pruebas de usabilidad",
     "reflection": "Reflexión",
     "next": "Siguiente proyecto",
+    "severity": {
+      "low": "Baja",
+      "medium": "Media",
+      "high": "Alta"
+    },
+    "recommendation": "Recomendación",
     "researchArtifacts": {
       "personas": "Personas",
       "competitive": "Auditoría competitiva",
@@ -238,9 +249,14 @@
       "after": "Alta fidelidad",
       "hint": "Arrastra para comparar wireframes y mockups de alta fidelidad."
     },
+    "viewLabels": {
+      "desktop": "Escritorio",
+      "mobile": "Móvil"
+    },
     "flowsLabel": "Flujos y pantallas",
     "readTime": "min de lectura",
     "designDecision": "Decisión de diseño",
+    "viewFullSize": "Ver tamaño completo",
     "status": {
       "inProgress": "En construcción"
     }

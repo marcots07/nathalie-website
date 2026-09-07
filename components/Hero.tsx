@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import Portrait from "./Portrait";
 
+const MotionTape = motion.create(Image);
+
 const line = {
   initial: { y: "110%", opacity: 0 },
   animate: (i: number) => ({
@@ -54,12 +56,12 @@ export default function Hero({ dict, locale }: { dict: Dictionary; locale: Local
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.05 }}
-            className="text-xs uppercase tracking-[0.28em] text-sage-700 mb-6"
+            className="text-xs font-label uppercase tracking-[0.28em] text-sage-700 mb-6"
           >
             {dict.hero.eyebrow}
           </motion.p>
 
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.98] text-ink">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98] text-ink">
             {[dict.hero.titleLine1, dict.hero.titleLine2, dict.hero.titleLine3].map(
               (text, i) => (
                 <span key={i} className="block overflow-hidden">
@@ -163,14 +165,23 @@ export default function Hero({ dict, locale }: { dict: Dictionary; locale: Local
 
               {/* A single strip of real washi tape straddling the top edge,
                   centred and just barely askew. Drawn after the portrait so it
-                  sits on top of it. */}
-              <Image
+                  sits on top of it, and drops in with a slight overshoot —
+                  as if it were just pressed down — once the portrait itself
+                  has mostly settled. Horizontal centering moves into `x`
+                  (rather than the usual `-translate-x-1/2` class) because
+                  framer's own transform on y/rotate would otherwise
+                  silently replace a class-based transform on this element. */}
+              <MotionTape
                 aria-hidden
                 src="/tape.png"
                 alt=""
                 width={734}
                 height={245}
-                className="absolute -top-3 left-1/2 z-20 w-28 h-auto -translate-x-1/2 -rotate-[3deg] select-none pointer-events-none drop-shadow-[0_2px_4px_rgba(42,42,38,0.15)]"
+                style={{ x: "-50%" }}
+                initial={{ y: -34, opacity: 0, rotate: -20 }}
+                animate={{ y: 0, opacity: 1, rotate: -3 }}
+                transition={{ delay: 1.1, type: "spring", stiffness: 260, damping: 14, mass: 0.6 }}
+                className="absolute -top-3 left-1/2 z-20 w-28 h-auto select-none pointer-events-none drop-shadow-[0_2px_4px_rgba(42,42,38,0.15)]"
               />
 
               <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-terracotta-300/60 blur-2xl -z-10" />

@@ -48,8 +48,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ["var(--font-serif)", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Courier New", "monospace"],
+        sans: ["var(--font-sans)", "Courier New", "monospace"],
+        mono: ["var(--font-mono)", "Courier New", "monospace"],
       },
       letterSpacing: {
         tightest: "-0.04em",

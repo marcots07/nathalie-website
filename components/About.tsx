@@ -2,12 +2,15 @@
 
 import { useRef, useState } from "react";
 import {
+  easeOut,
   motion,
   useMotionValueEvent,
   useScroll,
   useTransform,
+  type MotionValue,
 } from "framer-motion";
 import type { Dictionary } from "@/lib/i18n";
+import DecorFlower from "./DecorFlower";
 import SectionHeading from "./SectionHeading";
 
 const DOOR_KEYS = ["medicine", "rbt", "design"] as const;
@@ -15,13 +18,35 @@ type DoorKey = (typeof DOOR_KEYS)[number];
 
 export default function About({ dict }: { dict: Dictionary }) {
   const [active, setActive] = useState<number | null>(null);
+  const rowRef = useRef<HTMLDivElement | null>(null);
+  // Tracks scroll across the whole text+doors row (not just the sticky doors
+  // panel) so the thread's progress keeps advancing while the sticky panel is
+  // pinned, rather than stalling partway through — a sticky element's own
+  // bounding rect stops moving once it locks in place, so measuring against
+  // it directly under-reports scroll progress. "end end" (row bottom meets
+  // viewport bottom) is used instead of a hand-picked percentage so the trace
+  // reliably completes before the row scrolls past, regardless of how tall
+  // the paragraphs render in a given locale or viewport.
+  const { scrollYProgress } = useScroll({
+    target: rowRef,
+    // "start end" (row top meets viewport bottom) instead of a fixed
+    // percentage — it's the earliest the row can possibly be visible, which
+    // maximises the scroll distance the trace has to work with without
+    // starting before there's anything on screen to watch it fill.
+    offset: ["start end", "end end"],
+  });
 
   return (
-    <section id="about" className="relative py-24 md:py-36">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
+    <section id="about" className="relative pt-12 pb-24 md:pt-16 md:pb-36">
+      <div className="relative max-w-6xl mx-auto px-6 md:px-10">
+        {/* Position lives in content/decor/positions.json — draggable via
+            the "Mover flores" toggle. */}
+        <div className="hidden lg:contents">
+          <DecorFlower id="about-butterflies" />
+        </div>
         <SectionHeading eyebrow={dict.about.eyebrow} heading={dict.about.heading} />
 
-        <div className="mt-16 md:mt-20 grid md:grid-cols-12 gap-10">
+        <div ref={rowRef} className="mt-16 md:mt-20 grid md:grid-cols-12 gap-10">
           <div className="md:col-span-7 space-y-6">
             {dict.about.paragraphs.map((p, i) => (
               <motion.p
@@ -54,12 +79,17 @@ export default function About({ dict }: { dict: Dictionary }) {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6 }}
-                className="text-xs uppercase tracking-[0.28em] text-sage-700 mb-8 inline-flex items-center gap-3"
+                className="text-xs font-label uppercase tracking-[0.28em] text-sage-700 mb-8 inline-flex items-center gap-3"
               >
                 <span className="w-6 h-px bg-sage-500" />
                 {dict.about.threadLabel}
               </motion.p>
-              <ThreeDoors dict={dict} active={active} setActive={setActive} />
+              <ThreeDoors
+                dict={dict}
+                active={active}
+                setActive={setActive}
+                scrollYProgress={scrollYProgress}
+              />
             </div>
           </div>
         </div>
@@ -83,20 +113,18 @@ function ThreeDoors({
   dict,
   active,
   setActive,
+  scrollYProgress,
 }: {
   dict: Dictionary;
   active: number | null;
   setActive: (i: number | null) => void;
+  scrollYProgress: MotionValue<number>;
 }) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    // Start when the top of the container reaches 80 % of viewport,
-    // end when it reaches 20 % — so the trace fills during natural reading.
-    offset: ["start 80%", "end 20%"],
+  // Ease-out so the trace visibly decelerates into the final door instead of
+  // snapping to full length — the last stretch of scroll reads as an arrival.
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1], {
+    ease: easeOut,
   });
-
-  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const [reached, setReached] = useState<boolean[]>([false, false, false]);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
@@ -109,7 +137,7 @@ function ThreeDoors({
   });
 
   return (
-    <div ref={containerRef} className="relative">
+    <div className="relative">
       <svg
         viewBox="0 0 400 320"
         className="w-full h-auto"
@@ -253,7 +281,7 @@ function ThreeDoors({
               }`}
             >
               <p
-                className={`font-medium transition-colors ${
+                className={`transition-colors ${
                   isReached ? "text-ink" : "text-ink-muted"
                 }`}
               >

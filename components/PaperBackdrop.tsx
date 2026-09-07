@@ -1,14 +1,18 @@
 /**
- * Paper treatment — a seamless fiber texture over the aurora, plus a torn
- * deckle edge around the viewport so the whole site reads as one sheet of
- * handmade paper laid on a surface.
+ * Paper treatment — a torn deckle edge around the viewport, plus a lift
+ * vignette, so the whole site reads as one sheet of handmade paper laid
+ * on a surface. The fiber texture and crumple wash used to be separate
+ * `position: fixed` + `mix-blend-mode` divs here; they moved onto
+ * `html`'s own background (see globals.css) because that combination is
+ * a known Chromium scroll-compositing bug — it can leave a translucent
+ * ghost of whatever was underneath (the nav bar, in practice) frozen
+ * partway down the page. Baking the blend into a normal element's own
+ * background paints correctly on every scroll frame instead.
  *
- * Layer order (all fixed, all pointer-events: none):
- *   z-2   texture  — tileable PNG multiplied over the aurora, so it tints
- *                    the existing palette instead of covering it
- *   z-44  lift     — soft inner vignette that lifts the sheet off the backing
- *   z-45  edge     — backing-colored border displaced into a ragged tear;
- *                    sits above the nav (z-40) so the sheet frames everything
+ * Layer order (both fixed, pointer-events: none):
+ *   z-44  lift  — soft inner vignette that lifts the sheet off the backing
+ *   z-45  edge  — backing-colored border displaced into a ragged tear;
+ *                 sits above the nav (z-40) so the sheet frames everything
  *
  * The tear is a CSS border run through an SVG turbulence displacement: the
  * element is inset past the viewport so only the ragged inner boundary is
@@ -63,7 +67,6 @@ export default function PaperBackdrop() {
         </defs>
       </svg>
 
-      <div aria-hidden className="paper-texture" />
       <div aria-hidden className="paper-lift" />
       <div aria-hidden className="paper-edge" />
     </>

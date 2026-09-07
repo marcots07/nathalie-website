@@ -66,7 +66,7 @@ All content is JSON, loaded at build time — no CMS, no runtime fetches.
 
 ### Design tokens
 
-Tailwind palette: `sage` (green), `cream`, `terracotta`, `ink` (with `ink-soft` and `ink-muted` variants). Typography: `font-display` (Cormorant Garamond, defined as a CSS utility in `globals.css`) for headings, Inter for body. Custom easing: `ease-liminal` → `cubic-bezier(0.22, 1, 0.36, 1)`.
+Tailwind palette: `sage` (green), `cream`, `terracotta`, `ink` (with `ink-soft` and `ink-muted` variants). Typography is one typeface, Courier Prime (a typewriter face), carried under three CSS-variable tokens in `globals.css` so headings, body copy, and paper-tag labels can still diverge in weight/size (or typeface again) later without another sitewide sweep: `--font-serif` → `.font-display` utility (headings), `--font-sans` → the plain `body` rule (reading copy), `--font-mono` → `.font-label` utility (every torn-paper tag and small uppercase/tracked label — nav items, eyebrows, stat labels, pill tags, evolution-row captions). **No bold anywhere on the page, by design** — every rule/utility stays at `font-weight: 400`, and emphasis is carried by color (a darker or lighter shade of the existing sage/terracotta/ink tones) instead; don't reach for `font-medium`/`font-semibold`/`font-bold` for that job. Only one Google Fonts family is loaded (`app/layout.tsx`): Courier Prime, weight 400 only, normal and italic — no bold files requested since nothing uses them. Custom easing: `ease-liminal` → `cubic-bezier(0.22, 1, 0.36, 1)`.
 
 The paper aesthetic uses three mechanisms:
 1. `.paper-fiber::after` — fiber texture over any element (e.g. torn cards)

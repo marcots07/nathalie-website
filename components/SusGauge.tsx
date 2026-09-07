@@ -55,10 +55,10 @@ export default function SusGauge({ value, outOf = 100 }: Props) {
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="font-display text-5xl md:text-6xl text-ink">
+        <span className="font-display text-4xl md:text-5xl text-ink">
           {display}
         </span>
-        <span className="text-xs uppercase tracking-[0.24em] text-sage-700 mt-1">
+        <span className="text-xs font-label uppercase tracking-[0.24em] text-sage-700 mt-1">
           SUS · {outOf}
         </span>
       </div>

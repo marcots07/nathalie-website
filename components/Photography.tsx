@@ -1,8 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import type { Locale } from "@/lib/i18n";
 import { getPhotography, type Photo } from "@/lib/galleries";
+import { useMediaQuery } from "@/lib/useMediaQuery";
+import DecorFlower from "./DecorFlower";
 import SectionHeading from "./SectionHeading";
 import { tornClipPath, type TornVariant } from "./TornEdgeDefs";
 
@@ -37,7 +40,13 @@ export default function Photography({
 
   return (
     <section id="photography" className="relative py-24 md:py-36">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-6xl mx-auto px-6 md:px-10">
+        {/* Position lives in content/decor/positions.json — draggable via
+            the "Mover flores" toggle. */}
+        <div className="hidden lg:contents">
+          <DecorFlower id="photography-camera" />
+          <DecorFlower id="photography-bird" />
+        </div>
         <SectionHeading eyebrow={eyebrow} heading={heading}>
           {intro}
         </SectionHeading>
@@ -47,7 +56,7 @@ export default function Photography({
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="mt-10 text-xs uppercase tracking-[0.28em] text-ink-muted"
+          className="mt-10 text-xs font-label uppercase tracking-[0.28em] text-ink-muted"
         >
           {String(photos.length).padStart(2, "0")} {counterLabel}
         </motion.p>
@@ -91,8 +100,25 @@ function Frame({
   wide?: boolean;
   torn: TornVariant;
 }) {
+  const figureRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: figureRef,
+    offset: ["start end", "end start"],
+  });
+  // Soft depth cue, not a full parallax rig — the photo drifts a few
+  // percent slower/faster than the page as it crosses the viewport. The
+  // window div stays overflow-hidden and the image is sized past 100% (see
+  // the `h-[116%]` below) so this drift never uncovers an edge. Halved on
+  // phones: a short viewport means the frame crosses it much faster, so
+  // the same percentage drift reads as more abrupt there than on a taller
+  // tablet/desktop viewport.
+  const isTabletUp = useMediaQuery("(min-width: 768px)");
+  const range = isTabletUp ? 6 : 3;
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [`-${range}%`, `${range}%`]);
+
   return (
     <motion.figure
+      ref={figureRef}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -128,13 +154,23 @@ function Frame({
           }}
           className="relative overflow-hidden bg-cream-100"
         >
-          <img
-            src={photo.src}
-            alt={`${photo.title} — ${photo.place}`}
-            loading={wide ? "eager" : "lazy"}
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-liminal group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
-          />
+          {/* Parallax drift (`y`) lives on this wrapper, separate from the
+              hover-scale below — mixing a framer-driven translate and a
+              CSS-class-driven transform on the same element lets one
+              silently override the other (see DecorFlower's flip/sway
+              split for the same lesson). */}
+          <motion.div
+            style={{ y: parallaxY }}
+            className="absolute inset-x-0 -top-[8%] w-full h-[116%]"
+          >
+            <img
+              src={photo.src}
+              alt={`${photo.title} — ${photo.place}`}
+              loading={wide ? "eager" : "lazy"}
+              decoding="async"
+              className="w-full h-full object-cover transition-transform duration-[1200ms] ease-liminal group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
+            />
+          </motion.div>
 
           {/* Caption scrim — hidden until hover/focus so the photo leads. */}
           <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent opacity-0 translate-y-2 transition-all duration-700 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0">
@@ -143,7 +179,7 @@ function Frame({
                 <span className="block font-display italic text-xl text-cream-50 leading-tight">
                   {photo.title}
                 </span>
-                <span className="block text-xs uppercase tracking-[0.2em] text-cream-100/80 mt-1">
+                <span className="block text-xs font-label uppercase tracking-[0.2em] text-cream-100/80 mt-1">
                   {photo.place}
                 </span>
               </span>

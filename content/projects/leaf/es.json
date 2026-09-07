@@ -22,17 +22,51 @@
   },
   "research": {
     "heading": "Empecé por escuchar.",
-    "body": "Diseñé personas, hice una auditoría competitiva, definí la propuesta de valor y formulé preguntas 'How Might We…' y enunciados de objetivo. La investigación reveló que la mayoría de apps del segmento pecaban de dos cosas: pedir demasiada información inicial, o convertir el cuidado en una lista de tareas ansiosa. Leaf tenía que hacer lo contrario.",
+    "body": "Diseñé tres personas, hice una auditoría competitiva, definí la propuesta de valor y formulé preguntas 'How Might We…' y enunciados de objetivo para cada una. La investigación reveló que la mayoría de apps del segmento pecaban de dos cosas: pedir demasiada información inicial, o convertir el cuidado en una lista de tareas ansiosa. Leaf tenía que hacer lo contrario.",
     "bullets": [
-      "Personas basadas en entrevistas de usuarios reales.",
-      "Auditoría competitiva de 5 apps del segmento.",
-      "Propuesta de valor y preguntas 'How Might We…' priorizadas.",
-      "Enunciados de objetivo para acotar el MVP."
-    ]
+      "Personas basadas en 5 entrevistas reales, marzo de 2025.",
+      "Auditoría competitiva de 4 apps — Greg, Planta, PictureThis y Google Lens.",
+      "Propuesta de valor construida en torno a cuatro categorías: simplicidad, personalización, precisión, eficiencia.",
+      "Enunciados de objetivo y preguntas 'How Might We…', uno por persona."
+    ],
+    "personas": [
+      {
+        "name": "Sofia Ramirez, 27",
+        "role": "UX Researcher, Brooklyn, NY — dueña de plantas por primera vez, cinco plantas y cero experiencia previa; aprende de apps y YouTube.",
+        "goals": "Entender qué necesita cada planta sin tener que investigar · recordatorios simples y a tiempo, antes de que sea tarde · ganar confianza como dueña primeriza.",
+        "frustrations": "Las apps usan términos que no entiende · la identificación por foto falla en los primeros intentos y rompe la confianza de inmediato · las funciones básicas están detrás de una suscripción.",
+        "statement": "Sofia es una dueña de plantas primeriza que necesita una app que la encuentre donde está — no donde estaría una experta — porque cada vez que una app asume que ya sabe qué significa 'suelo bien drenado', confirma su miedo de que el cuidado de plantas es demasiado complicado para alguien como ella."
+      },
+      {
+        "name": "Carlos Mendez, 38",
+        "role": "Contador, Los Ángeles, CA — doce plantas y una rutina inconsistente; viaja seguido por trabajo.",
+        "goals": "No volver a regar de más o de menos · confiar en que sus datos siempre están seguros y sincronizados · registrar el cuidado en un solo toque, sin navegar menús.",
+        "frustrations": "Perdió un año de datos de sus plantas tras una actualización del teléfono, sin forma de recuperarlos · no puede personalizar fácilmente el riego por planta · las notificaciones mezclan alertas de cuidado con marketing.",
+        "statement": "Carlos es un profesional ocupado que necesita una app que trabaje a favor de su vida, no en contra — que recuerde sus plantas, su horario y sus preferencias — porque ahora mismo la app le exige más a él que lo que le exigen sus propias plantas."
+      },
+      {
+        "name": "Mayelin Perez, 52",
+        "role": "Especialista en comercio, Cuba — 20+ plantas y décadas de experiencia; monitorea la humedad del suelo a diario, pero el internet es poco confiable.",
+        "goals": "Acceder a toda su biblioteca de plantas e historial de cuidado en cualquier momento · recibir recomendaciones específicas a su entorno sin internet · sincronizar automáticamente cuando vuelva la conexión.",
+        "frustrations": "La app falla por completo sin conexión a internet · las recomendaciones genéricas ignoran su clima y plantas reales · no hay forma de ingresar su entorno o método de riego reales.",
+        "statement": "Mayelin es una dueña de plantas experimentada que necesita una app de cuidado que funcione de forma confiable sin internet — porque donde vive, la conectividad es inconsistente, y una app que deja de funcionar en cuanto se va la señal no es una herramienta en la que pueda confiar."
+      }
+    ],
+    "insight": "El problema real no era falta de información — todos los competidores ya inundan a la gente con tips de cuidado. Era falta de relevancia: ninguna app se adaptaba a quién eras en realidad, dónde vivías, o cuánto ya sabías. Una principiante, un profesional olvidadizo y una experta de 20 años sin internet confiable — a las tres se les daba exactamente el mismo consejo.",
+    "figure": {
+      "label": "Storyboard — Mayelin Perez",
+      "caption": "Uno de tres storyboards dibujados a mano de la fase de empatía. La planta de Mayelin está estresada y su app no carga sin conexión — hasta que encuentra una que funciona completamente offline, sin excepción."
+    }
   },
   "process": {
     "heading": "De wireframes al sistema de diseño.",
-    "body": "Diseñé wireframes de baja fidelidad primero, iterando con feedback antes de tocar color o tipografía. El sistema de diseño se construyó por capas: primitivos con rampas tonales de 10 pasos — verde bosque (#2D5016) sobre beige cálido, con acentos ámbar, azul y rojo —, una capa semántica que mapea cada primitivo a su rol (fondo, texto, bordes, estados) preparada para modo claro y oscuro, e Inter como única tipografía de la app. Cada ReminderCard, botón y overlay tipo bottom sheet vive como componente en Figma, y la alta fidelidad se llevó a desarrollo con Claude Code vía MCP.",
+    "body": "Cada pantalla empezó en papel antes de tocar Figma — bocetos rápidos y desechables para probar la lógica del layout antes de comprometerse con píxeles. Después vinieron los wireframes digitales de baja fidelidad, iterados con feedback antes de tocar color o tipografía. El sistema de diseño se construyó por capas: primitivos con rampas tonales de 10 pasos — verde bosque (#2D5016) sobre beige cálido, con acentos ámbar, azul y rojo —, una capa semántica que mapea cada primitivo a su rol (fondo, texto, bordes, estados) preparada para modo claro y oscuro, e Inter como única tipografía de la app. Cada ReminderCard, botón y overlay tipo bottom sheet vive como componente en Figma, y la alta fidelidad se llevó a desarrollo con Claude Code vía MCP.",
+    "figure": {
+      "label": "Propuesta de valor",
+      "caption": "El lienzo de trabajo completo, de principio a fin: cada idea de función, clasificada en cuatro categorías, conectada con el participante real que la necesitaba, y contrastada con lo que ya ofrecen los competidores. Termina en una sola frase — \"La app que deja de darle a todos el mismo consejo\". Desplázate para verlo entero."
+    },
+    "evolutionLabels": ["Boceto en papel", "Wireframe", "Alta fidelidad"],
+    "evolutionsLabels": ["Inicio", "Mis plantas", "Ficha de planta"],
     "flows": [
       "Inicio — próximo cuidado de un vistazo",
       "Mis plantas — estado de riego del jardín",
@@ -80,9 +114,34 @@
       }
     ]
   },
+  "testing": {
+    "heading": "Probar antes de darlo por terminado.",
+    "body": "Cinco participantes completaron las mismas 5 tareas — de forma independiente, sin moderación, en un prototipo de Figma de baja fidelidad: identificar una planta con la cámara, revisar su diagnóstico, poner un recordatorio de riego, encontrar la página de notas, y ubicar los próximos recordatorios de vuelta en la home.",
+    "stats": [
+      { "label": "Tareas completadas", "value": "100%" },
+      { "label": "Participantes", "value": "5" },
+      { "label": "Tareas sin dificultad", "value": "2 de 5" },
+      { "label": "Puntaje SUS", "value": "76" }
+    ],
+    "findings": [
+      {
+        "title": "Los íconos de navegación necesitan etiquetas",
+        "quote": "Mayormente estoy adivinando qué significan estos íconos.",
+        "severity": "Media",
+        "recommendation": "Agregar etiquetas de texto bajo cada ícono de la barra inferior. La navegación fue la única tarea donde los 5 participantes tuvieron alguna dificultad, casi siempre tocando primero la pestaña equivocada."
+      },
+      {
+        "title": "El botón de identificar no resalta lo suficiente",
+        "quote": "La función de cámara podría destacar más.",
+        "severity": "Baja",
+        "recommendation": "Reforzar la jerarquía visual del CTA de escaneo en la home, para que se lea como el primer paso obvio, no algo que el usuario tenga que buscar con la vista."
+      }
+    ],
+    "insight": "Todos los participantes terminaron todas las tareas — Leaf no era difícil de usar, era difícil de sentir segura al usar. Íconos sin etiqueta y un diagnóstico que no se explicaba a sí mismo hicieron que la gente dudara de decisiones que ya había tomado bien."
+  },
   "results": {
-    "heading": "Estudio de usabilidad real.",
-    "body": "Corrí un estudio con 5 participantes usando el System Usability Scale (SUS). El puntaje final fue 76 — sobre el promedio de la industria (68) y en el rango 'good'. Más importante que el número: los aprendizajes concretos.",
+    "heading": "Un buen puntaje, respaldado por pruebas reales.",
+    "body": "El mismo estudio que reveló los problemas de navegación y confianza de arriba también incluyó una encuesta System Usability Scale. El puntaje final fue 76 — sobre el promedio de la industria (68), dentro del rango 'good'.",
     "learnings": [
       "Los usuarios querían ver de un vistazo qué planta necesitaba atención hoy — rediseñé la home para priorizar 'próximo cuidado' sobre inventario completo.",
       "El onboarding pedía demasiado de golpe — lo dividí en pasos progresivos con la opción de posponer detalles.",
@@ -91,6 +150,16 @@
   },
   "reflection": {
     "heading": "Qué me llevo.",
-    "body": "Aprendí que un buen sistema de diseño no es sobre tener muchos componentes, sino sobre tener los correctos y consistentes. Y que la investigación de usuarios no termina cuando empieza el diseño — vuelve a ti en cada iteración. Si empezara de nuevo, invertiría más tiempo en el estudio de usabilidad y menos en refinar mockups antes de probarlos."
+    "body": "Aprendí que un buen sistema de diseño no es sobre tener muchos componentes, sino sobre tener los correctos y consistentes. Y que la investigación de usuarios no termina cuando empieza el diseño — vuelve a ti en cada iteración.",
+    "moments": [
+      {
+        "title": "Apostar por offline-first antes de que alguien lo pidiera directamente",
+        "body": "La entrevista de Mayelin reveló algo que ningún competidor resuelve: una app que deja de funcionar en cuanto se va la señal. En vez de tratar lo offline como un respaldo, invertí la arquitectura — guardar todo localmente primero, sincronizar a la nube cuando hay conexión, no al revés."
+      },
+      {
+        "title": "Diseñar para la confianza, no solo para la precisión",
+        "body": "Un competidor le dio dos nombres distintos a la misma planta en una sola sesión. A otra participante su planta empeoró después de seguir un consejo dentro de la app. La confianza se rompe en un mal momento y no vuelve — por eso cada identificación muestra un puntaje de confianza, y cada recomendación viene con una explicación clara de por qué."
+      }
+    ]
   }
 }

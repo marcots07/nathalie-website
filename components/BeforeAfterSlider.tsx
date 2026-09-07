@@ -129,7 +129,7 @@ export default function BeforeAfterSlider({
               </svg>
             </div>
           )}
-          <div className="absolute bottom-3 left-3 text-xs uppercase tracking-[0.24em] text-sage-700 bg-cream-50/80 backdrop-blur px-2 py-1 rounded-full">
+          <div className="absolute bottom-3 left-3 text-xs font-label uppercase tracking-[0.24em] text-sage-700 bg-cream-50/80 backdrop-blur px-2 py-1 rounded-full">
             {beforeLabel}
           </div>
         </div>
@@ -151,7 +151,7 @@ export default function BeforeAfterSlider({
           ) : (
             <Placeholder aspect="w-full h-full" rounded="rounded-none" />
           )}
-          <div className="absolute bottom-3 right-3 text-xs uppercase tracking-[0.24em] text-cream-50 bg-sage-700/90 backdrop-blur px-2 py-1 rounded-full">
+          <div className="absolute bottom-3 right-3 text-xs font-label uppercase tracking-[0.24em] text-cream-50 bg-sage-700/90 backdrop-blur px-2 py-1 rounded-full">
             {afterLabel}
           </div>
         </div>

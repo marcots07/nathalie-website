@@ -12,7 +12,6 @@
     "art": "Art",
     "skills": "Skills",
     "contact": "Contact",
-    "back": "Back to home",
     "downloadCv": "Download Resume",
     "switchLanguage": "Switch language",
     "toggleMenu": "Toggle menu"
@@ -33,7 +32,7 @@
     "paragraphs": [
       "I was studying medicine in Cuba, at the University of Medical Sciences in Pinar del Río — near the top of my class, with a clear path ahead. Circumstances at home forced me to leave before finishing: two years done, a plan interrupted.",
       "I arrived in the United States without fluent English. I waited tables while teaching myself the language. I earned my Registered Behavior Technician (RBT) certification while still working — and found a new door back to the same calling: helping people function and be understood.",
-      "Leaving medicine didn't mean leaving the reason I wanted to be a doctor. I've kept following that same pattern — not waiting for the right degree or the right permission, I've been teaching myself UX design and AI and applying it to real projects. Self-taught English, then RBT certification while waiting tables, and now UX and AI on my own while working as an RBT. The same mission, rebuilt."
+      "Leaving medicine didn't mean leaving the reason I wanted to be a doctor. I've kept following that same pattern — not waiting for the right degree or the right permission, I trained myself in UX design and AI and apply it to real projects. Self-taught English, then RBT certification while waiting tables, and now the Google UX Design Certificate while working as an RBT. The same mission, rebuilt."
     ],
     "anchorQuote": "Leaving medicine didn't mean leaving the reason I wanted to be a doctor.",
     "threadLabel": "Three doors, one thread",
@@ -53,8 +52,8 @@
       "design": {
         "year": "2026",
         "label": "UX · AI Design",
-        "keyword": "Building",
-        "detail": "Self-taught, applied to real work"
+        "keyword": "Certified",
+        "detail": "Google UX Design Certificate"
       }
     }
   },
@@ -109,7 +108,8 @@
     "heading": "Design with purpose.",
     "intro": "Projects that show how I combine research, design systems, and AI-assisted development to build products with intent.",
     "viewCase": "View case study",
-    "inProgress": "In progress"
+    "inProgress": "In progress",
+    "switcherAll": "All"
   },
   "gateway": {
     "eyebrow": "Beyond the work",
@@ -169,7 +169,7 @@
     "professional": {
       "title": "Professional",
       "items": [
-        "Family communication and parent training",
+        "Family communication and\nparent training",
         "Multidisciplinary collaboration",
         "Accurate documentation and reporting",
         "Adaptability across settings",
@@ -180,12 +180,12 @@
     "certifications": {
       "title": "Certifications",
       "items": [
+        "Google UX Design Certificate",
         "Registered Behavior Technician (RBT) — BACB",
         "CPR & First Aid",
         "Crisis Management",
         "HIPAA Compliance",
         "OSHA",
-        "Google UX Design Certificate",
         "Anthropic Academy — AI Fluency, Claude 101"
       ]
     }
@@ -223,10 +223,21 @@
     "type": "Type",
     "problem": "The problem",
     "research": "Research",
+    "persona": {
+      "goals": "Goals",
+      "frustrations": "Frustrations"
+    },
     "process": "Design process",
     "results": "Results",
+    "testing": "Usability testing",
     "reflection": "Reflection",
     "next": "Next project",
+    "severity": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "recommendation": "Recommendation",
     "researchArtifacts": {
       "personas": "Personas",
       "competitive": "Competitive audit",
@@ -238,9 +249,14 @@
       "after": "High fidelity",
       "hint": "Drag to compare wireframes and high-fidelity mockups."
     },
+    "viewLabels": {
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    },
     "flowsLabel": "Flows and screens",
     "readTime": "min read",
     "designDecision": "Design decision",
+    "viewFullSize": "View full size",
     "status": {
       "inProgress": "In progress"
     }

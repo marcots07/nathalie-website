@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import type { Dictionary, Locale } from "@/lib/i18n";
+import DecorFlower from "./DecorFlower";
 import SectionHeading from "./SectionHeading";
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -54,7 +55,12 @@ export default function Contact({
 
   return (
     <section id="contact" className="relative py-24 md:py-36">
-      <div className="max-w-6xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-6xl mx-auto px-6 md:px-10">
+        {/* Position lives in content/decor/positions.json — draggable via
+            the "Mover flores" toggle. */}
+        <div className="hidden lg:contents">
+          <DecorFlower id="contact-lilies" />
+        </div>
         <SectionHeading eyebrow={dict.contact.eyebrow} heading={dict.contact.heading}>
           {dict.contact.intro}
         </SectionHeading>
@@ -68,7 +74,7 @@ export default function Contact({
             className="md:col-span-5 space-y-6"
           >
             <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-sage-700 mb-2">
+              <p className="text-xs font-label uppercase tracking-[0.24em] text-sage-700 mb-2">
                 Email
               </p>
               <a
@@ -79,7 +85,7 @@ export default function Contact({
               </a>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-sage-700 mb-2">
+              <p className="text-xs font-label uppercase tracking-[0.24em] text-sage-700 mb-2">
                 {locale === "es" ? "Teléfono" : "Phone"}
               </p>
               <a
@@ -90,10 +96,23 @@ export default function Contact({
               </a>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-sage-700 mb-2">
+              <p className="text-xs font-label uppercase tracking-[0.24em] text-sage-700 mb-2">
                 {locale === "es" ? "Ubicación" : "Location"}
               </p>
               <p className="text-lg text-ink">{dict.contact.location}</p>
+            </div>
+            <div>
+              <p className="text-xs font-label uppercase tracking-[0.24em] text-sage-700 mb-2">
+                LinkedIn
+              </p>
+              <a
+                href="https://www.linkedin.com/in/nathalie-gonzalez-perez"
+                target="_blank"
+                rel="noreferrer"
+                className="text-lg text-ink hover:text-sage-700 transition-colors editorial-link break-all"
+              >
+                linkedin.com/in/nathalie-gonzalez-perez
+              </a>
             </div>
             <a
               href="/cv/nathalie-gonzalez-perez-cv.pdf"
@@ -231,7 +250,7 @@ function Field({
     "w-full bg-transparent border-b border-sage-200 focus:border-sage-700 outline-none py-3 text-ink placeholder-transparent transition-colors";
   return (
     <label className="block">
-      <span className="text-xs uppercase tracking-[0.24em] text-sage-700">
+      <span className="text-xs font-label uppercase tracking-[0.24em] text-sage-700">
         {label}
       </span>
       {textarea ? (
