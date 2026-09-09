@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Placeholder from "./Placeholder";
 import PhoneFrame from "./PhoneFrame";
 
@@ -40,16 +41,17 @@ export default function DeviceScreen({
           <span className="w-2.5 h-2.5 rounded-full bg-sage-200" />
           <span className="w-2.5 h-2.5 rounded-full bg-sage-200" />
         </div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={src}
-          alt={alt}
-          draggable={false}
-          loading="lazy"
-          className="w-full object-cover object-top"
-          style={{ aspectRatio: aspectRatio ?? "7 / 5" }}
-          onError={() => setErrored(true)}
-        />
+        <div className="relative w-full" style={{ aspectRatio: aspectRatio ?? "7 / 5" }}>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            draggable={false}
+            sizes="(min-width: 1024px) 640px, 90vw"
+            className="object-cover object-top"
+            onError={() => setErrored(true)}
+          />
+        </div>
       </div>
     );
   }

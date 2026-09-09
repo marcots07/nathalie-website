@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 type Props = {
   src?: string;
@@ -36,13 +37,13 @@ export default function PhoneFrame({
           style={{ aspectRatio }}
         >
           {showImg ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
+            <Image
               src={src}
               alt={alt}
+              fill
               draggable={false}
-              loading="lazy"
-              className="w-full h-full object-cover object-top"
+              sizes="(min-width: 1024px) 320px, 45vw"
+              className="object-cover object-top"
               onError={() => setErrored(true)}
             />
           ) : (

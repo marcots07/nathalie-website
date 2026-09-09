@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { getDecorPosition, type DecorId } from "@/lib/decor";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 import { useDecorEdit } from "./DecorEditContext";
 
 const MIN_WIDTH = 48;
@@ -65,6 +66,13 @@ export default function DecorFlower({ id, behind }: { id: DecorId; behind?: bool
   const flip = base.flip ?? false;
   const { editMode } = useDecorEdit();
   const reducedMotion = useReducedMotion();
+  // Call sites also hide these below `lg` with `hidden lg:contents`, but a
+  // CSS-hidden <img> is still fetched — a phone was downloading every
+  // decoration it would never show (several hundred KB of PNGs). Gating the
+  // render on the same breakpoint in JS means the request is never made.
+  // Starting `false` (server + first paint) also keeps these out of the
+  // critical path on desktop: they mount just after hydration.
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [pos, setPos] = useState({
     top: base.top,
     left: base.left,
@@ -172,6 +180,9 @@ export default function DecorFlower({ id, behind }: { id: DecorId; behind?: bool
       return next;
     });
   };
+
+  // After every hook, so the hook order stays stable across breakpoints.
+  if (!isDesktop) return null;
 
   return (
     <>

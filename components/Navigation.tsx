@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -138,11 +139,12 @@ export default function Navigation({ locale, dict }: NavProps) {
                 >
                   {dict.nav[item.key]}
                   {isActive(item.key) && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       aria-hidden
                       src="/tape.png"
                       alt=""
+                      width={734}
+                      height={245}
                       className="absolute -top-2 left-1/2 z-10 w-8 h-auto -translate-x-1/2 -rotate-2 select-none pointer-events-none drop-shadow-[0_2px_4px_rgba(42,42,38,0.15)]"
                     />
                   )}
@@ -219,11 +221,12 @@ export default function Navigation({ locale, dict }: NavProps) {
                     >
                       {dict.nav[item.key]}
                       {isActive(item.key) && (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
+                        <Image
                           aria-hidden
                           src="/tape.png"
                           alt=""
+                          width={734}
+                          height={245}
                           className="absolute -top-2.5 left-1/2 z-10 w-9 h-auto -translate-x-1/2 -rotate-2 select-none pointer-events-none drop-shadow-[0_2px_4px_rgba(42,42,38,0.15)]"
                         />
                       )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { Locale } from "@/lib/i18n";
 import { getPhotography, type Photo } from "@/lib/galleries";
@@ -163,12 +164,13 @@ function Frame({
             style={{ y: parallaxY }}
             className="absolute inset-x-0 -top-[8%] w-full h-[116%]"
           >
-            <img
+            <Image
               src={photo.src}
               alt={`${photo.title} — ${photo.place}`}
-              loading={wide ? "eager" : "lazy"}
-              decoding="async"
-              className="w-full h-full object-cover transition-transform duration-[1200ms] ease-liminal group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
+              fill
+              sizes={wide ? "90vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 90vw"}
+              priority={wide}
+              className="object-cover transition-transform duration-[1200ms] ease-liminal group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
             />
           </motion.div>
 

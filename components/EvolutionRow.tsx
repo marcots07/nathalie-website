@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { tornClipPath, type TornVariant } from "./TornEdgeDefs";
 
@@ -83,27 +84,29 @@ export default function EvolutionRow({
                 className="paper-fiber relative bg-cream-50 p-1.5 sm:p-2.5 -rotate-[1.5deg] drop-shadow-[0_10px_18px_rgba(70,60,40,0.26)]"
               >
                 <div
-                  className="overflow-hidden bg-cream-100"
+                  className="relative overflow-hidden bg-cream-100"
                   style={{ aspectRatio: stage.aspectRatio ?? "4 / 3" }}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={stage.src}
                     alt={labels?.[i] ? `${alt} — ${labels[i]}` : alt}
-                    className="w-full h-full object-contain"
+                    fill
+                    sizes="176px"
+                    className="object-contain"
                   />
                 </div>
               </div>
             ) : (
               <div
-                className="rounded-md overflow-hidden border border-sage-100 bg-cream-100"
+                className="relative rounded-md overflow-hidden border border-sage-100 bg-cream-100"
                 style={{ aspectRatio: stage.aspectRatio ?? "4 / 3" }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={stage.src}
                   alt={labels?.[i] ? `${alt} — ${labels[i]}` : alt}
-                  className="w-full h-full object-contain"
+                  fill
+                  sizes="176px"
+                  className="object-contain"
                 />
               </div>
             )}

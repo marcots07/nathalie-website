@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 type Props = {
   src: string;
@@ -56,20 +57,30 @@ export default function ProjectFigure({
         className="group block rounded-2xl overflow-hidden border border-sage-100 bg-cream-100 shadow-sm"
       >
         <div
-          className={scrollable ? "max-h-[32rem] overflow-y-auto" : ""}
+          className={scrollable ? "max-h-[32rem] overflow-y-auto" : "relative"}
           style={!scrollable && aspectRatio ? { aspectRatio } : undefined}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            alt={alt}
-            onError={() => setImgError(true)}
-            className={
-              scrollable
-                ? "w-full h-auto"
-                : "w-full h-full object-cover object-top"
-            }
-          />
+          {scrollable ? (
+            // Natural height, scrolls to its real size — no fixed box to
+            // hand `fill` a target, so this one stays a plain <img>.
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={src}
+              alt={alt}
+              loading="lazy"
+              onError={() => setImgError(true)}
+              className="w-full h-auto"
+            />
+          ) : (
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              sizes="(min-width: 1024px) 50vw, 90vw"
+              onError={() => setImgError(true)}
+              className="object-cover object-top"
+            />
+          )}
         </div>
         <span className="flex items-center gap-2 px-4 py-2.5 text-xs font-label uppercase tracking-[0.2em] text-sage-700 border-t border-sage-100 bg-cream-100 group-hover:text-sage-800 transition-colors">
           {viewFullSizeLabel}

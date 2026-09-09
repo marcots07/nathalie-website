@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Locale } from "@/lib/i18n";
 import { getArt, type ArtPiece, type ArtLabels, type ArtTone } from "@/lib/galleries";
 import DecorFlower from "./DecorFlower";
 import SectionHeading from "./SectionHeading";
 import { tornClipPath } from "./TornEdgeDefs";
+
+const MotionImage = motion.create(Image);
 
 /**
  * Art showcase built like a museum wall: the piece hangs on a tinted mat on
@@ -181,19 +184,20 @@ export default function Art({
                     object-contain still shows each piece uncropped inside it. */}
                 <div className="relative w-full h-[38vh] sm:h-[46vh] lg:h-[52vh] max-h-[560px] min-h-[280px]">
                   <AnimatePresence mode="popLayout" initial={false} custom={direction}>
-                    <motion.img
+                    <MotionImage
                       key={piece.id}
                       src={piece.image}
                       alt={`${piece.title} — ${piece.medium}`}
-                      loading="lazy"
-                      decoding="async"
+                      fill
+                      sizes="(min-width: 1024px) 40vw, 90vw"
+                      priority
                       custom={direction}
                       variants={reduce ? imageVariantsReduced : imageVariants}
                       initial="enter"
                       animate="center"
                       exit="exit"
                       transition={{ duration: 0.55, ease: artEase }}
-                      className="absolute inset-0 w-full h-full object-contain shadow-[0_16px_34px_-12px_rgba(30,25,15,0.45)]"
+                      className="object-contain shadow-[0_16px_34px_-12px_rgba(30,25,15,0.45)]"
                     />
                   </AnimatePresence>
                 </div>
@@ -261,16 +265,17 @@ export default function Art({
                     onClick={() => select(i)}
                     aria-current={i === active ? "true" : undefined}
                     aria-label={p.title}
-                    className={`block w-16 h-16 lg:w-[76px] lg:h-[76px] rounded-xl overflow-hidden shadow-[0_6px_14px_-8px_rgba(30,25,15,0.5)] transition-opacity duration-500 ${
+                    className={`relative block w-16 h-16 lg:w-[76px] lg:h-[76px] rounded-xl overflow-hidden shadow-[0_6px_14px_-8px_rgba(30,25,15,0.5)] transition-opacity duration-500 ${
                       i === active ? "opacity-100" : "opacity-55 hover:opacity-90"
                     }`}
                   >
-                    <img
+                    <Image
                       src={p.image}
                       alt=""
+                      fill
+                      sizes="76px"
                       loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover"
+                      className="object-cover"
                     />
                   </button>
                   {/* Slides between thumbnails instead of snapping, so the

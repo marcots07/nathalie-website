@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Placeholder from "./Placeholder";
 import { tornClipPath, type TornVariant } from "./TornEdgeDefs";
 
@@ -14,6 +15,9 @@ type Props = {
   /** Mount the photo on a torn sheet of the page's paper instead of a rounded
    * box, matching the Photography and Art cards. Picks the tear variant. */
   torn?: TornVariant;
+  /** The Hero portrait is the page's LCP element — skip lazy-loading and
+   * hint the browser to fetch it first. Every other use stays lazy. */
+  priority?: boolean;
 };
 
 /**
@@ -28,6 +32,7 @@ export default function Portrait({
   rounded = "rounded-[2rem]",
   position = "50% 35%",
   torn,
+  priority = false,
 }: Props) {
   const [errored, setErrored] = useState(false);
 
@@ -35,12 +40,14 @@ export default function Portrait({
     return <Placeholder aspect={aspect} rounded={rounded} ariaLabel={alt} />;
   }
 
-  /* eslint-disable-next-line @next/next/no-img-element */
   const photo = (
-    <img
+    <Image
       src={src}
       alt={alt}
-      className="w-full h-full object-cover"
+      fill
+      sizes="(min-width: 768px) 28rem, 90vw"
+      priority={priority}
+      className="object-cover"
       style={{ objectPosition: position }}
       onError={() => setErrored(true)}
     />
@@ -54,10 +61,10 @@ export default function Portrait({
         style={{ clipPath: tornClipPath(torn) }}
         className="paper-fiber relative bg-cream-50 p-3 sm:p-4 drop-shadow-[0_16px_30px_rgba(70,60,40,0.26)]"
       >
-        <div className={`${aspect} overflow-hidden bg-cream-100`}>{photo}</div>
+        <div className={`${aspect} relative overflow-hidden bg-cream-100`}>{photo}</div>
       </div>
     );
   }
 
-  return <div className={`${aspect} ${rounded} overflow-hidden`}>{photo}</div>;
+  return <div className={`${aspect} ${rounded} relative overflow-hidden`}>{photo}</div>;
 }

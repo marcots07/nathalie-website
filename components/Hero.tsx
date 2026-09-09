@@ -161,6 +161,7 @@ export default function Hero({ dict, locale }: { dict: Dictionary; locale: Local
                 aspect="aspect-[4/5]"
                 position="50% 28%"
                 torn={2}
+                priority
               />
 
               {/* A single strip of real washi tape straddling the top edge,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback, useEffect } from "react";
+import Image from "next/image";
 import Placeholder from "./Placeholder";
 
 type Props = {
@@ -101,11 +102,12 @@ export default function BeforeAfterSlider({
         {/* Before layer (bottom) */}
         <div className="absolute inset-0">
           {hasImages ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              src={beforeSrc}
+            <Image
+              src={beforeSrc!}
               alt={beforeLabel}
-              className="absolute inset-0 w-full h-full object-cover object-top"
+              fill
+              sizes="(min-width: 1024px) 640px, 90vw"
+              className="object-cover object-top"
               draggable={false}
               onError={() => setImgError(true)}
             />
@@ -140,11 +142,12 @@ export default function BeforeAfterSlider({
           style={{ clipPath: `inset(0 0 0 ${percent}%)` }}
         >
           {hasImages ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              src={afterSrc}
+            <Image
+              src={afterSrc!}
               alt={afterLabel}
-              className="absolute inset-0 w-full h-full object-cover object-top"
+              fill
+              sizes="(min-width: 1024px) 640px, 90vw"
+              className="object-cover object-top"
               draggable={false}
               onError={() => setImgError(true)}
             />

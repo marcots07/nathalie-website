@@ -421,6 +421,26 @@ body {
   }
 }
 
+/* Phones pay for this backdrop in a way desktops don't: each blob is
+   110vmax (~890px on a 375px screen) and a 60px blur means the compositor
+   resamples that whole surface every frame of a 52–78s loop, three times
+   over — the single most expensive thing on the page for a mobile GPU, and
+   it never stops. The fields are already soft radial gradients, so at
+   phone size a much smaller blur is visually indistinguishable; parking
+   the animation and dropping `will-change` also hands back three
+   full-screen GPU layers. The look is unchanged from `md` up. */
+@media (max-width: 767px) {
+  .aurora-blob {
+    filter: blur(24px);
+    will-change: auto;
+  }
+  .aurora-a,
+  .aurora-b,
+  .aurora-c {
+    animation: none;
+  }
+}
+
 /* View Transitions cross-fade for page navigation. */
 @supports (view-transition-name: root) {
   ::view-transition-old(root),

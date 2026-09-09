@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import TransitionLink from "./TransitionLink";
 import { tornClipPath } from "./TornEdgeDefs";
 
@@ -46,12 +47,12 @@ export default function GalleryConnector({
                     className="paper-fiber relative w-20 h-20 md:w-28 md:h-28 flex-shrink-0 bg-cream-50 p-1.5 md:p-2 -rotate-2 group-hover:rotate-0 transition-transform duration-700 ease-liminal drop-shadow-[0_10px_20px_rgba(70,60,40,0.35)]"
                   >
                     <div className="relative w-full h-full overflow-hidden bg-cream-100">
-                      <img
+                      <Image
                         src={previewSrc}
                         alt=""
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-liminal group-hover:scale-[1.08]"
+                        fill
+                        sizes="112px"
+                        className="object-cover transition-transform duration-700 ease-liminal group-hover:scale-[1.08]"
                       />
                     </div>
                   </div>

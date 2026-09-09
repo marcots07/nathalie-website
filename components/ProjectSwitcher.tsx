@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { projectHref } from "@/lib/i18n";
 import { getProjects } from "@/lib/projects";
@@ -93,11 +94,12 @@ export default function ProjectSwitcher({ locale, dict, activeSlug }: Props) {
             >
               {entry.label}
               {entry.active && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   aria-hidden
                   src="/tape.png"
                   alt=""
+                  width={734}
+                  height={245}
                   className="absolute -top-2.5 left-1/2 z-10 w-10 h-auto -translate-x-1/2 -rotate-2 select-none pointer-events-none drop-shadow-[0_2px_4px_rgba(42,42,38,0.15)]"
                 />
               )}

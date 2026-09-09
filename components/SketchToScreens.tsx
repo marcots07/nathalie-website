@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 type Screen = {
@@ -44,11 +45,10 @@ export default function SketchToScreens({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.7 }}
-        className="w-full rounded-lg overflow-hidden border border-sage-100 bg-cream-100"
+        className="relative w-full rounded-lg overflow-hidden border border-sage-100 bg-cream-100"
         style={{ aspectRatio: sketchAspectRatio }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={sketch} alt={`${alt} — sketches`} className="w-full h-full object-cover" />
+        <Image src={sketch} alt={`${alt} — sketches`} fill sizes="(min-width: 1024px) 42rem, 90vw" className="object-cover" />
       </motion.div>
 
       {rows.map((row, rowIndex) => (
@@ -92,14 +92,15 @@ export default function SketchToScreens({
                 transition={{ duration: 0.6, delay: 0.1 + i * 0.1 }}
               >
                 <div
-                  className="w-full rounded-lg overflow-hidden border border-sage-100 bg-cream-100"
+                  className="relative w-full rounded-lg overflow-hidden border border-sage-100 bg-cream-100"
                   style={{ aspectRatio: s.aspectRatio ?? "393 / 852" }}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={s.src}
                     alt={alt}
-                    className="w-full h-full object-cover object-top"
+                    fill
+                    sizes={`${Math.round(100 / screens.length)}vw`}
+                    className="object-cover object-top"
                   />
                 </div>
                 {rowIndex === rows.length - 1 && captions?.[i] && (

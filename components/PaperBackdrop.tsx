@@ -47,12 +47,17 @@ export default function PaperBackdrop() {
           </filter>
 
           {/* Shallower tear for narrow screens — a 22px bite reads as huge
-              next to 24px of gutter and would crowd the content. */}
+              next to 24px of gutter and would crowd the content.
+              Three octaves rather than the desktop filter's five: octaves
+              4–5 contribute detail an order of magnitude finer than the
+              11px displacement can express, so they're invisible here
+              while still costing a phone real time generating fractal
+              noise across the whole viewport before first paint. */}
           <filter id="deckle-edge-sm">
             <feTurbulence
               type="fractalNoise"
               baseFrequency="0.02 0.026"
-              numOctaves={5}
+              numOctaves={3}
               seed={9}
               result="noise"
             />
