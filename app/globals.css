@@ -27,6 +27,15 @@
 
 html {
   scroll-behavior: smooth;
+  /* iOS Safari's rubber-band bounce at the top/bottom of the page scrolls
+     past the real document edge — and `.paper-edge` below, a `fixed`
+     border meant to always trace the viewport, doesn't reliably stay
+     glued to it through that bounce (a long-standing WebKit quirk with
+     `position: fixed` during elastic overscroll). The gap it reveals
+     breaks the one-sheet-of-paper illusion right at the edge that's
+     supposed to sell it. Disabling the bounce removes the gap instead of
+     chasing it. */
+  overscroll-behavior-y: none;
   /* Must stay the cream page tone: the aurora layers are semi-transparent,
      so anything darker here tints the whole site. The torn edge paints its
      own backing color instead. */
@@ -120,6 +129,7 @@ html {
 
 body {
   background-color: transparent;
+  overscroll-behavior-y: none;
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
