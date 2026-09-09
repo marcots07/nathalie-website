@@ -29,15 +29,19 @@ The locale switcher in `Navigation` updates `localStorage` and calls `router.pus
 
 ### Background layer stack (locale layout)
 
-Four fixed, `pointer-events: none` layers wrap every page, bottom to top:
+Decorative `pointer-events: none` layers wrap every page, bottom to top:
 
 | Component | z-index | What it does |
 |---|---|---|
 | `AmbientBackdrop` | 0 | Three slow CSS-animated aurora blobs (pure CSS, off main thread) |
 | `paper-texture` class | 2 | Tileable paper PNG `multiply`-blended over aurora |
 | Content (`<div className="relative z-10">`) | 10 | All page content |
+| `paper-chrome-mask` | 43 | Fixed band covering the strip of page behind a browser's translucent bottom bar; `calc(100lvh - 100dvh)` tall, so it self-cancels to nothing wherever no chrome overlaps content |
 | `paper-lift` | 44 | Inset box-shadow vignette |
 | `paper-edge` | 45 | Backing-colored border run through SVG turbulence displacement — the torn deckle edge |
+| `PaperEdgeTop` / `PaperEdgeBottom` | 45 | The sheet's horizontal tears on phones — **not** fixed |
+
+The horizontal tears are the one deliberate exception to "fixed": below `md`, `paper-edge` keeps only its two side strips, and the top and bottom tears become ordinary in-flow elements rendered before and after `{children}` in the locale layout. On iOS Safari a `position: fixed` element is anchored to the *visual* viewport, so the browser drags it down and back up every time its address bar slides in or out; an edge that lives in the document can't be moved that way, and passing the top tear on the way down and meeting the bottom one at the end is also what going down a sheet of paper actually looks like. From `md` up there's no such chrome, so the fixed frame simply closes on all four sides and both caps are `display: none`.
 
 `TornEdgeDefs` injects three `<clipPath>` elements (`#torn-1/2/3`) with objectBoundingBox paths used by gallery cards and portraits. `PaperBackdrop` injects `#deckle-edge` and `#deckle-edge-sm` displacement filters used by `.paper-edge`. These SVG defs must be rendered before any element that references them.
 

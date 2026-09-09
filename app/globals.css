@@ -306,6 +306,41 @@ body {
   }
 }
 
+/* Safari's bottom bar — the one with the address input — is translucent,
+   and the web view keeps painting its full height behind it. So whatever
+   sits at the bottom of the page shows through it, blurred and
+   half-legible, which reads as text running off under the browser rather
+   than as a page that ended. This band covers exactly that strip with the
+   backing color, so what shows through the glass is the surface the sheet
+   is lying on — empty space, the way it looks past any other edge of the
+   paper.
+
+   `dvh` is the viewport as it is right now and `lvh` is the same viewport
+   with the chrome gone, so the difference between them *is* the height of
+   whatever chrome is currently overlapping the page. The band collapses
+   to zero height on its own the moment the bar hides, and is zero all the
+   time on any browser whose chrome doesn't overlap content at all — no
+   breakpoint and no listener needed to keep it honest. `dvh` is safe here
+   in a way it wasn't for the torn edge (see the commit history): this is
+   a solid rectangle, so repainting it costs nothing, and a frame of lag
+   while the bar animates is invisible behind the very chrome it hides
+   under. If a browser understands neither unit, both declarations drop
+   and an empty div is 0px tall — it just isn't there.
+
+   z-43 puts it over all page content but under the lift vignette (44) and
+   the tears (45), so at the true end of the page the bottom tear still
+   paints on top of it and stays visible through the glass. */
+.paper-chrome-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 100dvh;
+  height: calc(100lvh - 100dvh);
+  background-color: var(--paper-backing);
+  z-index: 43;
+  pointer-events: none;
+}
+
 /* The sheet's two horizontal tears, as ordinary in-flow elements at the
    very start and the very end of the document — the top one right where
    the paper begins, the bottom one right where it ends. Both scroll with
