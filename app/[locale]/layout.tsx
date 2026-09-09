@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { getDictionary, isLocale, LOCALES, type Locale } from "@/lib/i18n";
 import AmbientBackdrop from "@/components/AmbientBackdrop";
 import PaperBackdrop from "@/components/PaperBackdrop";
+import PaperEdgeTop from "@/components/PaperEdgeTop";
+import PaperEdgeBottom from "@/components/PaperEdgeBottom";
 import TornEdgeDefs from "@/components/TornEdgeDefs";
 import MotionProvider from "@/components/MotionProvider";
 import { DecorEditProvider } from "@/components/DecorEditContext";
@@ -70,7 +72,9 @@ export default async function LocaleLayout({
         <AmbientBackdrop />
         <PaperBackdrop />
         <TornEdgeDefs />
+        <PaperEdgeTop />
         <div className="relative z-10">{children}</div>
+        <PaperEdgeBottom />
         <DecorEditToggle />
       </DecorEditProvider>
     </MotionProvider>

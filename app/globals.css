@@ -210,16 +210,15 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  /* `dvh` (not plain `inset: 0`, which leaves height to the fixed
-     containing block) is meant to track Safari's dynamic toolbar live,
-     but `position: fixed` elements don't reliably repaint on iOS when the
-     toolbar animates regardless of which unit sizes them — `--vvh`
-     (ViewportHeightSync, set from the `visualViewport` API, which fires
-     its own resize/scroll and forces an immediate style write) is the
-     real fix; `100dvh` only covers the instant before that JS runs. */
+  /* `lvh` ("large viewport height") is the viewport's size with Safari's
+     toolbar fully collapsed — the biggest it's ever displayed at. Sizing
+     to that instead of chasing the *current* size (`dvh`, or a JS
+     `visualViewport` listener) means this never needs to resize as the
+     toolbar animates: it's simply always big enough, with the surplus
+     sitting harmlessly behind the toolbar chrome when it's showing. No
+     repaint-on-scroll, so no gap and no jank from trying to track it. */
   height: 100vh;
-  height: 100dvh;
-  height: var(--vvh, 100dvh);
+  height: 100lvh;
   pointer-events: none;
   opacity: 0.035;
   z-index: 1;
@@ -244,12 +243,11 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  /* See the matching comment on `.grain::before` — `--vvh` is what
-     actually keeps this glued to the bottom through Safari's dynamic
-     toolbar; `dvh` alone leaves a gap. */
+  /* See the matching comment on `.grain::before` — sized to the largest
+     the viewport ever gets, so it's never caught short when the toolbar
+     collapses. */
   height: 100vh;
-  height: 100dvh;
-  height: var(--vvh, 100dvh);
+  height: 100lvh;
   z-index: 44;
   pointer-events: none;
   background-image: radial-gradient(
@@ -268,18 +266,28 @@ body {
   top: -10px;
   left: -10px;
   width: calc(100vw + 20px);
-  /* See the matching comment on `.grain::before` — this is the one that
-     mattered most to get right: it's the torn-edge frame itself, so a gap
-     here (Safari not resizing a `fixed` element sized by a CSS length,
-     regardless of unit, when its dynamic toolbar animates mid-scroll)
-     broke the illusion right at the edge that's supposed to sell it.
-     `--vvh` (ViewportHeightSync) is the actual fix. */
+  /* Sized past the viewport (`lvh` = its largest possible size, toolbar
+     collapsed) so this never has to resize as Safari's dynamic toolbar
+     animates — the surplus just sits behind the toolbar chrome. */
   height: calc(100vh + 20px);
-  height: calc(100dvh + 20px);
-  height: calc(var(--vvh, 100dvh) + 20px);
+  height: calc(100lvh + 20px);
   z-index: 45;
   pointer-events: none;
-  border: 16px solid var(--paper-backing);
+  /* Sides only on phones. The two horizontal edges of the sheet belong to
+     the *paper*, not to the screen: you should pass the top tear on the
+     way down and meet the bottom tear at the end, the way you would going
+     down a real sheet — see `.paper-edge-top` / `.paper-edge-bottom`,
+     which are ordinary in-flow elements at each end of the document.
+     Keeping them out of this fixed box is also the only real fix for iOS
+     Safari: a fixed element is glued to the *visual* viewport, so every
+     time the browser's own chrome slides in or out (scroll up and the
+     address bar returns) it drags the fixed edge down and back up with
+     it. Nothing anchored there can hold still; an edge that lives in the
+     document simply never moves. The left/right strips stay fixed because
+     they have to run the whole length of the scroll, and a vertical strip
+     has no visible "up/down" to give the shift away. */
+  border-left: 16px solid var(--paper-backing);
+  border-right: 16px solid var(--paper-backing);
   filter: url(#deckle-edge-sm);
 }
 
@@ -289,10 +297,60 @@ body {
     left: -14px;
     width: calc(100vw + 28px);
     height: calc(100vh + 28px);
-    height: calc(100dvh + 28px);
-    height: calc(var(--vvh, 100dvh) + 28px);
-    border-width: 28px;
+    height: calc(100lvh + 28px);
+    /* Desktop keeps the closed, all-sides frame — a mouse-driven page
+       this wide doesn't fight Safari's mobile toolbar, so the fixed
+       bottom edge was never the problem here. */
+    border: 28px solid var(--paper-backing);
     filter: url(#deckle-edge);
+  }
+}
+
+/* The sheet's two horizontal tears, as ordinary in-flow elements at the
+   very start and the very end of the document — the top one right where
+   the paper begins, the bottom one right where it ends. Both scroll with
+   the page, which is the entire point twice over: it's what going down a
+   sheet of paper actually looks like (you leave the top edge behind, you
+   arrive at the bottom one), and being in the document means neither can
+   be dragged around by iOS Safari's chrome the way a fixed element is.
+   Same tear and backing color as `.paper-edge`; hidden at `md` and up,
+   where the fixed frame closes on all four sides instead. */
+.paper-edge-top {
+  display: block;
+  position: relative;
+  /* Above the nav (z-40), matching the fixed frame — at the top of the
+     page the tear reads as the sheet's own edge, in front of everything
+     printed on it. */
+  z-index: 45;
+  /* Pulled up past the document's top so the displacement's *outer*
+     wobble is clipped off-screen and only the inner tear shows — the
+     horizontal equivalent of `.paper-edge`'s negative inset. 26px of
+     band minus the 10px hidden above leaves the same 16px of backing the
+     side strips carry. No negative margin sideways, though: that would
+     widen the document past the viewport and let the page scroll 10px
+     horizontally. The band's own ends are displaced inward by at most
+     half the filter's 11px scale, and the fixed side strips are 16px
+     wide and painted underneath, so the corners stay covered anyway. */
+  margin-top: -10px;
+  border-bottom: 26px solid var(--paper-backing);
+  filter: url(#deckle-edge-sm);
+  pointer-events: none;
+}
+
+.paper-edge-bottom {
+  display: block;
+  position: relative;
+  z-index: 45;
+  margin-bottom: -10px;
+  border-top: 26px solid var(--paper-backing);
+  filter: url(#deckle-edge-sm);
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .paper-edge-top,
+  .paper-edge-bottom {
+    display: none;
   }
 }
 
@@ -315,7 +373,9 @@ body {
 @media print {
   .paper-texture,
   .paper-lift,
-  .paper-edge {
+  .paper-edge,
+  .paper-edge-top,
+  .paper-edge-bottom {
     display: none;
   }
   .paper-fiber::after {

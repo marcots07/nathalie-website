@@ -1,5 +1,3 @@
-import ViewportHeightSync from "./ViewportHeightSync";
-
 /**
  * Paper treatment — a torn deckle edge around the viewport, plus a lift
  * vignette, so the whole site reads as one sheet of handmade paper laid
@@ -20,14 +18,26 @@ import ViewportHeightSync from "./ViewportHeightSync";
  * element is inset past the viewport so only the ragged inner boundary is
  * visible. Nothing animates, so the browser rasterizes the filter once.
  *
- * `ViewportHeightSync` keeps both sized to the real, current screen height
- * on iOS Safari, where `position: fixed` + a CSS viewport unit alone can
- * lag behind the bottom toolbar animating — see that component for why.
+ * Both are sized in globals.css with `lvh` ("large viewport height" — the
+ * viewport at its biggest, toolbar collapsed) rather than `dvh` or a JS
+ * `visualViewport` listener: sizing to the maximum means there's nothing
+ * to resize as Safari's bottom toolbar animates, so there's nothing for
+ * it to fail to resize (the bug a `dvh`/JS-tracked height ran into) and
+ * no per-scroll-tick repaint of an SVG-filtered element to cause jank.
+ *
+ * Below `md` this frame is only the two side strips. Both horizontal
+ * tears belong to the paper rather than to the screen there, and live in
+ * the document instead: `PaperEdgeTop` before `{children}` and
+ * `PaperEdgeBottom` after it, in the locale layout. You pass the top tear
+ * on the way down and reach the bottom one at the true end of the page,
+ * the way you would going down a real sheet — and, just as importantly,
+ * neither can be shoved around by iOS Safari's address bar sliding in and
+ * out, which no `position: fixed` edge can avoid. Desktop keeps the plain
+ * closed frame; there's no browser chrome moving under it there.
  */
 export default function PaperBackdrop() {
   return (
     <>
-      <ViewportHeightSync />
       <svg
         aria-hidden
         width="0"
