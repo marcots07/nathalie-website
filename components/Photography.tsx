@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { Locale } from "@/lib/i18n";
-import { getPhotography, type Photo } from "@/lib/galleries";
+import { getPhotography, type Photo, type PhotoLabels } from "@/lib/galleries";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 import DecorFlower from "./DecorFlower";
+import PhotoLightbox from "./PhotoLightbox";
 import SectionHeading from "./SectionHeading";
 import { tornClipPath, type TornVariant } from "./TornEdgeDefs";
 
@@ -20,6 +21,11 @@ import { tornClipPath, type TornVariant } from "./TornEdgeDefs";
  * column without row-span math; each tile declares its aspect ratio from
  * JSON, which reserves the space and keeps the mosaic free of layout shift
  * while the images decode.
+ *
+ * Every frame opens `PhotoLightbox` at full size on click (or Enter/Space —
+ * the whole tile is one `role="button"`, not just a small icon someone has
+ * to aim for), with the small corner glyph that appears on hover/focus only
+ * signalling that, not gating it.
  */
 export default function Photography({
   locale,
@@ -30,7 +36,7 @@ export default function Photography({
    * featured banner can morph from the homepage gateway card that linked here. */
   heroViewTransitionName?: string;
 }) {
-  const { eyebrow, heading, intro, counterLabel, photos } =
+  const { eyebrow, heading, intro, counterLabel, labels, photos } =
     getPhotography(locale);
 
   if (photos.length === 0) return null;
@@ -38,6 +44,11 @@ export default function Photography({
   // One photo may open the section full width; the rest fall into the mosaic.
   const banner = photos.find((p) => p.feature);
   const mosaic = photos.filter((p) => p !== banner);
+  // Same order as the page reads top to bottom, so the lightbox's prev/next
+  // and counter agree with where each photo actually sits on screen.
+  const ordered = banner ? [banner, ...mosaic] : mosaic;
+
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section id="photography" className="relative py-24 md:py-36">
@@ -71,7 +82,14 @@ export default function Photography({
                 : undefined
             }
           >
-            <Frame photo={banner} index={0} wide torn={3} />
+            <Frame
+              photo={banner}
+              index={0}
+              wide
+              torn={3}
+              expandLabel={labels.expand}
+              onOpen={() => setOpenIndex(0)}
+            />
           </div>
         )}
 
@@ -82,10 +100,20 @@ export default function Photography({
               photo={photo}
               index={i}
               torn={((i % 3) + 1) as TornVariant}
+              expandLabel={labels.expand}
+              onOpen={() => setOpenIndex(ordered.indexOf(photo))}
             />
           ))}
         </div>
       </div>
+
+      <PhotoLightbox
+        photos={ordered}
+        index={openIndex}
+        onNavigate={setOpenIndex}
+        onClose={() => setOpenIndex(null)}
+        labels={labels}
+      />
     </section>
   );
 }
@@ -95,11 +123,15 @@ function Frame({
   index,
   wide = false,
   torn,
+  expandLabel,
+  onOpen,
 }: {
   photo: Photo;
   index: number;
   wide?: boolean;
   torn: TornVariant;
+  expandLabel: PhotoLabels["expand"];
+  onOpen: () => void;
 }) {
   const figureRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -128,8 +160,17 @@ function Frame({
         delay: (index % 3) * 0.1,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className={`group relative ${wide ? "" : "mb-5 md:mb-6 break-inside-avoid"}`}
+      className={`group relative cursor-zoom-in ${wide ? "" : "mb-5 md:mb-6 break-inside-avoid"}`}
+      role="button"
       tabIndex={0}
+      aria-label={`${expandLabel} — ${photo.title}`}
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
     >
       {/* Each print is mounted on a torn piece of the page's own paper: the
           tear lives in the cream margin so the photograph itself stays a crisp
@@ -173,6 +214,25 @@ function Frame({
               className="object-cover transition-transform duration-[1200ms] ease-liminal group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
             />
           </motion.div>
+
+          {/* Expand cue — same reveal timing as the caption scrim below, so
+              the two read as one hover state instead of two competing
+              ones. Purely a visual affordance; the whole frame is already
+              the click target (see the `role="button"` above it). */}
+          <div
+            aria-hidden
+            className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center bg-ink/60 text-cream-50 backdrop-blur-sm opacity-0 scale-90 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100 group-focus-visible:opacity-100 group-focus-visible:scale-100"
+          >
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path
+                d="M6.5 2H2v4.5M9.5 2H14v4.5M6.5 14H2V9.5M9.5 14H14V9.5"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
 
           {/* Caption scrim — hidden until hover/focus so the photo leads. */}
           <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent opacity-0 translate-y-2 transition-all duration-700 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0">

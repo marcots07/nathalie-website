@@ -3,6 +3,12 @@
   "heading": "Looking slowly.",
   "intro": "I go out walking with a camera for the same reason I love therapy: it forces me to actually look, without rushing to a conclusion. These are from the last year.",
   "counterLabel": "photographs",
+  "labels": {
+    "expand": "Expand photo",
+    "close": "Close",
+    "prev": "Previous photo",
+    "next": "Next photo"
+  },
   "items": {
     "ridgeline-silhouette": {
       "title": "Silhouettes at Dusk",

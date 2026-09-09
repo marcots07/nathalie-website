@@ -3,6 +3,12 @@
   "heading": "Mirar despacio.",
   "intro": "Salgo a caminar con la cámara por la misma razón por la que me gusta la terapia: obliga a mirar de verdad, sin apurar la conclusión. Estas son del último año.",
   "counterLabel": "fotografías",
+  "labels": {
+    "expand": "Ampliar foto",
+    "close": "Cerrar",
+    "prev": "Foto anterior",
+    "next": "Foto siguiente"
+  },
   "items": {
     "ridgeline-silhouette": {
       "title": "Siluetas al atardecer",

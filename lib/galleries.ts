@@ -43,11 +43,19 @@ export type PhotoCopy = {
 
 export type Photo = PhotoMeta & PhotoCopy;
 
+export type PhotoLabels = {
+  expand: string;
+  close: string;
+  prev: string;
+  next: string;
+};
+
 export type PhotographySection = {
   eyebrow: string;
   heading: string;
   intro: string;
   counterLabel: string;
+  labels: PhotoLabels;
   photos: Photo[];
 };
 
@@ -95,6 +103,7 @@ type PhotoLocaleFile = {
   heading: string;
   intro: string;
   counterLabel: string;
+  labels: PhotoLabels;
   items: Record<string, PhotoCopy>;
 };
 
@@ -127,6 +136,7 @@ export function getPhotography(locale: Locale): PhotographySection {
     heading: copy.heading,
     intro: copy.intro,
     counterLabel: copy.counterLabel,
+    labels: copy.labels,
     photos,
   };
 }
