@@ -211,13 +211,15 @@ body {
   left: 0;
   width: 100vw;
   /* `dvh` (not plain `inset: 0`, which leaves height to the fixed
-     containing block) tracks Safari's dynamic toolbar live — iOS doesn't
-     reliably resize a `fixed` element sized by `inset` when the toolbar
-     collapses mid-scroll, leaving a gap at the bottom the same height as
-     the toolbar. `100vh` first as a fallback for anything predating `dvh`
-     support. */
+     containing block) is meant to track Safari's dynamic toolbar live,
+     but `position: fixed` elements don't reliably repaint on iOS when the
+     toolbar animates regardless of which unit sizes them — `--vvh`
+     (ViewportHeightSync, set from the `visualViewport` API, which fires
+     its own resize/scroll and forces an immediate style write) is the
+     real fix; `100dvh` only covers the instant before that JS runs. */
   height: 100vh;
   height: 100dvh;
+  height: var(--vvh, 100dvh);
   pointer-events: none;
   opacity: 0.035;
   z-index: 1;
@@ -242,11 +244,12 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  /* See the matching comment on `.grain::before` — `dvh` instead of
-     `inset: 0` so this stays glued to the bottom through Safari's dynamic
-     toolbar instead of leaving a gap. */
+  /* See the matching comment on `.grain::before` — `--vvh` is what
+     actually keeps this glued to the bottom through Safari's dynamic
+     toolbar; `dvh` alone leaves a gap. */
   height: 100vh;
   height: 100dvh;
+  height: var(--vvh, 100dvh);
   z-index: 44;
   pointer-events: none;
   background-image: radial-gradient(
@@ -267,11 +270,13 @@ body {
   width: calc(100vw + 20px);
   /* See the matching comment on `.grain::before` — this is the one that
      mattered most to get right: it's the torn-edge frame itself, so a gap
-     here (Safari not resizing a `fixed`, `inset`-positioned element when
-     its dynamic toolbar collapses mid-scroll) broke the illusion right at
-     the edge that's supposed to sell it. */
+     here (Safari not resizing a `fixed` element sized by a CSS length,
+     regardless of unit, when its dynamic toolbar animates mid-scroll)
+     broke the illusion right at the edge that's supposed to sell it.
+     `--vvh` (ViewportHeightSync) is the actual fix. */
   height: calc(100vh + 20px);
   height: calc(100dvh + 20px);
+  height: calc(var(--vvh, 100dvh) + 20px);
   z-index: 45;
   pointer-events: none;
   border: 16px solid var(--paper-backing);
@@ -285,6 +290,7 @@ body {
     width: calc(100vw + 28px);
     height: calc(100vh + 28px);
     height: calc(100dvh + 28px);
+    height: calc(var(--vvh, 100dvh) + 28px);
     border-width: 28px;
     filter: url(#deckle-edge);
   }

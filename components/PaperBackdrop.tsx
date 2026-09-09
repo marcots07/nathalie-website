@@ -1,3 +1,5 @@
+import ViewportHeightSync from "./ViewportHeightSync";
+
 /**
  * Paper treatment — a torn deckle edge around the viewport, plus a lift
  * vignette, so the whole site reads as one sheet of handmade paper laid
@@ -17,10 +19,15 @@
  * The tear is a CSS border run through an SVG turbulence displacement: the
  * element is inset past the viewport so only the ragged inner boundary is
  * visible. Nothing animates, so the browser rasterizes the filter once.
+ *
+ * `ViewportHeightSync` keeps both sized to the real, current screen height
+ * on iOS Safari, where `position: fixed` + a CSS viewport unit alone can
+ * lag behind the bottom toolbar animating — see that component for why.
  */
 export default function PaperBackdrop() {
   return (
     <>
+      <ViewportHeightSync />
       <svg
         aria-hidden
         width="0"
