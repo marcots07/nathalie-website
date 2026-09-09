@@ -13,37 +13,45 @@ import { useEffect } from "react";
  * between its expanded and collapsed states mid-scroll (a long-standing
  * WebKit bug, independent of which viewport unit is used) — the frame
  * stays pinned to whatever height it last painted at, leaving a gap the
- * size of the toolbar. The `visualViewport` API reports the *actual*
- * on-screen height and fires its own `resize`, so writing that straight
- * into a custom property forces a real, immediately-applied style change
- * every time the toolbar moves, instead of waiting on a CSS recalculation
- * that Safari may not schedule on its own.
+ * size of the toolbar. `100dvh` stays in globals.css as the fallback for
+ * the instant before this effect runs and for browsers without
+ * `visualViewport`.
  *
- * `100dvh` stays in globals.css as the fallback for the instant before
- * this effect runs and for browsers without `visualViewport`.
+ * Debounced, and `resize` only — not `scroll`. `.paper-edge` carries an
+ * SVG turbulence filter, one of the most expensive things a mobile GPU
+ * can be asked to repaint; writing `--vvh` on every `scroll` tick (the
+ * visual viewport also fires that as the toolbar's collapse pans the
+ * offset, not just on an actual height change) forced that repaint
+ * continuously through the whole gesture and was the actual cause of the
+ * janky scrolling — far worse than the brief, real gap this is fixing.
+ * Waiting until 150ms after `resize` calls have stopped means the repaint
+ * happens once, after the toolbar has settled into its new size, instead
+ * of on every intermediate frame of its animation.
  */
 export default function ViewportHeightSync() {
   useEffect(() => {
     const vv = window.visualViewport;
+    let timer: number | undefined;
 
-    const setVvh = () => {
+    const commit = () => {
       const height = vv?.height ?? window.innerHeight;
       document.documentElement.style.setProperty("--vvh", `${height}px`);
     };
 
-    setVvh();
+    commit();
 
-    // `resize` fires as the toolbar animates; `scroll` catches the cases
-    // where the visual viewport shifts (offsetTop changes) without a
-    // height change being reported separately.
-    vv?.addEventListener("resize", setVvh);
-    vv?.addEventListener("scroll", setVvh);
-    window.addEventListener("resize", setVvh);
+    const scheduleCommit = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(commit, 150);
+    };
+
+    vv?.addEventListener("resize", scheduleCommit);
+    window.addEventListener("resize", scheduleCommit);
 
     return () => {
-      vv?.removeEventListener("resize", setVvh);
-      vv?.removeEventListener("scroll", setVvh);
-      window.removeEventListener("resize", setVvh);
+      window.clearTimeout(timer);
+      vv?.removeEventListener("resize", scheduleCommit);
+      window.removeEventListener("resize", scheduleCommit);
     };
   }, []);
 
