@@ -98,14 +98,30 @@ export default function Navigation({ locale, dict }: NavProps) {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        scrolled
-          ? "bg-cream-50/80 backdrop-blur-md border-b border-sage-100/60"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-40"
     >
-      {/* pt clears the torn paper edge so the wordmark is never clipped. */}
-      <div className="max-w-6xl mx-auto px-6 md:px-10 pt-4 md:pt-6 h-20 md:h-28 flex items-center justify-between">
+      {/* The scrolled cream/blur treatment lives on this absolute child
+          rather than on the fixed header itself. Safari 26+ reads both
+          `background-color` and `backdrop-filter` off any fixed element
+          within ~4px of the viewport top and tints its status bar to
+          match, so a translucent blurred header there quietly repaints the
+          browser chrome cream as soon as you scroll — over the paper
+          backing that's supposed to run all the way around the sheet.
+          Absolute children are skipped by that sampling, and the blur
+          still reads through to whatever is behind it. */}
+      <div
+        aria-hidden
+        className={`absolute inset-0 transition-all duration-500 ${
+          scrolled
+            ? "bg-cream-50/80 backdrop-blur-md border-b border-sage-100/60"
+            : "bg-transparent"
+        }`}
+      />
+      {/* `relative` so the nav content paints above that backdrop instead
+          of underneath it — an absolutely positioned sibling would
+          otherwise cover in-flow content.
+          pt clears the torn paper edge so the wordmark is never clipped. */}
+      <div className="relative max-w-6xl mx-auto px-6 md:px-10 pt-4 md:pt-6 h-20 md:h-28 flex items-center justify-between">
         <Link
           href={`/${locale}`}
           className={`font-display text-lg md:text-xl tracking-tightest transition-colors editorial-link ${
@@ -194,7 +210,10 @@ export default function Navigation({ locale, dict }: NavProps) {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden bg-cream-50/95 backdrop-blur border-t border-sage-100/60 overflow-hidden"
+            // `relative` for the same reason as the row above it: the
+            // header's backdrop is an absolute child, so anything left in
+            // flow would be painted underneath it.
+            className="relative lg:hidden bg-cream-50/95 backdrop-blur border-t border-sage-100/60 overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col items-start gap-3">
               {NAV_ITEMS.map((item, i) => {

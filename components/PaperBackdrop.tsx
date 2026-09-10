@@ -1,31 +1,35 @@
 /**
- * Paper treatment — a torn deckle edge around the viewport, plus a lift
- * vignette, so the whole site reads as one sheet of handmade paper laid
- * on a surface. The fiber texture and crumple wash used to be separate
- * `position: fixed` + `mix-blend-mode` divs here; they moved onto
- * `html`'s own background (see globals.css) because that combination is
- * a known Chromium scroll-compositing bug — it can leave a translucent
- * ghost of whatever was underneath (the nav bar, in practice) frozen
- * partway down the page. Baking the blend into a normal element's own
- * background paints correctly on every scroll frame instead.
+ * Paper treatment — the creased sheet, a lift vignette, and a torn deckle
+ * edge around the viewport, so the whole site reads as one sheet of
+ * handmade paper laid on a surface.
  *
  * Layer order (all fixed, pointer-events: none):
+ *   z-0   wash  — crumple gradients + tiled fiber over the backing colour
  *   z-44  lift  — soft inner vignette that lifts the sheet off the backing
- *   z-45  edge  — backing-colored border displaced into a ragged tear;
- *                 sits above the nav (z-40) so the sheet frames everything
+ *   z-45  edge  — backing-colored band displaced into a ragged tear; sits
+ *                 above the nav (z-40) so the sheet frames everything
  *
- * The tear is a CSS border run through an SVG turbulence displacement: the
- * element is inset past the viewport so only the ragged inner boundary is
- * visible. Nothing animates, so the browser rasterizes the filter once.
+ * The wash spent a while on `html`'s own background with
+ * `background-attachment: fixed`, which iOS Safari ignores by design —
+ * it degrades to `scroll`, which stretched the crease gradients across
+ * the whole document and slid them under the content as you scrolled. It
+ * is a real fixed element again, but with the blend baked into its own
+ * background stack (`background-blend-mode`, not `mix-blend-mode`) so it
+ * never has to re-composite against scrolling content; that combination
+ * is the Chromium ghosting bug the earlier version was running from.
+ * globals.css carries the full reasoning and the measurements.
  *
- * Both are sized in globals.css with `lvh` ("large viewport height" — the
- * viewport at its biggest, toolbar collapsed) rather than `dvh` or a JS
- * `visualViewport` listener: sizing to the maximum means there's nothing
- * to resize as Safari's bottom toolbar animates, so there's nothing for
- * it to fail to resize (the bug a `dvh`/JS-tracked height ran into) and
- * no per-scroll-tick repaint of an SVG-filtered element to cause jank.
+ * The tear is a backing-coloured band run through an SVG turbulence
+ * displacement, inset past the viewport so only the ragged inner boundary
+ * is visible. Nothing animates, so the browser rasterizes each filter
+ * once — and below `md` the filters are attached to two thin strips
+ * rather than to a viewport-sized box, so the region they have to
+ * generate noise across is a fraction of the screen. That is what the
+ * third filter here is for: the two strips can't share one, because an
+ * HTML filter's coordinate space is the element's own box and they would
+ * come out identical.
  *
- * Below `md` this frame is only the two side strips. Both horizontal
+ * Below `md` this frame is only those two side strips. Both horizontal
  * tears belong to the paper rather than to the screen there, and live in
  * the document instead: `PaperEdgeTop` before `{children}` and
  * `PaperEdgeBottom` after it, in the locale layout. You pass the top tear
@@ -34,6 +38,10 @@
  * neither can be shoved around by iOS Safari's address bar sliding in and
  * out, which no `position: fixed` edge can avoid. Desktop keeps the plain
  * closed frame; there's no browser chrome moving under it there.
+ *
+ * This component renders before `AmbientBackdrop` in the locale layout:
+ * the wash and the aurora are both z-0, so DOM order is what keeps the
+ * aurora drifting on top of the paper rather than under it.
  */
 export default function PaperBackdrop() {
   return (
@@ -86,9 +94,30 @@ export default function PaperBackdrop() {
               yChannelSelector="G"
             />
           </filter>
+
+          {/* Same tear, different seed — for the right-hand strip, which
+              would otherwise be handed the exact same noise as the left
+              one and tear in lockstep with it. */}
+          <filter id="deckle-edge-sm-alt">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.02 0.026"
+              numOctaves={3}
+              seed={23}
+              result="noise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale={11}
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
         </defs>
       </svg>
 
+      <div aria-hidden className="paper-wash" />
       <div aria-hidden className="paper-lift" />
       <div aria-hidden className="paper-edge" />
     </>

@@ -48,22 +48,60 @@ html {
      rests on — otherwise those bands read as a pale gap where the paper
      should have ended.
 
-     Safe to darken despite what this comment used to claim: html's own
-     layered backgrounds below paint over this colour everywhere inside
-     the viewport, so it only ever shows in the two out-of-viewport bands. */
+     Safe to darken: `.paper-wash` paints the sheet over this colour
+     everywhere inside the viewport, so it only ever shows in the two
+     out-of-viewport bands.
+
+     It is also the fallback Safari 26+ samples for its toolbar tint when
+     no qualifying fixed element sits against the relevant viewport edge —
+     which is why the bottom bar comes out backing-coloured rather than
+     white. See the `viewport` export in app/layout.tsx. */
   background-color: var(--paper-backing);
-  /* Paper fiber + crumple wash live here as layered *backgrounds* (not
-     separate `position: fixed` elements with `mix-blend-mode`, which they
-     used to be) — `background-attachment: fixed` gets the same
-     "doesn't scroll with content" result without creating an independent
-     compositor layer that has to re-blend against scrolling content on
-     every frame. That combination (fixed + blend-mode) is a known
-     Chromium ghosting bug: scroll fast enough and it leaves a translucent
-     freeze-frame of whatever was underneath (here, the nav bar) stuck
-     partway down the page until something forces a repaint. Baking the
-     blend into one element's own background sidesteps the bug entirely.
-     Layer order (first = painted on top): crumple wash, then the tiled
-     fiber texture, both multiplying/soft-lighting down onto --bg. */
+}
+
+/* The sheet itself: the crumple wash and the tiled fiber texture.
+   Layer order (first = painted on top): seven soft-light crease
+   gradients, a `lighten` white veil, then the tiled fiber multiplying
+   down onto `--paper-backing`, which this element restates as its own
+   background-color so the blend has the same backdrop html gave it.
+
+   This has to be a real `position: fixed` element. It lived on `html`
+   with `background-attachment: fixed` until iOS made a liar of it: Safari
+   ignores that value on purpose (repainting a viewport-fixed background
+   every scroll frame was too expensive on mobile hardware) and silently
+   treats it as `scroll`. The positioning area then becomes the root box
+   rather than the viewport, so `background-size: 100% 100%` stretched all
+   seven creases across the *whole document* — several thousand pixels —
+   and scrolled them with the content. On a phone that reads as a flat,
+   washed-out sheet whose faint diagonals slide and re-form as you scroll,
+   instead of one still piece of creased paper. Measured on an iPhone 16
+   Pro simulator: the identical layer stack rendered flat and moving on
+   `html`, and rendered the full creases and folds, motionless, the moment
+   it moved onto a fixed element.
+
+   `background-blend-mode` here rather than `mix-blend-mode`: the blend
+   stays inside this element's own background stack, so nothing has to
+   re-composite against scrolling content. `mix-blend-mode` on a fixed
+   element is a known Chromium ghosting bug — scroll fast enough and it
+   leaves a translucent freeze-frame of whatever was underneath (the nav
+   bar, in practice) stuck partway down the page.
+
+   Sized in `lvh`, the viewport at its largest with Safari's toolbar
+   collapsed, because a fixed element's containing block on iOS is the
+   *small* viewport: `inset: 0` and `height: 100%` both measure 678 on an
+   iPhone 16 Pro where `lvh` measures 760. Sizing to the containing block
+   would leave this layer 82px short the moment the toolbar collapses, and
+   the gap would show as a band of bare backing colour along the bottom. */
+.paper-wash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100lvh;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--paper-backing);
   background-image: linear-gradient(
       128deg,
       transparent 0%,
@@ -133,8 +171,10 @@ html {
     soft-light, soft-light, soft-light, lighten, multiply;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
     no-repeat, no-repeat, no-repeat, repeat;
-  background-attachment: fixed, fixed, fixed, fixed, fixed, fixed, fixed,
-    fixed, fixed;
+  /* No `background-attachment` at all — the element is already pinned to
+     the viewport, so the default `scroll` positions every layer against
+     this box, which is exactly the viewport-sized area the old `fixed`
+     value was reaching for. */
   background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
     100% 100%, 100% 100%, 100% 100%, auto;
 }
@@ -238,10 +278,15 @@ body {
 }
 
 /* ---------------------------------------------------------------------
-   Paper sheet — the fiber texture and crumple wash live on `html`'s own
-   background now (see above); this section is just the torn deckle edge
-   and the inner-lift vignette. See components/PaperBackdrop.tsx for the
-   layer order and how the tear is built.
+   Paper sheet — the fiber texture and crumple wash are `.paper-wash`
+   above; this section is the torn deckle edge and the inner-lift
+   vignette. See components/PaperBackdrop.tsx for the layer order and how
+   the tear is built.
+
+   Everything here is sized in `lvh` for the reason spelled out on
+   `.paper-wash`: on iOS a fixed element's containing block is the small
+   viewport, so `inset: 0` / `height: 100%` come out 82px short of the
+   screen the moment Safari's toolbar collapses.
    -------------------------------------------------------------------- */
 
 /* Soft inner vignette so the sheet reads as lifted off the backing —
@@ -249,21 +294,25 @@ body {
    fully transparent through the center (where the reading content
    lives) and only darkens toward the edges, like a worn/foxed
    parchment corner. Box-shadow and gradient stack for depth without
-   either one alone having to carry the whole effect. */
+   either one alone having to carry the whole effect.
+
+   `ellipse farthest-side` rather than a circle: a circle sizes itself to
+   the farthest *corner*, so on any non-square screen the last stop lands
+   only in the four corners and the middle of the top and bottom edges
+   stays near-transparent. Sizing to the farthest sides puts the 100%
+   stop on every edge midpoint, with the corners past it and clamped to
+   the same final color, so the burn closes evenly all the way round. */
 .paper-lift {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  /* See the matching comment on `.grain::before` — sized to the largest
-     the viewport ever gets, so it's never caught short when the toolbar
-     collapses. */
+  right: 0;
   height: 100vh;
   height: 100lvh;
   z-index: 44;
   pointer-events: none;
   background-image: radial-gradient(
-    circle,
+    ellipse farthest-side,
     transparent 38%,
     rgba(180, 158, 128, 0.22) 72%,
     rgba(133, 111, 82, 0.4) 100%
@@ -271,50 +320,93 @@ body {
   box-shadow: inset 0 0 70px rgba(100, 82, 58, 0.24);
 }
 
-/* The tear itself: a thick backing-colored border, inset past the viewport
-   so only its displaced inner boundary shows. */
+/* The tear itself: a thick backing-colored band, inset past the viewport
+   so only its displaced inner boundary shows.
+
+   Sides only on phones. The two horizontal edges of the sheet belong to
+   the *paper*, not to the screen: you should pass the top tear on the way
+   down and meet the bottom tear at the end, the way you would going down
+   a real sheet — see `.paper-edge-top` / `.paper-edge-bottom`, which are
+   ordinary in-flow elements at each end of the document. Keeping them out
+   of this fixed box is also the only real fix for iOS Safari: a fixed
+   element is glued to the *visual* viewport, so every time the browser's
+   own chrome slides in or out (scroll up and the address bar returns) it
+   drags the fixed edge down and back up with it. Nothing anchored there
+   can hold still; an edge that lives in the document simply never moves.
+   The left/right strips stay fixed because they have to run the whole
+   length of the scroll, and a vertical strip has no visible "up/down" to
+   give the shift away.
+
+   Below `md` the two strips are pseudo-elements carrying their own
+   filter, and this box is a bare positioning frame. It used to be one
+   viewport-sized element with left/right borders and the filter on the
+   element itself — which made the filter *region* the whole screen, so
+   `feTurbulence` had to generate three octaves of fractal noise across
+   every pixel of a 402x760pt viewport at devicePixelRatio 3 to displace
+   two 16px ribbons, and had to do it again on every repaint of the layer
+   (which on iOS includes each time the toolbar slides). Two 36x780pt
+   strips are roughly a twelfth of the pixels, and the noise is generated
+   where the tear actually is.
+
+   The strips need separate filters because an HTML `filter`'s coordinate
+   space is the element's own box: both pseudo-elements start at local
+   x=0, so a shared filter would hand them the identical noise and the two
+   edges would tear in lockstep. Different seeds keep them independent,
+   the way the old single full-width filter region did by sampling the
+   left and right borders from far-apart coordinates. */
 .paper-edge {
   position: fixed;
-  top: -10px;
-  left: -10px;
-  width: calc(100vw + 20px);
-  /* Sized past the viewport (`lvh` = its largest possible size, toolbar
-     collapsed) so this never has to resize as Safari's dynamic toolbar
-     animates — the surplus just sits behind the toolbar chrome. */
-  height: calc(100vh + 20px);
-  height: calc(100lvh + 20px);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100lvh;
   z-index: 45;
   pointer-events: none;
-  /* Sides only on phones. The two horizontal edges of the sheet belong to
-     the *paper*, not to the screen: you should pass the top tear on the
-     way down and meet the bottom tear at the end, the way you would going
-     down a real sheet — see `.paper-edge-top` / `.paper-edge-bottom`,
-     which are ordinary in-flow elements at each end of the document.
-     Keeping them out of this fixed box is also the only real fix for iOS
-     Safari: a fixed element is glued to the *visual* viewport, so every
-     time the browser's own chrome slides in or out (scroll up and the
-     address bar returns) it drags the fixed edge down and back up with
-     it. Nothing anchored there can hold still; an edge that lives in the
-     document simply never moves. The left/right strips stay fixed because
-     they have to run the whole length of the scroll, and a vertical strip
-     has no visible "up/down" to give the shift away. */
-  border-left: 16px solid var(--paper-backing);
-  border-right: 16px solid var(--paper-backing);
+}
+
+/* Each strip runs 10px past both ends of the frame so the displacement's
+   *outer* wobble is clipped off-screen and only the inner tear shows —
+   the same trick the old negative inset played, and the reason the bands
+   are 26px wide for 16px of visible backing. */
+.paper-edge::before,
+.paper-edge::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  width: 16px;
+  background-color: var(--paper-backing);
+}
+
+.paper-edge::before {
+  left: -10px;
   filter: url(#deckle-edge-sm);
+}
+
+.paper-edge::after {
+  right: -10px;
+  filter: url(#deckle-edge-sm-alt);
 }
 
 @media (min-width: 768px) {
   .paper-edge {
     top: -14px;
     left: -14px;
+    right: auto;
     width: calc(100vw + 28px);
     height: calc(100vh + 28px);
     height: calc(100lvh + 28px);
     /* Desktop keeps the closed, all-sides frame — a mouse-driven page
        this wide doesn't fight Safari's mobile toolbar, so the fixed
-       bottom edge was never the problem here. */
+       bottom edge was never the problem here, and one filter region has
+       to span the viewport anyway to reach all four sides. */
     border: 28px solid var(--paper-backing);
     filter: url(#deckle-edge);
+  }
+  .paper-edge::before,
+  .paper-edge::after {
+    display: none;
   }
 }
 
@@ -383,7 +475,7 @@ body {
 
 /* The torn frame is decoration; never let it eat into a printed page. */
 @media print {
-  .paper-texture,
+  .paper-wash,
   .paper-lift,
   .paper-edge,
   .paper-edge-top,

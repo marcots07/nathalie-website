@@ -69,8 +69,10 @@ export default async function LocaleLayout({
   return (
     <MotionProvider>
       <DecorEditProvider>
-        <AmbientBackdrop />
+        {/* Paper first: its wash layer and the aurora are both z-0, so DOM
+            order is what keeps the aurora drifting over the sheet. */}
         <PaperBackdrop />
+        <AmbientBackdrop />
         <TornEdgeDefs />
         <PaperEdgeTop />
         <div className="relative z-10">{children}</div>
