@@ -10,9 +10,6 @@
  * background paints correctly on every scroll frame instead.
  *
  * Layer order (all fixed, pointer-events: none):
- *   z-43  mask  — covers the strip of page sitting behind the browser's
- *                 own translucent bottom bar, so text never shows through
- *                 it; zero-height whenever no chrome overlaps the page
  *   z-44  lift  — soft inner vignette that lifts the sheet off the backing
  *   z-45  edge  — backing-colored border displaced into a ragged tear;
  *                 sits above the nav (z-40) so the sheet frames everything
@@ -92,7 +89,6 @@ export default function PaperBackdrop() {
         </defs>
       </svg>
 
-      <div aria-hidden className="paper-chrome-mask" />
       <div aria-hidden className="paper-lift" />
       <div aria-hidden className="paper-edge" />
     </>

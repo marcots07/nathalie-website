@@ -36,10 +36,15 @@ Decorative `pointer-events: none` layers wrap every page, bottom to top:
 | `AmbientBackdrop` | 0 | Three slow CSS-animated aurora blobs (pure CSS, off main thread) |
 | `paper-texture` class | 2 | Tileable paper PNG `multiply`-blended over aurora |
 | Content (`<div className="relative z-10">`) | 10 | All page content |
-| `paper-chrome-mask` | 43 | Fixed band covering the strip of page behind a browser's translucent bottom bar; `calc(100lvh - 100dvh)` tall, so it self-cancels to nothing wherever no chrome overlaps content |
 | `paper-lift` | 44 | Inset box-shadow vignette |
 | `paper-edge` | 45 | Backing-colored border run through SVG turbulence displacement — the torn deckle edge |
 | `PaperEdgeTop` / `PaperEdgeBottom` | 45 | The sheet's horizontal tears on phones — **not** fixed |
+
+**The bands outside the viewport can only be painted by `html`'s `background-color`.** On iOS the screen is taller than the layout viewport ever gets — an iPhone 16 Pro measures 874pt of screen against 760pt of layout viewport — leaving roughly 114pt at the bottom and 60pt at the top that sit outside it completely. Nothing positioned reaches there: a fixed element deliberately hanging past the edge (`bottom: -140px`) is clipped at the viewport bound, which is why `body { background-color }` does nothing for it either. The canvas background is the only thing painted in that region, so it carries `--paper-backing` rather than `--bg`; see the comment on `html` in globals.css.
+
+Five attempts went the other way first — `dvh` sizing, a `visualViewport` listener, `calc(100lvh - 100dvh)`, a `bottom`-anchored variant, and a `paper-foot` strip that was documented here before it was written and would not have worked either. Measured on an iPhone 16 Pro simulator, `lvh` is 760 and `dvh` is 678 with the bar showing, so `lvh - dvh` is 82px, not 0 as an earlier revision of this note claimed — but the number was never the point. Every one of those attempts sized *an element*, and no element can paint outside the layout viewport.
+
+Safari's own bottom toolbar — the one carrying the address field on first load — is browser UI and cannot be styled or hidden by the page at all. `theme-color` was tried and reaches only the top status strip (verified with a magenta value); it is deliberately not set, since the canvas colour already tints that strip and a second hard-coded copy of the colour would only have to be kept in sync.
 
 The horizontal tears are the one deliberate exception to "fixed": below `md`, `paper-edge` keeps only its two side strips, and the top and bottom tears become ordinary in-flow elements rendered before and after `{children}` in the locale layout. On iOS Safari a `position: fixed` element is anchored to the *visual* viewport, so the browser drags it down and back up every time its address bar slides in or out; an edge that lives in the document can't be moved that way, and passing the top tear on the way down and meeting the bottom one at the end is also what going down a sheet of paper actually looks like. From `md` up there's no such chrome, so the fixed frame simply closes on all four sides and both caps are `display: none`.
 
