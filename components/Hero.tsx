@@ -50,19 +50,18 @@ export default function Hero({ dict, locale }: { dict: Dictionary; locale: Local
 
   // `svh` — the viewport at its *smallest*, with the browser's bar showing —
   // rather than `min-h-screen`/`vh`, which resolves to the viewport at its
-  // largest (760pt vs 678pt of actually-visible height on an iPhone 16 Pro).
-  // Sizing the opening screen to a height that isn't on screen when the page
-  // loads is what pushed the headline under the fold.
+  // largest (760pt against the 678pt actually on screen on an iPhone 16 Pro).
+  // One screen tall should mean the screen the visitor has when the page
+  // loads, not the one they'd have if the toolbar collapsed; sized in `vh`
+  // this section is 82pt taller than what's visible, and the portrait it
+  // centers rides that much lower than centered.
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden pt-24 pb-16">
       <div className="relative max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-12 gap-10 md:gap-14 items-center w-full">
-        {/* Copy first on phones, portrait first from `md` up — where the two
-            sit side by side and "first" only means the left column. Stacked on
-            a phone the portrait used to open the page and ate about two thirds
-            of it, leaving the headline cut in half and the subtitle and both
-            buttons below the fold: a visitor arriving from a link met a photo
-            and no idea what they were looking at. */}
-        <div className="md:col-span-7 order-1">
+        {/* Second on phones, left column from `md` up. The portrait opens the
+            page on purpose — it's the first thing a visitor should meet, and
+            the copy follows underneath. */}
+        <div className="md:col-span-7 order-2 md:order-1">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -151,17 +150,14 @@ export default function Hero({ dict, locale }: { dict: Dictionary; locale: Local
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="md:col-span-5 order-2 relative"
+          className="md:col-span-5 order-1 md:order-2 relative"
         >
           {/* Held up by a single strip of washi tape across the top edge, laid
               at a slight angle: the portrait is the first thing a visitor sees,
               so it sets the paper language — torn stock, warm tape — that the
               Photography and Art cards carry through the rest of the page. The
               loosely-taped sheet sways gently from where it's fixed. */}
-          {/* Narrower on phones so the whole opening block — headline,
-              subtitle, both buttons — clears the fold, with the portrait
-              showing just enough below it to read as more page. */}
-          <div className="relative max-w-[15rem] sm:max-w-xs md:max-w-md mx-auto pt-6">
+          <div className="relative max-w-md mx-auto pt-6">
             <motion.div
               className="relative"
               initial={{ rotate: -1.5 }}
