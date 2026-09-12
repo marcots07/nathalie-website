@@ -8,7 +8,6 @@ import {
 import { getProject, getProjects } from "@/lib/projects";
 import Navigation from "@/components/Navigation";
 import ProjectSwitcher from "@/components/ProjectSwitcher";
-import ScrollProgress from "@/components/ScrollProgress";
 import Footer from "@/components/Footer";
 import CaseStudy from "@/components/CaseStudy";
 import LocalePersist from "@/components/LocalePersist";
@@ -62,7 +61,6 @@ export default async function ProjectPage({
         {dict.nav.skipToContent}
       </a>
       <LocalePersist locale={locale} />
-      <ScrollProgress variant="reading" />
       <Navigation locale={locale} dict={dict} />
       <ProjectSwitcher locale={locale} dict={dict} activeSlug={project.slug} />
       <CaseStudy project={project} dict={dict} locale={locale} />

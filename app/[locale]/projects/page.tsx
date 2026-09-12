@@ -6,7 +6,6 @@ import ProjectSwitcher from "@/components/ProjectSwitcher";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import LocalePersist from "@/components/LocalePersist";
-import ScrollProgress from "@/components/ScrollProgress";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -41,7 +40,6 @@ export default async function ProjectsPage({
         {dict.nav.skipToContent}
       </a>
       <LocalePersist locale={locale} />
-      <ScrollProgress />
       <Navigation locale={locale} dict={dict} />
       <ProjectSwitcher locale={locale} dict={dict} />
       <Projects dict={dict} locale={locale} />

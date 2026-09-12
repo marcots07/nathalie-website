@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { getDictionary, isLocale, LOCALES, galleryHref } from "@/lib/i18n";
 import { getPhotography, getArt } from "@/lib/galleries";
 import Navigation from "@/components/Navigation";
-import ScrollProgress from "@/components/ScrollProgress";
 import Photography from "@/components/Photography";
 import GalleryConnector from "@/components/GalleryConnector";
 import Footer from "@/components/Footer";
@@ -43,7 +42,6 @@ export default async function PhotographyPage({
         {dict.nav.skipToContent}
       </a>
       <LocalePersist locale={locale} />
-      <ScrollProgress />
       <Navigation locale={locale} dict={dict} />
 
       {/* No top padding here: <Photography>'s own `py-24 md:py-36` already

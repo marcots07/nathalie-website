@@ -445,15 +445,48 @@ body {
   display: block;
   position: relative;
   z-index: 45;
-  margin-bottom: -10px;
   border-top: 26px solid var(--paper-backing);
   filter: url(#deckle-edge-sm);
   pointer-events: none;
 }
 
+/* Closes the bottom tear's *lower* boundary, and puts some distance
+   between the tear and the end of the page.
+
+   The displacement filter doesn't only ripple the edge you want ragged:
+   it ripples the band's straight bottom boundary by the same amount, and
+   `.paper-wash` is pinned to the viewport behind it, so the paper showed
+   through every notch the filter opened down there. Right at the end of
+   the page that read as a second torn edge appearing below the first —
+   the top of the next sheet, which is not a thing this page has.
+
+   The negative `margin-bottom` that used to live on the band was the
+   symmetric counterpart to `.paper-edge-top`'s `margin-top`, and it can't
+   work down here: at the top, the 10px pulled past the document's start
+   is simply unreachable, whereas scrollable overflow grows to include
+   anything hanging off the bottom, so the ragged boundary stayed on
+   screen no matter how far it was pushed.
+
+   So: an unfiltered strip of the same backing colour. No filter means its
+   own edges stay straight, it laps 10px over the band (the filter's
+   displacement reaches at most half of its 11px scale, and the tear line
+   itself sits 26px up, well clear) and continues 14px past it, and the
+   only thing below it is the same colour again on `html`. Above the band
+   rather than under it, since the point is to paint over the notches. */
+.paper-edge-seal {
+  display: block;
+  position: relative;
+  z-index: 46;
+  margin-top: -10px;
+  height: 24px;
+  background-color: var(--paper-backing);
+  pointer-events: none;
+}
+
 @media (min-width: 768px) {
   .paper-edge-top,
-  .paper-edge-bottom {
+  .paper-edge-bottom,
+  .paper-edge-seal {
     display: none;
   }
 }
@@ -479,7 +512,8 @@ body {
   .paper-lift,
   .paper-edge,
   .paper-edge-top,
-  .paper-edge-bottom {
+  .paper-edge-bottom,
+  .paper-edge-seal {
     display: none;
   }
   .paper-fiber::after {

@@ -5,7 +5,6 @@ import Navigation from "@/components/Navigation";
 import Skills from "@/components/Skills";
 import Footer from "@/components/Footer";
 import LocalePersist from "@/components/LocalePersist";
-import ScrollProgress from "@/components/ScrollProgress";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -40,7 +39,6 @@ export default async function SkillsPage({
         {dict.nav.skipToContent}
       </a>
       <LocalePersist locale={locale} />
-      <ScrollProgress />
       <Navigation locale={locale} dict={dict} />
       <Skills dict={dict} />
       <Footer dict={dict} />
